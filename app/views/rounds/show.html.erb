@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @round.name %>
+</p>
+
+<p>
+  <b>Deadline:</b>
+  <%= @round.deadline %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @round.date %>
+</p>
+
+<p>
+  <b>Confirmed:</b>
+  <%= @round.confirmed %>
+</p>
+
+<p>
+  <b>Max people:</b>
+  <%= @round.max_people %>
+</p>
+
+<p>
+  <b>Min people:</b>
+  <%= @round.min_people %>
+</p>
+
+
+<%= link_to 'Edit', edit_round_path(@round) %> |
+<%= link_to 'Back', rounds_path %>
