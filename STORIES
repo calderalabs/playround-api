@@ -1,39 +1,60 @@
+P 10 E 10 (first iteration)
 As a user, i want to be able to create an event. The system will prompt me to choose the name of the event, the city, a specific place that will host the event, a game, a specific time and the maximum number of people allowed to participate. Also i want to set a subscription deadline.
 
+P 6 E 7
 As a user, i want to be able to specify a game during the creation of events. If the game is not in the list i want to create a new one specifying the name, the creator, max and min number of players and a description of rules. As an alternative/additional infos i can provide a wikipedia url of the game.
 
+P 5 E 15
 As a visitor, i want to be able to sign up with my Facebook account or link it to my Playround account after the registration.
 
+P 6 E 10
 During the registration phase the system will ask me for my email, my name, birth date, hometown, city where i live, gender, some extra info about me, and a photo to upload as an avatar. The system will give me the option to hide my email (and possibly other infos) to everyone that looks at my profile.
 
-As an event administrator i want to be able to see the list of people that participate in the event and the comments they added when the chose to participate.
+P 8 E 3
+As an event administrator i want to be able to see the list of people that participate in the event and the comments they added.
 
+P 9 E 10
 As a user, i want to be able to browse events by city, by name, by game. The system will prompt me the list of events in chronological order.
 
+P 9 E 6 (first iteration)
 When i select a specific event i want to see who has joined that event, the game that will be played, how much time i have left to join the event, how many free spots are there and where it will take place on google maps. If i click on the game the system will open a popup displaying infos about that game.
 
+P 9 E 6 (first iteration)
 As a user, i want to be able to participate in the events i browse. The system will ask me if i confirm my choice to participate and if i want to add a comment that will be seen by every user that browse (join?) that event.
 
+P 5 E 6
 As a user, i want to be able to invite a Facebook friend (if i linked my Facebook account) to an event i joined.
 
+P 3 E 3
 As a user, i want to be able to select a friend and create a bond so that when i join a specific event he will join automatically with me.
 
+P 8 E 10
 As a host for events, i want to be able to create the page of my pub/place. The system will ask me informations about my place such as the city, the address, how many people it can hold maximum per group.
 As an alternative it will ask me to point a specific place in google maps so that some of those infos will autofill.
 
+P 5 E 6
 As an event administrator, if there are two events taking place at the same time and place or at the same time and with the same game the system will ask me if i want to join the two events and will give me a way to contact the other administrator to set this up.
 
+P 5 E 6
 As a pub i want to be able to create advertisements of my pub that will appear to the user during the selection of the place to host the event.
 
+P 3 E 10
 After the event took place as the event administrator i want to be able to say who was really there during the event so that those people will get a positive reputation for showing up.
 
+P 10 E 3 (first iteration)
 As an event administrator i want to be able to edit the maximum number of people allowed for the event i created and edit the event description. Also i want to be able to delete the event i created at any given time.
 
+P 6 E 6
 As a participant in an event i want to be able to freely add comments to the event that will be visible only to the participants and to revoke my participation at any give time. The system will give me bad reputation if i leave an event after the event deadline.
 
+P 6 E 10
 If i click on someone's photo i want to see his photo enlarged, the details he specified during the registration (except the infos he decided to hide), the list of games he prefers, and the reputation (and badges?) he earned.
 
+P 5 E 15
 As a user, i want to be able to receive reputation and badges for organizing successful events or participating to many events.
 
+P 3 E 6
 As a participant in an event i want to be able to rate the event after it took place. The rating should be a vote from 1 to 5.
 
+P 3 E 3
+As a user, i want to be able to see the list of players that played a game in the game view
