@@ -12,37 +12,37 @@ class RoundTest < ActiveSupport::TestCase
   test "record should be invalid at creation" do
     round = Round.new
     
-    assert round.invalid?, "record should be invalid"
+    assert round.invalid?
   end
   
   test "minimum people should not be nil at creation" do
     round = Round.new
     
-    assert_not_nil(round.min_people)
+    assert_not_nil round.min_people
   end
   
   test "maximum people should not be nil at creation" do
     round = Round.new
     
-    assert_not_nil(round.max_people)
+    assert_not_nil round.max_people
   end
   
   test "confirmed should not be nil at creation" do
     round = Round.new
     
-    assert_not_nil(round.confirmed)
+    assert_not_nil round.confirmed
   end
   
   test "date should not be nil at creation" do
     round = Round.new
     
-    assert_not_nil(round.date)
+    assert_not_nil round.date
   end
   
   test "deadline should not be nil at creation" do
     round = Round.new
     
-    assert_not_nil(round.deadline)
+    assert_not_nil round.deadline
   end
   
   test "confirmed should be false at creation" do
@@ -61,18 +61,6 @@ class RoundTest < ActiveSupport::TestCase
   test "people should not be less than 1" do
     @round.min_people = 0
     @round.max_people = -1
-    
-    assert @round.invalid?
-  end
-  
-  test "minimum people should not be string" do
-    @round.min_people = 'abc'
-    
-    assert @round.invalid?
-  end
-  
-  test "maximum people should not be string" do
-    @round.max_people = 'abc'
     
     assert @round.invalid?
   end

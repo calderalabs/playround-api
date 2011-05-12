@@ -10,7 +10,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110511152518) do
+ActiveRecord::Schema.define(:version => 20110512093924) do
+
+  create_table "arenas", :force => true do |t|
+    t.float    "latitude",                  :default => 0.0
+    t.float    "longitude",                 :default => 0.0
+    t.string   "name",        :limit => 30
+    t.text     "description"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "games", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "rounds", :force => true do |t|
     t.string   "name"
