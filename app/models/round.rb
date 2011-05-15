@@ -2,6 +2,8 @@ class Round < ActiveRecord::Base
   after_initialize :initialize_default_values
   before_save :capitalize_name
   
+  belongs_to :arena
+  
   validate :validate_deadline_should_be_earlier_than_or_equal_to_date
   
   validates_presence_of :name
@@ -9,6 +11,7 @@ class Round < ActiveRecord::Base
   validates_presence_of :date
   validates_presence_of :max_people
   validates_presence_of :min_people
+  validates_presence_of :arena_id
   
   validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 0, :only_integer => true
   validates_numericality_of :min_people, :greater_than => 0, :only_integer => true

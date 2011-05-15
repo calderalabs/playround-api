@@ -64,25 +64,11 @@ class ArenaTest < ActiveSupport::TestCase
   end
   
   test "website should be a valid url" do
-    @arena.website = ':aaa'
-    
-    assert @arena.invalid?
-    
-    @arena.website = 'http:/www.google.com'
-    
-    assert @arena.valid?
-    
-    @arena.website = 'http:///www.google'
-    
-    assert @arena.valid?
-    
-    @arena.website = 'www.google.com'
-    
-    assert @arena.valid?
-    
-    @arena.website = 'ftp://www.google.com'
-    
-    assert @arena.invalid?
+    assert_validates_url @arena
+  end
+  
+  test "website should be prefixed with the default schema if not present" do
+    assert_adjusts_url @arena
   end
   
   test "record should be valid when website is blank" do
@@ -95,5 +81,16 @@ class ArenaTest < ActiveSupport::TestCase
     @arena.website = nil
     
     assert @arena.valid?
+  end
+  
+  test "should have many rounds" do
+    assert_has_many @arena, :rounds
+    
+    assert_equal @arena.rounds.first.arena_id, @arena.id
+    assert_equal @arena.rounds.first.arena.name, 'Tea Room'
+    
+    assert_difference '@arena.rounds.count' do
+      @arena.rounds << rounds(:risk)
+    end
   end
 end

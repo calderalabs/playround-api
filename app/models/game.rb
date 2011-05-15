@@ -1,18 +1,17 @@
-class Arena < ActiveRecord::Base
+class Game < ActiveRecord::Base
+  before_save :capitalize_name
   before_validation :adjust_website_url
 
-  has_many :rounds
-
   validates_presence_of :name
-  validates_presence_of :latitude
-  validates_presence_of :longitude
+  validates_presence_of :description
   
-  validates_length_of :name, :in => 3..30
-  
-  validates_numericality_of :latitude, :greater_than_or_equal_to => -90, :less_than_or_equal_to => 90
-  validates_numericality_of :longitude, :greater_than_or_equal_to => -180, :less_than_or_equal_to => 180
+  validates_length_of :name, :maximum => 30
   
   validates_format_of :website, :with => /^(#{URI::regexp(%w(http https))})$/, :allow_blank => true
+
+  def capitalize_name
+    self.name.capitalize!
+  end
   
   def adjust_website_url
    unless self.website.blank?

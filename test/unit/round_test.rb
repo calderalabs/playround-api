@@ -102,4 +102,13 @@ class RoundTest < ActiveSupport::TestCase
     
     assert @round.name == 'Abc'
   end
+  
+  test "should belong to an arena" do
+    assert_belongs_to @round, :arena, Arena
+    
+    @round.arena = arenas(:tearoom)
+    
+    assert_equal @round.arena_id, @round.arena.id
+    assert_equal @round.arena.name, 'Tea Room'
+  end
 end

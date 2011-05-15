@@ -1,6 +1,7 @@
 class CreateRounds < ActiveRecord::Migration
   def self.up
     create_table :rounds do |t|
+      t.references :arena
       t.string :name, :limit => 30
       t.text :description
       t.datetime :deadline
