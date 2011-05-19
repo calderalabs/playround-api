@@ -1,6 +1,4 @@
 class Arena < ActiveRecord::Base
-  before_validation :adjust_website_url
-
   has_many :rounds
 
   validates_presence_of :name
@@ -12,11 +10,6 @@ class Arena < ActiveRecord::Base
   validates_numericality_of :latitude, :greater_than_or_equal_to => -90, :less_than_or_equal_to => 90
   validates_numericality_of :longitude, :greater_than_or_equal_to => -180, :less_than_or_equal_to => 180
   
-  validates_format_of :website, :with => /^(#{URI::regexp(%w(http https))})$/, :allow_blank => true
-  
-  def adjust_website_url
-   unless self.website.blank?
-     self.website = 'http://' + self.website unless self.website =~ /^.*:.*$/ # Prepend the default schema (http) if it was not present already
-   end
-  end
+  validates_url_format_of :website, :allow_blank => true
+  adjusts_string :website, :prepend => 'http://', :if => Proc.new { |a| !(a.website =~ /^.*:.*$/) }
 end

@@ -1,7 +1,6 @@
 class Round < ActiveRecord::Base
   after_initialize :initialize_default_values
-  before_save :capitalize_name
-  
+
   belongs_to :arena
   
   validate :validate_deadline_should_be_earlier_than_or_equal_to_date
@@ -13,10 +12,12 @@ class Round < ActiveRecord::Base
   validates_presence_of :min_people
   validates_presence_of :arena_id
   
-  validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 0, :only_integer => true
+  validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 0, :only_integer => true, :unless => Proc.new { |round| round.min_people.nil? }
   validates_numericality_of :min_people, :greater_than => 0, :only_integer => true
   
   validates_length_of :name, :in => 3..30
+  
+  adjusts_string :name, :case => :capitalize
   
   private
   
@@ -26,10 +27,8 @@ class Round < ActiveRecord::Base
   end
   
   def validate_deadline_should_be_earlier_than_or_equal_to_date
-    errors.add(:deadline, "should be earlier than date") if self.deadline > self.date
-  end
-  
-  def capitalize_name
-    self.name.capitalize!
+    if self.deadline && self.date
+      errors.add(:deadline, "should be earlier than date") if self.deadline > self.date
+    end
   end
 end

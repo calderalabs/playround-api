@@ -9,10 +9,26 @@ class ArenaTest < ActiveSupport::TestCase
     @arena = nil
   end
   
-  test "record should be invalid at creation" do
-    arena = Arena.new
+  test "fixture should be valid" do
+    assert @arena.valid?
+  end
+  
+  test "should be invalid without a name" do
+    @arena.name = nil
     
-    assert arena.invalid?
+    assert @arena.invalid?
+  end
+  
+  test "should be invalid without latitude" do
+    @arena.latitude = nil
+    
+    assert @arena.invalid?
+  end
+  
+  test "should be invalid without longitude" do
+    @arena.longitude = nil
+    
+    assert @arena.invalid?
   end
   
   test "latitude should not be nil at creation" do
@@ -71,13 +87,13 @@ class ArenaTest < ActiveSupport::TestCase
     assert_adjusts_url @arena
   end
   
-  test "record should be valid when website is blank" do
+  test "should be valid when website is blank" do
     @arena.website = ''
     
     assert @arena.valid?
   end
   
-  test "record should be valid when website is nil" do
+  test "should be valid when website is nil" do
     @arena.website = nil
     
     assert @arena.valid?

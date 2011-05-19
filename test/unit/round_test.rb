@@ -9,10 +9,44 @@ class RoundTest < ActiveSupport::TestCase
     @round = nil
   end
   
-  test "record should be invalid at creation" do
-    round = Round.new
+  test "fixture should be valid" do
+    assert @round.valid?
+  end
+  
+  test "should not be valid without a name" do
+    @round.name = nil
     
-    assert round.invalid?
+    assert @round.invalid?
+  end
+  
+   test "should not be valid without a deadline" do
+    @round.deadline = nil
+    
+    assert @round.invalid?
+  end
+  
+  test "should not be valid without a date" do
+    @round.date = nil
+    
+    assert @round.invalid?
+  end
+  
+  test "should not be valid without maximum people" do
+    @round.max_people = nil
+    
+    assert @round.invalid?
+  end
+  
+  test "should not be valid without minimum people" do
+    @round.min_people = nil
+    
+    assert @round.invalid?
+  end
+  
+  test "should not be valid without an arena" do
+    @round.arena = nil
+    
+    assert @round.invalid?
   end
   
   test "minimum people should not be nil at creation" do

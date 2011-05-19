@@ -5,10 +5,20 @@ class GameTest < ActiveSupport::TestCase
     @game = games(:dota)
   end
   
-  test "should be invalid at creation" do
-    game = Game.new
+  test "fixture should be valid" do
+    assert @game.valid?
+  end
+  
+  test "should not be valid wihout a name" do
+    @game.name = nil
     
-    assert game.invalid?
+    assert @game.invalid?
+  end
+  
+  test "should not be valid without a description" do
+    @game.description = nil
+    
+    assert @game.invalid?
   end
   
   test "name should not be more than 30 characters" do
