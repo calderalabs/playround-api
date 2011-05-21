@@ -49,6 +49,12 @@ class RoundTest < ActiveSupport::TestCase
     assert @round.invalid?
   end
   
+  test "should not be valid without a game" do
+    @round.game = nil
+    
+    assert @round.invalid?
+  end
+  
   test "minimum people should not be nil at creation" do
     round = Round.new
     

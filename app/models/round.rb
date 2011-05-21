@@ -17,6 +17,7 @@ class Round < ActiveRecord::Base
   validates_presence_of :max_people
   validates_presence_of :min_people
   validates_presence_of :arena_id
+  validates_presence_of :game_id
   
   validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 0, :only_integer => true, :unless => Proc.new { |round| round.min_people.nil? }
   validates_numericality_of :min_people, :greater_than => 0, :only_integer => true

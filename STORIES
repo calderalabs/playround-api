@@ -17,7 +17,7 @@ P 9 E 10
 As a user, I want to be able to browse rounds by city, by name, by game. The system will prompt me the list of rounds in chronological order.
 
 P 9 E 6 (first iteration)
-When I select a specific round I want to see who has joined that round, the game that will be played, how much time I have left to join the round, how many free spots are there and where it will take arena on google maps. If I click on the game the system will open a popup displaying infos about that game.
+When I select a specific round I want to see who has joined that round, the game that will be played, how much time I have left to join the round, how many free spots are there and where it will take place on google maps. If I click on the game the system will open a popup displaying infos about that game.
 
 P 9 E 6 (first iteration)
 As a user, I want to be able to participate in the rounds I browse. The system will ask me if I confirm my choice to participate and if I want to add a comment that will be seen by every user that browse (join?) that round.

@@ -31,6 +31,14 @@
     <%= f.label :min_people %><br />
     <%= f.text_field :min_people %>
   </div>
+  <div class="field">
+    <%= f.label :arena_id %><br />
+    <%= f.collection_select :arena_id, Arena.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label :game_id %><br />
+    <%= f.collection_select :game_id, Game.all, :id, :name %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -8,6 +8,7 @@
     <th>Confirmed</th>
     <th>Max people</th>
     <th>Min people</th>
+	<th>Arena</th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,6 +22,7 @@
     <td><%= round.confirmed %></td>
     <td><%= round.max_people %></td>
     <td><%= round.min_people %></td>
+	<td><%= round.arena.name %></td>
     <td><%= link_to 'Show', round %></td>
     <td><%= link_to 'Edit', edit_round_path(round) %></td>
     <td><%= link_to 'Destroy', round, :confirm => 'Are you sure?', :method => :delete %></td>

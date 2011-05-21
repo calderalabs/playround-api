@@ -1,4 +1,8 @@
 Playround::Application.routes.draw do
+  resources :games
+
+  resources :arenas
+
   resources :rounds
 
   # The priority is based upon order of creation:
