@@ -105,6 +105,8 @@ class ArenaTest < ActiveSupport::TestCase
     assert_equal @arena.rounds.first.arena_id, @arena.id
     assert_equal @arena.rounds.first.arena.name, 'Tea Room'
     
+    @arena.rounds = []
+    
     assert_difference '@arena.rounds.count' do
       @arena.rounds << rounds(:risk)
     end

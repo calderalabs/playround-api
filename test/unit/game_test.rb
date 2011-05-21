@@ -55,4 +55,17 @@ class GameTest < ActiveSupport::TestCase
     assert @game.valid?
   end
   
+  test "should have many rounds" do
+    assert_has_many @game, :rounds
+    
+    assert_equal @game.rounds.first.game_id, @game.id
+    assert_equal @game.rounds.first.game.name, 'DotA'
+    
+    @game.rounds = []
+    
+    assert_difference '@game.rounds.count' do
+      @game.rounds << rounds(:risk)
+    end
+  end
+  
 end

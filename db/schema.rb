@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20110515142002) do
 
   create_table "rounds", :force => true do |t|
     t.integer  "arena_id"
+    t.integer  "game_id"
     t.string   "name",        :limit => 30
     t.text     "description"
     t.datetime "deadline"

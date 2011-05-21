@@ -126,7 +126,8 @@ class RoundTest < ActiveSupport::TestCase
   test "deadline should be before or at the same time of date" do
     @round.deadline = 1.hour.since(@round.date)
     
-    assert @round.invalid?
+    assert @round.invalid?  
+    assert @round.errors[:deadline].include? "must be earlier than date"
   end
   
   test "name should begin with a capital letter after save" do
@@ -140,9 +141,30 @@ class RoundTest < ActiveSupport::TestCase
   test "should belong to an arena" do
     assert_belongs_to @round, :arena, Arena
     
-    @round.arena = arenas(:tearoom)
-    
     assert_equal @round.arena_id, @round.arena.id
     assert_equal @round.arena.name, 'Tea Room'
+  end
+  
+  test "should belong to a game" do
+    assert_belongs_to @round, :game, Game
+    
+    assert_equal @round.game_id, @round.game.id
+    assert_equal @round.game.name, 'DotA'
+  end
+  
+  test "deadline should not be before now" do
+    @round.deadline = Time.now - 1.day
+    
+    assert @round.invalid?
+  end
+  
+  test "date should not be before now" do
+    @round.date = Time.now - 1.day
+    
+    assert @round.invalid?
+  end
+  
+  test "deadline and date should be equal on creation" do
+    assert_equal @round.date, @round.deadline
   end
 end

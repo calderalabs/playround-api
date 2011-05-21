@@ -2,8 +2,14 @@ class Round < ActiveRecord::Base
   after_initialize :initialize_default_values
 
   belongs_to :arena
+  belongs_to :game
   
-  validate :validate_deadline_should_be_earlier_than_or_equal_to_date
+  validate do
+    errors.add(:deadline, "must be earlier than date") if self.deadline && self.date && self.deadline > self.date
+    
+    errors.add(:deadline, "must be after the current time") if self.deadline && self.deadline < Time.now.change(:sec => 0)
+    errors.add(:date, "must be after the current time") if self.date && self.date < Time.now.change(:sec => 0)
+  end
   
   validates_presence_of :name
   validates_presence_of :deadline
@@ -19,16 +25,26 @@ class Round < ActiveRecord::Base
   
   adjusts_string :name, :case => :capitalize
   
+  def date=(date)
+    if date
+      super(date.change(:sec => 0))
+    else
+      super(nil)
+    end
+  end
+  
+  def deadline=(deadline)
+    if deadline
+      super(deadline.change(:sec => 0))
+    else
+      super(nil)
+    end
+  end
+  
   private
   
   def initialize_default_values
     self.date ||= Time.now
     self.deadline ||= Time.now
-  end
-  
-  def validate_deadline_should_be_earlier_than_or_equal_to_date
-    if self.deadline && self.date
-      errors.add(:deadline, "should be earlier than date") if self.deadline > self.date
-    end
   end
 end

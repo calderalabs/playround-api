@@ -1,4 +1,6 @@
 class Game < ActiveRecord::Base
+  has_many :rounds
+  
   validates_presence_of :name
   validates_presence_of :description
   
