@@ -2,7 +2,8 @@ require 'test_helper'
 
 class RoundsControllerTest < ActionController::TestCase
   setup do
-    @round = rounds(:one)
+    @round = rounds(:dota)
+    @controller.sign_in Factory :user
   end
 
   test "should get index" do

@@ -1,4 +1,6 @@
 class RoundsController < ApplicationController
+  before_filter :authorize
+  
   # GET /rounds
   # GET /rounds.xml
   def index
