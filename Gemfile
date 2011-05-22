@@ -32,3 +32,4 @@ gem 'sqlite3'
 
 gem 'clearance'
 gem 'factory_girl'
+gem 'flutie'

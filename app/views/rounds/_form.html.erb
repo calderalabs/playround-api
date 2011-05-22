@@ -1,6 +1,6 @@
 <%= form_for(@round) do |f| %>
   <% if @round.errors.any? %>
-    <div id="error_explanation">
+    <div class="error">
       <h2><%= pluralize(@round.errors.count, "error") %> prohibited this round from being saved:</h2>
 
       <ul>
