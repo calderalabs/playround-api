@@ -2,14 +2,14 @@ require 'test_helper'
 
 class RoundTest < ActiveSupport::TestCase
   def setup
-    @round = rounds(:dota)
+    @round = Factory :round
   end
   
   def teardown
     @round = nil
   end
   
-  test "fixture should be valid" do
+  test "factory should be valid" do
     assert @round.valid?
   end
   
@@ -148,14 +148,12 @@ class RoundTest < ActiveSupport::TestCase
     assert_belongs_to @round, :arena, Arena
     
     assert_equal @round.arena_id, @round.arena.id
-    assert_equal @round.arena.name, 'Tea Room'
   end
   
   test "should belong to a game" do
     assert_belongs_to @round, :game, Game
     
     assert_equal @round.game_id, @round.game.id
-    assert_equal @round.game.name, 'DotA'
   end
   
   test "deadline should not be before now" do
@@ -172,5 +170,17 @@ class RoundTest < ActiveSupport::TestCase
   
   test "deadline and date should be equal on creation" do
     assert_equal @round.date, @round.deadline
+  end
+ 
+  test "rounds should have many subscriptions" do
+    Factory :subscription, :round => @round
+    
+    assert_has_many @round, :subscriptions
+    
+    assert_equal @round.subscriptions.first.round_id, @round.id
+    
+    assert_difference '@round.subscriptions.count' do
+      Factory :subscription, :round => @round
+    end  
   end
 end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class GamesControllerTest < ActionController::TestCase
   setup do
-    @game = games(:dota)
+    @game = Factory :game
     @controller.sign_in Factory :user
   end
 

@@ -45,7 +45,10 @@ P 10 E 3 (first iteration)
 As an round administrator I want to be able to edit the maximum number of people allowed for the round I created and edit the round description. Also I want to be able to delete the round I created at any given time.
 
 P 6 E 6
-As a participant in an round I want to be able to freely add comments to the round that will be visible only to the participants and to revoke my participation at any give time. The system will give me bad reputation if I leave an round after the round deadline.
+As a participant in an round I want to be able to freely add comments to the round that will be visible only to the participants 
+
+P 6 E 6
+As a participant in a round I want to be able to revoke my participation at any give time. The system will give me bad reputation if I leave an round after the round deadline.
 
 P 6 E 10
 If I click on someone's photo I want to see his photo enlarged, the details he specified during the registration (except the infos he decided to hide), the list of games he prefers, and the reputation (and badges?) he earned.

@@ -38,6 +38,20 @@
   <%= @round.game.name %>
 </p>
 
+<p>
+  <b>Subscribers:</b>
+  <ul>
+  <% for subscription in @round.subscriptions %>
+    <li><%=h subscription.user.email %></li>
+  <% end %>
+</ul>
+</p>
+
+<%unless current_user.subscribed?(@round) %>
+  <%= link_to "Subscribe", subscriptions_path(:id => @round.id), :method => :post %> |
+<% else %>
+  <%= link_to "Unsubscribe", subscription_path(:id => @round.id), :confirm => 'Are you sure?', :method => :delete %> |
+<% end %>
 
 <%= link_to 'Edit', edit_round_path(@round) %> |
 <%= link_to 'Back', rounds_path %>

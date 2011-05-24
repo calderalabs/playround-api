@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110522133806) do
+ActiveRecord::Schema.define(:version => 20110523112945) do
 
   create_table "arenas", :force => true do |t|
     t.float    "latitude",                  :default => 0.0
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20110522133806) do
     t.boolean  "confirmed",                 :default => false
     t.integer  "max_people",                :default => 1
     t.integer  "min_people",                :default => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "round_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

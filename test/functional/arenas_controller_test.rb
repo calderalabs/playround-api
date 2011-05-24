@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ArenasControllerTest < ActionController::TestCase
   setup do
-    @arena = arenas(:tearoom)
+    @arena = Factory :arena
     @controller.sign_in Factory :user
   end
 

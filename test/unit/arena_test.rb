@@ -2,14 +2,14 @@ require 'test_helper'
 
 class ArenaTest < ActiveSupport::TestCase
   def setup
-    @arena = arenas(:tearoom)
+    @arena = Factory :arena
   end
   
   def teardown
     @arena = nil
   end
   
-  test "fixture should be valid" do
+  test "factory should be valid" do
     assert @arena.valid?
   end
   
@@ -100,15 +100,14 @@ class ArenaTest < ActiveSupport::TestCase
   end
   
   test "should have many rounds" do
+    Factory :round, :arena => @arena
+    
     assert_has_many @arena, :rounds
     
     assert_equal @arena.rounds.first.arena_id, @arena.id
-    assert_equal @arena.rounds.first.arena.name, 'Tea Room'
-    
-    @arena.rounds = []
     
     assert_difference '@arena.rounds.count' do
-      @arena.rounds << rounds(:risk)
+      Factory :round, :arena => @arena
     end
   end
 end

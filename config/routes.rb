@@ -1,4 +1,6 @@
 Playround::Application.routes.draw do
+  resources :subscriptions
+
   resources :games
 
   resources :arenas
@@ -54,7 +56,7 @@ Playround::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => "rounds#index"
+  root :to => "rounds#index"
 
   # See how all your routes lay out with "rake routes"
 

@@ -2,10 +2,15 @@ require 'test_helper'
 
 class GameTest < ActiveSupport::TestCase
   def setup
-    @game = games(:dota)
+    @game = Factory :game
   end
   
-  test "fixture should be valid" do
+  def teardown
+    @game = nil
+  end
+
+  
+  test "factory should be valid" do
     assert @game.valid?
   end
   
@@ -56,15 +61,14 @@ class GameTest < ActiveSupport::TestCase
   end
   
   test "should have many rounds" do
+    Factory :round, :game => @game
+    
     assert_has_many @game, :rounds
     
     assert_equal @game.rounds.first.game_id, @game.id
-    assert_equal @game.rounds.first.game.name, 'DotA'
-    
-    @game.rounds = []
     
     assert_difference '@game.rounds.count' do
-      @game.rounds << rounds(:risk)
+      Factory :round, :game => @game
     end
   end
   

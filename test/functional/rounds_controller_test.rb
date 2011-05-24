@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RoundsControllerTest < ActionController::TestCase
   setup do
-    @round = rounds(:dota)
+    @round = Factory :round
     @controller.sign_in Factory :user
   end
 

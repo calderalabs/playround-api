@@ -1,4 +1,6 @@
 class Round < ActiveRecord::Base
+  has_many :subscriptions
+
   after_initialize :initialize_default_values
 
   belongs_to :arena
@@ -41,7 +43,7 @@ class Round < ActiveRecord::Base
       super(nil)
     end
   end
-  
+
   private
   
   def initialize_default_values
