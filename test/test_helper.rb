@@ -37,15 +37,28 @@ class ActiveSupport::TestCase
     assert_equal record.send(key), 'http://www.google.com'
   end
   
-  def assert_has_many(record, key)
-    assert_respond_to record, key
-
-    assert_kind_of Array, record.send(key) 
+  def assert_has_many(record, attribute, options = {})
+    assert_respond_to record, attribute
+    
+    class_name = options[:class_name] || ActiveSupport::Inflector.classify(attribute.to_s)
+    foreign_key = options[:foreign_key] || ActiveSupport::Inflector.foreign_key(record.class.name)
+    
+    assert_kind_of Array, record.send(attribute)
+    
+    assert_difference "record.#{attribute}.count" do
+      Factory class_name.underscore.to_sym, foreign_key => record.id
+    end
   end
   
-  def assert_belongs_to(record, key, klass)
-    assert_respond_to record, key
+  def assert_belongs_to(record, attribute, options = {})
+    class_name = options[:class_name] || ActiveSupport::Inflector.classify(attribute.to_s)
+    class_constant = ActiveSupport::Inflector.constantize(class_name)
+    foreign_key = options[:foreign_key] || ActiveSupport::Inflector.foreign_key(attribute.to_s)
     
-    assert_kind_of klass, record.send(key)
+    assert_respond_to record, attribute
+    
+    assert_kind_of class_constant, record.send(attribute)
+    
+    assert_equal record.send(foreign_key), record.send(attribute).id
   end
 end

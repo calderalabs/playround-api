@@ -102,24 +102,14 @@ class ArenaTest < ActiveSupport::TestCase
   test "should have many rounds" do
     @arena.save!
     
-    Factory :round, :arena => @arena
-    
     assert_has_many @arena, :rounds
-    
-    assert_equal @arena.rounds.first.arena_id, @arena.id
-    
-    assert_difference '@arena.rounds.count' do
-      Factory :round, :arena => @arena
-    end
   end
   
   test "should belong to user" do
-    assert_belongs_to @arena, :user, User
-    
-    assert_equal @arena.user_id, @arena.user.id
+    assert_belongs_to @arena, :user
   end
   
-  test "user_id should not be nil" do
+  test "should be invalid without a user" do
     @arena.user = nil
     
     assert @arena.invalid?

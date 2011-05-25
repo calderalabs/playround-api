@@ -34,15 +34,11 @@ class SubscriptionTest < ActiveSupport::TestCase
   end
   
   test "should belong to user" do
-    assert_belongs_to @subscription, :user, User
-    
-    assert_equal @subscription.user_id, @subscription.user.id
+    assert_belongs_to @subscription, :user
   end
   
   test "should belong to round" do
-    assert_belongs_to @subscription, :round, Round
-    
-    assert_equal @subscription.round_id, @subscription.round.id
+    assert_belongs_to @subscription, :round
   end
   
   test "not allow to subscribe to a full round" do

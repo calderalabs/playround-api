@@ -63,24 +63,14 @@ class GameTest < ActiveSupport::TestCase
   test "should have many rounds" do
     @game.save!
     
-    Factory :round, :game => @game
-    
     assert_has_many @game, :rounds
-    
-    assert_equal @game.rounds.first.game_id, @game.id
-    
-    assert_difference '@game.rounds.count' do
-      Factory :round, :game => @game
-    end
   end
   
   test "should belong to user" do
-    assert_belongs_to @game, :user, User
-    
-    assert_equal @game.user_id, @game.user.id
+    assert_belongs_to @game, :user
   end
   
-  test "user_id should not be nil" do
+  test "should be invalid without a user" do
     @game.user = nil
     
     assert @game.invalid?

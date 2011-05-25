@@ -145,15 +145,11 @@ class RoundTest < ActiveSupport::TestCase
   end
   
   test "should belong to an arena" do
-    assert_belongs_to @round, :arena, Arena
-    
-    assert_equal @round.arena_id, @round.arena.id
+    assert_belongs_to @round, :arena
   end
   
   test "should belong to a game" do
-    assert_belongs_to @round, :game, Game
-    
-    assert_equal @round.game_id, @round.game.id
+    assert_belongs_to @round, :game
   end
   
   test "deadline should not be before now" do
@@ -175,15 +171,7 @@ class RoundTest < ActiveSupport::TestCase
   test "rounds should have many subscriptions" do
     @round.save!
     
-    Factory :subscription, :round => @round
-    
     assert_has_many @round, :subscriptions
-    
-    assert_equal @round.subscriptions.first.round_id, @round.id
-    
-    assert_difference '@round.subscriptions.count' do
-      Factory :subscription, :round => @round
-    end  
   end
   
   test "should be full when subscribers are equal to max_people" do
@@ -199,9 +187,7 @@ class RoundTest < ActiveSupport::TestCase
   end
   
   test "should belong to user" do
-    assert_belongs_to @round, :user, User
-    
-    assert_equal @round.user_id, @round.user.id
+    assert_belongs_to @round, :user
   end
   
   test "only the user who created the round should be able to manage it" do
@@ -212,7 +198,7 @@ class RoundTest < ActiveSupport::TestCase
     assert !@round.authorized?(Factory :user)
   end
   
-  test "user_id should not be nil" do
+  test "should be invalid without a user" do
     @round.user = nil
     
     assert @round.invalid?
