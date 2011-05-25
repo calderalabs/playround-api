@@ -39,7 +39,7 @@
 </p>
 
 <p>
-  <b>Subscribers:</b>
+  <b><%= t :number_of_subscribed_people, :count => @round.subscriptions.count %>:</b>
   <ul>
   <% for subscription in @round.subscriptions %>
     <li><%=h subscription.user.email %></li>
@@ -47,11 +47,25 @@
 </ul>
 </p>
 
-<%unless current_user.subscribed?(@round) %>
-  <%= link_to "Subscribe", subscriptions_path(:id => @round.id), :method => :post %> |
+<p><b>
+<% if @round.full? %>
+  This round is full!
 <% else %>
-  <%= link_to "Unsubscribe", subscription_path(:id => @round.id), :confirm => 'Are you sure?', :method => :delete %> |
+  <%= t :number_of_spots_left, :count => @round.remaining_spots %>
+<% end %>
+</b></p>
+
+<% unless current_user.subscribed?(@round) %>
+  <% unless @round.full? || cannot?(:create, @subscription) %>
+    <%= link_to "Subscribe", subscriptions_path(:id => @round.id), :confirm => 'Are you sure?', :method => :post %> |
+  <% end %>
+<% else %>
+  <% if  can? :destroy, @subscription %>
+    <%= link_to "Unsubscribe", subscription_path(:id => @round.id), :confirm => 'Are you sure?', :method => :delete %> |
+  <% end %>
 <% end %>
 
-<%= link_to 'Edit', edit_round_path(@round) %> |
+<% if can? :update, @round %>
+  <%= link_to 'Edit', edit_round_path(@round) %> |
+<% end %>
 <%= link_to 'Back', rounds_path %>

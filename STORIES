@@ -10,10 +10,10 @@ As a visitor, I want to be able to sign up with my Facebook account or link it t
 P 6 E 10
 During the registration phase the system will ask me for my email, my name, birth date, hometown, city where I live, gender, some extra info about me, and a photo to upload as an avatar. The system will give me the option to hide my email (and possibly other infos) to everyone that looks at my profile.
 
-P 8 E 3
+P 8 E 3 (second iteration)
 As an round administrator I want to be able to see the list of people that participate in the round and the comments they added.
 
-P 9 E 10
+P 9 E 10 (second iteration)
 As a user, I want to be able to browse rounds by city, by name, by game. The system will prompt me the list of rounds in chronological order.
 
 P 9 E 6 (first iteration)
@@ -28,7 +28,7 @@ As a user, I want to be able to invite a Facebook friend (if I linked my Faceboo
 P 3 E 3
 As a user, I want to be able to select a friend and create a bond so that when I join a specific round he will join automatically with me.
 
-P 8 E 10
+P 8 E 10 (second iteration)
 As a host for rounds, I want to be able to create the page of my arena. The system will ask me informations about my arena such as the city, the address, how many people it can hold maximum per group.
 As an alternative it will ask me to point a specific place in google maps so that some of those infos will autofill.
 
@@ -50,7 +50,7 @@ As a participant in an round I want to be able to freely add comments to the rou
 P 6 E 6
 As a participant in a round I want to be able to revoke my participation at any give time. The system will give me bad reputation if I leave an round after the round deadline.
 
-P 6 E 10
+P 6 E 10 (second iteration)
 If I click on someone's photo I want to see his photo enlarged, the details he specified during the registration (except the infos he decided to hide), the list of games he prefers, and the reputation (and badges?) he earned.
 
 P 5 E 15
@@ -62,5 +62,5 @@ As a participant in an round I want to be able to rate the round after it took p
 P 3 E 3
 As a user, I want to be able to see the list of players that played a game in the game view
 
-P 8 E 6
+P 8 E 6 (second iteration)
 As a user, I want to be able to confirm that the round will take place. After I do this every participant should be notified of the confirmation by email.

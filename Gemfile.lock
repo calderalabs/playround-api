@@ -30,6 +30,7 @@ GEM
     activesupport (3.0.7)
     arel (2.0.9)
     builder (2.1.2)
+    cancan (1.6.5)
     clearance (0.11.1)
       diesel (~> 0.1.4)
       rails (~> 3.0.0)
@@ -46,6 +47,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    mocha (0.9.12)
     polyglot (0.3.1)
     rack (1.2.2)
     rack-mount (0.6.14)
@@ -76,8 +78,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cancan
   clearance
   factory_girl
   flutie
+  mocha
   rails (= 3.0.7)
   sqlite3

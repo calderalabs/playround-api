@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ArenaTest < ActiveSupport::TestCase
   def setup
-    @arena = Factory :arena
+    @arena = Factory.build :arena
   end
   
   def teardown
@@ -100,6 +100,8 @@ class ArenaTest < ActiveSupport::TestCase
   end
   
   test "should have many rounds" do
+    @arena.save!
+    
     Factory :round, :arena => @arena
     
     assert_has_many @arena, :rounds
@@ -109,5 +111,17 @@ class ArenaTest < ActiveSupport::TestCase
     assert_difference '@arena.rounds.count' do
       Factory :round, :arena => @arena
     end
+  end
+  
+  test "should belong to user" do
+    assert_belongs_to @arena, :user, User
+    
+    assert_equal @arena.user_id, @arena.user.id
+  end
+  
+  test "user_id should not be nil" do
+    @arena.user = nil
+    
+    assert @arena.invalid?
   end
 end

@@ -1,6 +1,8 @@
 class RoundsController < ApplicationController
   before_filter :authorize
   
+  load_and_authorize_resource
+  
   # GET /rounds
   # GET /rounds.xml
   def index
@@ -42,7 +44,7 @@ class RoundsController < ApplicationController
   # POST /rounds
   # POST /rounds.xml
   def create
-    @round = Round.new(params[:round])
+    @round = current_user.rounds.build(params[:round])
 
     respond_to do |format|
       if @round.save

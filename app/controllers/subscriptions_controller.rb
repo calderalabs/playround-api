@@ -1,13 +1,15 @@
 class SubscriptionsController < ApplicationController
+  load_and_authorize_resource
+  
   def create
     @subscription = current_user.subscriptions.build(:round_id => params[:id])
     @round = Round.find(params[:id])
     
     if @subscription.save
-      flash[:notice] = "You successfully subscribed to this round"
+      flash[:notice] = "You successfully subscribed to this round."
       redirect_to @round
     else
-      flash[:error] = "You are already subscribed to this round"
+      flash[:failure] = "An error occurred while subscribing to this round."
       redirect_to @round
     end
   end
@@ -17,7 +19,7 @@ class SubscriptionsController < ApplicationController
     @subscription = current_user.subscriptions.where(:round_id => @round.id).first
     @subscription.destroy
     
-    flash[:notice] = "Removed subscription."
+    flash[:notice] = "You are no longer subscribed to this round."
     redirect_to @subscription.round
   end
 end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class GameTest < ActiveSupport::TestCase
   def setup
-    @game = Factory :game
+    @game = Factory.build :game
   end
   
   def teardown
@@ -61,6 +61,8 @@ class GameTest < ActiveSupport::TestCase
   end
   
   test "should have many rounds" do
+    @game.save!
+    
     Factory :round, :game => @game
     
     assert_has_many @game, :rounds
@@ -72,4 +74,15 @@ class GameTest < ActiveSupport::TestCase
     end
   end
   
+  test "should belong to user" do
+    assert_belongs_to @game, :user, User
+    
+    assert_equal @game.user_id, @game.user.id
+  end
+  
+  test "user_id should not be nil" do
+    @game.user = nil
+    
+    assert @game.invalid?
+  end
 end

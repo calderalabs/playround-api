@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(:version => 20110523112945) do
 
   create_table "arenas", :force => true do |t|
+    t.integer  "user_id"
     t.float    "latitude",                  :default => 0.0
     t.float    "longitude",                 :default => 0.0
     t.string   "name",        :limit => 30
@@ -23,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20110523112945) do
   end
 
   create_table "games", :force => true do |t|
+    t.integer  "user_id"
     t.string   "name",        :limit => 30
     t.text     "description"
     t.string   "website"
@@ -31,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20110523112945) do
   end
 
   create_table "rounds", :force => true do |t|
+    t.integer  "user_id"
     t.integer  "arena_id"
     t.integer  "game_id"
     t.string   "name",        :limit => 30

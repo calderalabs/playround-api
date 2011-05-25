@@ -1,4 +1,4 @@
-<h1>Listing games</h1>
+<h1>Games</h1>
 
 <table>
   <tr>
@@ -13,13 +13,21 @@
   <tr>
     <td><%= game.name %></td>
     <td><%= game.description %></td>
-    <td><%= link_to 'Show', game %></td>
-    <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Destroy', game, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if can? :read, game %>
+      <td><%= link_to 'Show', game %></td>
+    <% end %>
+    <% if can? :update, game %>
+      <td><%= link_to 'Edit', edit_game_path(game) %></td>
+    <% end %>
+    <% if can? :destroy, game %>
+      <td><%= link_to 'Destroy', game, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Game', new_game_path %>
+<% if can? :create, @game %>
+    <%= link_to 'New Game', new_game_path %>
+<% end %>

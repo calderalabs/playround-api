@@ -5,6 +5,7 @@ class Round < ActiveRecord::Base
 
   belongs_to :arena
   belongs_to :game
+  belongs_to :user
   
   validate do
     errors.add(:deadline, "must be earlier than date") if self.deadline && self.date && self.deadline > self.date
@@ -20,6 +21,7 @@ class Round < ActiveRecord::Base
   validates_presence_of :min_people
   validates_presence_of :arena_id
   validates_presence_of :game_id
+  validates_presence_of :user_id
   
   validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 0, :only_integer => true, :unless => Proc.new { |round| round.min_people.nil? }
   validates_numericality_of :min_people, :greater_than => 0, :only_integer => true
@@ -42,6 +44,18 @@ class Round < ActiveRecord::Base
     else
       super(nil)
     end
+  end
+  
+  def full?
+    self.remaining_spots == 0
+  end
+  
+  def remaining_spots
+    self.max_people - self.subscriptions.count
+  end
+  
+  def authorized?(user)
+    self.user == user
   end
 
   private

@@ -1,8 +1,10 @@
 class Game < ActiveRecord::Base
   has_many :rounds
+  belongs_to :user
   
   validates_presence_of :name
   validates_presence_of :description
+  validates_presence_of :user_id
   
   validates_length_of :name, :maximum => 30
   

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SubscriptionTest < ActiveSupport::TestCase
   def setup
-    @subscription = Factory(:subscription)
+    @subscription = Factory.build :subscription
   end
   
   def teardown
@@ -26,6 +26,8 @@ class SubscriptionTest < ActiveSupport::TestCase
   end
   
   test "combination of user and round should be unique" do
+    @subscription.save!
+    
     @another_subscription = Factory.build(:subscription , :user => @subscription.user, :round => @subscription.round)
     
     assert @another_subscription.invalid?
@@ -41,5 +43,13 @@ class SubscriptionTest < ActiveSupport::TestCase
     assert_belongs_to @subscription, :round, Round
     
     assert_equal @subscription.round_id, @subscription.round.id
+  end
+  
+  test "not allow to subscribe to a full round" do
+    @subscription.round.max_people.times do
+      Factory(:subscription, :round => @subscription.round)
+    end
+    
+    assert @subscription.invalid?
   end
 end

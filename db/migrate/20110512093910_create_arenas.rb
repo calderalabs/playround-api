@@ -1,6 +1,7 @@
 class CreateArenas < ActiveRecord::Migration
   def self.up
     create_table :arenas do |t|
+      t.references :user
       t.float :latitude, :default => 0
       t.float :longitude, :default => 0
       t.string :name, :limit => 30

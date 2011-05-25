@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RoundTest < ActiveSupport::TestCase
   def setup
-    @round = Factory :round
+    @round = Factory.build :round
   end
   
   def teardown
@@ -173,6 +173,8 @@ class RoundTest < ActiveSupport::TestCase
   end
  
   test "rounds should have many subscriptions" do
+    @round.save!
+    
     Factory :subscription, :round => @round
     
     assert_has_many @round, :subscriptions
@@ -182,5 +184,37 @@ class RoundTest < ActiveSupport::TestCase
     assert_difference '@round.subscriptions.count' do
       Factory :subscription, :round => @round
     end  
+  end
+  
+  test "should be full when subscribers are equal to max_people" do
+    @round.save!
+    
+    assert !@round.full?
+    
+    @round.max_people.times do
+      Factory(:subscription, :round => @round)
+    end
+    
+    assert @round.full?
+  end
+  
+  test "should belong to user" do
+    assert_belongs_to @round, :user, User
+    
+    assert_equal @round.user_id, @round.user.id
+  end
+  
+  test "only the user who created the round should be able to manage it" do
+    @round.save!
+    
+    assert @round.authorized?(@round.user)
+    
+    assert !@round.authorized?(Factory :user)
+  end
+  
+  test "user_id should not be nil" do
+    @round.user = nil
+    
+    assert @round.invalid?
   end
 end

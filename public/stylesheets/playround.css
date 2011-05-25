@@ -17,6 +17,11 @@ body, p, ol, ul, td {
 
 #header {
   text-align: right;
+  margin-bottom: 20px;
+}
+
+#footer {
+  text-align: center;
 }
 
 pre {

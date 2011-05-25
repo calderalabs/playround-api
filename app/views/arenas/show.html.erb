@@ -14,5 +14,7 @@
 </p>
 
 
-<%= link_to 'Edit', edit_arena_path(@arena) %> |
+<% if can? :update, @arena %>
+  <%= link_to 'Edit', edit_arena_path(@arena) %> |
+<% end %>
 <%= link_to 'Back', arenas_path %>

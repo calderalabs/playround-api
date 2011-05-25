@@ -1,4 +1,4 @@
-<h1>Listing rounds</h1>
+<h1>Rounds</h1>
 
 <table>
   <tr>
@@ -25,13 +25,20 @@
     <td><%= round.min_people %></td>
 	  <td><%= round.arena.name %></td>
     <td><%= round.game.name %></td>
-    <td><%= link_to 'Show', round %></td>
-    <td><%= link_to 'Edit', edit_round_path(round) %></td>
-    <td><%= link_to 'Destroy', round, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if can? :read, round %>
+      <td><%= link_to 'Show', round %></td>
+    <% end %>
+    <% if can? :update, round %>
+      <td><%= link_to 'Edit', edit_round_path(round) %></td>
+    <% end %>
+    <% if can? :destroy, round %>
+      <td><%= link_to 'Destroy', round, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Round', new_round_path %>
+<% if can? :create, @round %>
+    <%= link_to 'New Round', new_round_path %>
+<% end %>

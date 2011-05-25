@@ -1,9 +1,11 @@
 class Arena < ActiveRecord::Base
   has_many :rounds
+  belongs_to :user
 
   validates_presence_of :name
   validates_presence_of :latitude
   validates_presence_of :longitude
+  validates_presence_of :user_id
   
   validates_length_of :name, :in => 3..30
   

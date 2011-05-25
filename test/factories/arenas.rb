@@ -3,6 +3,7 @@ Factory.sequence :name do |n|
 end
 
 Factory.define :arena, :class => Arena do |arena|
+  arena.association :user
   arena.name { Factory.next :name }
   arena.latitude 43.31706
   arena.longitude 11.333599

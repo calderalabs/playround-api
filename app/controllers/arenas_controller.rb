@@ -1,4 +1,6 @@
 class ArenasController < ApplicationController
+  load_and_authorize_resource
+  
   # GET /arenas
   # GET /arenas.xml
   def index
@@ -40,7 +42,7 @@ class ArenasController < ApplicationController
   # POST /arenas
   # POST /arenas.xml
   def create
-    @arena = Arena.new(params[:arena])
+    @arena = current_user.arenas.build(params[:arena])
 
     respond_to do |format|
       if @arena.save

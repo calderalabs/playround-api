@@ -1,4 +1,4 @@
-<h1>Listing arenas</h1>
+<h1>Arenas</h1>
 
 <table>
   <tr>
@@ -15,13 +15,21 @@
     <td><%= arena.name %></td>
     <td><%= arena.latitude %></td>
     <td><%= arena.longitude %></td>
-    <td><%= link_to 'Show', arena %></td>
-    <td><%= link_to 'Edit', edit_arena_path(arena) %></td>
-    <td><%= link_to 'Destroy', arena, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if can? :read, arena %>
+      <td><%= link_to 'Show', arena %></td>
+    <% end %>
+    <% if can? :update, arena %>
+      <td><%= link_to 'Edit', edit_arena_path(arena) %></td>
+    <% end %>
+    <% if can? :destroy, arena %>
+      <td><%= link_to 'Destroy', arena, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Arena', new_arena_path %>
+<% if can? :create, @arena %>
+    <%= link_to 'New Arena', new_arena_path %>
+<% end %>

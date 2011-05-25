@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  load_and_authorize_resource
+  
   # GET /games
   # GET /games.xml
   def index
@@ -40,7 +42,7 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.xml
   def create
-    @game = Game.new(params[:game])
+    @game = current_user.games.build(params[:game])
 
     respond_to do |format|
       if @game.save

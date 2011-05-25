@@ -21,6 +21,11 @@
       <% end %>
     </div>
     <%= yield %>
+    <div id="footer">
+      <%= link_to "Rounds", rounds_path %>
+      <%= link_to "Arenas", arenas_path %>
+      <%= link_to "Games", games_path %>
+    </div>
   </div>
 </body>
 </html>
