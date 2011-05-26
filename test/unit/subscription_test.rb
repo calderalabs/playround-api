@@ -48,4 +48,15 @@ class SubscriptionTest < ActiveSupport::TestCase
     
     assert @subscription.invalid?
   end
+  
+  test "any user can create subscriptions" do
+    ability = Ability.new Factory :user
+    assert ability.can?(:create, Subscription)
+  end
+  
+  test "user can only destroy subscriptions which he owns" do
+    ability = Ability.new @subscription.user
+    assert ability.can?(:destroy, @subscription)
+    assert ability.cannot?(:destroy, Factory.build(:subscription))
+  end
 end

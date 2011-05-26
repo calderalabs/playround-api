@@ -9,3 +9,8 @@ en:
   number_of_spots_left:
     one: "%{count} spot left"
     other: "%{count} spots left"
+    
+  clearance:
+    controllers:
+      passwords:
+        bad_email_or_password: 'Unable to create account.'

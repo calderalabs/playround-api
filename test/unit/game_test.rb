@@ -75,4 +75,28 @@ class GameTest < ActiveSupport::TestCase
     
     assert @game.invalid?
   end
+  
+  test "any user can create games" do
+    ability = Ability.new Factory :user
+    assert ability.can?(:create, Game)
+  end
+  
+  test "user can read any game" do
+    ability = Ability.new Factory :user
+    assert ability.can?(:read, @game)
+    ability = Ability.new @game.user
+    assert ability.can?(:read, @game)
+  end
+  
+  test "user can only update games which he owns" do
+    ability = Ability.new @game.user
+    assert ability.can?(:update, @game)
+    assert ability.cannot?(:update, Factory.build(:game))
+  end
+  
+  test "user can only destroy games which he owns" do
+    ability = Ability.new @game.user
+    assert ability.can?(:destroy, @game)
+    assert ability.cannot?(:destroy, Factory.build(:game))
+  end
 end

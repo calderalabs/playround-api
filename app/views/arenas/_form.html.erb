@@ -1,8 +1,6 @@
 <%= form_for(@arena) do |f| %>
   <% if @arena.errors.any? %>
     <div class="error">
-      <h2><%= pluralize(@arena.errors.count, "error") %> prohibited this arena from being saved:</h2>
-
       <ul>
       <% @arena.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>

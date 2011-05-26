@@ -114,4 +114,28 @@ class ArenaTest < ActiveSupport::TestCase
     
     assert @arena.invalid?
   end
+  
+  test "any user can create arenas" do
+    ability = Ability.new Factory :user
+    assert ability.can?(:create, Arena)
+  end
+  
+  test "user can read any arena" do
+    ability = Ability.new Factory :user
+    assert ability.can?(:read, @arena)
+    ability = Ability.new @arena.user
+    assert ability.can?(:read, @arena)
+  end
+  
+  test "user can only update arenas which he owns" do
+    ability = Ability.new @arena.user
+    assert ability.can?(:update, @arena)
+    assert ability.cannot?(:update, Factory.build(:arena))
+  end
+  
+  test "user can only destroy arenas which he owns" do
+    ability = Ability.new @arena.user
+    assert ability.can?(:destroy, @arena)
+    assert ability.cannot?(:destroy, Factory.build(:arena))
+  end
 end

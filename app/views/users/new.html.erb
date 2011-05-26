@@ -1,6 +1,16 @@
 <h2>Sign up</h2>
 
 <%= form_for @user do |form| %>
+<% if @user.errors.any? %>
+    <div class="error">
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= render :partial => '/users/form', :object => form %>
   <%= form.submit 'Sign up' %>
 <% end %>

@@ -203,4 +203,28 @@ class RoundTest < ActiveSupport::TestCase
     
     assert @round.invalid?
   end
+  
+  test "any user can create rounds" do
+    ability = Ability.new Factory :user
+    assert ability.can?(:create, Round)
+  end
+  
+  test "user can read any round" do
+    ability = Ability.new Factory :user
+    assert ability.can?(:read, @round)
+    ability = Ability.new @round.user
+    assert ability.can?(:read, @round)
+  end
+  
+  test "user can only update rounds which he owns" do
+    ability = Ability.new @round.user
+    assert ability.can?(:update, @round)
+    assert ability.cannot?(:update, Factory.build(:round))
+  end
+  
+  test "user can only destroy rounds which he owns" do
+    ability = Ability.new @round.user
+    assert ability.can?(:destroy, @round)
+    assert ability.cannot?(:destroy, Factory.build(:round))
+  end
 end

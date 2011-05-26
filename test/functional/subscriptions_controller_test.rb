@@ -12,6 +12,7 @@ class SubscriptionsControllerTest < ActionController::TestCase
       post :create, :id => @round.id
     end
 
+    assert_response :found
     assert_redirected_to @round
   end
   
@@ -22,6 +23,13 @@ class SubscriptionsControllerTest < ActionController::TestCase
       delete :destroy, :id => @round.id
     end
 
+    assert_response :found
     assert_redirected_to @round
+  end
+  
+  test "should not destroy if you don't own the subscription" do
+    delete :destroy, :id => Factory(:subscription, :round => @round).to_param
+    
+    assert_response :unauthorized
   end
 end
