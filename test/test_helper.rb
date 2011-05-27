@@ -5,6 +5,8 @@ require 'rails/test_help'
 Factory.find_definitions
 require 'capybara/rails'
 
+#Capybara.default_driver = :selenium
+
 class ActionDispatch::IntegrationTest
   include Capybara
 end

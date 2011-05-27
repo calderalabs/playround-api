@@ -136,14 +136,6 @@ class RoundTest < ActiveSupport::TestCase
     assert @round.errors[:deadline].include? "must be earlier than date"
   end
   
-  test "name should begin with a capital letter after save" do
-    @round.name = 'abc'
-    
-    @round.save!
-    
-    assert @round.name == 'Abc'
-  end
-  
   test "should belong to an arena" do
     assert_belongs_to @round, :arena
   end

@@ -10,5 +10,4 @@ class Game < ActiveRecord::Base
   
   validates_url_format_of :website, :allow_blank => true
   adjusts_string :website, :prepend => 'http://', :if => Proc.new { |a| !(a.website =~ /^.*:.*$/) }
-  adjusts_string :name, :case => :capitalize
 end

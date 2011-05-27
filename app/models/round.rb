@@ -28,8 +28,6 @@ class Round < ActiveRecord::Base
   
   validates_length_of :name, :in => 3..30
   
-  adjusts_string :name, :case => :capitalize
-  
   def date=(date)
     if date
       super(date.change(:sec => 0))

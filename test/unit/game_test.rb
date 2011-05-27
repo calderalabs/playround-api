@@ -32,14 +32,6 @@ class GameTest < ActiveSupport::TestCase
     assert @game.invalid?
   end
   
-  test "name should be capitalized after save" do
-    @game.name = 'go'
-    
-    @game.save!
-    
-    assert_equal @game.name, 'Go'
-  end
-  
   test "website should be a valid url" do
     assert_validates_url @game
   end
