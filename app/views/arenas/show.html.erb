@@ -4,15 +4,9 @@
 </p>
 
 <p>
-  <b>Latitude:</b>
-  <%= @arena.latitude %>
+  <b>Description:</b>
+  <%= @arena.description %>
 </p>
-
-<p>
-  <b>Longitude:</b>
-  <%= @arena.longitude %>
-</p>
-
 
 <% if can? :update, @arena %>
   <%= link_to 'Edit', edit_arena_path(@arena) %> |

@@ -15,7 +15,7 @@ Then /^I should be able to sign in with email: "([^"]*)", password: "([^"]*)"$/ 
   click_button "Sign in"
 end
 
-Given /^I've logged in with email: "([^"]*)", password: "([^"]*)"$/ do |email, password|
+Given /^I have logged in with email: "([^"]*)", password: "([^"]*)"$/ do |email, password|
   visit "/sign_in"
   fill_in "Email", :with => email
   fill_in "Password", :with => password

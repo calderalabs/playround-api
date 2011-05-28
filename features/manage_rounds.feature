@@ -1,42 +1,49 @@
-Feature: Manage Round
-	In order to use playround
-	As a logged in user
-	I want to manage rounds
+@rounds
+Feature: Manage Rounds
+  In order to organize matches with others
+  As a user
+  I want to create rounds
 
   Background:
     Given a user "Matteo" exists with email: "matteodepalo@mac.com", password: "solidus"
-    And I've logged in with email: "matteodepalo@mac.com", password: "solidus"
+    And I have logged in with email: "matteodepalo@mac.com", password: "solidus"
+    And I go to the home page
 
-	Scenario: Create Round
-		Given an arena exists with name: "Casa Depalo"
-		And a game exists with name: "DotA"
-		When I go to the rounds page
-		Then I should be able to create a round with name: "DotA Party", max people: "20", min people: "10", existing game and arena
+  Scenario: Create Round
+    Given an arena exists
+    And a game exists
+    When I click the "Rounds" link
+    And I click the "New Round" link
+    And I fill in "Name" with "DotA Party"
+    And I fill in "Max people" with "20"
+    And I fill in "Min people" with "10"
+    And I select that game from "Game"
+    And I select that arena from "Arena"
+    And I press "Create Round"
     Then I should see "Round was successfully created"
-		And I should see "DotA Party"
-		And I should see "20"
-		And I should see "10"
+    And I should be on the page for that round
+    And I should see the details of that round
 
-  Scenario: Read Round
-    Given a round exists with name: "DotA Party"
-    When I go to the rounds page
+  Scenario: Read Round Details
+    Given a round exists
+    When I click the "Rounds" link
     And I click the "Show" link
-    Then I should see "DotA Party"
+    Then I should see the details of that round
 
   Scenario: Update Round
-    Given a round exists with name: "DotA Party", created by the user "Matteo"
-    When I go to the rounds page
+    Given a round exists created by "Matteo"
+    When I click the "Rounds" link
     And I click the "Show" link
     And I click the "Edit" link
-    And I change the name of the round to "DotA Parties"
+    And I fill in "Name" with "Risk! Party"
     And I press "Update Round"
-    Then I should be on the show page for that round
+    Then I should be on the page for that round
     And I should see "Round was successfully updated."
-    And I should see "DotA Parties"
+    And I should see "Risk! Party"
 
   Scenario: Destroy Round
-    And a round exists with name: "DotA Party", created by the user "Matteo"
-    When I go to the rounds page
+    Given a round exists with name: "DotA Party" created by "Matteo"
+    When I click the "Rounds" link
     And I click the "Destroy" link
     Then I should not see "DotA Party"
     And I should be on the rounds page

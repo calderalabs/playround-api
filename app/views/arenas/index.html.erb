@@ -3,8 +3,6 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Latitude</th>
-    <th>Longitude</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,8 +11,6 @@
 <% @arenas.each do |arena| %>
   <tr>
     <td><%= arena.name %></td>
-    <td><%= arena.latitude %></td>
-    <td><%= arena.longitude %></td>
     <% if can? :read, arena %>
       <td><%= link_to 'Show', arena %></td>
     <% end %>

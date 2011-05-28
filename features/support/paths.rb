@@ -13,9 +13,9 @@ module NavigationHelpers
 
     # the following are examples using path_to_pickle
     
-    when /^the show page for that #{capture_model}$/                           # eg. the forum's page
-      path_to_pickle $1
-      
+    when /^the page for that #{capture_model}$/                           # eg. the forum's page
+      polymorphic_path ActiveSupport::Inflector.constantize("#{$1.capitalize!}").last
+    
     when /^the edit page for that #{capture_model}$/                           # eg. the forum's page
       path_to_pickle $1, :action => "edit"
 
