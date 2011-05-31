@@ -9,7 +9,7 @@ class SubscriptionsControllerTest < ActionController::TestCase
   
   test "should create subscription" do
     assert_difference('Subscription.count') do
-      post :create, :id => @round.id
+      post :create, :id => @round.to_param
     end
 
     assert_response :found
@@ -20,15 +20,15 @@ class SubscriptionsControllerTest < ActionController::TestCase
     Factory :subscription, :user => @user, :round => @round
     
     assert_difference('Subscription.count', -1) do
-      delete :destroy, :id => @round.id
+      delete :destroy, :id => @round.to_param
     end
 
     assert_response :found
     assert_redirected_to @round
   end
   
-  test "should not destroy if you don't own the subscription" do
-    delete :destroy, :id => Factory(:subscription, :round => @round).to_param
+  test "should not subscribe if you own the round" do
+    post :create, :id => (Factory :round, :user => @user).to_param
     
     assert_response :unauthorized
   end

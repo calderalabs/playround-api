@@ -10,7 +10,7 @@ Feature: Authorizations
     And a user "Eugenio" exists
 
   Scenario Outline: Can Only Read Round, Games and Arenas
-    Given a <model> exists created by another user
+    Given a <model> exists created by "Eugenio"
     And I go to the page for that <model>
     Then I should see the details of that <model>
     And I should not see "Destroy"

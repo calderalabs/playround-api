@@ -56,11 +56,11 @@
 </b></p>
 
 <% unless current_user.subscribed?(@round) %>
-  <% unless @round.full? || cannot?(:create, @subscription) %>
+  <% unless @round.full? || cannot?(:manage_subscription_of, @round) %>
     <%= link_to "Subscribe", subscriptions_path(:id => @round.id), :confirm => 'Are you sure?', :method => :post %> |
   <% end %>
 <% else %>
-  <% if  can? :destroy, @subscription %>
+  <% if  can? :manage_subscription_of, @round %>
     <%= link_to "Unsubscribe", subscription_path(:id => @round.id), :confirm => 'Are you sure?', :method => :delete %> |
   <% end %>
 <% end %>

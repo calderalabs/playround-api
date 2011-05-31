@@ -13,3 +13,17 @@ Then /^I should not see that round listed$/ do
   And "I should not see \"#{Game.last.name}\""
   And "I should not see \"#{Arena.last.name}\""
 end
+
+Then /^I should see my email among the list of participants$/ do
+  user = find_model('user: "me"')
+  Then "I should see \"#{user.email}\""
+end
+
+Then /^I should not see my email among the list of participants$/ do
+  user = find_model('user: "me"')
+  Then "I should not see \"#{user.email}\""
+end
+
+Given /^I am subscribed to that round$/ do
+  create_model("subscription", :user => find_model('user: "me"'), :round => Round.last)
+end
