@@ -1,4 +1,9 @@
 <p>
+  <b>Created by:</b>
+  <%= @round.user.email %>
+</p>
+
+<p>
   <b>Name:</b>
   <%= @round.name %>
 </p>
@@ -54,6 +59,38 @@
   <%= t :number_of_spots_left, :count => @round.remaining_spots %>
 <% end %>
 </b></p>
+
+<div id="comments">
+  <% @round.comments.each do |comment| %>
+    <p><%= comment.text %></p>
+    <p><%= comment.user.email %></p>
+
+    <% if can? :destroy, comment %>
+      <%= link_to 'Destroy', comment_path(comment), :method => :delete, :confirm => 'Are you sure?' %>
+    <% end %>
+  <% end %>
+
+  <%= form_for @comment do |f| %>
+    <% if @comment.errors.any? %>
+      <div class="error">
+        <ul>
+        <% @comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :text %><br />
+      <%= f.text_area :text %>
+    </div>
+
+    <%= f.hidden_field :round_id %>
+
+    <%= f.submit 'Add Comment' %>
+  <% end%>
+</div>
 
 <% unless current_user.subscribed?(@round) %>
   <% unless @round.full? || cannot?(:manage_subscription_of, @round) %>

@@ -1,0 +1,21 @@
+<%= image_tag @user.avatar.url(:medium) %>
+
+<p>
+  <b>Display name:</b>
+  <%= @user.display_name %>
+</p>
+
+<p>
+  <b>Real name:</b>
+  <%= @user.real_name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<% if @user == current_user %>
+  <%= link_to 'Edit', edit_user_path %> |
+<% end %>
+<%= link_to 'Back', arenas_path %>

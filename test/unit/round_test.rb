@@ -219,4 +219,10 @@ class RoundTest < ActiveSupport::TestCase
     assert ability.can?(:destroy, @round)
     assert ability.cannot?(:destroy, Factory.build(:round))
   end
+  
+  test "should have many comments" do
+    @round.save!
+    
+    assert_has_many @round, :comments
+  end
 end

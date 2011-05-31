@@ -1,0 +1,32 @@
+<%= form_for @user, :as => :user, :url => user_path, :html => { :multipart => true } do |f| %>
+  <% if @user.errors.any? %>
+    <div class="error">
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <%= f.file_field :avatar %>
+
+  <div class="text_field">
+    <%= f.label :display_name %>
+    <%= f.text_field :display_name %>
+  </div>
+  <div class="text_field">
+    <%= f.label :real_name %>
+    <%= f.text_field :real_name %>
+  </div>
+  <div class="text_field">
+    <%= f.label :email %>
+    <%= f.text_field :email, :type => "email" %>
+  </div>
+  <div class="password_field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <p><%= f.submit "Update Profile"%></p>
+<% end %>

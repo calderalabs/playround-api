@@ -1,4 +1,6 @@
 Playround::Application.routes.draw do
+  resources :comments
+
   resources :subscriptions
 
   resources :games
@@ -6,6 +8,8 @@ Playround::Application.routes.draw do
   resources :arenas
 
   resources :rounds
+  
+  resources :users, :only => [:show, :edit, :update]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -80,6 +80,9 @@ GEM
     mime-types (1.16)
     mocha (0.9.12)
     nokogiri (1.4.4)
+    paperclip (2.3.11)
+      activerecord (>= 2.3.0)
+      activesupport (>= 2.3.2)
     pickle (0.4.7)
       cucumber (>= 0.8)
       rake
@@ -103,6 +106,7 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
+    rmagick (2.13.1)
     rubyzip (0.9.4)
     selenium-webdriver (0.2.0)
       childprocess (>= 0.1.7)
@@ -131,7 +135,9 @@ DEPENDENCIES
   flutie
   launchy
   mocha
+  paperclip
   pickle
   rails (= 3.0.7)
   rake (~> 0.8.7)
+  rmagick
   sqlite3

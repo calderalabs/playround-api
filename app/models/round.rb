@@ -6,6 +6,7 @@ class Round < ActiveRecord::Base
   belongs_to :arena
   belongs_to :game
   belongs_to :user
+  has_many :comments
   
   validate do
     errors.add(:deadline, "must be earlier than date") if self.deadline && self.date && self.deadline > self.date

@@ -18,7 +18,8 @@ class RoundsController < ApplicationController
   # GET /rounds/1.xml
   def show
     @round = Round.find(params[:id])
-
+    @comment = Comment.new(:round_id => @round.id)
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @round }

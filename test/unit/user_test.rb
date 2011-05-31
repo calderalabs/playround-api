@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = Factory.build :user
+    @user = Factory.build :user, :email => "matteodepalo@gmail.com"
   end
   
   def teardown
@@ -43,5 +43,45 @@ class UserTest < ActiveSupport::TestCase
     @user.save!
     
     assert_has_many @user, :arenas
+  end
+  
+  test "should have many comments" do
+    @user.save!
+    
+    assert_has_many @user, :comments
+  end
+  
+  test "display name should not be allowed to be blank" do
+    @user.display_name = ''
+    
+    assert @user.invalid?
+  end
+  
+  test "real name should not be longer than 30 characters" do
+    @user.real_name = "a" * 35
+    
+    assert @user.invalid?
+  end
+  
+  test "real name should not be shorter than 3 characters" do
+    @user.real_name = "aa"
+    
+    assert @user.invalid?
+  end
+  
+  test "real name should be allowed to be blank" do
+    @user.real_name = nil
+    
+    assert @user.valid?
+    
+    @user.real_name = ''
+    
+    assert @user.valid?
+  end
+  
+  test "display name should be some reasonable default at creation" do
+    @user.save!
+    
+    assert_equal "matteodepalo", @user.display_name
   end
 end
