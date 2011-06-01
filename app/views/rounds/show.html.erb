@@ -1,6 +1,6 @@
 <p>
   <b>Created by:</b>
-  <%= @round.user.email %>
+  <%= link_to @round.user.display_name, user_path(@round)%>
 </p>
 
 <p>
@@ -43,14 +43,16 @@
   <%= @round.game.name %>
 </p>
 
+<div id="participants">
 <p>
   <b><%= t :number_of_subscribed_people, :count => @round.subscriptions.count %>:</b>
   <ul>
   <% for subscription in @round.subscriptions %>
-    <li><%=h subscription.user.email %></li>
+    <li><%=h subscription.user.display_name %></li>
   <% end %>
 </ul>
 </p>
+</div>
 
 <p><b>
 <% if @round.full? %>
@@ -63,7 +65,7 @@
 <div id="comments">
   <% @round.comments.each do |comment| %>
     <p><%= comment.text %></p>
-    <p><%= comment.user.email %></p>
+    <p><%= comment.user.display_name %></p>
 
     <% if can? :destroy, comment %>
       <%= link_to 'Destroy', comment_path(comment), :method => :delete, :confirm => 'Are you sure?' %>

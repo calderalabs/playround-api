@@ -45,5 +45,6 @@ Feature: Manage Rounds
     Given a round exists with name: "DotA Party" created by "Matteo"
     When I click the "Rounds" link
     And I click the "Destroy" link
+    And I click the confirmation button
     Then I should not see "DotA Party"
     And I should be on the rounds page

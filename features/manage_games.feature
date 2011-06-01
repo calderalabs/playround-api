@@ -39,5 +39,6 @@ Feature: Manage Games
     Given a game exists with name: "DotA" created by "Matteo"
     When I click the "Games" link
     And I click the "Destroy" link
+    And I click the confirmation button
     Then I should not see "DotA"
     And I should be on the games page

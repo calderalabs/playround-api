@@ -1,3 +1,4 @@
+@signinout
 Feature: Access
   In order to get access to or leave Playround
   As a registered user

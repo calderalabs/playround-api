@@ -39,5 +39,6 @@ Feature: Manage Arenas
     Given an arena exists with name: "Depalo's House" created by "Matteo"
     When I click the "Arenas" link
     And I click the "Destroy" link
+    And I click the confirmation button
     Then I should not see "Depalo's House"
     And I should be on the arenas page

@@ -1,3 +1,5 @@
+@signup
+@selenium
 Feature: Sign Up
 	In order to get access to Playround
 	As a guest

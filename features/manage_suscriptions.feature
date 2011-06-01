@@ -12,12 +12,14 @@ Feature: Subscriptions
   Scenario: Subscribe to a round
     Given I go to the page for that round
     When I click the "Subscribe" link
+    And I click the confirmation button
     Then I should see "You successfully subscribed to this round."
-    And I should see my email among the list of participants
+    And I should see my display name among the list of participants
 
   Scenario: Unsubscribe to a round
     Given I am subscribed to that round
     And I go to the page for that round
     When I click the "Unsubscribe" link
+    And I click the confirmation button
     Then I should see "You are no longer subscribed to this round."
-    And I should not see my email among the list of participants
+    And I should not see my display name among the list of participants

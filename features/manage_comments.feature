@@ -22,10 +22,11 @@ Feature: Manage Comments
     Given a comment for that round exists with text: "This round is amazing" created by "Matteo"
     When I go to the page for that round
     Then I should see "This round is amazing"
-    And I should see "Matteo"'s email in the comments box
+    And I should see "Matteo"'s display name in the comments box
 
   Scenario: Destroy Comment
     Given a comment for that round exists with text: "This round is amazing" created by "Matteo"
     When I go to the page for that round
     When I click the "Destroy" link in the comments box
+    And I click the confirmation button
     And I should not see "This round is amazing"

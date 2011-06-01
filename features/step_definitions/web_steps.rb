@@ -58,6 +58,10 @@ When /^(?:|I )click the "([^"]*)" link$/ do |link|
   click_link(link)
 end
 
+When /^(?:|I )click the confirmation button$/ do
+  page.driver.browser.switch_to.alert.accept
+end
+
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end
