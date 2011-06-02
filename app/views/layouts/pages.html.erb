@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playround | Stop sharing. Start being.</title>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag 'pages', :cache => true %>
+</head>
+<body>
+  <div class="content">
+    <div id="flash">
+      <% flash.each do |key, value| -%>
+        <div id="flash_<%= key %>"><%=h value %></div>
+      <% end %>
+    </div>
+    <%= yield %>
+  </div>
+</body>
+</html>

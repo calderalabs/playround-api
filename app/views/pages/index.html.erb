@@ -1,0 +1,26 @@
+<div id="header">
+  <%= image_tag 'logo.png' %>
+  <h2>Stop sharing. <em>Start being.</em></h2>
+</div>
+
+<div class="left-column">
+<%= form_for @user, :html => { :id => 'signup-form' } do |form| %>
+<% if @user.errors.any? %>
+    <div class="error">
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= render :partial => '/users/form', :object => form %>
+  <%= link_to_function 'Sign up!', "document.getElementById('signup-form').submit()", :id => 'signup' %>
+<% end %>
+</div>
+<div class="right-column">
+  <h1>Choose a game.<br />Pick a place.<br />Meet new people.</h1>
+
+  <%= link_to 'View rounds around you!', rounds_path, :id => 'rounds' %>
+</div>
