@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h1>Sign up</h1>
 
 <%= form_for @user do |form| %>
 <% if @user.errors.any? %>
@@ -12,5 +12,7 @@
   <% end %>
 
   <%= render :partial => '/users/form', :object => form %>
-  <%= form.submit 'Sign up' %>
+  <div class="submit_field">
+    <%= form.submit 'Sign up' %>
+  </div>
 <% end %>

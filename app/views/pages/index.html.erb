@@ -1,26 +1,66 @@
 <div id="header">
-  <%= image_tag 'logo.png' %>
-  <h2>Stop sharing. <em>Start being.</em></h2>
-</div>
-
-<div class="left-column">
-<%= form_for @user, :html => { :id => 'signup-form' } do |form| %>
-<% if @user.errors.any? %>
-    <div class="error">
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <div class="container">
+    <div class="left-column">
+      <%= image_tag 'logo.png' %>
     </div>
-  <% end %>
 
-  <%= render :partial => '/users/form', :object => form %>
-  <%= link_to_function 'Sign up!', "document.getElementById('signup-form').submit()", :id => 'signup' %>
-<% end %>
+    <div class="right-column">
+      <h2>Stop sharing. <em>Start being.</em></h2>
+    </div>
+  </div>
 </div>
-<div class="right-column">
-  <h1>Choose a game.<br />Pick a place.<br />Meet new people.</h1>
 
-  <%= link_to 'View rounds around you!', rounds_path, :id => 'rounds' %>
+<div id="content">
+  <div class="container">
+    <div class="left-column">
+      <%= form_for @user, :html => { :id => 'signup-form' } do |form| %>
+        <div class="text_field">
+          <%= form.text_field :email, :id => 'email-field', :placeholder => 'Email address', :autocomplete => 'off' %>
+        </div>
+        <div class="password_field">
+          <%= form.password_field :password, :id => 'password-field', :autocomplete => 'off' %>
+        </div>
+    
+        <%= text_field_tag 'text-password', '', :id => 'text-password-field', :placeholder => 'Password', :autocomplete => 'off' %>
+
+        <p>Already a rounder? <%= link_to 'Sign in!', '/sign_in' %></p>
+      
+        <%= link_to_function 'Sign up!', "$('#signup-form').submit()", :id => 'signup-button', :class => 'button' %>
+      <% end %>
+    </div>
+    
+    <div class="right-column">
+      <h1>
+        Choose a game.<br />
+        Pick a place.<br />
+        Meet new people.
+      </h1>
+    
+      <%= link_to 'View rounds around you!', rounds_path, :id => 'rounds-button', :class => 'button' %>
+    </div>
+  </div>
 </div>
+
+<div id="footer">
+  <p>Copyright © Playround 2011. All rights reserved.</p>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#email-field").placeholder();
+    $("#password-field").placeholder();
+
+    $('#text-password-field').focus(function() {
+      $('#text-password-field').hide();
+      $('#password-field').show();
+      $('#password-field').focus();
+    });
+      
+    $('#password-field').blur(function() {
+      if($('#password-field').val() == '') {
+        $('#text-password-field').show();
+        $('#password-field').hide();
+      }
+    });
+  });
+</script>

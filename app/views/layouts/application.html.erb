@@ -4,11 +4,17 @@
   <title>Playround</title>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
-  <%= stylesheet_link_tag :flutie, 'playround', :cache => true %>
+  <%= stylesheet_link_tag 'playround' %>
 </head>
 <body>
-  <div class="content">
-    <div id="header">
+  <% unless flash.empty? %>
+    <div id="flash">
+      <% flash.each do |key, value| -%>
+        <div id="flash_<%= key %>"><%=h value %></div>
+      <% end %>
+    </div>
+  <% end %>
+    <div id="session">
       <% if signed_in? -%>
         <%= link_to current_user.display_name, user_path(current_user)%> |
         <%= link_to "Sign out", sign_out_path, :method => :delete %>
@@ -16,17 +22,28 @@
         <%= link_to "Sign in", sign_in_path %>
       <% end -%>
     </div>
-    <div id="flash">
-      <% flash.each do |key, value| -%>
-        <div id="flash_<%= key %>"><%=h value %></div>
-      <% end %>
+    <div id="header">
+    <div class="container">
+      <div class="left-column">
+        <%= link_to(image_tag('logo-small.png'), root_path) %>
+      </div>
+      <div class="right-column">
+        <ul>
+          <li><%= link_to "Rounds", rounds_path %> </li>
+          <li><%= link_to "Arena", arenas_path %> </li>
+          <li><%= link_to "Games", games_path %> </li>
+          <li><%= link_to "People", users_path %> </li>
+        </ul>
+      </div>
     </div>
-    <%= yield %>
+</div>
+    <div id="content">
+      <div class="container">
+      <%= yield %>
+</div>
+    </div>
     <div id="footer">
-      <%= link_to "Rounds", rounds_path %>
-      <%= link_to "Arenas", arenas_path %>
-      <%= link_to "Games", games_path %>
+
     </div>
-  </div>
 </body>
 </html>

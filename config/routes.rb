@@ -11,6 +11,11 @@ Playround::Application.routes.draw do
   
   resources :users, :only => [:show, :edit, :update]
 
+  resource :session, :controller => 'sessions'
+
+  match 'sign_in' => 'sessions#new', :as => 'sign_in'
+  match 'sign_out' => 'sessions#destroy', :via => :delete, :as => 'sign_out'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
