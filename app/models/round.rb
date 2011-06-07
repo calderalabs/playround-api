@@ -7,6 +7,7 @@ class Round < ActiveRecord::Base
   belongs_to :game
   belongs_to :user
   has_many :comments
+  has_many :subscribers, :through => :subscriptions, :source => :user
   
   validate do
     errors.add(:deadline, "must be earlier than date") if self.deadline && self.date && self.deadline > self.date
@@ -50,11 +51,15 @@ class Round < ActiveRecord::Base
   end
   
   def remaining_spots
-    self.max_people - self.subscriptions.count
+    self.max_people - self.subscriptions.count - 1
   end
   
   def authorized?(user)
     self.user == user
+  end
+
+  def all_subscribers
+    self.subscribers + [self.user]
   end
 
   private

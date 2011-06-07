@@ -34,6 +34,9 @@ ul {
 .right-column {
   float: right; }
 
+.clear {
+  clear: both; }
+
 #content {
   background-image: url("/images/content-background.png");
   background-repeat: repeat-x;

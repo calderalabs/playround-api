@@ -8,6 +8,12 @@ $main-fucsia: #eb04a1;
   -webkit-border-radius: $radius;
 }
 
+@mixin box-shadow($horizontal, $vertical, $blur, $spread, $color) {
+  -moz-box-shadow: $horizontal $vertical $blur $spread $color;
+  -webkit-box-shadow: $horizontal $vertical $blur $spread $color;
+  box-shadow: $horizontal $vertical $blur $spread $color;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -53,4 +59,8 @@ ul {
 
 .right-column {
   float: right;
+}
+
+.clear {
+  clear: both;
 }

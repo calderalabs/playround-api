@@ -1,44 +1,64 @@
-<h1>Rounds</h1>
+<div id="title">
+  <h1>Rounds around you</h1>
+  <% if can? :create, Round %>
+    <%= link_to('Start a new round!', new_round_path) %>
+  <% end %>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Deadline</th>
-    <th>Date</th>
-    <th>Confirmed</th>
-    <th>Max people</th>
-    <th>Min people</th>
-	  <th>Arena</th>
-    <th>Game</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<ul id="rounds">
 <% @rounds.each do |round| %>
-  <tr>
-    <td><%= round.name %></td>
-    <td><%= round.deadline %></td>
-    <td><%= round.date %></td>
-    <td><%= round.confirmed %></td>
-    <td><%= round.max_people %></td>
-    <td><%= round.min_people %></td>
-	  <td><%= round.arena.name %></td>
-    <td><%= round.game.name %></td>
-    <% if can? :read, round %>
-      <td><%= link_to 'Show', round %></td>
-    <% end %>
-    <% if can? :update, round %>
-      <td><%= link_to 'Edit', edit_round_path(round) %></td>
-    <% end %>
-    <% if can? :destroy, round %>
-      <td><%= link_to 'Destroy', round, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
+  <li class="round">
+    <div class="date left-column">
+      <div class="month">
+        <%= t('date.abbr_month_names')[round.date.month] %>
+      </div>
+      <div class="day">
+        <%= "%02d" % round.date.day %>
+      </div>
+      <div class="wday">
+        <%= t('date.day_names')[round.date.wday] %>
+      </div>
+    </div>
+    <div class="game left-column">
+      <%= link_to round.game.name, game_path(round.game) %>
+    </div>
+    <div class="subscribers left-column">
+      <div class="details">
+        <h2 class="arena">
+          <%= link_to round.arena.name, arena_path(round.arena) %> <%= " (#{round.date.strftime("at %I:%M %p")})" %>
+        </h2>
 
-<br />
-<% if can? :create, Round %>
-    <%= link_to 'New Round', new_round_path %>
+      <ul>
+        <% round.max_people.times do |n| %>
+          <li>
+            <% if n < round.all_subscribers.count %>
+              <%= image_tag round.all_subscribers[n].avatar.url(:thumb), :width => '35', :height => '35' %>
+            <% elsif n < round.min_people %>
+              <div class="remaining-spot min"></div>
+            <% else %>
+              <div class="remaining-spot"></div>
+            <% end%>
+          </li>
+        <% end%>
+      </ul>
+      </div>
+    </div>
+
+    <div class="actions right-column">
+      <% if can? :read, round %>
+        <%= link_to 'Show', round, :class => 'button' %>
+      <% end %>
+
+      <div class="spots">
+        <%= round.remaining_spots.to_s + ' spots left'%>
+      </div>
+
+      <div class="time">
+        <%= '3 hours left to subscribe!' %>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+  </li>
 <% end %>
+</ul>
