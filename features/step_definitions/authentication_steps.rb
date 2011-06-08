@@ -3,9 +3,8 @@ Given /^I'm a guest$/ do
 end
 
 Then /^I should be able to sign up with email: "([^"]*)", password: "([^"]*)"$/ do |email, password|
-  click_link "Sign up"
-  fill_in "Email", :with => email
-  fill_in "Password", :with => password
+  fill_in "email-field", :with => email
+  fill_in "password-field", :with => password
   click_button "Sign up"
 end
 

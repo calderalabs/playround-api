@@ -16,7 +16,6 @@ class Round < ActiveRecord::Base
     errors.add(:date, "must be after the current time") if self.date && self.date < Time.now.change(:sec => 0)
   end
   
-  validates_presence_of :name
   validates_presence_of :deadline
   validates_presence_of :date
   validates_presence_of :max_people
@@ -25,10 +24,8 @@ class Round < ActiveRecord::Base
   validates_presence_of :game_id
   validates_presence_of :user_id
   
-  validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 0, :only_integer => true, :unless => Proc.new { |round| round.min_people.nil? }
+  validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 1, :only_integer => true, :unless => Proc.new { |round| round.min_people.nil? }
   validates_numericality_of :min_people, :greater_than => 0, :only_integer => true
-  
-  validates_length_of :name, :in => 3..30
   
   def date=(date)
     if date

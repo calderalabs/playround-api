@@ -41,8 +41,8 @@ class SubscriptionTest < ActiveSupport::TestCase
     assert_belongs_to @subscription, :round
   end
   
-  test "not allow to subscribe to a full round" do
-    @subscription.round.max_people.times do
+  test "should not allow to subscribe to a full round" do
+    @subscription.round.remaining_spots.times do
       Factory(:subscription, :round => @subscription.round)
     end
     
@@ -51,12 +51,11 @@ class SubscriptionTest < ActiveSupport::TestCase
   
   test "any user can create subscriptions" do
     ability = Ability.new Factory :user
-    assert ability.can?(:create, Subscription)
+    assert ability.can?(:manage_subscription_of, Round)
   end
   
-  test "user can only destroy subscriptions which he owns" do
+  test "user can destroy subscriptions which he owns" do
     ability = Ability.new @subscription.user
-    assert ability.can?(:destroy, @subscription)
-    assert ability.cannot?(:destroy, Factory.build(:subscription))
+    assert ability.can?(:manage_subscription_of, @subscription.round)
   end
 end

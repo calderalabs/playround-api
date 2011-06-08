@@ -13,12 +13,6 @@ class RoundTest < ActiveSupport::TestCase
     assert @round.valid?
   end
   
-  test "should not be valid without a name" do
-    @round.name = nil
-    
-    assert @round.invalid?
-  end
-  
    test "should not be valid without a deadline" do
     @round.deadline = nil
     
@@ -105,6 +99,12 @@ class RoundTest < ActiveSupport::TestCase
     assert @round.invalid?
   end
   
+  test "max people should not be lest than 2" do
+    @round.max_people = 1
+    
+    assert @round.invalid?
+  end
+  
   test "minimum people should not be fractional" do
     @round.min_people = 0.5
     
@@ -113,18 +113,6 @@ class RoundTest < ActiveSupport::TestCase
   
   test "maximum people should not be fractional" do
     @round.max_people = 0.5
-    
-    assert @round.invalid?
-  end
-  
-  test "name should not be less than 3 characters" do
-    @round.name = 'Ab'
-    
-    assert @round.invalid?
-  end
-  
-  test "name should not be more than 30 characters" do
-    @round.name = 'a' * 35
     
     assert @round.invalid?
   end
@@ -171,7 +159,7 @@ class RoundTest < ActiveSupport::TestCase
     
     assert !@round.full?
     
-    @round.max_people.times do
+    @round.remaining_spots.times do
       Factory(:subscription, :round => @round)
     end
     

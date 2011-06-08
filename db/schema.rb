@@ -44,13 +44,12 @@ ActiveRecord::Schema.define(:version => 20110531081218) do
     t.integer  "user_id"
     t.integer  "arena_id"
     t.integer  "game_id"
-    t.string   "name",        :limit => 30
     t.text     "description"
     t.datetime "deadline"
     t.datetime "date"
-    t.boolean  "confirmed",                 :default => false
-    t.integer  "max_people",                :default => 1
-    t.integer  "min_people",                :default => 1
+    t.boolean  "confirmed",   :default => false
+    t.integer  "max_people",  :default => 2
+    t.integer  "min_people",  :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
