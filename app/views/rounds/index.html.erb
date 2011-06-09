@@ -34,7 +34,11 @@
           <%= link_to round.arena.name, arena_path(round.arena) %> <%= " (#{round.date.strftime("at %I:%M %p")})" %>
         </h2>
         <h3>
-          <%= '3 hours left to subscribe!' %>
+          <% if round.deadline - Time.now > 0 %>
+            <%= time_ago_in_words(round.deadline) + ' left to subscribe!' %>
+          <% else %>
+            You can no longer subscribe to this round.
+          <% end %>
         </h3>
       <ul>
         <% round.max_people.times do |n| %>
@@ -58,7 +62,7 @@
       <% end %>
 
       <div class="spots">
-        <%= round.remaining_spots.to_s + ' spots left'%>
+        <%= t :number_of_spots_left, :count => round.remaining_spots%>
       </div>
     </div>
 
