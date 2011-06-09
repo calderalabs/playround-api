@@ -213,4 +213,22 @@ class RoundTest < ActiveSupport::TestCase
     
     assert_has_many @round, :comments
   end
+  
+  test "should confirm if confirmed is false" do
+    assert_equal @round.confirmed, false
+    
+    assert @round.confirm!
+    
+    assert_equal @round.confirmed, true
+  end
+  
+  test "should not confirm if confirmed is true" do
+    @round.confirm!
+    
+    assert_equal @round.confirmed, true
+    
+    assert !@round.confirm!
+    
+    assert_equal @round.confirmed, true
+  end
 end

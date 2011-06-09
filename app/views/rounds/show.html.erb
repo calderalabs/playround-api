@@ -105,6 +105,7 @@
 <% end %>
 
 <% if can? :update, @round %>
+  <%= link_to 'Confirm', confirm_round_path(@round), :method => :put %> |
   <%= link_to 'Edit', edit_round_path(@round) %> |
 <% end %>
 <%= link_to 'Back', rounds_path %>

@@ -1,13 +1,13 @@
 class RoundMailer < ActionMailer::Base
   default :from => "info@playround.com"
   
-  def round_confirmation_email(round)
+  def round_confirmation_email(round, user)
     @round = round
+    @user = user
     
-    @round.subscribers.each do |user|
-      @user = user
-      mail(:to => @user.email,
-           :subject => "Round confirmation")
-    end
+    email_with_name = "#{@user.display_name} <#{@user.email}>"
+    
+    mail(:to => email_with_name,
+         :subject => "Round confirmation")
   end
 end

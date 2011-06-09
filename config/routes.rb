@@ -7,7 +7,9 @@ Playround::Application.routes.draw do
 
   resources :arenas
 
-  resources :rounds
+  resources :rounds do
+    put 'confirm', :on => :member
+  end
   
   resources :users, :only => [:show, :edit, :update]
 

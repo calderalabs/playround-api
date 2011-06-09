@@ -58,6 +58,19 @@ class Round < ActiveRecord::Base
   def all_subscribers
     self.subscribers + [self.user]
   end
+  
+  def confirm!
+    if !self.confirmed
+       update_attribute(:confirmed, true)
+
+       self.subscribers.each do |user|
+         RoundMailer.round_confirmation_email(self, user).deliver
+       end
+       true
+     else
+       false
+     end
+  end
 
   private
   
@@ -65,4 +78,6 @@ class Round < ActiveRecord::Base
     self.date ||= Time.now
     self.deadline ||= Time.now
   end
+  
+ 
 end

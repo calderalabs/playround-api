@@ -8,7 +8,7 @@ class RoundMailerTest < ActionMailer::TestCase
   end
   
   test "round confirmation email" do
-    email = RoundMailer.round_confirmation_email(@round).deliver
+    email = RoundMailer.round_confirmation_email(@round, @user).deliver
     
     assert !ActionMailer::Base.deliveries.empty?
     assert_equal "Round confirmation", email.subject

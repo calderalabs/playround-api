@@ -78,4 +78,19 @@ class RoundsControllerTest < ActionController::TestCase
     
     assert_response :unauthorized
   end
+  
+  test "should confirm if you own the round" do
+    put :confirm, :id => @round.to_param
+    
+    assert_response :found
+    assert_redirected_to round_path(assigns(:round))
+  end
+  
+  test "should not confirm if you don't own the round" do
+    round = Factory :round
+    put :confirm, :id => round.to_param
+    
+    assert_response :unauthorized
+  end
+    
 end

@@ -85,4 +85,20 @@ class RoundsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  # PUT /rounds/1
+  # PUT /rounds/1.xml
+  def confirm
+    @round = Round.find(params[:id])
+
+    respond_to do |format|
+      if @round.confirm! 
+        format.html { redirect_to(@round, :notice => 'Round was successfully confirmed.') }
+        format.xml  { head :ok }
+      else
+        format.html { redirect_to :action => "show" }
+        format.xml  { render :xml => @round.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
 end
