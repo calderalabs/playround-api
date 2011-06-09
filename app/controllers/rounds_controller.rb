@@ -7,6 +7,8 @@ class RoundsController < ApplicationController
   # GET /rounds.xml
   def index
     @rounds = Round.all
+    
+    
 
     respond_to do |format|
       format.html # index.html.erb

@@ -14,6 +14,39 @@ $main-fucsia: #eb04a1;
   box-shadow: $horizontal $vertical $blur $spread $color;
 }
 
+@mixin box-shadow-inset($horizontal, $vertical, $blur, $spread, $color) {
+  -moz-box-shadow: inset $horizontal $vertical $blur $spread $color;
+  -webkit-box-shadow: inset $horizontal $vertical $blur $spread $color;
+  box-shadow: inner $horizontal $vertical $blur $spread $color;
+}
+
+@mixin linear-gradient($top-color, $bottom-color) {
+  background-image: -moz-linear-gradient(top, $top-color, $bottom-color);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $top-color),color-stop(1, $bottom-color));
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$top-color}', EndColorStr='#{$bottom-color}');
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$top-color}', EndColorStr='#{$bottom-color}')";
+}
+
+@mixin button($width, $height, $color, $text-color) {
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  border: 1px solid darken($color, 5%);
+  cursor: pointer;
+  height: $height;
+  width: $width;
+  @include linear-gradient(lighten($color, 40%), $color);
+  @include rounded-corners(10px);
+  @include box-shadow(0,0, 5px, 0, darken($color, 10%));
+  line-height: $height;
+  color: $text-color;
+  
+  &:hover {
+    @include box-shadow-inset(0,0, 5px, 0, darken($color, 10%));
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -29,8 +62,8 @@ ul {
 }
 
 #header {
-    background-color: $main-purple;
-    color: #ffffff;
+  background-color: $main-purple;
+  color: #ffffff;
 }
 
 .container {
@@ -43,7 +76,7 @@ ul {
 
 #footer {
   color: #666;
-  background-image: url('/images/footer-background.png');
+  @include linear-gradient(#444444,#000000);
   height: 300px;
   text-align: center;
   

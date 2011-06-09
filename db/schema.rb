@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(:version => 20110531081218) do
   end
 
   create_table "games", :force => true do |t|
-    t.integer  "user_id"
     t.string   "name",        :limit => 30
     t.text     "description"
     t.string   "website"
@@ -49,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20110531081218) do
     t.datetime "date"
     t.boolean  "confirmed",   :default => false
     t.integer  "max_people",  :default => 2
-    t.integer  "min_people",  :default => 1
+    t.integer  "min_people",  :default => 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

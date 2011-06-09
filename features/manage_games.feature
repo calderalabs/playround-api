@@ -34,11 +34,3 @@ Feature: Manage Games
     Then I should be on the page for that game
     And I should see "Game was successfully updated."
     And I should see "Risk!"
-
-  Scenario: Destroy Game
-    Given a game exists with name: "DotA" created by "Matteo"
-    When I click the "Games" link
-    And I click the "Destroy" link
-    And I click the confirmation button
-    Then I should not see "DotA"
-    And I should be on the games page

@@ -11,7 +11,7 @@ Playround::Application.routes.draw do
     put 'confirm', :on => :member
   end
   
-  resources :users, :only => [:show, :edit, :update]
+  resources :users
 
   resource :session, :controller => 'sessions'
 

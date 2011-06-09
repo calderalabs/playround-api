@@ -33,12 +33,6 @@ class UserTest < ActiveSupport::TestCase
     assert_has_many @user, :rounds
   end
   
-  test "should have many games" do
-    @user.save!
-    
-    assert_has_many @user, :games
-  end
-  
   test "should have many arenas" do
     @user.save!
     

@@ -1,5 +1,11 @@
 <div id="title">
-  <h1>Rounds around you</h1>
+  <div class="text_field">
+  <%= form_tag(rounds_path, :method => :get) do -%>
+    <%= label_tag 'near', "Rounds around" %>
+    <%= text_field_tag 'near', "" %>
+    <%= submit_tag "Search"%>
+  <% end -%>
+  </div>
   <% if can? :create, Round %>
     <%= link_to('Start a new round!', new_round_path) %>
   <% end %>
@@ -27,7 +33,9 @@
         <h2 class="arena">
           <%= link_to round.arena.name, arena_path(round.arena) %> <%= " (#{round.date.strftime("at %I:%M %p")})" %>
         </h2>
-
+        <h3>
+          <%= '3 hours left to subscribe!' %>
+        </h3>
       <ul>
         <% round.max_people.times do |n| %>
           <li>
@@ -46,15 +54,11 @@
 
     <div class="actions right-column">
       <% if can? :read, round %>
-        <%= link_to 'Show', round, :class => 'button' %>
+        <%= link_to 'Show', round %>
       <% end %>
 
       <div class="spots">
         <%= round.remaining_spots.to_s + ' spots left'%>
-      </div>
-
-      <div class="time">
-        <%= '3 hours left to subscribe!' %>
       </div>
     </div>
 

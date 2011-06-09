@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  attr_accessible :text, :round_id
+  
   belongs_to :user
   belongs_to :round
   

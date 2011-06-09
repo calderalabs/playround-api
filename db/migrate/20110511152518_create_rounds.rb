@@ -9,7 +9,7 @@ class CreateRounds < ActiveRecord::Migration
       t.datetime :date
       t.boolean :confirmed, :default => false
       t.integer :max_people, :default => 2
-      t.integer :min_people, :default => 1
+      t.integer :min_people, :default => 2
 
       t.timestamps
     end

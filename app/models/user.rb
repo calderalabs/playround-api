@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Clearance::User
   
+  attr_accessible :display_name, :real_name, :email, :password
+  
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => '/missing_avatar.gif'
   
   before_validation do
@@ -9,7 +11,6 @@ class User < ActiveRecord::Base
   
   has_many :subscriptions
   has_many :rounds
-  has_many :games
   has_many :arenas
   has_many :comments
   

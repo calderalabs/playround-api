@@ -51,6 +51,20 @@ class ActiveSupport::TestCase
     end
   end
   
+  def assert_has_many_through(record, attribute, options = {})
+    assert_respond_to record, attribute
+    
+    source_class_name = options[:source_class_name]
+    class_name = options[:class_name] || ActiveSupport::Inflector.classify(attribute.to_s)
+    foreign_key = options[:foreign_key] || ActiveSupport::Inflector.foreign_key(record.class.name)
+    
+    assert_kind_of Array, record.send(attribute)
+    
+    assert_difference "record.#{attribute}.count" do
+      Factory source_class_name.underscore.to_sym, foreign_key => record.id
+    end
+  end
+  
   def assert_belongs_to(record, attribute, options = {})
     class_name = options[:class_name] || ActiveSupport::Inflector.classify(attribute.to_s)
     class_constant = ActiveSupport::Inflector.constantize(class_name)

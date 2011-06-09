@@ -42,7 +42,7 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.xml
   def create
-    @game = current_user.games.build(params[:game])
+    @game = Game.new(params[:game])
 
     respond_to do |format|
       if @game.save
@@ -68,18 +68,6 @@ class GamesController < ApplicationController
         format.html { render :action => "edit" }
         format.xml  { render :xml => @game.errors, :status => :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /games/1
-  # DELETE /games/1.xml
-  def destroy
-    @game = Game.find(params[:id])
-    @game.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(games_url) }
-      format.xml  { head :ok }
     end
   end
 end

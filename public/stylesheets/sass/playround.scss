@@ -23,15 +23,32 @@ body {
     padding: 20px 0;
   }
   
-  h1 {
-    padding-bottom: 25px;
+  #title {
+    padding-bottom: 20px;
     margin-bottom: 15px;
     border-bottom: 2px solid #ddd;
-    font-size: 22pt;
   }
   
-  form {
-    width: 316px;
+  #title input {
+    font-size: 16pt;
+    display: inline;
+    height: 30px;
+    margin-right: 10px;
+    width: 200px;
+  }
+  
+  #title label {
+    display: inline;
+    font-size: 22pt;
+    line-height: 30px;
+    margin-right: 10px;
+    padding: 8px;
+  }
+  
+  #title input[type=submit] {
+    @include button(auto,auto,$main-purple,white);
+    display: inline;
+    line-height: 50px;
   }
 }
 
@@ -57,38 +74,21 @@ body {
 }
 
 #title a {
-  color: black;
-  display: block;
-  width: 190px;
-  height: 50px;
-  line-height: 50px;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
+  @include button(190px, 50px, $main-orange, #000000);
   position: absolute;
   font-size: 14pt;
   right: 0;
   top: 0;
-  background-image: url('/images/new-round-button.png');
-  background-repeat: no-repeat;
-  
-  &:hover {
-    background-position: 0 -50px;
-  }
 }
 
-a.button {
-  background-color: $main-orange;
-  padding: 10px;
-  text-decoration: none;
-  color: #000000;
+#header a {
+  color: white;
   font-weight: bold;
-  @include rounded-corners(10px);
+  text-decoration: none;
 }
 
-a.button:hover {
-  background-color: $main-fucsia;
-  color: #ffffff;
+#header a:hover {
+  color: $main-orange;
 }
 
 #header {
@@ -168,29 +168,20 @@ input.placeholder {
   padding-bottom: 20px;
   border-bottom: 1px solid #ccc;
   
+  h3 {
+    margin: 5px 0;
+    font-weight: normal;
+    color: #555;
+  }
+  
   .game {
     a {
-      @include box-shadow(5px, 5px, 5px, 0, #ccc);
-      
-      border: 1px solid darken($main-orange, 10%);
+      @include button(120px, auto, #ffffff, #000000);
       min-height: 60px;
-      display: block;
-      background-color: $main-orange;
-      text-align: center;
-      font-weight: bold;
       margin-left: 10px;
       font-size: 13pt;
-      width: 120px;
-      @include rounded-corners(5px);
       padding: 10px;
-      color: black;
-      text-decoration: none;
     }
-    
-    a:hover {
-        color: white;
-        background-color: $main-fucsia;
-      }
   }
 
   .date {
@@ -281,17 +272,11 @@ input.placeholder {
     text-align: center;
     width: 140px;
     
-    a.button {
-       font-size: 12pt;
-       background-image: url('/images/view-round-button.png');
-       background-repeat: no-repeat;
-       color: #ffffff;
-       display: block;
-       margin-bottom: 8px;
-    }
-    
-    a.button:hover {
-      background-position: 0 -50px;
+    a {
+      margin: 0 auto;
+      @include button(120px, 35px, $main-fucsia, #ffffff);
+      font-size: 12pt;
+      margin-bottom: 8px;
     }
     
     .time {
@@ -300,9 +285,9 @@ input.placeholder {
     }
     
     .spots {
-      font-weight: bold;
-      color: #888;
-      font-size: 13pt;
+      color: #000;
+      font-size: 14pt;
+      margin-top: 15px;
     }
   }
 }

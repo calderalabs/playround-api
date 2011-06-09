@@ -1,4 +1,6 @@
 class Arena < ActiveRecord::Base
+  attr_accessible :name, :latitude, :longitude, :website
+  
   has_many :rounds
   belongs_to :user
 

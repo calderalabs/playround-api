@@ -49,6 +49,14 @@ class RoundTest < ActiveSupport::TestCase
     assert @round.invalid?
   end
   
+  test "should not be able to mass-assign user_id" do
+    user_id = @round.user_id
+    
+    @round.attributes = { :user_id => user_id + 1 }
+    
+    assert_equal @round.user_id, user_id 
+  end
+  
   test "minimum people should not be nil at creation" do
     round = Round.new
     
@@ -92,14 +100,8 @@ class RoundTest < ActiveSupport::TestCase
     assert @round.invalid?
   end
   
-  test "people should not be less than 1" do
-    @round.min_people = 0
-    @round.max_people = -1
-    
-    assert @round.invalid?
-  end
-  
-  test "max people should not be lest than 2" do
+  test "people should not be less than 2" do
+    @round.min_people = 1
     @round.max_people = 1
     
     assert @round.invalid?
@@ -162,6 +164,8 @@ class RoundTest < ActiveSupport::TestCase
     @round.remaining_spots.times do
       Factory(:subscription, :round => @round)
     end
+    
+    @round.reload
     
     assert @round.full?
   end
@@ -230,5 +234,35 @@ class RoundTest < ActiveSupport::TestCase
     assert !@round.confirm!
     
     assert_equal @round.confirmed, true
+  end
+  
+  test "should have many subscribers through subscriptions" do
+    @round.save!
+    
+    assert_has_many_through @round, :subscribers, :source_class_name => 'Subscription'
+  end
+  
+  test "all subscribers should include the owner" do
+    assert @round.all_subscribers.include?(@round.user)
+  end
+  
+  test "all subscribers should include a subscriber" do
+    @round.save!
+
+    @subscription = Factory :subscription, :round => @round
+ 
+    @round.reload
+ 
+    assert @round.subscribers.include?(@subscription.user)
+  end
+  
+  test "should decrease remaining spots when someone subscribes" do
+    @round.save!
+    
+    assert_difference '@round.remaining_spots', -1 do
+      @subscription = Factory :subscription, :round => @round
+      
+      @round.reload
+    end
   end
 end

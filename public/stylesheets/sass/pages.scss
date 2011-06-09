@@ -4,8 +4,7 @@ $content-width: 900px;
 $content-height: 500px;
 
 #content {
-  background-image: url('/images/content-background.png');
-  background-repeat: repeat-x;
+  @include linear-gradient(#ffffff, lighten($main-purple, 65%));
   height: $content-height;
   text-align: center;
   
@@ -65,34 +64,15 @@ $content-height: 500px;
 }
 
 #signup-button {
-  $height: 60px;
-  
-  width: 186px;
-  height: $height;
+  @include button(186px, 60px, $main-orange, #000000);
   margin: 20px auto;
-  background-image: url('/images/signup-button.png');
   font-size: 15pt;
-  line-height: $height;
-  color: #000000;
-  
-  &:hover {
-    background-position: 0 (-$height);
-  }
 }
 
 #rounds-button {
-  $height: 78px;
-  width: 361px;
-  height: $height;
+  @include button(361px, 78px, $main-fucsia, #ffffff);
   margin: 30px auto;
-  background-image: url('/images/rounds-button.png');
   font-size: 17pt;
-  line-height: $height;
-  color: #ffffff;
-  
-  &:hover {
-    background-position: 0 (-$height);
-  }
 }
 
 #password-field {

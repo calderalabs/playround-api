@@ -27,6 +27,14 @@ class CommentTest < ActiveSupport::TestCase
     assert @comment.invalid?
   end
   
+  test "should not mass-assign user_id" do
+    user_id = @comment.user_id
+    
+    @comment.attributes = { :user_id => user_id + 1 }
+    
+    assert_equal @comment.user_id, user_id
+  end
+  
   test "should belong to an user" do
     assert_belongs_to @comment, :user
   end

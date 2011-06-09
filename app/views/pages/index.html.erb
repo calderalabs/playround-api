@@ -25,7 +25,7 @@
 
         <p>Already a rounder? <%= link_to 'Sign in!', '/sign_in' %></p>
       
-        <%= link_to_function 'Sign up!', "$('#signup-form').submit()", :id => 'signup-button', :class => 'button' %>
+        <%= form.submit 'Sign up!', :id => 'signup-button', :class => 'button' %>
       <% end %>
     </div>
     

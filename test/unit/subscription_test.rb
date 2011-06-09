@@ -25,6 +25,14 @@ class SubscriptionTest < ActiveSupport::TestCase
     assert @subscription.invalid?
   end
   
+  test "should not mass-assign user_id" do
+    user_id = @subscription.user_id
+        
+    @subscription.attributes = { :user_id => user_id + 1 }
+    
+    assert_equal @subscription.user_id, user_id
+  end
+  
   test "combination of user and round should be unique" do
     @subscription.save!
     
@@ -45,6 +53,8 @@ class SubscriptionTest < ActiveSupport::TestCase
     @subscription.round.remaining_spots.times do
       Factory(:subscription, :round => @subscription.round)
     end
+    
+    @subscription.round.reload
     
     assert @subscription.invalid?
   end

@@ -1,11 +1,12 @@
 class Round < ActiveRecord::Base
-  has_many :subscriptions
-
+  attr_accessible :deadline, :date, :max_people, :min_people, :arena_id, :game_id
+  
   after_initialize :initialize_default_values
 
   belongs_to :arena
   belongs_to :game
   belongs_to :user
+  has_many :subscriptions
   has_many :comments
   has_many :subscribers, :through => :subscriptions, :source => :user
   
@@ -25,7 +26,7 @@ class Round < ActiveRecord::Base
   validates_presence_of :user_id
   
   validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 1, :only_integer => true, :unless => Proc.new { |round| round.min_people.nil? }
-  validates_numericality_of :min_people, :greater_than => 0, :only_integer => true
+  validates_numericality_of :min_people, :greater_than => 1, :only_integer => true
   
   def date=(date)
     if date
@@ -43,22 +44,22 @@ class Round < ActiveRecord::Base
     end
   end
   
-  def full?
-    self.remaining_spots == 0
+  def all_subscribers
+    self.subscribers + [self.user]
   end
   
   def remaining_spots
-    self.max_people - self.subscriptions.count - 1
+    self.max_people - self.all_subscribers.count
+  end
+  
+  def full?
+    self.remaining_spots == 0
   end
   
   def authorized?(user)
     self.user == user
   end
 
-  def all_subscribers
-    self.subscribers + [self.user]
-  end
-  
   def confirm!
     if !self.confirmed
        update_attribute(:confirmed, true)

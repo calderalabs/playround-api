@@ -58,16 +58,6 @@ class GameTest < ActiveSupport::TestCase
     assert_has_many @game, :rounds
   end
   
-  test "should belong to user" do
-    assert_belongs_to @game, :user
-  end
-  
-  test "should be invalid without a user" do
-    @game.user = nil
-    
-    assert @game.invalid?
-  end
-  
   test "any user can create games" do
     ability = Ability.new Factory :user
     assert ability.can?(:create, Game)
@@ -76,19 +66,15 @@ class GameTest < ActiveSupport::TestCase
   test "user can read any game" do
     ability = Ability.new Factory :user
     assert ability.can?(:read, @game)
-    ability = Ability.new @game.user
-    assert ability.can?(:read, @game)
   end
   
-  test "user can only update games which he owns" do
-    ability = Ability.new @game.user
-    assert ability.can?(:update, @game)
-    assert ability.cannot?(:update, Factory.build(:game))
+  test "user can edit any game" do
+    ability = Ability.new Factory :user
+    assert ability.can?(:edit, @game)
   end
   
-  test "user can only destroy games which he owns" do
-    ability = Ability.new @game.user
-    assert ability.can?(:destroy, @game)
-    assert ability.cannot?(:destroy, Factory.build(:game))
+  test "user cannot destroy games" do
+    ability = Ability.new Factory :user
+    assert ability.cannot?(:destroy, @game)
   end
 end

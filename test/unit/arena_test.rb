@@ -115,6 +115,14 @@ class ArenaTest < ActiveSupport::TestCase
     assert @arena.invalid?
   end
   
+  test "should not mass-assign user_id" do
+    user_id = @arena.user_id
+    
+    @arena.attributes = { :user_id => user_id + 1 }
+    
+    assert_equal @arena.user_id, user_id
+  end
+  
   test "any user can create arenas" do
     ability = Ability.new Factory :user
     assert ability.can?(:create, Arena)

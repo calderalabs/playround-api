@@ -21,7 +21,10 @@ ul {
 
 #footer {
   color: #666;
-  background-image: url("/images/footer-background.png");
+  background-image: -moz-linear-gradient(top, #444444, black);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #444444), color-stop(1, black));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#444444', EndColorStr='black');
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#444444', EndColorStr='black')";
   height: 300px;
   text-align: center; }
   #footer p {
@@ -38,8 +41,10 @@ ul {
   clear: both; }
 
 #content {
-  background-image: url("/images/content-background.png");
-  background-repeat: repeat-x;
+  background-image: -moz-linear-gradient(top, white, #d8acff);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #d8acff));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#d8acff');
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#d8acff')";
   height: 500px;
   text-align: center; }
   #content .left-column {
@@ -76,26 +81,60 @@ ul {
   display: block; }
 
 #signup-button {
-  width: 186px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  border: 1px solid #e6be00;
+  cursor: pointer;
   height: 60px;
-  margin: 20px auto;
-  background-image: url("/images/signup-button.png");
-  font-size: 15pt;
+  width: 186px;
+  background-image: -moz-linear-gradient(top, #fff6cc, #ffd300);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff6cc), color-stop(1, #ffd300));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff6cc', EndColorStr='#ffd300');
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff6cc', EndColorStr='#ffd300')";
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-box-shadow: 0 0 5px 0 #cca900;
+  -webkit-box-shadow: 0 0 5px 0 #cca900;
+  box-shadow: 0 0 5px 0 #cca900;
   line-height: 60px;
-  color: #000000; }
+  color: black;
+  margin: 20px auto;
+  font-size: 15pt; }
   #signup-button:hover {
-    background-position: 0 -60px; }
+    -moz-box-shadow: inset 0 0 5px 0 #cca900;
+    -webkit-box-shadow: inset 0 0 5px 0 #cca900;
+    box-shadow: inner 0 0 5px 0 #cca900; }
 
 #rounds-button {
-  width: 361px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  border: 1px solid #d20490;
+  cursor: pointer;
   height: 78px;
-  margin: 30px auto;
-  background-image: url("/images/rounds-button.png");
-  font-size: 17pt;
+  width: 361px;
+  background-image: -moz-linear-gradient(top, #febde9, #eb04a1);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #febde9), color-stop(1, #eb04a1));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#febde9', EndColorStr='#eb04a1');
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#febde9', EndColorStr='#eb04a1')";
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-box-shadow: 0 0 5px 0 #b9037f;
+  -webkit-box-shadow: 0 0 5px 0 #b9037f;
+  box-shadow: 0 0 5px 0 #b9037f;
   line-height: 78px;
-  color: #ffffff; }
+  color: white;
+  margin: 30px auto;
+  font-size: 17pt; }
   #rounds-button:hover {
-    background-position: 0 -78px; }
+    -moz-box-shadow: inset 0 0 5px 0 #b9037f;
+    -webkit-box-shadow: inset 0 0 5px 0 #b9037f;
+    box-shadow: inner 0 0 5px 0 #b9037f; }
 
 #password-field {
   display: none; }

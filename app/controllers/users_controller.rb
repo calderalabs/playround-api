@@ -1,4 +1,4 @@
-class UsersController < ApplicationController  
+class UsersController < Clearance::UsersController  
   def show
     @user = User.find(params[:id])
     
@@ -24,5 +24,17 @@ class UsersController < ApplicationController
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
+  end
+  
+  private
+
+  def flash_notice_after_create
+    flash[:notice] = translate(:signed_up,
+      :scope => [:clearance, :controllers, :users],
+      :default => "Welcome to Playround!")
+  end
+  
+  def url_after_create
+    rounds_path
   end
 end
