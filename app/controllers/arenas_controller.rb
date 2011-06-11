@@ -1,5 +1,6 @@
 class ArenasController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:autocomplete_address]
+  before_filter :get_user_location, :only => [:new, :edit]
   
   # GET /arenas
   # GET /arenas.xml
@@ -27,7 +28,12 @@ class ArenasController < ApplicationController
   # GET /arenas/new.xml
   def new
     @arena = Arena.new
-
+    
+    if user_located?
+      @arena.latitude = @location.latitude
+      @arena.longitude = @location.longitude
+    end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @arena }
@@ -81,5 +87,9 @@ class ArenasController < ApplicationController
       format.html { redirect_to(arenas_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def autocomplete_address
+    @locations = Geocoder.search(params[:address])
   end
 end

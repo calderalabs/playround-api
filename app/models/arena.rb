@@ -16,4 +16,6 @@ class Arena < ActiveRecord::Base
   
   validates_url_format_of :website, :allow_blank => true
   adjusts_string :website, :prepend => 'http://', :if => Proc.new { |a| !(a.website =~ /^.*:.*$/) }
+  
+  reverse_geocoded_by :latitude, :longitude
 end

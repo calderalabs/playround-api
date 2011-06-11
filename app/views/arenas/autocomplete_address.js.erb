@@ -1,0 +1,7 @@
+<% unless @locations.empty? %>
+<ul>
+<% @locations.each do |location| %>
+  <li><span class="address"><%= location.address %></span><span class="latitude"><%= location.latitude %></span><span class="longitude"><%= location.longitude %></span></li>
+<% end %>
+</ul>
+<% end %>

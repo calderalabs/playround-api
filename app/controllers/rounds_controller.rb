@@ -1,15 +1,23 @@
 class RoundsController < ApplicationController
   before_filter :authorize
+  before_filter :get_user_location, :only => [:index]
   
   load_and_authorize_resource
   
   # GET /rounds
   # GET /rounds.xml
   def index
-    @rounds = Round.all
+    if params[:near]
+      @location = Geocoder.search(params[:near]).first
+      session[:near] = params[:near]
+    end
     
+    if user_located?
+      @rounds = Arena.near(@location.coordinates, 20).select("*, rounds.id AS round_id").joins(:rounds).collect { |arena| Round.find(arena.round_id) }
+    else
+      @rounds = []
+    end
     
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @rounds }

@@ -23,6 +23,13 @@ body {
     padding: 20px 0;
   }
   
+  h1 {
+    padding-bottom: 25px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    font-size: 22pt;
+  }
+  
   #title {
     padding-bottom: 20px;
     margin-bottom: 15px;
@@ -48,7 +55,6 @@ body {
   #title input[type=submit] {
     @include button(auto,auto,$main-purple,white);
     display: inline;
-    line-height: 50px;
   }
 }
 

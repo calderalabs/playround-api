@@ -56,6 +56,11 @@ body {
   padding: 50px; }
   #content p {
     padding: 20px 0; }
+  #content h1 {
+    padding-bottom: 25px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    font-size: 22pt; }
   #content #title {
     padding-bottom: 20px;
     margin-bottom: 15px;
@@ -93,8 +98,7 @@ body {
     box-shadow: 0 0 5px 0 #18002c;
     line-height: auto;
     color: white;
-    display: inline;
-    line-height: 50px; }
+    display: inline; }
     #content #title input[type=submit]:hover {
       -moz-box-shadow: inset 0 0 5px 0 #18002c;
       -webkit-box-shadow: inset 0 0 5px 0 #18002c;

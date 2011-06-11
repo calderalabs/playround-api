@@ -5,7 +5,9 @@ Playround::Application.routes.draw do
 
   resources :games
 
-  resources :arenas
+  resources :arenas do
+    get 'autocomplete_address', :on => :collection
+  end
 
   resources :rounds do
     put 'confirm', :on => :member

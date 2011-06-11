@@ -2,8 +2,8 @@
   <div class="text_field">
   <%= form_tag(rounds_path, :method => :get) do -%>
     <%= label_tag 'near', "Rounds around" %>
-    <%= text_field_tag 'near', "" %>
-    <%= submit_tag "Search"%>
+    <%= text_field_tag 'near', "#{@location.city}, #{@location.country}" %>
+    <%= submit_tag "Search", :name => '' %>
   <% end -%>
   </div>
   <% if can? :create, Round %>
@@ -31,11 +31,11 @@
     <div class="subscribers left-column">
       <div class="details">
         <h2 class="arena">
-          <%= link_to round.arena.name, arena_path(round.arena) %> <%= " (#{round.date.strftime("at %I:%M %p")})" %>
+          <%= link_to round.arena.name, arena_path(round.arena) %> <%= " (#{round.date.to_date.strftime("at %I:%M %p")})" %>
         </h2>
         <h3>
           <% if round.deadline - Time.now > 0 %>
-            <%= time_ago_in_words(round.deadline) + ' left to subscribe!' %>
+            <%= time_ago_in_words(round.deadline).capitalize + ' left to subscribe!' %>
           <% else %>
             You can no longer subscribe to this round.
           <% end %>

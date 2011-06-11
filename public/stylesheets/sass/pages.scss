@@ -56,13 +56,6 @@ $content-height: 500px;
   width: $content-width;
 }
 
-.button {
-  background-repeat: no-repeat;
-  font-weight: bold;
-  text-decoration: none;
-  display: block;
-}
-
 #signup-button {
   @include button(186px, 60px, $main-orange, #000000);
   margin: 20px auto;
@@ -79,7 +72,7 @@ $content-height: 500px;
   display: none;
 }
 
-input {
+input[type=text] {
   font-size: 14pt;
   padding: 8px;
   margin: 20px;
