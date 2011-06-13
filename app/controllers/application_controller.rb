@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "Access denied."
-    redirect_to root_url, :status => :unauthorized
+    redirect_to sign_in_url, :status => :unauthorized
   end
   
   def get_user_location

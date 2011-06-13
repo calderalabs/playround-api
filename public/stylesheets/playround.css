@@ -40,6 +40,277 @@ ul {
 .clear {
   clear: both; }
 
+div.auto_complete {
+  width: 350px;
+  background: #fff;
+  z-index: 1; }
+
+div.auto_complete ul {
+  border: 1px solid #888;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style-type: none; }
+
+div.auto_complete ul li {
+  margin: 0;
+  padding: 3px; }
+
+div.auto_complete ul li.selected {
+  background-color: #ffb; }
+
+div.auto_complete ul strong.highlight {
+  color: #800;
+  margin: 0;
+  padding: 0; }
+
+/* -------------------------------------------------------------------------------------------------
+
+It's *strongly* suggested that you don't modify this file.  Instead, load a new stylesheet after
+this one in your layouts (eg formtastic_changes.css) and override the styles to suit your needs.
+This will allow you to update formtastic.css with new releases without clobbering your own changes.
+
+This stylesheet forms part of the Formtastic Rails Plugin
+(c) 2008 Justin French
+
+--------------------------------------------------------------------------------------------------*/
+/* NORMALIZE AND RESET - obviously inspired by Yahoo's reset.css, but scoped to just form.formtastic
+--------------------------------------------------------------------------------------------------*/
+form.formtastic, form.formtastic ul, form.formtastic ol, form.formtastic li, form.formtastic fieldset, form.formtastic legend, form.formtastic input, form.formtastic textarea, form.formtastic select, form.formtastic p {
+  margin: 0;
+  padding: 0; }
+
+form.formtastic fieldset {
+  border: 0; }
+
+form.formtastic em, form.formtastic strong {
+  font-style: normal;
+  font-weight: normal; }
+
+form.formtastic ol, form.formtastic ul {
+  list-style: none; }
+
+form.formtastic abbr, form.formtastic acronym {
+  border: 0;
+  font-variant: normal; }
+
+form.formtastic input, form.formtastic textarea, form.formtastic select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit; }
+
+form.formtastic input, form.formtastic textarea, form.formtastic select {
+  font-size: 100%; }
+
+form.formtastic legend {
+  white-space: normal;
+  color: #000; }
+
+/* SEMANTIC ERRORS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic ul.errors {
+  color: #cc0000;
+  margin: 0.5em 0 1.5em 25%;
+  list-style: square; }
+
+form.formtastic ul.errors li {
+  padding: 0;
+  border: none;
+  display: list-item; }
+
+/* FIELDSETS & LISTS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset {
+  overflow: hidden; }
+
+/* clearing contained floats */
+form.formtastic fieldset.buttons {
+  padding-left: 25%; }
+
+form.formtastic fieldset.buttons li {
+  float: left;
+  padding-right: 0.5em; }
+
+/* INPUT LIs
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li {
+  padding: 0.5em 0;
+  margin-top: -0.5em;
+  margin-bottom: 1em; }
+
+/* padding and negative margin juggling is for Firefox */
+form.formtastic fieldset > ol > li {
+  overflow: hidden; }
+
+/* clearing contained floats */
+/* LABELS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li label {
+  display: block;
+  width: 25%;
+  float: left;
+  padding-top: .2em; }
+
+form.formtastic fieldset > ol > li > li label {
+  line-height: 100%;
+  padding-top: 0; }
+
+form.formtastic fieldset > ol > li > li label input {
+  line-height: 100%;
+  vertical-align: middle;
+  margin-top: -0.1em; }
+
+/* NESTED FIELDSETS AND LEGENDS (radio, check boxes and date/time inputs use nested fieldsets)
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li fieldset {
+  position: relative; }
+
+form.formtastic fieldset > ol > li fieldset legend {
+  position: absolute;
+  width: 95%;
+  left: 0px; }
+
+form.formtastic fieldset > ol > li fieldset legend span {
+  position: absolute; }
+
+form.formtastic fieldset > ol > li fieldset legend.label label {
+  position: absolute; }
+
+form.formtastic fieldset > ol > li fieldset ol {
+  float: left;
+  width: 74%;
+  margin: 0;
+  padding: 0 0 0 25%; }
+
+form.formtastic fieldset > ol > li fieldset ol li {
+  padding: 0;
+  border: 0; }
+
+/* INLINE HINTS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li p.inline-hints {
+  color: #666;
+  margin: 0.5em 0 0 25%; }
+
+/* INLINE ERRORS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li p.inline-errors {
+  color: #cc0000;
+  margin: 0.5em 0 0 25%; }
+
+form.formtastic fieldset > ol > li ul.errors {
+  color: #cc0000;
+  margin: 0.5em 0 0 25%;
+  list-style: square; }
+
+form.formtastic fieldset > ol > li ul.errors li {
+  padding: 0;
+  border: none;
+  display: list-item; }
+
+/* STRING, NUMERIC, PASSWORD, EMAIL, URL, PHONE & SEARCH OVERRIDES
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li.string input,
+form.formtastic fieldset > ol > li.password input,
+form.formtastic fieldset > ol > li.numeric input,
+form.formtastic fieldset > ol > li.email input,
+form.formtastic fieldset > ol > li.url input,
+form.formtastic fieldset > ol > li.phone input,
+form.formtastic fieldset > ol > li.search input {
+  width: 72%; }
+
+form.formtastic fieldset > ol > li.string input[size],
+form.formtastic fieldset > ol > li.password input[size],
+form.formtastic fieldset > ol > li.numeric input[size],
+form.formtastic fieldset > ol > li.email input[size],
+form.formtastic fieldset > ol > li.url input[size],
+form.formtastic fieldset > ol > li.phone input[size],
+form.formtastic fieldset > ol > li.search input[size] {
+  width: auto;
+  max-width: 72%; }
+
+/* TEXTAREA OVERRIDES
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li.text textarea {
+  width: 72%; }
+
+form.formtastic fieldset > ol > li.text textarea[cols] {
+  width: auto;
+  max-width: 72%; }
+
+/* HIDDEN OVERRIDES
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset ol li.hidden {
+  display: none; }
+
+/* BOOLEAN OVERRIDES
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li.boolean label {
+  padding-left: 25%;
+  width: auto; }
+
+form.formtastic fieldset > ol > li.boolean label input {
+  margin: 0 0.5em 0 0.2em; }
+
+/* RADIO OVERRIDES
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li.radio fieldset {
+  overflow: visible; }
+
+form.formtastic fieldset > ol > li.radio fieldset ol {
+  margin-bottom: -0.5em; }
+
+form.formtastic fieldset > ol > li.radio fieldset ol li {
+  margin: 0.1em 0 0.5em 0;
+  overflow: visible; }
+
+form.formtastic fieldset > ol > li.radio fieldset ol li label {
+  float: none;
+  width: 100%; }
+
+form.formtastic fieldset > ol > li.radio fieldset ol li label input {
+  margin-right: 0.2em; }
+
+/* CHECK BOXES (COLLECTION) OVERRIDES
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li.check_boxes fieldset {
+  overflow: visible; }
+
+form.formtastic fieldset > ol > li.check_boxes fieldset ol {
+  margin-bottom: -0.5em; }
+
+form.formtastic fieldset > ol > li.check_boxes fieldset ol li {
+  margin: 0.1em 0 0.5em 0;
+  overflow: visible; }
+
+form.formtastic fieldset > ol > li.check_boxes fieldset ol li label {
+  float: none;
+  width: 100%; }
+
+form.formtastic fieldset > ol > li.check_boxes fieldset ol li label input {
+  margin-right: 0.2em; }
+
+/* DATE & TIME OVERRIDES
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li.date fieldset ol li,
+form.formtastic fieldset > ol > li.time fieldset ol li,
+form.formtastic fieldset > ol > li.datetime fieldset ol li {
+  float: left;
+  width: auto;
+  margin: 0 .3em 0 0; }
+
+form.formtastic fieldset > ol > li.date fieldset ol li label,
+form.formtastic fieldset > ol > li.time fieldset ol li label,
+form.formtastic fieldset > ol > li.datetime fieldset ol li label {
+  display: none; }
+
+form.formtastic fieldset > ol > li.date fieldset ol li label input,
+form.formtastic fieldset > ol > li.time fieldset ol li label input,
+form.formtastic fieldset > ol > li.datetime fieldset ol li label input {
+  display: inline;
+  margin: 0;
+  padding: 0; }
+
 body {
   font-size: small; }
 
@@ -51,11 +322,17 @@ body {
   font-weight: bold;
   font-size: 15pt; }
 
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #6a00c5; }
+
+a:hover {
+  color: #eb04a1; }
+
 #content {
   min-height: 400px;
   padding: 50px; }
-  #content p {
-    padding: 20px 0; }
   #content h1 {
     padding-bottom: 25px;
     margin-bottom: 15px;
@@ -82,27 +359,42 @@ body {
     font-weight: bold;
     text-align: center;
     display: block;
-    border: 1px solid #250046;
-    cursor: pointer;
     height: auto;
     width: auto;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    line-height: auto;
+    color: white;
     background-image: -moz-linear-gradient(top, #9d2cff, #33005f);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #9d2cff), color-stop(1, #33005f));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#9d2cff', EndColorStr='#33005f');
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#9d2cff', EndColorStr='#33005f')";
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
     -moz-box-shadow: 0 0 5px 0 #18002c;
     -webkit-box-shadow: 0 0 5px 0 #18002c;
     box-shadow: 0 0 5px 0 #18002c;
-    line-height: auto;
-    color: white;
+    border: 1px solid #250046;
+    cursor: pointer;
     display: inline; }
     #content #title input[type=submit]:hover {
       -moz-box-shadow: inset 0 0 5px 0 #18002c;
       -webkit-box-shadow: inset 0 0 5px 0 #18002c;
       box-shadow: inner 0 0 5px 0 #18002c; }
+    #content #title input[type=submit][disabled] {
+      border: 1px solid #bfbfbf;
+      cursor: default;
+      background-image: -moz-linear-gradient(top, white, #cccccc);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
+      -moz-box-shadow: 0 0 5px 0 #b3b3b3;
+      -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
+      box-shadow: 0 0 5px 0 #b3b3b3;
+      color: black; }
+      #content #title input[type=submit][disabled]:hover {
+        -moz-box-shadow: inset 0 0 0 0 0;
+        -webkit-box-shadow: inset 0 0 0 0 0;
+        box-shadow: inner 0 0 0 0 0; }
 
 #session {
   color: #ffffff;
@@ -124,22 +416,22 @@ body {
   font-weight: bold;
   text-align: center;
   display: block;
-  border: 1px solid #e6be00;
-  cursor: pointer;
   height: 50px;
   width: 190px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  line-height: 50px;
+  color: black;
   background-image: -moz-linear-gradient(top, #fff6cc, #ffd300);
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff6cc), color-stop(1, #ffd300));
   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff6cc', EndColorStr='#ffd300');
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff6cc', EndColorStr='#ffd300')";
-  border-radius: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
   -moz-box-shadow: 0 0 5px 0 #cca900;
   -webkit-box-shadow: 0 0 5px 0 #cca900;
   box-shadow: 0 0 5px 0 #cca900;
-  line-height: 50px;
-  color: black;
+  border: 1px solid #e6be00;
+  cursor: pointer;
   position: absolute;
   font-size: 14pt;
   right: 0;
@@ -148,6 +440,21 @@ body {
     -moz-box-shadow: inset 0 0 5px 0 #cca900;
     -webkit-box-shadow: inset 0 0 5px 0 #cca900;
     box-shadow: inner 0 0 5px 0 #cca900; }
+  #title a[disabled] {
+    border: 1px solid #bfbfbf;
+    cursor: default;
+    background-image: -moz-linear-gradient(top, white, #cccccc);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
+    -moz-box-shadow: 0 0 5px 0 #b3b3b3;
+    -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
+    box-shadow: 0 0 5px 0 #b3b3b3;
+    color: black; }
+    #title a[disabled]:hover {
+      -moz-box-shadow: inset 0 0 0 0 0;
+      -webkit-box-shadow: inset 0 0 0 0 0;
+      box-shadow: inner 0 0 0 0 0; }
 
 #header a {
   color: white;
@@ -166,7 +473,7 @@ body {
     margin: 10px;
     display: inline; }
   #header .left-column {
-    padding-top: 10px; }
+    padding-top: 5px; }
   #header em {
     font-style: normal;
     color: #ffd300; }
@@ -221,22 +528,22 @@ input.placeholder {
     font-weight: bold;
     text-align: center;
     display: block;
-    border: 1px solid #f2f2f2;
-    cursor: pointer;
     height: auto;
     width: 120px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    line-height: auto;
+    color: black;
     background-image: -moz-linear-gradient(top, white, white);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, white));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='white');
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='white')";
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
     -moz-box-shadow: 0 0 5px 0 #e6e6e6;
     -webkit-box-shadow: 0 0 5px 0 #e6e6e6;
     box-shadow: 0 0 5px 0 #e6e6e6;
-    line-height: auto;
-    color: black;
+    border: 1px solid #f2f2f2;
+    cursor: pointer;
     -moz-box-shadow: 0 0 5px 0 #999999;
     -webkit-box-shadow: 0 0 5px 0 #999999;
     box-shadow: 0 0 5px 0 #999999;
@@ -248,6 +555,21 @@ input.placeholder {
       -moz-box-shadow: inset 0 0 5px 0 #e6e6e6;
       -webkit-box-shadow: inset 0 0 5px 0 #e6e6e6;
       box-shadow: inner 0 0 5px 0 #e6e6e6; }
+    .round .game a[disabled] {
+      border: 1px solid #bfbfbf;
+      cursor: default;
+      background-image: -moz-linear-gradient(top, white, #cccccc);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
+      -moz-box-shadow: 0 0 5px 0 #b3b3b3;
+      -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
+      box-shadow: 0 0 5px 0 #b3b3b3;
+      color: black; }
+      .round .game a[disabled]:hover {
+        -moz-box-shadow: inset 0 0 0 0 0;
+        -webkit-box-shadow: inset 0 0 0 0 0;
+        box-shadow: inner 0 0 0 0 0; }
     .round .game a:hover {
       -moz-box-shadow: inset 0 0 5px 0 #999999;
       -webkit-box-shadow: inset 0 0 5px 0 #999999;
@@ -278,12 +600,6 @@ input.placeholder {
     margin-left: 20px;
     margin-bottom: 10px;
     width: 500px; }
-    .round .subscribers .details a {
-      text-decoration: none;
-      font-weight: bold;
-      color: #6a00c5; }
-    .round .subscribers .details a:hover {
-      color: #eb04a1; }
     .round .subscribers .details .arena {
       font-weight: normal;
       font-size: 14pt; }
@@ -315,28 +631,43 @@ input.placeholder {
       font-weight: bold;
       text-align: center;
       display: block;
-      border: 1px solid #d20490;
-      cursor: pointer;
       height: 35px;
       width: 120px;
+      border-radius: 10px;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      line-height: 35px;
+      color: white;
       background-image: -moz-linear-gradient(top, #febde9, #eb04a1);
       background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #febde9), color-stop(1, #eb04a1));
       filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#febde9', EndColorStr='#eb04a1');
       -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#febde9', EndColorStr='#eb04a1')";
-      border-radius: 10px;
-      -moz-border-radius: 10px;
-      -webkit-border-radius: 10px;
       -moz-box-shadow: 0 0 5px 0 #b9037f;
       -webkit-box-shadow: 0 0 5px 0 #b9037f;
       box-shadow: 0 0 5px 0 #b9037f;
-      line-height: 35px;
-      color: white;
+      border: 1px solid #d20490;
+      cursor: pointer;
       font-size: 12pt;
       margin-bottom: 8px; }
       .round .actions a:hover {
         -moz-box-shadow: inset 0 0 5px 0 #b9037f;
         -webkit-box-shadow: inset 0 0 5px 0 #b9037f;
         box-shadow: inner 0 0 5px 0 #b9037f; }
+      .round .actions a[disabled] {
+        border: 1px solid #bfbfbf;
+        cursor: default;
+        background-image: -moz-linear-gradient(top, white, #cccccc);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
+        -moz-box-shadow: 0 0 5px 0 #b3b3b3;
+        -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
+        box-shadow: 0 0 5px 0 #b3b3b3;
+        color: black; }
+        .round .actions a[disabled]:hover {
+          -moz-box-shadow: inset 0 0 0 0 0;
+          -webkit-box-shadow: inset 0 0 0 0 0;
+          box-shadow: inner 0 0 0 0 0; }
     .round .actions .time {
       margin-top: 10px;
       color: #888; }
@@ -344,3 +675,157 @@ input.placeholder {
       color: #000;
       font-size: 14pt;
       margin-top: 15px; }
+
+#round-title h1 {
+  padding-bottom: 10px; }
+
+#round-infos {
+  margin-top: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 20px; }
+  #round-infos .left-column {
+    width: 650px; }
+  #round-infos .right-column {
+    width: 200px;
+    text-align: center;
+    color: #888;
+    font-size: 14pt;
+    font-weight: bold; }
+    #round-infos .right-column #subscribe, #round-infos .right-column #confirm {
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+      display: block;
+      height: 50px;
+      width: 120px;
+      border-radius: 10px;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      line-height: 50px;
+      color: white;
+      background-image: -moz-linear-gradient(top, #4dff4d, green);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #4dff4d), color-stop(1, green));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#4dff4d', EndColorStr='green');
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#4dff4d', EndColorStr='green')";
+      -moz-box-shadow: 0 0 5px 0 #004d00;
+      -webkit-box-shadow: 0 0 5px 0 #004d00;
+      box-shadow: 0 0 5px 0 #004d00;
+      border: 1px solid #006700;
+      cursor: pointer;
+      font-size: 12pt;
+      margin: 0 auto;
+      margin-bottom: 20px; }
+      #round-infos .right-column #subscribe:hover, #round-infos .right-column #confirm:hover {
+        -moz-box-shadow: inset 0 0 5px 0 #004d00;
+        -webkit-box-shadow: inset 0 0 5px 0 #004d00;
+        box-shadow: inner 0 0 5px 0 #004d00; }
+      #round-infos .right-column #subscribe[disabled], #round-infos .right-column #confirm[disabled] {
+        border: 1px solid #bfbfbf;
+        cursor: default;
+        background-image: -moz-linear-gradient(top, white, #cccccc);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
+        -moz-box-shadow: 0 0 5px 0 #b3b3b3;
+        -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
+        box-shadow: 0 0 5px 0 #b3b3b3;
+        color: black; }
+        #round-infos .right-column #subscribe[disabled]:hover, #round-infos .right-column #confirm[disabled]:hover {
+          -moz-box-shadow: inset 0 0 0 0 0;
+          -webkit-box-shadow: inset 0 0 0 0 0;
+          box-shadow: inner 0 0 0 0 0; }
+    #round-infos .right-column #unsubscribe {
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+      display: block;
+      height: 50px;
+      width: 120px;
+      border-radius: 10px;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      line-height: 50px;
+      color: white;
+      background-image: -moz-linear-gradient(top, #ffcccc, red);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffcccc), color-stop(1, red));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffcccc', EndColorStr='red');
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffcccc', EndColorStr='red')";
+      -moz-box-shadow: 0 0 5px 0 #cc0000;
+      -webkit-box-shadow: 0 0 5px 0 #cc0000;
+      box-shadow: 0 0 5px 0 #cc0000;
+      border: 1px solid #e60000;
+      cursor: pointer;
+      font-size: 12pt;
+      margin: 0 auto;
+      margin-bottom: 20px; }
+      #round-infos .right-column #unsubscribe:hover {
+        -moz-box-shadow: inset 0 0 5px 0 #cc0000;
+        -webkit-box-shadow: inset 0 0 5px 0 #cc0000;
+        box-shadow: inner 0 0 5px 0 #cc0000; }
+      #round-infos .right-column #unsubscribe[disabled] {
+        border: 1px solid #bfbfbf;
+        cursor: default;
+        background-image: -moz-linear-gradient(top, white, #cccccc);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
+        -moz-box-shadow: 0 0 5px 0 #b3b3b3;
+        -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
+        box-shadow: 0 0 5px 0 #b3b3b3;
+        color: black; }
+        #round-infos .right-column #unsubscribe[disabled]:hover {
+          -moz-box-shadow: inset 0 0 0 0 0;
+          -webkit-box-shadow: inset 0 0 0 0 0;
+          box-shadow: inner 0 0 0 0 0; }
+
+#participants {
+  margin-bottom: 20px; }
+
+#participants li {
+  float: left;
+  display: block;
+  padding: 5px;
+  margin: 5px;
+  margin-left: 0;
+  border: 1px solid #ccc; }
+
+#participants h2, #comments h2 {
+  padding-bottom: 20px; }
+
+.spots {
+  color: #888;
+  font-size: 14pt;
+  margin-top: 15px; }
+
+.additional-notes {
+  margin-top: 20px;
+  font-style: italic; }
+
+#comments .header {
+  background-color: #f7eeff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding: 10px;
+  font-style: italic; }
+  #comments .header img {
+    border: 1px solid #ccc; }
+  #comments .header a {
+    font-style: normal; }
+  #comments .header img, #comments .header a, #comments .header span {
+    margin-right: 5px; }
+
+#comments p {
+  padding: 15px;
+  padding-left: 10px; }
+
+#comments textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px; }
+
+span.actions a {
+  color: #eb04a1; }
+  span.actions a:hover {
+    color: #6a00c5; }

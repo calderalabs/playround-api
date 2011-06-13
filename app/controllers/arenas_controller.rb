@@ -1,6 +1,9 @@
 class ArenasController < ApplicationController
-  load_and_authorize_resource :except => [:autocomplete_address]
+  load_and_authorize_resource :except => [:autocomplete_address, :autocomplete_arena_name]
   before_filter :get_user_location, :only => [:new, :edit]
+  before_filter :authorize_autocomplete, :only => [:autocomplete_address, :autocomplete_arena_name]
+  
+  autocomplete :arena, :name
   
   # GET /arenas
   # GET /arenas.xml
@@ -90,6 +93,14 @@ class ArenasController < ApplicationController
   end
   
   def autocomplete_address
-    @locations = Geocoder.search(params[:address])
+    @locations = Geocoder.search(params[:term])
+    
+    render :json => json_for_autocomplete(@locations, :address, [:latitude, :longitude])
+  end
+  
+  private
+    
+  def authorize_autocomplete
+    authorize! :create, Arena
   end
 end

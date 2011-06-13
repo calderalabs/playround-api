@@ -20,8 +20,9 @@
         <div class="password_field">
           <%= form.password_field :password, :id => 'password-field', :autocomplete => 'off' %>
         </div>
-    
-        <%= text_field_tag 'text-password', '', :id => 'text-password-field', :placeholder => 'Password', :autocomplete => 'off' %>
+        <div class="text_field">
+          <%= text_field_tag 'text-password', nil, :id => 'text-password-field', :placeholder => 'Password', :autocomplete => 'off', :size => 30 %>
+        </div>
 
         <p>Already a rounder? <%= link_to 'Sign in!', '/sign_in' %></p>
       

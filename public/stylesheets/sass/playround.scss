@@ -1,4 +1,5 @@
 @import "application";
+@import "forms";
 
 $content-width: 900px;
 
@@ -15,13 +16,20 @@ body {
   font-size: 15pt;
 }
 
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: lighten($main-purple, 20%);
+  }
+  
+  a:hover {
+    color: $main-fucsia;
+  }
+  
+
 #content {
   min-height: 400px;
   padding: 50px;
-
-  p {
-    padding: 20px 0;
-  }
   
   h1 {
     padding-bottom: 25px;
@@ -109,7 +117,7 @@ body {
   }
   
   .left-column {
-    padding-top: 10px;
+    padding-top: 5px;
   }
   
   em {
@@ -229,16 +237,6 @@ input.placeholder {
     margin-bottom: 10px;
 
     .details {
-      a {
-        text-decoration: none;
-        font-weight: bold;
-        color: lighten($main-purple, 20%);
-      }
-      
-      a:hover {
-        color: $main-fucsia;
-      }
-      
       .arena {
         font-weight: normal;
         font-size: 14pt;
@@ -300,5 +298,112 @@ input.placeholder {
       font-size: 14pt;
       margin-top: 15px;
     }
+  }
+}
+
+#round-title {
+  h1 {
+    padding-bottom: 10px;
+  }
+}
+
+#round-infos {
+  margin-top: 20px;
+
+  .left-column {
+    width: 650px;
+  }
+  
+  .right-column {
+    width: 200px;
+    text-align: center;
+    color: #888;
+    font-size: 14pt;
+    font-weight: bold;
+    
+    #subscribe, #confirm {
+      @include button(120px, 50px, green, #ffffff);
+      font-size: 12pt;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+    
+    #unsubscribe {
+      @include button(120px, 50px, red, #ffffff);
+      font-size: 12pt;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+  }
+  
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+#participants {
+  margin-bottom: 20px;
+}
+
+#participants li {
+  float: left;
+  display: block;
+  padding: 5px;
+  margin: 5px;
+  margin-left: 0;
+  border: 1px solid #ccc;
+}
+
+#participants h2, #comments h2 {
+  padding-bottom: 20px;
+}
+
+.spots {
+  color: #888;
+  font-size: 14pt;
+  margin-top: 15px;
+}
+
+.additional-notes {
+  margin-top: 20px;
+  font-style: italic;
+}
+
+#comments .header {
+  background-color: lighten($main-purple, 78%);
+  @include rounded-corners(5px);
+  padding: 10px;
+  
+  img {
+    border: 1px solid #ccc;
+  }
+  
+  a {
+    font-style: normal;
+  }
+  
+  img, a, span {
+    margin-right: 5px;
+  }
+  
+  font-style: italic;
+}
+
+#comments p {
+  padding: 15px;
+  padding-left: 10px;
+}
+
+#comments textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+span.actions a {
+  color: $main-fucsia;
+  
+  &:hover {
+    color: lighten($main-purple, 20%);
   }
 }

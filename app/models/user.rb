@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
   def subscribed?(round)
     self.subscriptions.exists?(:round_id => round.id)
   end
+  
+  def guest?
+    new_record?
+  end
 end

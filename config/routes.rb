@@ -3,10 +3,13 @@ Playround::Application.routes.draw do
 
   resources :subscriptions
 
-  resources :games
+  resources :games do
+    get :autocomplete_game_name, :on => :collection
+  end
 
   resources :arenas do
     get 'autocomplete_address', :on => :collection
+    get :autocomplete_arena_name, :on => :collection
   end
 
   resources :rounds do

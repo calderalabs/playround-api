@@ -1,47 +1,18 @@
-<%= form_for(@round) do |f| %>
-  <% if @round.errors.any? %>
-    <div class="error">
-      <ul>
-      <% @round.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :deadline %><br />
-    <%= f.datetime_select :deadline %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br />
-    <%= f.datetime_select :date %>
-  </div>
-  <div class="field">
-    <%= f.label :max_people %><br />
-    <%= f.text_field :max_people %>
-  </div>
-  <div class="field">
-    <%= f.label :min_people %><br />
-    <%= f.text_field :min_people %>
-  </div>
-  <div class="field">
-    <%= f.label :arena_id %><br />
-    <%= f.collection_select :arena_id, Arena.all, :id, :name %>
-  </div>
-  <div class="field">
-    <%= f.label :game_id %><br />
-    <%= f.collection_select :game_id, Game.all, :id, :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :confirmed %><br />
-    <%= f.check_box :confirmed %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= semantic_form_for(@round) do |f| %>
+  <%= f.inputs do %>
+      <%= f.hidden_field :game_id%>
+      <li class="text">
+      <%= f.label :game_id %> <%= autocomplete_field_tag 'game', '', autocomplete_game_name_games_path, :value => @round.game ? @round.game.name : '', 
+                                 :update_elements => { :id => '#round_game_id' } %></li>
+      <%= f.hidden_field :arena_id%>
+      <li class="text">
+      <%= f.label :arena_id %> <%= autocomplete_field_tag 'arena', '', autocomplete_arena_name_arenas_path, :value => @round.arena ? @round.arena.name : '', 
+                                 :update_elements => { :id => '#round_arena_id' } %></li>
+      <%= f.input :description, :required => false, :hint => 'This is an optional description for your round' %>
+      <%= f.input :deadline, :required => false, :start_year => Time.now.year %>
+      <%= f.input :date, :required => false, :start_year => Time.now.year %>
+      <%= f.input :max_people, :required => false %>
+      <%= f.input :min_people, :required => false%>
+    <% end %>
+  <%= f.buttons %>
 <% end %>

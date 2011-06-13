@@ -2,13 +2,11 @@
   <div class="text_field">
   <%= form_tag(rounds_path, :method => :get) do -%>
     <%= label_tag 'near', "Rounds around" %>
-    <%= text_field_tag 'near', "#{@location.city}, #{@location.country}" %>
+    <%= text_field_tag 'near', @location ? @location.address : '' %>
     <%= submit_tag "Search", :name => '' %>
   <% end -%>
   </div>
-  <% if can? :create, Round %>
-    <%= link_to('Start a new round!', new_round_path) %>
-  <% end %>
+  <%= link_to('Start a new round!', new_round_path) %>
 </div>
 
 <ul id="rounds">

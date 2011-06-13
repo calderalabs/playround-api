@@ -1,5 +1,8 @@
 class GamesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:autocomplete_game_name]
+  before_filter :authorize_autocomplete, :only => [:autocomplete_game_name]
+
+  autocomplete :game, :name
   
   # GET /games
   # GET /games.xml
@@ -70,4 +73,11 @@ class GamesController < ApplicationController
       end
     end
   end
+  
+  private
+    
+  def authorize_autocomplete
+    authorize! :create, Game
+  end
+  
 end

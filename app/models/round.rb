@@ -1,5 +1,5 @@
 class Round < ActiveRecord::Base
-  attr_accessible :deadline, :date, :max_people, :min_people, :arena_id, :game_id
+  attr_accessible :deadline, :date, :max_people, :min_people, :arena_id, :game_id, :description
   
   after_initialize :initialize_default_values
 
@@ -58,6 +58,10 @@ class Round < ActiveRecord::Base
   
   def authorized?(user)
     self.user == user
+  end
+
+  def confirmable?
+    !self.confirmed && Time.now > self.deadline && Time.now < self.date
   end
 
   def confirm!

@@ -80,6 +80,10 @@ class RoundsControllerTest < ActionController::TestCase
   end
   
   test "should confirm if you own the round" do
+    @round.date = Time.now + 1.months
+    @round.deadline = Time.now
+    @round.save!
+    
     put :confirm, :id => @round.to_param
     
     assert_response :found

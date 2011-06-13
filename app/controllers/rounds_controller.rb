@@ -1,5 +1,4 @@
 class RoundsController < ApplicationController
-  before_filter :authorize
   before_filter :get_user_location, :only => [:index]
   
   load_and_authorize_resource

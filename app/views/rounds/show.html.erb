@@ -1,75 +1,120 @@
-<p>
-  <b>Created by:</b>
-  <%= link_to @round.user.display_name, user_path(@round)%>
-</p>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-<p>
-  <b>Deadline:</b>
-  <%= @round.deadline %>
-</p>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var latlng = new google.maps.LatLng(<%= @round.arena.latitude %>,<%= @round.arena.longitude %>);
 
-<p>
-  <b>Date:</b>
-  <%= @round.date %>
-</p>
+    var myOptions = {
+      scrollwheel: false,
+      zoom: 15,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
 
-<p>
-  <b>Confirmed:</b>
-  <%= @round.confirmed %>
-</p>
+    map = new google.maps.Map(document.getElementById("location_map"),
+        myOptions);
 
-<p>
-  <b>Max people:</b>
-  <%= @round.max_people %>
-</p>
+    marker = new google.maps.Marker({
+        position: latlng, 
+        map: map,
+      });
 
-<p>
-  <b>Min people:</b>
-  <%= @round.min_people %>
-</p>
+    google.maps.event.addListener(marker, 'position_changed', function() {
+      var latLng = marker.getPosition();
 
-<p>
-  <b>Arena:</b>
-  <%= @round.arena.name %>
-</p>
+      $("#arena_latitude").attr('value', latLng.lat().toString(10));
+      $("#arena_longitude").attr('value', latLng.lng().toString(10));
+    });
+  });
+</script>
 
-<p>
-  <b>Game:</b>
-  <%= @round.game.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @round.description %>
-</p>
-
-<div id="participants">
-<p>
-  <b><%= t :number_of_subscribed_people, :count => @round.subscriptions.count %>:</b>
-  <ul>
-  <% for subscription in @round.subscriptions %>
-    <li><%=h subscription.user.display_name %></li>
-  <% end %>
-</ul>
-</p>
+<div id="round-title">
+  <h1>
+    <%= link_to @round.game.name, game_path(@round.game)%> - <%= l @round.date, :format => :long %>
+    <% if can? :update, @round %>
+      <span class="actions">
+      | <%= link_to 'Edit', edit_round_path(@round) %>
+      </span>
+    <% end %>
+  </h1>
+  <h2><%= link_to @round.arena.name, arena_path(@round.arena) %> - <%= Geocoder.search([@round.arena.latitude, @round.arena.longitude]).first.address %></h2>
 </div>
 
-<p><b>
-<% if @round.full? %>
-  This round is full!
-<% else %>
-  <%= t :number_of_spots_left, :count => @round.remaining_spots %>
-<% end %>
-</b></p>
+<div id="round-infos">
+  <div id="location_map" class="left-column" style="width: 650px; height: 200px;"></div>  
+
+  <div class="right-column">
+    <% if can? :update, @round %>
+      <% if !@round.confirmed %>
+        <%= button_to 'Confirm', confirm_round_path(@round), :id => 'confirm', :disabled => cannot?(:confirm, @round), :method => :put %>
+        <%= cannot?(:confirm, @round) ? 'You can confirm in ' + time_ago_in_words(@round.deadline) : 'You can confirm now!' %>
+      <% else %>
+        You confirmed this round
+      <% end%>
+    <% else %>
+      <% unless signed_in? && current_user.subscribed?(@round) %>
+        <% unless @round.full? || cannot?(:manage_subscription_of, @round) %>
+          <%= button_to "Subscribe", subscriptions_path(:id => @round.id), :id => 'subscribe', :confirm => 'Are you sure?', :method => :post %>
+          <%= time_ago_in_words(@round.deadline).capitalize + ' left to subscribe!' %>  
+        <% end %>
+      <% else %>
+        <% if  can? :manage_subscription_of, @round %>
+          <%= button_to "Unsubscribe", subscription_path(:id => @round.id), :id => 'unsubscribe', :confirm => 'Are you sure?', :method => :delete %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if !@round.confirmed %>
+      <p class="spots">
+        <% if @round.full? %>
+          This round is full!
+        <% else %>
+            <%= t :number_of_spots_left, :count => @round.remaining_spots %>
+        <% end %>
+      </p>
+    <% end %>
+  </div>  
+  <div class="clear"></div>
+
+  <% unless @round.description.blank? %>
+    <p class="additional-notes"><strong>Additional notes:</strong> <%= @round.description %></p>
+  <% end %>
+</div>
+
+<div id="participants">
+<h2>People you will meet at this round</h2>
+<ul>
+  <% @round.all_subscribers.each do |user| %>
+    <li>
+      <a href="<%= user_path(user) %>">
+      <div class="user-avatar"><%= image_tag user.avatar.url(:thumb), :width => '100', :height => '100' %></div>
+      <div class="user-details"><%= user.display_name %></div>
+      </a>
+    </li>
+  <% end%>
+</ul>
+
+<div class="clear"></div>
+
+</div>
 
 <div id="comments">
+  <h2>Post your comments</h2>
+  <ul>
   <% @round.comments.each do |comment| %>
-    <p><%= comment.text %></p>
-    <p><%= comment.user.display_name %></p>
+    <li>
+      <div class="header">
+        <%= image_tag comment.user.avatar.url(:thumb), :width => '35', :height => '35' %>
+        <%= link_to comment.user.display_name, user_path(comment.user) %>
+        <span><%= time_ago_in_words comment.created_at %> ago</span>
+        <span class="actions">
+          <% if can? :destroy, comment %>
+            <%= link_to 'Remove', comment_path(comment), :method => :delete, :confirm => 'Are you sure?' %>
+          <% end %>
+        </span>
+      </div>
 
-    <% if can? :destroy, comment %>
-      <%= link_to 'Destroy', comment_path(comment), :method => :delete, :confirm => 'Are you sure?' %>
-    <% end %>
+      <p><%= comment.text %></p>
   <% end %>
 
   <%= form_for @comment do |f| %>
@@ -84,7 +129,6 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :text %><br />
       <%= f.text_area :text %>
     </div>
 
@@ -93,19 +137,3 @@
     <%= f.submit 'Add Comment' %>
   <% end%>
 </div>
-
-<% unless current_user.subscribed?(@round) %>
-  <% unless @round.full? || cannot?(:manage_subscription_of, @round) %>
-    <%= link_to "Subscribe", subscriptions_path(:id => @round.id), :confirm => 'Are you sure?', :method => :post %> |
-  <% end %>
-<% else %>
-  <% if  can? :manage_subscription_of, @round %>
-    <%= link_to "Unsubscribe", subscription_path(:id => @round.id), :confirm => 'Are you sure?', :method => :delete %> |
-  <% end %>
-<% end %>
-
-<% if can? :update, @round %>
-  <%= link_to 'Confirm', confirm_round_path(@round), :method => :put %> |
-  <%= link_to 'Edit', edit_round_path(@round) %> |
-<% end %>
-<%= link_to 'Back', rounds_path %>

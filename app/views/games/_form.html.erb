@@ -1,23 +1,4 @@
-<%= form_for(@game) do |f| %>
-  <% if @game.errors.any? %>
-    <div class="error">
-      <ul>
-      <% @game.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= semantic_form_for(@game) do |f| %>
+  <%= f.inputs :name, :description %>
+  <%= f.buttons %>
 <% end %>
