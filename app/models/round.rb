@@ -4,6 +4,7 @@ class Round < ActiveRecord::Base
   after_initialize :initialize_default_values
 
   belongs_to :arena
+  geocoded_through :arena
   belongs_to :game
   belongs_to :user
   has_many :subscriptions
@@ -27,6 +28,10 @@ class Round < ActiveRecord::Base
   
   validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 1, :only_integer => true, :unless => Proc.new { |round| round.min_people.nil? }
   validates_numericality_of :min_people, :greater_than => 1, :only_integer => true
+  
+  validate do
+    self.errors.add(:base, "You cannot confirm this round") if @recently_confirmed && !self.confirmable?
+  end
   
   def date=(date)
     if date
@@ -61,20 +66,24 @@ class Round < ActiveRecord::Base
   end
 
   def confirmable?
-    !self.confirmed && Time.now > self.deadline && Time.now < self.date
+    Time.now > self.deadline && Time.now < self.date
+  end
+
+  def confirmed=(confirmed)
+    @recently_confirmed = !self.confirmed && confirmed
+
+    super(confirmed)
   end
 
   def confirm!
-    if !self.confirmed
-       update_attribute(:confirmed, true)
+    self.confirmed = true
+    self.save
+  end
 
-       self.subscribers.each do |user|
-         RoundMailer.round_confirmation_email(self, user).deliver
-       end
-       true
-     else
-       false
-     end
+  after_save do
+    self.subscribers.each do |user|
+      RoundMailer.round_confirmation_email(self, user).deliver
+    end if @recently_confirmed
   end
 
   private

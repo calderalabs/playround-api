@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/vpuzzella/geocoder.git
+  revision: 061ebd764980a93b16eb8e4fce63e286ee762344
+  specs:
+    geocoder (1.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -68,7 +74,9 @@ GEM
       actionpack (>= 2.3.7)
       activesupport (>= 2.3.7)
       i18n (~> 0.4)
-    geocoder (1.0.1)
+    geoplanet (0.2.6)
+      json (>= 1.1.3)
+      rest-client (>= 0.9)
     gherkin (2.3.9)
       json (>= 1.4.6)
     i18n (0.5.0)
@@ -118,6 +126,8 @@ GEM
       thor (~> 0.14.4)
     rake (0.8.7)
     redis (2.2.1)
+    rest-client (1.6.3)
+      mime-types (>= 1.16)
     rmagick (2.13.1)
     rubyzip (0.9.4)
     sass (3.1.2)
@@ -148,7 +158,8 @@ DEPENDENCIES
   database_cleaner
   factory_girl
   formtastic
-  geocoder
+  geocoder!
+  geoplanet
   jquery-rails
   launchy
   mocha

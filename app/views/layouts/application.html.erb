@@ -6,6 +6,24 @@
     <%= javascript_include_tag :defaults %>
     <%= stylesheet_link_tag 'playround', 'jquery-ui/jquery.ui.all', :cache => true %>
     <%= javascript_include_tag 'autocomplete-rails.js' %>
+    
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        $('#location-form').css('display', 'none');
+        
+        $('#location-form input').blur(function(event) {
+          $('#location-form').css('display', 'none');
+          $('#change-location').css('display', 'inline');
+        });
+        $('#change-location').click(function(event){
+          $(this).css('display', 'none');
+          $('#location-form').css('display', 'inline');
+          $('#location-form input').focus();
+          
+          event.preventDefault();
+        });
+      });
+    </script>
   </head>
 <body>
   <% unless flash.empty? %>
@@ -17,6 +35,13 @@
   <% end %>
     <div id="session">
       <div class="container">
+        <%= form_tag location_path, :method => :put, :id => 'location-form' do |f| %>
+          <%= hidden_field_tag 'redirect_to', request.request_uri %>
+          <%= text_field_tag 'location', '' %>
+        <% end %>
+        
+        <%= link_to(located? ? [current_location.name, current_location.country].join(', ') : 'Unknown location', '/', :id => 'change-location') %> |
+        
         <% if signed_in? -%>
           <%= link_to current_user.display_name, user_path(current_user)%> |
           <%= link_to "Sign out", sign_out_path, :method => :delete %>

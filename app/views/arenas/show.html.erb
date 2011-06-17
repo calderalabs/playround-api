@@ -1,14 +1,17 @@
-<p>
-  <b>Name:</b>
-  <%= @arena.name %>
-</p>
+<div id="arena">
+  <h1>
+    <%= @arena.name %> <% if can? :update, @arena %>
+      | <%= link_to 'Edit', edit_arena_path(@arena) %>
+    <% end %>
+  </h1>
 
-<p>
-  <b>Description:</b>
-  <%= @arena.description %>
-</p>
+  <div class="left-column">
+    <%= image_tag @arena.image.url(:medium) %>
+  </div>
 
-<% if can? :update, @arena %>
-  <%= link_to 'Edit', edit_arena_path(@arena) %> |
-<% end %>
-<%= link_to 'Back', arenas_path %>
+  <p>
+    <%= @arena.description %>
+  </p>
+</div>
+
+

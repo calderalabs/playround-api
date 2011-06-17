@@ -1,6 +1,7 @@
 class CreateDieselClearanceUsers < ActiveRecord::Migration
   def self.up
     create_table(:users) do |t|
+      t.integer  :town_woeid,         :limit => 8
       t.string   :email
       t.string   :display_name
       t.string   :real_name,          :limit => 30

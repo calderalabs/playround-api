@@ -83,6 +83,8 @@ form.formtastic fieldset > ol > li.numeric input,
 form.formtastic fieldset > ol > li.email input,
 form.formtastic fieldset > ol > li.url input,
 form.formtastic fieldset > ol > li.phone input,
+form.formtastic fieldset .autocomplete,
+form.formtastic fieldset .map,
 form.formtastic fieldset > ol > li.search input { width:72%; }
 
 form.formtastic fieldset > ol > li.string input[size], 
@@ -91,6 +93,7 @@ form.formtastic fieldset > ol > li.numeric input[size],
 form.formtastic fieldset > ol > li.email input[size],
 form.formtastic fieldset > ol > li.url input[size],
 form.formtastic fieldset > ol > li.phone input[size],
+form.formtastic fieldset .autocomplete[size],
 form.formtastic fieldset > ol > li.search input[size] { width:auto; max-width:72%; }
 
 

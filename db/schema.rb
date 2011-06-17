@@ -10,15 +10,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110531081218) do
+ActiveRecord::Schema.define(:version => 20110614104445) do
 
   create_table "arenas", :force => true do |t|
     t.integer  "user_id"
-    t.float    "latitude",                  :default => 0.0
-    t.float    "longitude",                 :default => 0.0
-    t.string   "name",        :limit => 30
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.float    "latitude",                         :default => 0.0
+    t.float    "longitude",                        :default => 0.0
+    t.integer  "town_woeid",         :limit => 8
+    t.string   "name",               :limit => 30
     t.text     "description"
     t.string   "website"
+    t.boolean  "public",                           :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,7 +44,12 @@ ActiveRecord::Schema.define(:version => 20110531081218) do
   end
 
   create_table "games", :force => true do |t|
-    t.string   "name",        :limit => 30
+    t.integer  "user_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "name",               :limit => 30
     t.text     "description"
     t.string   "website"
     t.datetime "created_at"
@@ -61,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20110531081218) do
   end
 
   create_table "users", :force => true do |t|
+    t.integer  "town_woeid",          :limit => 8
     t.string   "email"
     t.string   "display_name"
     t.string   "real_name",           :limit => 30

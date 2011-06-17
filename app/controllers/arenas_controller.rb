@@ -1,6 +1,5 @@
 class ArenasController < ApplicationController
   load_and_authorize_resource :except => [:autocomplete_address, :autocomplete_arena_name]
-  before_filter :get_user_location, :only => [:new, :edit]
   before_filter :authorize_autocomplete, :only => [:autocomplete_address, :autocomplete_arena_name]
   
   autocomplete :arena, :name
@@ -8,7 +7,11 @@ class ArenasController < ApplicationController
   # GET /arenas
   # GET /arenas.xml
   def index
-    @arenas = Arena.all
+    if located?
+      @arenas = Arena.where(:town_woeid => current_location.woeid)
+    else
+      @arenas = []
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -32,7 +35,7 @@ class ArenasController < ApplicationController
   def new
     @arena = Arena.new
     
-    if user_located?
+    if located?
       @arena.latitude = @location.latitude
       @arena.longitude = @location.longitude
     end

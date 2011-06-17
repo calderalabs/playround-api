@@ -1,15 +1,15 @@
-<p>
-  <b>Name:</b>
-  <%= @game.name %>
-</p>
+<div id="game">
+  <h1>
+    <%= @game.name %> <% if can? :update, @game %>
+      | <%= link_to 'Edit', edit_game_path(@game) %>
+    <% end %>
+  </h1>
 
-<p>
-  <b>Description:</b>
-  <%= @game.description %>
-</p>
+  <div class="left-column">
+    <%= image_tag @game.image.url(:medium) %>
+  </div>
 
-
-<% if can? :update, @game %>
-  <%= link_to 'Edit', edit_game_path(@game) %> |
-<% end %>
-<%= link_to 'Back', games_path %>
+  <p>
+    <%= @game.description %>
+  </p>
+</div>

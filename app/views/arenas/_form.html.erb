@@ -41,17 +41,21 @@
 </script>
 
 <%= semantic_form_for(@arena) do |f| %>
-  <%= f.inputs :name, :description%>
-
-  <div class="field">
-    <%= label_tag 'address' %><br />
-    <%= autocomplete_field_tag 'address', '', autocomplete_address_arenas_path, :update_elements => { :latitude => '#arena_latitude', :longitude => '#arena_longitude'}  %>
-  </div>
-
+  <%= f.inputs do %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :image %>
+  
+  <li class="text optional">
+    <%= f.label 'address' %>
+    <%= autocomplete_field_tag 'address', '', autocomplete_address_arenas_path, :update_elements => 
+    { :latitude => '#arena_latitude', :longitude => '#arena_longitude'}, :class => 'autocomplete' %>
+    
+    <div id="location_map" class="map" style="height: 400px"></div>
+  </li>
+  
   <%= f.hidden_field :latitude %>
   <%= f.hidden_field :longitude %>
-
-  <div id="location_map" style="width: 500px; height: 500px;"></div>
-
+  <% end %>
   <%= f.buttons %>
 <% end %>

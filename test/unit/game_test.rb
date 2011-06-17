@@ -26,6 +26,16 @@ class GameTest < ActiveSupport::TestCase
     assert @game.invalid?
   end
   
+  test "should belong to user" do
+    assert_belongs_to @game, :user
+  end
+
+  test "user_id should not be nil" do
+    @game.user = nil
+
+    assert @game.invalid?
+  end
+  
   test "name should not be more than 30 characters" do
     @game.name = 'a' * 35
     
@@ -68,13 +78,15 @@ class GameTest < ActiveSupport::TestCase
     assert ability.can?(:read, @game)
   end
   
-  test "user can edit any game" do
-    ability = Ability.new Factory :user
-    assert ability.can?(:edit, @game)
+  test "user can only update games which he owns" do
+    ability = Ability.new @game.user
+    assert ability.can?(:update, @game)
+    assert ability.cannot?(:update, Factory.build(:game))
   end
   
-  test "user cannot destroy games" do
-    ability = Ability.new Factory :user
-    assert ability.cannot?(:destroy, @game)
+  test "user can only destroy games which he owns" do
+    ability = Ability.new @game.user
+    assert ability.can?(:destroy, @game)
+    assert ability.cannot?(:destroy, Factory.build(:game))
   end
 end

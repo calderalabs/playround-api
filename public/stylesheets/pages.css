@@ -64,6 +64,9 @@ div.auto_complete ul strong.highlight {
   margin: 0;
   padding: 0; }
 
+textarea {
+  resize: none; }
+
 #content {
   background-image: -moz-linear-gradient(top, white, #d8acff);
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #d8acff));

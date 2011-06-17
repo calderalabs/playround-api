@@ -1,31 +1,15 @@
-<h1>Arenas</h1>
+<div id="title">
+  <h1>Arenas</h1>
+  <%= link_to('Create a new arena!', new_arena_path) %>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<ul id="arenas">
 <% @arenas.each do |arena| %>
-  <tr>
-    <td><%= arena.name %></td>
-    <% if can? :read, arena %>
-      <td><%= link_to 'Show', arena %></td>
-    <% end %>
-    <% if can? :update, arena %>
-      <td><%= link_to 'Edit', edit_arena_path(arena) %></td>
-    <% end %>
-    <% if can? :destroy, arena %>
-      <td><%= link_to 'Destroy', arena, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<% if can? :create, Arena %>
-    <%= link_to 'New Arena', new_arena_path %>
-<% end %>
+<li>
+  <a href="<%= arena_path(arena) %>">
+    <div class="arena-image"><%= image_tag arena.image.url(:thumb), :width => '100', :height => '100' %></div>
+    <div class="arena-details"><%= arena.name %></div>
+  </a>
+</li>
+<% end%>
+</ul>

@@ -1,33 +1,16 @@
-<h1>Games</h1>
+<div id="title">
+    <h1>Games</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <%= link_to('Create a new game!', new_game_path) %>
+</div>
 
+<ul id="games">
 <% @games.each do |game| %>
-  <tr>
-    <td><%= game.name %></td>
-    <td><%= game.description %></td>
-    <% if can? :read, game %>
-      <td><%= link_to 'Show', game %></td>
-    <% end %>
-    <% if can? :update, game %>
-      <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <% end %>
-    <% if can? :destroy, game %>
-      <td><%= link_to 'Destroy', game, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<% if can? :create, Game %>
-    <%= link_to 'New Game', new_game_path %>
-<% end %>
+<li>
+  <a href="<%= game_path(game) %>">
+    <div class="game-image"><%= image_tag game.image.url(:thumb), :width => '100', :height => '100' %></div>
+    <div class="game-details"><%= game.name %></div>
+  </a>
+</li>
+<% end%>
+</ul>

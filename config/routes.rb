@@ -19,7 +19,8 @@ Playround::Application.routes.draw do
   resources :users
 
   resource :session, :controller => 'sessions'
-
+  resource :location, :controller => 'location'
+  
   match 'sign_in' => 'sessions#new', :as => 'sign_in'
   match 'sign_out' => 'sessions#destroy', :via => :delete, :as => 'sign_out'
 

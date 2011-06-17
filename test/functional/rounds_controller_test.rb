@@ -90,6 +90,27 @@ class RoundsControllerTest < ActionController::TestCase
     assert_redirected_to round_path(assigns(:round))
   end
   
+  test "should not confirm if the current time is before the deadline" do
+    @round.date = Time.now + 2.months
+    @round.deadline = Time.now + 1.month
+    @round.save!
+    
+    put :confirm, :id => @round.to_param
+    
+    assert !assigns(:round).errors.empty?
+  end
+  
+  test "should not confirm if the current time is after the date" do
+    @round.date = Time.now + 1.second
+    @round.deadline = Time.now
+    @round.save!
+    
+    sleep(2)
+    put :confirm, :id => @round.to_param
+    
+    assert !assigns(:round).errors.empty?
+  end
+  
   test "should not confirm if you don't own the round" do
     round = Factory :round
     put :confirm, :id => round.to_param

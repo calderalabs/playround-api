@@ -1,18 +1,11 @@
 class RoundsController < ApplicationController
-  before_filter :get_user_location, :only => [:index]
-  
   load_and_authorize_resource
   
   # GET /rounds
   # GET /rounds.xml
   def index
-    if params[:near]
-      @location = Geocoder.search(params[:near]).first
-      session[:near] = params[:near]
-    end
-    
-    if user_located?
-      @rounds = Arena.near(@location.coordinates, 20).select("*, rounds.id AS round_id").joins(:rounds).collect { |arena| Round.find(arena.round_id) }
+    if located?
+      @rounds = Round.where(:arenas => { :town_woeid => current_location.woeid }).joins(:arena)
     else
       @rounds = []
     end
@@ -101,7 +94,7 @@ class RoundsController < ApplicationController
     @round = Round.find(params[:id])
 
     respond_to do |format|
-      if @round.confirm! 
+      if @round.confirm!
         format.html { redirect_to(@round, :notice => 'Round was successfully confirmed.') }
         format.xml  { head :ok }
       else
