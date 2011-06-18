@@ -4,8 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied."
-    redirect_to sign_in_url, :status => :unauthorized
+    respond_to do |format|
+      format.html {
+        flash[:error] = 'Access denied'
+        redirect_to sign_in_url 
+        }
+      format.xml  { head :unauthorized }
+    end
+    
   end
   
   before_filter :set_timezone
