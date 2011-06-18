@@ -668,7 +668,7 @@ input.placeholder {
   border: 1px solid #ccc;
   width: 100px;
   height: auto; }
-  #arenas li .arena-image, #arenas li .game-image {
+  #arenas li .arena-image, #arenas li .game-image, #arenas li .user-avatar {
     text-align: center; }
 
 #games li {
@@ -680,7 +680,7 @@ input.placeholder {
   border: 1px solid #ccc;
   width: 100px;
   height: auto; }
-  #games li .arena-image, #games li .game-image {
+  #games li .arena-image, #games li .game-image, #games li .user-avatar {
     text-align: center; }
 
 #round-title h1 {
@@ -798,7 +798,7 @@ input.placeholder {
   border: 1px solid #ccc;
   width: 100px;
   height: auto; }
-  #subscribers li .arena-image, #subscribers li .game-image {
+  #subscribers li .arena-image, #subscribers li .game-image, #subscribers li .user-avatar {
     text-align: center; }
 
 #subscribers h2, #comments h2 {
@@ -818,7 +818,7 @@ input.placeholder {
   border: 1px solid #ccc;
   width: 100px;
   height: auto; }
-  #users li .arena-image, #users li .game-image {
+  #users li .arena-image, #users li .game-image, #users li .user-avatar {
     text-align: center; }
 
 .spots {

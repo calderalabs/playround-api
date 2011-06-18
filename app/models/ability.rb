@@ -26,7 +26,7 @@ class Ability
     end
     
     can :manage_subscription_of, Round do |round|
-      round.user_id != user.id
+      !user.guest? && round.user_id != user.id
     end
   end
 end
