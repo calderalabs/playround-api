@@ -8,30 +8,38 @@ class ApplicationController < ActionController::Base
     redirect_to sign_in_url, :status => :unauthorized
   end
   
+  before_filter :set_timezone
+
+  def set_timezone
+    Time.zone = current_timezone
+  end
+  
   def located?
     !!current_location
   end
   
+  def current_timezone
+    set_location_from_session_or_user_or_ip unless @location
+    @timezone ||= session[:timezone] || Time.zone
+  end
+  
   def current_location
-    @location ||= location_from_session_or_user_or_ip
+    @location ||= set_location_from_session_or_user_or_ip
   end
   
   def set_location(location)
-    return nil unless location && location.placetype_code == 7
+    return unless location.try(:placetype_code) == 7
     
     session[:location] = location
+    session[:timezone] = location.try(:belongtos, { :type => 31 }).try(:first).try(:name)
   end
   
   private
   
-  def location_from_session_or_user_or_ip
+  def set_location_from_session_or_user_or_ip
     location = session[:location]
     location ||= GeoPlanet::Place.new(current_user.town_woeid) if signed_in?
-    
-    unless location
-      places = GeoPlanet::Place.search(request.location.address) if request.location
-      location = places.first if places
-    end
+    location ||= GeoPlanet::Place.search(request.location.try(:address).to_s).try(:first)
     
     set_location(location)
     
@@ -40,5 +48,6 @@ class ApplicationController < ActionController::Base
   
   def clear_location!
     session[:location] = nil
+    session[:timezone] = nil
   end
 end

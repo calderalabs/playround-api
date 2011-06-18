@@ -1,6 +1,6 @@
 class Arena < ActiveRecord::Base
-  attr_accessible :name, :latitude, :longitude, :website, :public, :description, :image, :town_woeid
-  
+  attr_accessible :name, :latitude, :longitude, :website, :public, :description, :image, :town_woeid, :address
+
   has_many :rounds
   belongs_to :user
   
@@ -10,7 +10,7 @@ class Arena < ActiveRecord::Base
   validates_presence_of :latitude
   validates_presence_of :longitude
   validates_presence_of :user_id
-  validates_presence_of :town_woeid
+  validates_presence_of :address
   
   validates_length_of :name, :in => 3..30
   
@@ -18,11 +18,15 @@ class Arena < ActiveRecord::Base
   validates_numericality_of :longitude, :greater_than_or_equal_to => -180, :less_than_or_equal_to => 180
   
   before_validation do
-    places = GeoPlanet::Place.search(Geocoder.search([self.latitude, self.longitude]).first.address)
-    location = places.first if places
-    town = location if location.placetype_code == 7
-    town ||= location.belongtos(:type => 7).first
-    self.town_woeid = town.woeid if town
+    address = Geocoder.search([self.latitude, self.longitude]).try(:first).try(:address)
+    location = GeoPlanet::Place.search(address.to_s).try(:first)
+    
+    town = location if location.try(:placetype_code) == 7
+    town ||= location.try(:belongtos, { :type => 7 }).try(:first)
+    
+    self.town_woeid = town.try(:woeid)
+    
+    errors.add(:address, "must be in a town or city") unless self.town_woeid
   end
   
   validates_url_format_of :website, :allow_blank => true

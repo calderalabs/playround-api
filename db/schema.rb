@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20110614104445) do
     t.text     "description"
     t.string   "website"
     t.boolean  "public",                           :default => false
+    t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

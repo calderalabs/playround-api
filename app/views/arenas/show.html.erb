@@ -1,6 +1,6 @@
 <div id="arena">
   <h1>
-    <%= @arena.name %> <% if can? :update, @arena %>
+    <%= @arena.name %> - <%= @arena.address %> <% if can? :update, @arena %>
       | <%= link_to 'Edit', edit_arena_path(@arena) %>
     <% end %>
   </h1>

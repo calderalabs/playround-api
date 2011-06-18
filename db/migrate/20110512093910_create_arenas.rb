@@ -13,6 +13,7 @@ class CreateArenas < ActiveRecord::Migration
       t.text :description
       t.string :website
       t.boolean :public, :default => false
+      t.string :address
       
       t.timestamps
     end
