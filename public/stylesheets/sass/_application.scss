@@ -34,6 +34,12 @@ $main-fucsia: #eb04a1;
   margin: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
+  width: 100px;
+  height: auto;
+  .arena-image, .game-image {
+    text-align: center;
+  }
+  
 }
 
 @mixin button($width, $height, $color, $text-color) {

@@ -7,7 +7,7 @@
 <% @arenas.each do |arena| %>
 <li>
   <a href="<%= arena_path(arena) %>">
-    <div class="arena-image"><%= image_tag arena.image.url(:thumb), :width => '100', :height => '100' %></div>
+    <div class="arena-image"><%= image_tag arena.image.url(:thumb) %></div>
     <div class="arena-details">
       <%= arena.name %>
     </div>

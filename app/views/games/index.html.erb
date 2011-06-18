@@ -8,7 +8,7 @@
 <% @games.each do |game| %>
 <li>
   <a href="<%= game_path(game) %>">
-    <div class="game-image"><%= image_tag game.image.url(:thumb), :width => '100', :height => '100' %></div>
+    <div class="game-image"><%= image_tag game.image.url(:thumb) %></div>
     <div class="game-details"><%= game.name %></div>
   </a>
 </li>
