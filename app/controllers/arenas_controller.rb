@@ -96,8 +96,7 @@ class ArenasController < ApplicationController
   end
   
   def autocomplete_address
-    @locations = Geocoder.search(params[:term]).collect {|l| {:label => l.address, :value => l.address, :latitude => l.latitude, :longitude => l.longitude}}
-    
+    @locations = Geocoder.search(params[:term]).each_with_index.collect {|l, index| {:id => index, :label => l.address, :value => l.address, :latitude => l.latitude, :longitude => l.longitude}}
     render :json => @locations
   end
   
