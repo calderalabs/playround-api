@@ -4,14 +4,48 @@
       | <%= link_to 'Edit', edit_arena_path(@arena) %>
     <% end %>
   </h1>
+  
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var latlng = new google.maps.LatLng(<%= @arena.latitude %>,<%= @arena.longitude %>);
+
+      var myOptions = {
+        scrollwheel: false,
+        zoom: 15,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      map = new google.maps.Map(document.getElementById("location_map"),
+          myOptions);
+
+      marker = new google.maps.Marker({
+          position: latlng, 
+          map: map,
+        });
+
+      google.maps.event.addListener(marker, 'position_changed', function() {
+        var latLng = marker.getPosition();
+
+        $("#arena_latitude").attr('value', latLng.lat().toString(10));
+        $("#arena_longitude").attr('value', latLng.lng().toString(10));
+      });
+    });
+  </script>
+  
   <div class="left-column">
-    <%= image_tag @arena.image.url(:medium) %>
+    <%= image_tag @arena.image.url(:medium) %><br>
+    <div id="location_map" style="width: 300px; height: 300px;"></div>  
   </div>
 
   <p>
     <%= @arena.description %>
   </p>
+  
+  <div class="clear">
+  </div>
 </div>
 
 

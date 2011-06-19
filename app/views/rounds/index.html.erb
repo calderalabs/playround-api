@@ -23,7 +23,7 @@
     <div class="subscribers left-column">
       <div class="details">
         <h2 class="arena">
-          <%= link_to round.arena.name, arena_path(round.arena) %> <%= " (#{round.date.to_date.strftime("at %I:%M %p")})" %>
+          <%= link_to round.arena.name, arena_path(round.arena) %> <%= " (at #{round.date.hour}:#{round.date.min})" %>
         </h2>
         <h3>
           <% if round.deadline - Time.now > 0 %>

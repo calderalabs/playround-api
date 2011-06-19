@@ -368,8 +368,14 @@ input.placeholder {
 }
 
 #arena, #game, #user {
-  img {
+  .left-column {
+    width: 300px;
+    text-align: center;
     margin-right: 30px;
+  }
+  
+  img {
+    margin-bottom: 20px;
   }
   
   p {

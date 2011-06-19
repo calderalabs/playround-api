@@ -804,8 +804,12 @@ input.placeholder {
 #subscribers h2, #comments h2 {
   padding-bottom: 20px; }
 
-#arena img, #game img, #user img {
+#arena .left-column, #game .left-column, #user .left-column {
+  width: 300px;
+  text-align: center;
   margin-right: 30px; }
+#arena img, #game img, #user img {
+  margin-bottom: 20px; }
 #arena p, #game p, #user p {
   font-size: large; }
 
