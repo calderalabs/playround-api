@@ -31,11 +31,12 @@ $main-fucsia: #eb04a1;
   float: left;
   display: block;
   padding: 10px;
-  margin: 5px;
+  margin: 20px;
+  margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
-  width: 100px;
-  height: auto;
+  @include rounded-corners(5px);
+  @include box-shadow(0,0,5px,0, #999999);
   .arena-image, .game-image, .user-avatar {
     text-align: center;
   }
@@ -75,9 +76,21 @@ $main-fucsia: #eb04a1;
   }
 }
 
+@mixin normal-box-shadow {
+  border: 1px solid #ccc;
+  @include rounded-corners(5px);
+  @include box-shadow(0,0,5px,0, #999999);
+}
+
 * {
   margin: 0;
   padding: 0;
+}
+
+.boxed-item {
+  padding: 20px;
+  @include normal-box-shadow;
+  margin-bottom: 15px;
 }
 
 body {

@@ -369,17 +369,22 @@ input.placeholder {
 
 #arena, #game, #user {
   .left-column {
-    width: 300px;
-    text-align: center;
-    margin-right: 30px;
+    width: 540px;
   }
-  
-  img {
-    margin-bottom: 20px;
+
+  .right-column {
+    text-align: center;
   }
   
   p {
+    text-align: left;
     font-size: large;
+  }
+}
+
+#user {
+  p {
+    line-height: 200%;
   }
 }
 

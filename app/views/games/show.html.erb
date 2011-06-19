@@ -6,10 +6,16 @@
   </h1>
 
   <div class="left-column">
-    <%= image_tag @game.image.url(:medium) %>
+    <div class="boxed-item" style="min-height: 300px">
+      <p><%= @game.description %></p>
+    </div>
   </div>
 
-  <p>
-    <%= @game.description %>
-  </p>
+  <div class="right-column">
+    <div class="boxed-item" style="min-width: 300px">
+      <%= image_tag @game.image.url(:medium) %>
+    </div>
+  </div>
+  
+  <div class="clear"></div>
 </div>
