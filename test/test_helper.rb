@@ -4,6 +4,9 @@ require 'rails/test_help'
 
 Factory.find_definitions
 require 'capybara/rails'
+require 'geoplanet'
+require 'geocoder'
+require 'geocoder/results/google'
 
 #Capybara.default_driver = :selenium
 

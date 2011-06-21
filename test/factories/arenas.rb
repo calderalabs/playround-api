@@ -10,4 +10,5 @@ Factory.define :arena, :class => Arena do |arena|
   arena.description "Sala da thè più famosa"
   arena.website "http://www.facebook.com/group.php?gid=59769240464&v=info"
   arena.address "Via di Porta Giustizia, 11, 53100 Siena, Italy"
+  arena.town_woeid 724196
 end

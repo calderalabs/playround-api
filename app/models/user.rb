@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   
   attr_accessible :display_name, :real_name, :email, :password, :avatar, :town_woeid
   
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => '/images/missing_avatar.gif', 
-                    :storage => :s3, :s3_credentials => 'config/s3.yml'
+  has_attached_file :avatar, { :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
+                               :default_url => '/images/missing_avatar.gif' }.merge(PAPERCLIP_CONFIG)
   
   before_validation do
     self.display_name ||= self.email.split('@').first

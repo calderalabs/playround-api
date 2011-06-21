@@ -4,12 +4,12 @@ class Game < ActiveRecord::Base
   belongs_to :user
   has_many :rounds
   
-  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => '/images/missing_game_:style.png',
-                    :storage => :s3, :s3_credentials => 'config/s3.yml'
+  has_attached_file :image, { :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
+                              :default_url => '/images/missing_game_:style.png' }.merge(PAPERCLIP_CONFIG)
   
   validates_presence_of :name
   validates_presence_of :description
-  validates_presence_of :user
+  validates_presence_of :user_id
   
   validates_length_of :name, :maximum => 30
   

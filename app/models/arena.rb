@@ -4,8 +4,8 @@ class Arena < ActiveRecord::Base
   has_many :rounds
   belongs_to :user
   
-  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => '/images/missing_arena_:style.png',
-                    :storage => :s3, :s3_credentials => 'config/s3.yml'
+  has_attached_file :image, { :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
+                              :default_url => '/images/missing_arena_:style.png' }.merge(PAPERCLIP_CONFIG)
 
   validates_presence_of :name
   validates_presence_of :latitude
@@ -23,8 +23,9 @@ class Arena < ActiveRecord::Base
     location = GeoPlanet::Place.search(address.to_s).try(:first)
     
     town = location if location.try(:placetype_code) == 7
-    town ||= location.try(:belongtos, { :type => 7 }).try(:first)
     
+    town ||= location.try(:belongtos, { :type => 7 }).try(:first)
+
     self.town_woeid = town.try(:woeid)
     
     errors.add(:address, "must be in a town or city") unless self.town_woeid

@@ -25,5 +25,10 @@ Playround::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
   
   Paperclip.options[:command_path] = "/usr/local/bin/"
+  
+  PAPERCLIP_CONFIG = {
+    :storage => :s3,
+    :s3_credentials => "config/s3.yml",
+  }
 end
 

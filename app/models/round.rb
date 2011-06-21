@@ -66,16 +66,11 @@ class Round < ActiveRecord::Base
   end
 
   def confirmable?
-    Time.now > self.deadline && Time.now < self.date
-  end
-
-  def confirmed=(confirmed)
-    @recently_confirmed = !self.confirmed && confirmed
-
-    super(confirmed)
+    !self.confirmed_was && Time.now > self.deadline && Time.now < self.date
   end
 
   def confirm!
+    @recently_confirmed = true
     self.confirmed = true
     self.save
   end
@@ -92,6 +87,4 @@ class Round < ActiveRecord::Base
     self.date ||= Time.now
     self.deadline ||= Time.now
   end
-  
- 
 end

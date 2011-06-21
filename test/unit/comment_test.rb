@@ -9,6 +9,8 @@ class CommentTest < ActiveSupport::TestCase
     @comment = nil
   end
   
+  #validity tests
+  
   test "should not be valid with empty text" do
     @comment.text = nil
     assert @comment.invalid?
@@ -27,6 +29,8 @@ class CommentTest < ActiveSupport::TestCase
     assert @comment.invalid?
   end
   
+  #attributes accessibility tests
+  
   test "should not mass-assign user_id" do
     user_id = @comment.user_id
     
@@ -34,6 +38,8 @@ class CommentTest < ActiveSupport::TestCase
     
     assert_equal @comment.user_id, user_id
   end
+  
+  #associations tests
   
   test "should belong to an user" do
     assert_belongs_to @comment, :user

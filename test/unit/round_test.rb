@@ -9,6 +9,8 @@ class RoundTest < ActiveSupport::TestCase
     @round = nil
   end
   
+  # validity tests
+  
   test "factory should be valid" do
     assert @round.valid?
   end
@@ -49,12 +51,10 @@ class RoundTest < ActiveSupport::TestCase
     assert @round.invalid?
   end
   
-  test "should not be able to mass-assign user_id" do
-    user_id = @round.user_id
+  test "should be invalid without a user" do
+    @round.user = nil
     
-    @round.attributes = { :user_id => user_id + 1 }
-    
-    assert_equal @round.user_id, user_id 
+    assert @round.invalid?
   end
   
   test "minimum people should not be nil at creation" do
@@ -126,14 +126,6 @@ class RoundTest < ActiveSupport::TestCase
     assert @round.errors[:deadline].include? "must be earlier than date"
   end
   
-  test "should belong to an arena" do
-    assert_belongs_to @round, :arena
-  end
-  
-  test "should belong to a game" do
-    assert_belongs_to @round, :game
-  end
-  
   test "deadline should not be before now" do
     @round.deadline = Time.now - 1.day
     
@@ -149,12 +141,50 @@ class RoundTest < ActiveSupport::TestCase
   test "deadline and date should be equal on creation" do
     assert_equal @round.date, @round.deadline
   end
+  
+  #attributes accessibility tests
+  
+  test "should not be able to mass-assign user_id" do
+    user_id = @round.user_id
+    
+    @round.attributes = { :user_id => user_id + 1 }
+    
+    assert_equal @round.user_id, user_id 
+  end
+  
+  #associations tests
+  
+  test "should belong to an arena" do
+    assert_belongs_to @round, :arena
+  end
+  
+  test "should belong to a game" do
+    assert_belongs_to @round, :game
+  end
  
   test "rounds should have many subscriptions" do
     @round.save!
     
     assert_has_many @round, :subscriptions
   end
+  
+  test "should belong to user" do
+    assert_belongs_to @round, :user
+  end
+  
+  test "should have many comments" do
+    @round.save!
+    
+    assert_has_many @round, :comments
+  end
+  
+  test "should have many subscribers through subscriptions" do
+    @round.save!
+    
+    assert_has_many_through @round, :subscribers, :source_class_name => 'Subscription'
+  end
+  
+  #methods tests
   
   test "should be full when subscribers are equal to max_people" do
     @round.save!
@@ -168,54 +198,6 @@ class RoundTest < ActiveSupport::TestCase
     @round.reload
     
     assert @round.full?
-  end
-  
-  test "should belong to user" do
-    assert_belongs_to @round, :user
-  end
-  
-  test "only the user who created the round should be able to manage it" do
-    @round.save!
-    
-    assert @round.authorized?(@round.user)
-    
-    assert !@round.authorized?(Factory :user)
-  end
-  
-  test "should be invalid without a user" do
-    @round.user = nil
-    
-    assert @round.invalid?
-  end
-  
-  test "any user can create rounds" do
-    ability = Ability.new Factory :user
-    assert ability.can?(:create, Round)
-  end
-  
-  test "user can read any round" do
-    ability = Ability.new Factory :user
-    assert ability.can?(:read, @round)
-    ability = Ability.new @round.user
-    assert ability.can?(:read, @round)
-  end
-  
-  test "user can only update rounds which he owns" do
-    ability = Ability.new @round.user
-    assert ability.can?(:update, @round)
-    assert ability.cannot?(:update, Factory.build(:round))
-  end
-  
-  test "user can only destroy rounds which he owns" do
-    ability = Ability.new @round.user
-    assert ability.can?(:destroy, @round)
-    assert ability.cannot?(:destroy, Factory.build(:round))
-  end
-  
-  test "should have many comments" do
-    @round.save!
-    
-    assert_has_many @round, :comments
   end
   
   test "should confirm if confirmed is false" do
@@ -234,12 +216,6 @@ class RoundTest < ActiveSupport::TestCase
     assert !@round.confirm!
     
     assert_equal @round.confirmed, true
-  end
-  
-  test "should have many subscribers through subscriptions" do
-    @round.save!
-    
-    assert_has_many_through @round, :subscribers, :source_class_name => 'Subscription'
   end
   
   test "all subscribers should include the owner" do
@@ -264,5 +240,39 @@ class RoundTest < ActiveSupport::TestCase
       
       @round.reload
     end
+  end
+  
+  #ability tests
+  
+  test "only the user who created the round should be able to manage it" do
+    @round.save!
+    
+    assert @round.authorized?(@round.user)
+    
+    assert !@round.authorized?(Factory :user)
+  end
+  
+  test "any user can create rounds" do
+    ability = Ability.new Factory :user
+    assert ability.can?(:create, Round)
+  end
+  
+  test "user can read any round" do
+    ability = Ability.new Factory :user
+    assert ability.can?(:read, @round)
+    ability = Ability.new @round.user
+    assert ability.can?(:read, @round)
+  end
+  
+  test "user can only update rounds which he owns" do
+    ability = Ability.new @round.user
+    assert ability.can?(:update, @round)
+    assert ability.cannot?(:update, Factory.build(:round))
+  end
+  
+  test "user can only destroy rounds which he owns" do
+    ability = Ability.new @round.user
+    assert ability.can?(:destroy, @round)
+    assert ability.cannot?(:destroy, Factory.build(:round))
   end
 end

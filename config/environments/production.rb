@@ -46,4 +46,9 @@ Playround::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  PAPERCLIP_CONFIG = {
+    :storage => :s3,
+    :s3_credentials => "config/s3.yml",
+  }
 end

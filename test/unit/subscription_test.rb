@@ -9,6 +9,8 @@ class SubscriptionTest < ActiveSupport::TestCase
     @subscription = nil
   end
   
+  #validity tests
+  
   test "factory should be valid" do
     assert @subscription.valid?
   end
@@ -25,28 +27,12 @@ class SubscriptionTest < ActiveSupport::TestCase
     assert @subscription.invalid?
   end
   
-  test "should not mass-assign user_id" do
-    user_id = @subscription.user_id
-        
-    @subscription.attributes = { :user_id => user_id + 1 }
-    
-    assert_equal @subscription.user_id, user_id
-  end
-  
   test "combination of user and round should be unique" do
     @subscription.save!
     
     @another_subscription = Factory.build(:subscription , :user => @subscription.user, :round => @subscription.round)
     
     assert @another_subscription.invalid?
-  end
-  
-  test "should belong to user" do
-    assert_belongs_to @subscription, :user
-  end
-  
-  test "should belong to round" do
-    assert_belongs_to @subscription, :round
   end
   
   test "should not allow to subscribe to a full round" do
@@ -58,6 +44,28 @@ class SubscriptionTest < ActiveSupport::TestCase
     
     assert @subscription.invalid?
   end
+  
+  #attributes accessibility tests
+  
+  test "should not mass-assign user_id" do
+    user_id = @subscription.user_id
+        
+    @subscription.attributes = { :user_id => user_id + 1 }
+    
+    assert_equal @subscription.user_id, user_id
+  end
+  
+  #associations tests
+  
+  test "should belong to user" do
+    assert_belongs_to @subscription, :user
+  end
+  
+  test "should belong to round" do
+    assert_belongs_to @subscription, :round
+  end
+  
+  #ability tests
   
   test "any user can create subscriptions" do
     ability = Ability.new Factory :user

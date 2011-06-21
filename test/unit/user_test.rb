@@ -2,53 +2,20 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = Factory.build :user, :email => "matteodepalo@gmail.com"
+    @user = User.new
+    @user.stubs(:email => "matteodepalo@gmail.com", :password => "solidus")
   end
   
   def teardown
     @user = nil
   end
+  
+  #validity tests
  
   test "users should have many subscriptions" do
     @user.save!
 
     assert_has_many @user, :subscriptions 
-  end
-  
-  test "should return the expected value on subscribed?" do
-    @user.save!
-    
-    round = Factory :round
-    
-    assert !@user.subscribed?(round)
-    
-    Factory :subscription, :user => @user, :round => round
-    
-    assert @user.subscribed?(round)
-  end
-  
-  test "should have many rounds" do
-    @user.save!
-    
-    assert_has_many @user, :rounds
-  end
-  
-  test "should have many arenas" do
-    @user.save!
-    
-    assert_has_many @user, :arenas
-  end
-  
-  test "should have many games" do
-    @user.save!
-    
-    assert_has_many @user, :games
-  end
-  
-  test "should have many comments" do
-    @user.save!
-    
-    assert_has_many @user, :comments
   end
   
   test "display name should not be allowed to be blank" do
@@ -83,5 +50,45 @@ class UserTest < ActiveSupport::TestCase
     @user.save!
     
     assert_equal "matteodepalo", @user.display_name
+  end
+  
+  #methods tests
+  
+  test "should return the expected value on subscribed?" do
+    @user.save!
+    
+    round = Factory :round
+    
+    assert !@user.subscribed?(round)
+    
+    Factory :subscription, :user => @user, :round => round
+    
+    assert @user.subscribed?(round)
+  end
+  
+  #associations tests
+  
+  test "should have many rounds" do
+    @user.save!
+    
+    assert_has_many @user, :rounds
+  end
+  
+  test "should have many arenas" do
+    @user.save!
+    
+    assert_has_many @user, :arenas
+  end
+  
+  test "should have many games" do
+    @user.save!
+    
+    assert_has_many @user, :games
+  end
+  
+  test "should have many comments" do
+    @user.save!
+    
+    assert_has_many @user, :comments
   end
 end

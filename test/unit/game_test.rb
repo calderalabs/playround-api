@@ -9,6 +9,7 @@ class GameTest < ActiveSupport::TestCase
     @game = nil
   end
 
+  #validity tests
   
   test "factory should be valid" do
     assert @game.valid?
@@ -24,10 +25,6 @@ class GameTest < ActiveSupport::TestCase
     @game.description = nil
     
     assert @game.invalid?
-  end
-  
-  test "should belong to user" do
-    assert_belongs_to @game, :user
   end
 
   test "user_id should not be nil" do
@@ -62,11 +59,19 @@ class GameTest < ActiveSupport::TestCase
     assert @game.valid?
   end
   
+  #associations tests
+  
+  test "should belong to user" do
+    assert_belongs_to @game, :user
+  end
+  
   test "should have many rounds" do
     @game.save!
     
     assert_has_many @game, :rounds
   end
+  
+  #ability tests
   
   test "any user can create games" do
     ability = Ability.new Factory :user
