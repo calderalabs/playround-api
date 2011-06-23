@@ -2,10 +2,9 @@ require 'spec_helper'
 
 describe "Round" do
   before(:each) do
-    @arena = mock_model('Arena')
-    @game = mock_model('Game')
-    @user = mock_model('User')
-    @round = Factory :round, :arena => @arena, :game => @game, :user => @user
+    stub_geocoder
+    
+    @round = Factory :round
   end
   
   # validity tests
@@ -135,7 +134,7 @@ describe "Round" do
     @round.date.should == @round.deadline
   end
   
-  #attributes accessibility tests
+  # attributes accessibility tests
   
   it "should not be able to mass-assign user_id" do
     @round.should_not allow_mass_assignment_of(:user_id)
@@ -169,7 +168,33 @@ describe "Round" do
     @round.should allow_mass_assignment_of(:description)
   end
   
-  #methods tests
+  # associations tests
+  
+  it "should belong to an arena" do
+    @round.should belong_to(:arena)
+  end
+  
+  it "should belong to a game" do
+    @round.should belong_to(:game)
+  end
+ 
+  it "rounds should have many subscriptions" do
+    @round.should have_many(:subscriptions)
+  end
+  
+  it "should belong to user" do
+    @round.should belong_to(:user)
+  end
+  
+  it "should have many comments" do
+    @round.should have_many(:comments)
+  end
+  
+  it "should have many subscribers through subscriptions" do
+    @round.should have_many(:subscribers).through(:subscriptions)
+  end
+  
+  # methods tests
   
   it "should be full when subscribers are equal to max_people" do
     @round.save!
@@ -193,7 +218,7 @@ describe "Round" do
     @round.confirmable?.should == false
   end
   
-  it "should confirm if confirmed is false" do
+  it "should confirm if can confirm" do
     @round.date = Time.now + 2.month
     
     @round.confirmed.should == false
@@ -201,7 +226,7 @@ describe "Round" do
     @round.confirmed.should == true
   end
   
-  it "should not confirm if confirmed is true" do
+  it "should not confirm if can't confirm" do
     @round.date = Time.now + 2.month
 
     @round.confirm!
@@ -209,6 +234,12 @@ describe "Round" do
     @round.confirmed.should == true
     @round.confirm!.should == false 
     @round.confirmed.should == true
+  end
+  
+  it "authorized? should return the expected value" do
+    @round.authorized?(@round.user).should == true
+    
+    @round.authorized?(mock_model('User')).should == false
   end
   
   it "all subscribers should include the owner" do
@@ -242,5 +273,51 @@ describe "Round" do
     @round.subscribers.each do |subscriber|
       @round.should have_sent_email.with_subject(/Round confirmation/).from('info@playround.com').with_body(/Hello/).to(subscriber.email)
     end
+  end
+  
+  # ability tests
+  
+  it "only the user who created the round should be able to manage it" do
+    @round.save!
+    
+    @round.authorized?(@round.user).should == true
+    
+    @round.authorized?(Factory :user).should == false
+  end
+  
+  it "user can create rounds" do
+    ability = Ability.new Factory :user
+    ability.can?(:create, Round).should == true
+  end
+  
+  it "guests can't create rounds" do
+    ability = Ability.new User.new
+    ability.cannot?(:create, Round).should == true
+  end
+  
+  it "anyone can read any round" do
+    ability = Ability.new Factory :user
+    ability.can?(:read, @round).should == true
+    ability = Ability.new @round.user
+    ability.can?(:read, @round).should == true
+    ability = Ability.new User.new
+    ability.can?(:read, @round).should == true
+  end
+  
+  it "user can only update rounds which he owns" do
+    ability = Ability.new @round.user
+    ability.can?(:update, @round).should == true
+    ability.cannot?(:update, Factory.build(:round)).should == true
+  end
+  
+  it "user can only destroy rounds which he owns and that has no subscribers" do
+    ability = Ability.new @round.user
+    ability.can?(:destroy, @round).should == true
+    ability.cannot?(:destroy, Factory.build(:round)).should == true
+    
+    @round.save!
+    Factory :subscription, :round => @round
+    
+    ability.cannot?(:destroy, @round).should == true
   end
 end

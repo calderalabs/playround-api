@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe "Comment" do
   before(:each) do
-    @round = mock_model('Round')
-    @comment = Factory.build :comment, :round => @round
+    stub_geocoder
+    
+    @comment = Factory.build :comment
   end
   
   # validity tests
@@ -32,6 +33,49 @@ describe "Comment" do
   
   it "should mass-assign round_id" do
     @comment.should allow_mass_assignment_of(:round_id)
+  end
+  
+  # associations tests
+  
+  it "should belong to an user" do
+    @comment.should belong_to(:user)
+  end
+  
+  it "should belong to a round" do
+    @comment.should belong_to(:round)
+  end
+  
+  # ability tests
+  
+  it "user can create comments" do
+    ability = Ability.new Factory :user
+    ability.can?(:create, Comment).should == true
+  end
+  
+  it "guests can't create comments" do
+    ability = Ability.new User.new
+    ability.cannot?(:create, Comment).should == true
+  end
+  
+  it "anyone can read any comment" do
+    ability = Ability.new Factory :user
+    ability.can?(:read, @comment).should == true
+    ability = Ability.new @comment.user
+    ability.can?(:read, @comment).should == true
+    ability = Ability.new User.new
+    ability.can?(:read, @comment).should == true
+  end
+  
+  it "user can only update comments which he owns" do
+    ability = Ability.new @comment.user
+    ability.can?(:update, @comment).should == true
+    ability.cannot?(:update, Factory.build(:comment)).should == true
+  end
+  
+  it "user can only destroy comments which he owns" do
+    ability = Ability.new @comment.user
+    ability.can?(:destroy, @comment).should == true
+    ability.cannot?(:destroy, Factory.build(:comment)).should == true
   end
 end
   

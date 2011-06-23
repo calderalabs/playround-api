@@ -1,9 +1,8 @@
 describe "Subscription" do
   before(:each) do
-    @round = mock_model('Round')
-    @round.stub(:full?).and_return(false)
-    @user = mock_model('User')
-    @subscription = Factory.build :subscription, :user => @user, :round => @round
+    stub_geocoder
+    
+    @subscription = Factory.build :subscription
   end
   
   # validity tests
@@ -23,7 +22,7 @@ describe "Subscription" do
   it "combination of user and round should be unique" do
     @subscription.save!
     
-    @another_subscription = Factory.build :subscription, :user => @user, :round => @round
+    @another_subscription = Factory.build :subscription, :round => @subscription.round, :user => @subscription.user
     
     @another_subscription.should be_invalid
   end
@@ -36,5 +35,38 @@ describe "Subscription" do
   
   it "should mass-assign round_id" do
     @subscription.should allow_mass_assignment_of(:round_id)
+  end
+  
+  # associations tests
+  
+  it "should belong to user" do
+    @subscription.should belong_to(:user)
+  end
+  
+  it "should belong to round" do
+    @subscription.should belong_to(:round)
+  end
+  
+  # ability tests
+  
+  it "user can create subscriptions" do
+    ability = Ability.new Factory :user
+    ability.can?(:manage_subscription_of, Factory(:round)).should == true
+  end
+  
+  it "guests can't create subscriptions" do
+    ability = Ability.new User.new
+    ability.cannot?(:manage_subscription_of, Factory(:round)).should == true
+  end
+  
+  it "user can destroy only subscriptions which he owns" do
+    ability = Ability.new @subscription.user
+    ability.can?(:manage_subscription_of, @subscription.round).should == true
+  end
+  
+  it "user can't subscribe to his own round" do
+    user = Factory :user
+    ability = Ability.new user
+    ability.cannot?(:manage_subscription_of, Factory(:round, :user => user)).should == true
   end
 end

@@ -64,3 +64,8 @@ def assert_adjusts_url(record, key = :website)
   
   record.send(key).should == 'http://www.google.com'
 end
+
+def stub_geocoder
+  Geocoder.stub(:search).and_return([Geocoder::Result::Google.new({})])
+  GeoPlanet::Place.stub(:search).and_return([GeoPlanet::Place.new({'woeid' => 724196, 'placeTypeName attrs' => {'code' => 7}})])
+end

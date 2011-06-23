@@ -1,7 +1,8 @@
 describe "Game" do
   before(:each) do
-    @user = mock_model('User')
-    @game = Factory.build :game, :user => @user
+    stub_geocoder
+    
+    @game = Factory.build :game
   end
 
   # validity tests
@@ -66,5 +67,53 @@ describe "Game" do
   
   it "should mass-assign image" do
     @game.should allow_mass_assignment_of(:image)
+  end
+  
+  # associations tests
+  
+  it "should belong to user" do
+    @game.should belong_to(:user)
+  end
+  
+  it "should have many rounds" do
+    @game.should have_many(:rounds)
+  end
+  
+  # ability tests
+  
+  it "user can create games" do
+    ability = Ability.new Factory :user
+    ability.can?(:create, Game).should == true
+  end
+  
+  it "guests can't create games" do
+    ability = Ability.new User.new
+    ability.cannot?(:create, Game).should == true
+  end
+  
+  it "anyone can read any game" do
+    ability = Ability.new Factory :user
+    ability.can?(:read, @game).should == true
+    ability = Ability.new @game.user
+    ability.can?(:read, @game).should == true
+    ability = Ability.new User.new
+    ability.can?(:read, @game).should == true
+  end
+  
+  it "user can only update games which he owns" do
+    ability = Ability.new @game.user
+    ability.can?(:update, @game).should == true
+    ability.cannot?(:update, Factory.build(:game)).should == true
+  end
+  
+  it "user can only destroy games which he owns and that has no rounds" do
+    ability = Ability.new @game.user
+    ability.can?(:destroy, @game).should == true
+    ability.cannot?(:destroy, Factory.build(:game)).should == true
+    
+    @game.save!
+    Factory :round, :game => @game
+    
+    ability.cannot?(:destroy, @game).should == true
   end
 end

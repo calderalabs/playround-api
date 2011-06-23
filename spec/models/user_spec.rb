@@ -1,5 +1,7 @@
 describe "User" do
   before(:each) do
+    stub_geocoder
+    
     @user = Factory.build :user, :email => "matteodepalo@mac.com"
   end
   
@@ -66,8 +68,7 @@ describe "User" do
   it "should return the expected value on subscribed?" do
     @user.save!
     
-    round = mock_model('Round')
-    round.stub(:full?).and_return(false)
+    round = Factory :round
     
     @user.subscribed?(round).should == false
     
@@ -84,5 +85,27 @@ describe "User" do
     @user.save!
     
     @user.guest?.should == false
+  end
+  
+  # associations tests
+  
+  it "should have many rounds" do
+    @user.should have_many(:rounds)
+  end
+  
+  it "should have many arenas" do
+    @user.should have_many(:arenas)
+  end
+  
+  it "should have many games" do
+    @user.should have_many(:games)
+  end
+  
+  it "should have many comments" do
+    @user.should have_many(:comments)
+  end
+  
+  it "users should have many subscriptions" do
+    @user.should have_many(:subscriptions)
   end
 end

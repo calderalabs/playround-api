@@ -2,14 +2,12 @@ require 'spec_helper'
 
 describe "Arena" do
   before(:each) do
-    Geocoder.stub(:search).and_return([Geocoder::Result::Google.new({})])
-    GeoPlanet::Place.stub(:search).and_return([GeoPlanet::Place.new({'woeid' => 724196, 'placeTypeName attrs' => {'code' => 7}})])
+    stub_geocoder
     
-    @user = mock_model('User')
-    @arena = Factory.build :arena, :user => @user
+    @arena = Factory.build :arena
   end
   
-  #validity tests
+  # validity tests
   
   it "should be valid with valid attributes" do
     @arena.should be_valid
@@ -103,7 +101,7 @@ describe "Arena" do
     assert_adjusts_url @arena
   end
   
-  #attributes accessibility tests
+  # attributes accessibility tests
   
   it "should not mass-assign user_id" do
     @arena.should_not allow_mass_assignment_of(:user_id)
@@ -143,5 +141,53 @@ describe "Arena" do
   
   it "should mass-assign image" do
     @arena.should allow_mass_assignment_of(:image)
+  end
+  
+  # associations tests
+  
+  it "should have many rounds" do
+    @arena.should have_many(:rounds)
+  end
+  
+  it "should belong to user" do
+    @arena.should belong_to(:user)
+  end
+  
+  # ability tests
+  
+  it "user can create arenas" do
+    ability = Ability.new Factory :user
+    ability.can?(:create, Arena).should == true
+  end
+  
+  it "guests can't create arenas" do
+    ability = Ability.new User.new
+    ability.cannot?(:create, Arena).should == true
+  end
+  
+  it "anyone can read any arena" do
+    ability = Ability.new Factory :user
+    ability.can?(:read, @arena).should == true
+    ability = Ability.new @arena.user
+    ability.can?(:read, @arena).should == true
+    ability = Ability.new User.new
+    ability.can?(:read, @arena).should == true
+  end
+  
+  it "user can only update arenas which he owns" do
+    ability = Ability.new @arena.user
+    ability.can?(:update, @arena).should == true
+    ability.cannot?(:update, Factory.build(:arena)).should == true
+  end
+  
+  it "user can only destroy arenas which he owns and that has no rounds" do
+    ability = Ability.new @arena.user
+    ability.can?(:destroy, @arena).should == true
+    ability.cannot?(:destroy, Factory.build(:arena)).should == true
+    
+    @arena.save!
+    Factory :round, :arena => @arena
+    
+    ability.cannot?(:destroy, @arena).should == true
   end
 end
