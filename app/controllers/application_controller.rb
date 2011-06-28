@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   
   def set_location_from_session_or_user_or_ip
     location = session[:location]
-    location ||= GeoPlanet::Place.new(current_user.town_woeid) if signed_in?
+    location ||= GeoPlanet::Place.new(current_user.town_woeid) if signed_in? && current_user.town_woeid
     location ||= GeoPlanet::Place.search(request.location.try(:address).to_s).try(:first)
     
     set_location(location)
