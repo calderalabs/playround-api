@@ -262,7 +262,7 @@ describe "Round" do
     @subscription = Factory :subscription, :round => @round
     @round.reload
     
-    @round.remaining_spots.should == previous_remaining_spots - 1
+    @round.remaining_spots.should be_one_less_than(previous_remaining_spots)
   end
   
   it "should send emails to subscribers when the owner of the round confirms" do
