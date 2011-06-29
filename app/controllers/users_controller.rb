@@ -20,11 +20,11 @@ class UsersController < Clearance::UsersController
   end
   
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
   
   def update
-    @user = current_user
+    @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
