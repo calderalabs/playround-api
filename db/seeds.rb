@@ -50,12 +50,12 @@ risk.user_id = eugenio.id
 risk.save!
 puts "Risk was created" if !!risk  
                                      
-dota_round = Round.new({ :date => Time.now + 2.month, :deadline => Time.now + 1.month, :game_id => dota.id, :arena_id => depalo_house.id, :max_people => 10, :min_people => 5})
+dota_round = Round.new({ :date => Time.now + 1.month, :deadline => Time.now, :game_id => dota.id, :arena_id => depalo_house.id, :max_people => 10, :min_people => 5})
 dota_round.user_id = matteo.id
 dota_round.save!
 puts "DotA round was created" if !!dota_round  
 
-risk_round = Round.new({ :date => Time.now + 2.month, :deadline => Time.now + 1.month, :game_id => risk.id, :arena_id => giorni_house.id, :max_people => 10, :min_people => 5})
+risk_round = Round.new({ :date => Time.now + 1.month, :deadline => Time.now, :game_id => risk.id, :arena_id => giorni_house.id, :max_people => 10, :min_people => 5})
 risk_round.user_id = eugenio.id
 risk_round.save!
 puts "Risk round was created" if !!risk_round

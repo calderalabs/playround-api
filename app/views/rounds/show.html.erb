@@ -46,7 +46,7 @@
   <div class="right-column">
     <% if can? :update, @round %>
       <% if !@round.confirmed %>
-        <%= button_to 'Confirm', confirm_round_path(@round), :id => 'confirm', :disabled => !@round.confirmable?, :method => :put %>
+        <%= button_to 'Confirm', confirm_round_path(@round), { :id => 'confirm', :method => :put, :disabled => !@round.confirmable? } %>
         <%= !@round.confirmable? ? 'You can confirm in ' + time_ago_in_words(@round.deadline) : 'You can confirm now!' %>
       <% else %>
         You confirmed this round
