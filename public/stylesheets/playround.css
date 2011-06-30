@@ -322,85 +322,10 @@ a {
 a:hover {
   color: #eb04a1; }
 
-#content {
-  min-height: 400px;
-  padding: 50px; }
-  #content h1 {
-    padding-bottom: 25px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #ddd;
-    font-size: 22pt; }
-  #content #title {
-    padding-bottom: 20px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #ddd; }
-  #content #title input {
-    font-size: 16pt;
-    display: inline;
-    height: 30px;
-    margin-right: 10px;
-    width: 200px; }
-  #content #title label {
-    display: inline;
-    font-size: 22pt;
-    line-height: 30px;
-    margin-right: 10px;
-    padding: 8px; }
-  #content #title input[type=submit] {
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    display: block;
-    height: auto;
-    width: auto;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    line-height: auto;
-    color: white;
-    background-image: -moz-linear-gradient(top, #9d2cff, #33005f);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #9d2cff), color-stop(1, #33005f));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#9d2cff', EndColorStr='#33005f');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#9d2cff', EndColorStr='#33005f')";
-    -moz-box-shadow: 0 0 5px 0 #18002c;
-    -webkit-box-shadow: 0 0 5px 0 #18002c;
-    box-shadow: 0 0 5px 0 #18002c;
-    border: 1px solid #250046;
-    cursor: pointer;
-    display: inline; }
-    #content #title input[type=submit]:hover {
-      -moz-box-shadow: inset 0 0 5px 0 #18002c;
-      -webkit-box-shadow: inset 0 0 5px 0 #18002c;
-      box-shadow: inner 0 0 5px 0 #18002c; }
-    #content #title input[type=submit][disabled] {
-      border: 1px solid #bfbfbf;
-      cursor: default;
-      background-image: -moz-linear-gradient(top, white, #cccccc);
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
-      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
-      -moz-box-shadow: 0 0 5px 0 #b3b3b3;
-      -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
-      box-shadow: 0 0 5px 0 #b3b3b3;
-      color: black; }
-      #content #title input[type=submit][disabled]:hover {
-        -moz-box-shadow: inset 0 0 0 0 0;
-        -webkit-box-shadow: inset 0 0 0 0 0;
-        box-shadow: inner 0 0 0 0 0; }
-
-#session {
-  color: #ffffff;
-  padding: 10px;
-  background-color: #230040;
-  text-align: right; }
-  #session a {
-    color: #ffffff;
-    text-decoration: none;
-    padding: 10px; }
-  #session a:hover {
-    color: #ffd300; }
-
 #title {
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ddd;
   position: relative; }
   #title a {
     text-decoration: none;
@@ -449,6 +374,80 @@ a:hover {
   #title h1 {
     border-bottom: 0;
     margin: 0; }
+  #title input {
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    height: auto;
+    width: auto;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    line-height: auto;
+    color: white;
+    background-image: -moz-linear-gradient(top, #9d2cff, #33005f);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #9d2cff), color-stop(1, #33005f));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#9d2cff', EndColorStr='#33005f');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#9d2cff', EndColorStr='#33005f')";
+    -moz-box-shadow: 0 0 5px 0 #18002c;
+    -webkit-box-shadow: 0 0 5px 0 #18002c;
+    box-shadow: 0 0 5px 0 #18002c;
+    border: 1px solid #250046;
+    cursor: pointer;
+    display: inline;
+    font-size: 16pt;
+    display: inline;
+    height: 30px;
+    margin-right: 10px;
+    width: 200px; }
+    #title input:hover {
+      -moz-box-shadow: inset 0 0 5px 0 #18002c;
+      -webkit-box-shadow: inset 0 0 5px 0 #18002c;
+      box-shadow: inner 0 0 5px 0 #18002c; }
+    #title input[disabled] {
+      border: 1px solid #bfbfbf;
+      cursor: default;
+      background-image: -moz-linear-gradient(top, white, #cccccc);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
+      -moz-box-shadow: 0 0 5px 0 #b3b3b3;
+      -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
+      box-shadow: 0 0 5px 0 #b3b3b3;
+      color: black; }
+      #title input[disabled]:hover {
+        -moz-box-shadow: inset 0 0 0 0 0;
+        -webkit-box-shadow: inset 0 0 0 0 0;
+        box-shadow: inner 0 0 0 0 0; }
+  #title label {
+    display: inline;
+    font-size: 22pt;
+    line-height: 30px;
+    margin-right: 10px;
+    padding: 8px; }
+
+h1 {
+  padding-bottom: 25px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ddd;
+  font-size: 22pt; }
+
+#content {
+  min-height: 400px;
+  padding: 50px; }
+
+#session {
+  color: #ffffff;
+  padding: 10px;
+  background-color: #230040;
+  text-align: right; }
+  #session a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px; }
+  #session a:hover {
+    color: #ffd300; }
 
 #header a {
   color: white;
@@ -678,6 +677,7 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
+<<<<<<< HEAD
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -685,6 +685,11 @@ input.placeholder {
   -webkit-box-shadow: 0 0 5px 0 #999999;
   box-shadow: 0 0 5px 0 #999999; }
   #arenas li .arena-image, #arenas li .game-image, #arenas li .user-avatar {
+=======
+  width: 100px;
+  height: auto; }
+  #arenas li .image {
+>>>>>>> Added guider and a short guided tour and refactored javascripts and stylesheets
     text-align: center; }
 
 #games li {
@@ -695,6 +700,7 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
+<<<<<<< HEAD
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -702,6 +708,11 @@ input.placeholder {
   -webkit-box-shadow: 0 0 5px 0 #999999;
   box-shadow: 0 0 5px 0 #999999; }
   #games li .arena-image, #games li .game-image, #games li .user-avatar {
+=======
+  width: 100px;
+  height: auto; }
+  #games li .image {
+>>>>>>> Added guider and a short guided tour and refactored javascripts and stylesheets
     text-align: center; }
 
 #round-title h1 {
@@ -818,6 +829,7 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
+<<<<<<< HEAD
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -825,6 +837,11 @@ input.placeholder {
   -webkit-box-shadow: 0 0 5px 0 #999999;
   box-shadow: 0 0 5px 0 #999999; }
   #subscribers li .arena-image, #subscribers li .game-image, #subscribers li .user-avatar {
+=======
+  width: 100px;
+  height: auto; }
+  #subscribers li .image {
+>>>>>>> Added guider and a short guided tour and refactored javascripts and stylesheets
     text-align: center; }
 
 #subscribers h2, #comments h2 {
@@ -849,6 +866,7 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
+<<<<<<< HEAD
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -856,6 +874,11 @@ input.placeholder {
   -webkit-box-shadow: 0 0 5px 0 #999999;
   box-shadow: 0 0 5px 0 #999999; }
   #users li .arena-image, #users li .game-image, #users li .user-avatar {
+=======
+  width: 100px;
+  height: auto; }
+  #users li .image {
+>>>>>>> Added guider and a short guided tour and refactored javascripts and stylesheets
     text-align: center; }
 
 .spots {
@@ -899,4 +922,5 @@ form #location_map {
   margin-left: 25%;
   width: 72%;
   margin-bottom: 20px;
-  margin-top: -10px; }
+  margin-top: -10px;
+  height: 400px; }

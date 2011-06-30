@@ -40,9 +40,7 @@ class UsersController < Clearance::UsersController
   private
 
   def flash_notice_after_create
-    flash[:notice] = translate(:signed_up,
-      :scope => [:clearance, :controllers, :users],
-      :default => "Welcome to Playround!")
+    flash[:notice] = nil
   end
   
   def url_after_create

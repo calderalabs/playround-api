@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20110614104445) do
   end
 
   create_table "users", :force => true do |t|
+    t.boolean  "show_guiders",                       :default => true
     t.integer  "town_woeid",          :limit => 8
     t.string   "email"
     t.string   "display_name"

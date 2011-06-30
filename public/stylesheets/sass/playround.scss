@@ -27,43 +27,56 @@ body {
   }
   
 
-#content {
-  min-height: 400px;
-  padding: 50px;
   
+  #title {
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    
+    position: relative;
+
+    a {
+      @include button(190px, 50px, $main-orange, #000000);
+      position: absolute;
+      font-size: 14pt;
+      right: 0;
+      top: 0;
+    }
+
+    h1 {
+      border-bottom: 0;
+      margin: 0;
+    }
+    
+    input {
+      @include button(auto,auto,$main-purple,white);
+      display: inline;
+      font-size: 16pt;
+      display: inline;
+      height: 30px;
+      margin-right: 10px;
+      width: 200px;
+    }
+    
+    label {
+      display: inline;
+      font-size: 22pt;
+      line-height: 30px;
+      margin-right: 10px;
+      padding: 8px;
+    }
+  }
+
   h1 {
     padding-bottom: 25px;
     margin-bottom: 15px;
     border-bottom: 2px solid #ddd;
     font-size: 22pt;
   }
-  
-  #title {
-    padding-bottom: 20px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #ddd;
-  }
-  
-  #title input {
-    font-size: 16pt;
-    display: inline;
-    height: 30px;
-    margin-right: 10px;
-    width: 200px;
-  }
-  
-  #title label {
-    display: inline;
-    font-size: 22pt;
-    line-height: 30px;
-    margin-right: 10px;
-    padding: 8px;
-  }
-  
-  #title input[type=submit] {
-    @include button(auto,auto,$main-purple,white);
-    display: inline;
-  }
+
+#content {
+  min-height: 400px;
+  padding: 50px;
 }
 
 #session {
@@ -82,24 +95,6 @@ body {
    color: #ffd300;
   }
 }
-
-#title {
-  position: relative;
-  
-  a {
-    @include button(190px, 50px, $main-orange, #000000);
-    position: absolute;
-    font-size: 14pt;
-    right: 0;
-    top: 0;
-  }
-  
-  h1 {
-    border-bottom: 0;
-    margin: 0;
-  }
-}
-
 
 #header a {
   color: white;
@@ -308,11 +303,11 @@ input.placeholder {
 }
 
 #arenas li {
-  @include list-item;
+  @include list-box;
 }
 
 #games li {
-  @include list-item;
+  @include list-box;
 }
 
 #round-title {
@@ -360,7 +355,7 @@ input.placeholder {
 }
 
 #subscribers li {
-  @include list-item
+  @include list-box;
 }
 
 #subscribers h2, #comments h2 {
@@ -389,7 +384,7 @@ input.placeholder {
 }
 
 #users li {
-  @include list-item;
+  @include list-box;
 }
 
 .spots {
@@ -442,4 +437,4 @@ span.actions a {
   }
 }
 
-form #location_map { margin-left: 25%; width:72%; margin-bottom: 20px; margin-top: -10px; }
+form #location_map { margin-left: 25%; width:72%; margin-bottom: 20px; margin-top: -10px; height: 400px; }
