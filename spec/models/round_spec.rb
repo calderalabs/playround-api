@@ -306,6 +306,10 @@ describe Round do
   end
   
   it "user can only update rounds which he owns" do
+    @round.date = Time.now + 2.months
+    @round.deadline = Time.now + 1.month
+    @round.save!
+    
     ability = Ability.new @round.user
     ability.can?(:update, @round).should == true
     ability.cannot?(:update, Factory.build(:round)).should == true
@@ -320,5 +324,16 @@ describe Round do
     Factory :subscription, :round => @round
     
     ability.cannot?(:destroy, @round).should == true
+  end
+  
+  it "user can only update rounds before the deadline" do
+    ability = Ability.new @round.user
+    @round.date = Time.now + 1.second
+    @round.deadline = Time.now
+    @round.save!
+
+    Time.stub(:now).and_return(@round.deadline + 10.seconds)
+    ability.cannot?(:update, @round).should == true
+    Time.unstub!(:now)
   end
 end

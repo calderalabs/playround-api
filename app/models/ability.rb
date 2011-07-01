@@ -8,7 +8,10 @@ class Ability
     
     can :create, [Arena, Comment, Round, Game] unless user.guest?
     
-    can :update, [Arena, Comment, Round, Game], :user_id => user.id
+    can :update, [Arena, Comment, Game], :user_id => user.id
+    can :update, Round do |round|
+      round.user_id == user.id && Time.now < round.deadline
+    end
     can :update, User, :id => user.id
     
     can :destroy, Comment, :user_id => user.id

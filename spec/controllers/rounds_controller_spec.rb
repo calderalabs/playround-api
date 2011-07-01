@@ -57,6 +57,10 @@ describe RoundsController do
   end
 
   it "should get edit if you own the round" do
+    @round.date = Time.now + 2.months
+    @round.deadline = Time.now + 1.month
+    @round.save!
+    
     get :edit, :id => @round.to_param
     
     should respond_with(:success)
@@ -77,6 +81,10 @@ describe RoundsController do
   end
 
   it "should update if you own the round" do
+    @round.date = Time.now + 2.months
+    @round.deadline = Time.now + 1.month
+    @round.save!
+    
     put :update, :id => @round.to_param, :round => @round.attributes
     
     should respond_with(:found)
@@ -96,6 +104,18 @@ describe RoundsController do
     put :update, :id => @round.to_param, :round => @round.attributes
     
     should redirect_to(sign_in_url)
+  end
+  
+  it "should not update if current time is past the deadline" do
+    @round.date = Time.now + 1.second
+    @round.deadline = Time.now
+    @round.save!
+
+    Time.stub(:now).and_return(@round.deadline + 10.seconds)
+    put :update, :id => @round.to_param, :round => @round.attributes
+    
+    should redirect_to(sign_in_url)
+    Time.unstub!(:now)
   end
 
   it "should destroy if you own the round" do
