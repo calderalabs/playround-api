@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Arena" do
+describe Arena do
   before(:each) do
     stub_geocoder
     

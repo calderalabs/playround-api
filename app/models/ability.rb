@@ -21,10 +21,9 @@ class Ability
     can :destroy, Game do |game|
       game.rounds.count == 0 && game.user_id == user.id
     end
-    can :confirm, Round do |round|
-      round.user_id == user.id
+    can :manage_confirmation_of, Round do |round|
+      round.user_id == user.id && round.confirmable?
     end
-    
     can :manage_subscription_of, Round do |round|
       !user.guest? && round.user_id != user.id
     end

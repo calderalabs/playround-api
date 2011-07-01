@@ -13,7 +13,7 @@ Playround::Application.routes.draw do
   end
 
   resources :rounds do
-    put 'confirm', :on => :member
+    resource :confirmation, :only => :create, :controller => 'confirmation'
   end
   
   resources :users

@@ -1,4 +1,6 @@
-describe "User" do
+require 'spec_helper'
+
+describe User do
   before(:each) do
     stub_geocoder
     

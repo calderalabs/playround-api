@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Comment" do
+describe Comment do
   before(:each) do
     stub_geocoder
     

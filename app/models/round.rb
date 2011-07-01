@@ -11,7 +11,9 @@ class Round < ActiveRecord::Base
   has_many :comments
   has_many :subscribers, :through => :subscriptions, :source => :user
   
-  validate do
+  before_validation :validate_date_deadline, :on => :create
+  
+  def validate_date_deadline
     errors.add(:deadline, "must be earlier than date") if self.deadline && self.date && self.deadline > self.date
     
     errors.add(:deadline, "must be after the current time") if self.deadline && self.deadline < Time.now.change(:sec => 0)

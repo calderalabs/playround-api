@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe "Round" do
+describe Round do
   before(:each) do
     stub_geocoder
     
-    @round = Factory :round
+    @round = Factory.build :round
   end
   
   # validity tests
@@ -226,9 +226,9 @@ describe "Round" do
     @round.confirmed.should == true
   end
   
-  it "should not confirm if can't confirm" do
+  it "should not confirm if the round is already confirmed" do
     @round.date = Time.now + 2.month
-
+    @round.save!
     @round.confirm!
     
     @round.confirmed.should == true
@@ -266,6 +266,7 @@ describe "Round" do
   end
   
   it "should send emails to subscribers when the owner of the round confirms" do
+    @round.date = Time.now + 2.month
     @round.save!
     
     5.times { @subscription = Factory :subscription, :round => @round }

@@ -1,4 +1,6 @@
-describe "Subscription" do
+require 'spec_helper'
+
+describe Subscription do
   before(:each) do
     stub_geocoder
     

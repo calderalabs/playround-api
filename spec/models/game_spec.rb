@@ -1,4 +1,6 @@
-describe "Game" do
+require 'spec_helper'
+
+describe Game do
   before(:each) do
     stub_geocoder
     

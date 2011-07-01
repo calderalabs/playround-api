@@ -18,20 +18,17 @@ describe SubscriptionsController do
     should redirect_to(@round)
   end
   
+  it "should not subscribe if you own the round" do
+    post :create, :id => (Factory :round, :user => @user).to_param
+    
+    should redirect_to(sign_in_url)
+  end
+  
   it "should not create subscription if guest" do
     @controller.sign_out
     
     post :create, :id => @round.to_param
 
-    should redirect_to(sign_in_url)
-  end
-  
-  it "should not create subscription if you own the round" do
-    @controller.sign_out
-    @controller.sign_in @round.user
-    
-    post :create, :id => @round.to_param
-    
     should redirect_to(sign_in_url)
   end
   
@@ -44,12 +41,6 @@ describe SubscriptionsController do
 
     should respond_with(:found)
     should redirect_to(@round)
-  end
-  
-  it "should not subscribe if you own the round" do
-    post :create, :id => (Factory :round, :user => @user).to_param
-    
-    should redirect_to(sign_in_url)
   end
   
   it "should not destroy subscription if guest" do
