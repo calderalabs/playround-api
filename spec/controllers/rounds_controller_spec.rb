@@ -133,11 +133,72 @@ describe RoundsController do
     should redirect_to(sign_in_url)
   end
   
+  it "should not destroy if there is at least one subscriber" do
+    Factory :subscription, :round => @round
+    
+    delete :destroy, :id => @round.to_param
+    
+    should redirect_to(sign_in_url)
+  end
+  
   it "should not destroy if guest" do
     @controller.sign_out
     
     delete :destroy, :id => @round.to_param
     
     should redirect_to(sign_in_url)
+  end
+  
+  # ability tests
+  
+  it "user can create rounds" do
+    ability = Ability.new Factory :user
+    ability.can?(:create, Round).should == true
+  end
+
+  it "guests can't create rounds" do
+    ability = Ability.new User.new
+    ability.cannot?(:create, Round).should == true
+  end
+
+  it "anyone can read any round" do
+    ability = Ability.new Factory :user
+    ability.can?(:read, @round).should == true
+    ability = Ability.new @round.user
+    ability.can?(:read, @round).should == true
+    ability = Ability.new User.new
+    ability.can?(:read, @round).should == true
+  end
+
+  it "user can only update rounds which he owns" do
+    @round.date = Time.now + 2.months
+    @round.deadline = Time.now + 1.month
+    @round.save!
+
+    ability = Ability.new @round.user
+    ability.can?(:update, @round).should == true
+    ability.cannot?(:update, Factory.build(:round)).should == true
+  end
+
+  it "user can only destroy rounds which he owns and that has no subscribers" do
+    ability = Ability.new @round.user
+    ability.can?(:destroy, @round).should == true
+    ability.cannot?(:destroy, Factory.build(:round)).should == true
+
+    @round.save!
+    Factory :subscription, :round => @round
+
+    ability.cannot?(:destroy, @round).should == true
+  end
+
+  it "user can only update rounds before the deadline" do
+    ability = Ability.new @round.user
+    @round.date = Time.now + 1.second
+    @round.deadline = Time.now
+    @round.save!
+
+    Time.stub(:now).and_return(@round.deadline + 10.seconds)
+    ability.cannot?(:update, @round).should == true
+    Time.unstub!(:now)
   end
 end

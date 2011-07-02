@@ -20,6 +20,10 @@ class Round < ActiveRecord::Base
     errors.add(:date, "must be after the current time") if self.date && self.date < Time.now.change(:sec => 0)
   end
   
+  before_validation do
+    errors.add(:arena_id, "must be a public arena or a private arena that you own") if !self.arena.public? && self.arena.user_id != self.user_id
+  end
+  
   validates_presence_of :deadline
   validates_presence_of :date
   validates_presence_of :max_people

@@ -48,27 +48,4 @@ describe Subscription do
   it "should belong to round" do
     @subscription.should belong_to(:round)
   end
-  
-  # ability tests
-  
-  it "user can create subscriptions" do
-    ability = Ability.new Factory :user
-    ability.can?(:manage_subscription_of, Factory(:round)).should == true
-  end
-  
-  it "guests can't create subscriptions" do
-    ability = Ability.new User.new
-    ability.cannot?(:manage_subscription_of, Factory(:round)).should == true
-  end
-  
-  it "user can destroy only subscriptions which he owns" do
-    ability = Ability.new @subscription.user
-    ability.can?(:manage_subscription_of, @subscription.round).should == true
-  end
-  
-  it "user can't subscribe to his own round" do
-    user = Factory :user
-    ability = Ability.new user
-    ability.cannot?(:manage_subscription_of, Factory(:round, :user => user)).should == true
-  end
 end

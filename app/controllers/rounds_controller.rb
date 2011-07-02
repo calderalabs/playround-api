@@ -48,7 +48,7 @@ class RoundsController < ApplicationController
   # POST /rounds.xml
   def create
     @round = current_user.rounds.build(params[:round])
-
+    
     respond_to do |format|
       if @round.save
         format.html { redirect_to(@round, :notice => 'Round was successfully created.') }

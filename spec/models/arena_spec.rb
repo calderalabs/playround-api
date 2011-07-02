@@ -101,6 +101,11 @@ describe Arena do
     assert_adjusts_url @arena
   end
   
+  it "public should be false at creation" do
+    arena = Arena.new
+    arena.public.should == false
+  end
+  
   # attributes accessibility tests
   
   it "should not mass-assign user_id" do
@@ -151,43 +156,5 @@ describe Arena do
   
   it "should belong to user" do
     @arena.should belong_to(:user)
-  end
-  
-  # ability tests
-  
-  it "user can create arenas" do
-    ability = Ability.new Factory :user
-    ability.can?(:create, Arena).should == true
-  end
-  
-  it "guests can't create arenas" do
-    ability = Ability.new User.new
-    ability.cannot?(:create, Arena).should == true
-  end
-  
-  it "anyone can read any arena" do
-    ability = Ability.new Factory :user
-    ability.can?(:read, @arena).should == true
-    ability = Ability.new @arena.user
-    ability.can?(:read, @arena).should == true
-    ability = Ability.new User.new
-    ability.can?(:read, @arena).should == true
-  end
-  
-  it "user can only update arenas which he owns" do
-    ability = Ability.new @arena.user
-    ability.can?(:update, @arena).should == true
-    ability.cannot?(:update, Factory.build(:arena)).should == true
-  end
-  
-  it "user can only destroy arenas which he owns and that has no rounds" do
-    ability = Ability.new @arena.user
-    ability.can?(:destroy, @arena).should == true
-    ability.cannot?(:destroy, Factory.build(:arena)).should == true
-    
-    @arena.save!
-    Factory :round, :arena => @arena
-    
-    ability.cannot?(:destroy, @arena).should == true
   end
 end

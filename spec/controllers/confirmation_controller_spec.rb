@@ -9,10 +9,6 @@ describe ConfirmationController do
   end
   
   it "should confirm if you own the round" do
-    @round.date = Time.now + 1.months
-    @round.deadline = Time.now
-    @round.save!
-
     @round.confirmable?.should == true
 
     post :create, :round_id => @round.to_param

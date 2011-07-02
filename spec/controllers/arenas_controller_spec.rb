@@ -48,12 +48,12 @@ describe ArenasController do
     should redirect_to(sign_in_url)
   end
 
-  it "should always show arena" do
+  it "should always show arenas" do
     get :show, :id => @arena.to_param
     
     should respond_with(:success)
     
-    arena = Factory :arena
+    arena = Factory :arena, :public => true
     
     get :show, :id => arena.to_param
     
@@ -123,11 +123,57 @@ describe ArenasController do
     should redirect_to(sign_in_url)
   end
   
+  it "should not destroy if there is at least one round with that arena" do
+    Factory :round, :arena => @arena
+    
+    delete :destroy, :id => @arena.to_param
+    
+    should redirect_to(sign_in_url)
+  end
+  
   it "should not destroy if guest" do
     @controller.sign_out
     
     delete :destroy, :id => @arena.to_param
     
     should redirect_to(sign_in_url)
+  end
+  
+  # ability tests
+  
+  it "user can create arenas" do
+    ability = Ability.new Factory :user
+    ability.should be_able_to(:create, Arena)
+  end
+  
+  it "guests can't create arenas" do
+    ability = Ability.new User.new
+    ability.should_not be_able_to(:create, Arena)
+  end
+  
+  it "anyone can read any arena" do
+    ability = Ability.new Factory :user
+    ability.should be_able_to(:read, @arena)
+    ability = Ability.new @arena.user
+    ability.should be_able_to(:read, @arena)
+    ability = Ability.new User.new
+    ability.should be_able_to(:read, @arena)
+  end
+  
+  it "user can only update arenas which he owns" do
+    ability = Ability.new @arena.user
+    ability.should be_able_to(:update, @arena)
+    ability.should_not be_able_to(:update, Factory.build(:arena))
+  end
+  
+  it "user can only destroy arenas which he owns and that has no rounds" do
+    ability = Ability.new @arena.user
+    ability.should be_able_to(:destroy, @arena)
+    ability.should_not be_able_to(:destroy, Factory.build(:arena))
+    
+    @arena.save!
+    Factory :round, :arena => @arena
+    
+    ability.should_not be_able_to(:destroy, @arena)
   end
 end

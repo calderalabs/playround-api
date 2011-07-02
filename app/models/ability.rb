@@ -6,7 +6,7 @@ class Ability
     
     can :read, [Arena, Comment, Round, Game, User]
     
-    can :create, [Arena, Comment, Round, Game] unless user.guest?
+    can :create, [Round, Arena, Comment, Game] unless user.guest?
     
     can :update, [Arena, Comment, Game], :user_id => user.id
     can :update, Round do |round|

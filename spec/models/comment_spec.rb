@@ -44,39 +44,6 @@ describe Comment do
   it "should belong to a round" do
     @comment.should belong_to(:round)
   end
-  
-  # ability tests
-  
-  it "user can create comments" do
-    ability = Ability.new Factory :user
-    ability.can?(:create, Comment).should == true
-  end
-  
-  it "guests can't create comments" do
-    ability = Ability.new User.new
-    ability.cannot?(:create, Comment).should == true
-  end
-  
-  it "anyone can read any comment" do
-    ability = Ability.new Factory :user
-    ability.can?(:read, @comment).should == true
-    ability = Ability.new @comment.user
-    ability.can?(:read, @comment).should == true
-    ability = Ability.new User.new
-    ability.can?(:read, @comment).should == true
-  end
-  
-  it "user can only update comments which he owns" do
-    ability = Ability.new @comment.user
-    ability.can?(:update, @comment).should == true
-    ability.cannot?(:update, Factory.build(:comment)).should == true
-  end
-  
-  it "user can only destroy comments which he owns" do
-    ability = Ability.new @comment.user
-    ability.can?(:destroy, @comment).should == true
-    ability.cannot?(:destroy, Factory.build(:comment)).should == true
-  end
 end
   
 

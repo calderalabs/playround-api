@@ -40,6 +40,7 @@
   <%= f.inputs do %>
   <%= f.input :name %>
   <%= f.input :description %>
+  <%= f.input :public %>
   <%= f.input :image %>
   <%= f.autocompleted_input :address, :size => nil, :url => autocomplete_address_arenas_path, :update_elements => 
     { :latitude => '#arena_latitude', :longitude => '#arena_longitude'} %>

@@ -131,7 +131,21 @@ describe Round do
   end
   
   it "deadline and date should be equal on creation" do
-    @round.date.should == @round.deadline
+    round = Round.new
+    round.date.should == round.deadline
+  end
+  
+  it "round arena should be either public or private and owned by the round creator" do
+    user = Factory :user
+    public_arena = Factory :arena, :public => true
+    private_arena = Factory :arena, :public => false, :user => user
+    
+    round = Factory.build :round, :arena => public_arena
+    round.should be_valid
+    round = Factory.build :round, :arena => private_arena
+    round.should be_invalid
+    round = Factory.build :round, :arena => private_arena, :user => user
+    round.should be_valid
   end
   
   # attributes accessibility tests
@@ -209,8 +223,6 @@ describe Round do
   end
   
   it "confirmable? should return the expected value" do
-    @round.date = Time.now + 2.month
-    
     @round.confirmable?.should == true
     
     @round.deadline = Time.now + 1.month
@@ -219,15 +231,12 @@ describe Round do
   end
   
   it "should confirm if can confirm" do
-    @round.date = Time.now + 2.month
-    
     @round.confirmed.should == false
     @round.confirm!.should == true
     @round.confirmed.should == true
   end
   
   it "should not confirm if the round is already confirmed" do
-    @round.date = Time.now + 2.month
     @round.save!
     @round.confirm!
     
@@ -266,7 +275,6 @@ describe Round do
   end
   
   it "should send emails to subscribers when the owner of the round confirms" do
-    @round.date = Time.now + 2.month
     @round.save!
     
     5.times { @subscription = Factory :subscription, :round => @round }
@@ -276,64 +284,11 @@ describe Round do
     end
   end
   
-  # ability tests
-  
   it "only the user who created the round should be able to manage it" do
     @round.save!
     
     @round.authorized?(@round.user).should == true
     
     @round.authorized?(Factory :user).should == false
-  end
-  
-  it "user can create rounds" do
-    ability = Ability.new Factory :user
-    ability.can?(:create, Round).should == true
-  end
-  
-  it "guests can't create rounds" do
-    ability = Ability.new User.new
-    ability.cannot?(:create, Round).should == true
-  end
-  
-  it "anyone can read any round" do
-    ability = Ability.new Factory :user
-    ability.can?(:read, @round).should == true
-    ability = Ability.new @round.user
-    ability.can?(:read, @round).should == true
-    ability = Ability.new User.new
-    ability.can?(:read, @round).should == true
-  end
-  
-  it "user can only update rounds which he owns" do
-    @round.date = Time.now + 2.months
-    @round.deadline = Time.now + 1.month
-    @round.save!
-    
-    ability = Ability.new @round.user
-    ability.can?(:update, @round).should == true
-    ability.cannot?(:update, Factory.build(:round)).should == true
-  end
-  
-  it "user can only destroy rounds which he owns and that has no subscribers" do
-    ability = Ability.new @round.user
-    ability.can?(:destroy, @round).should == true
-    ability.cannot?(:destroy, Factory.build(:round)).should == true
-    
-    @round.save!
-    Factory :subscription, :round => @round
-    
-    ability.cannot?(:destroy, @round).should == true
-  end
-  
-  it "user can only update rounds before the deadline" do
-    ability = Ability.new @round.user
-    @round.date = Time.now + 1.second
-    @round.deadline = Time.now
-    @round.save!
-
-    Time.stub(:now).and_return(@round.deadline + 10.seconds)
-    ability.cannot?(:update, @round).should == true
-    Time.unstub!(:now)
   end
 end

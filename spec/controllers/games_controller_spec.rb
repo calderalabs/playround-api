@@ -115,11 +115,57 @@ describe GamesController do
     should redirect_to(sign_in_url)
   end
   
+  it "should not destroy if there is at least one round with that game" do
+    Factory :round, :game => @game
+    
+    delete :destroy, :id => @game.to_param
+    
+    should redirect_to(sign_in_url)
+  end
+  
   it "should not destroy if guest" do
     @controller.sign_out
     
     delete :destroy, :id => @game.to_param
     
     should redirect_to(sign_in_url)
+  end
+  
+  # ability tests
+  
+  it "user can create games" do
+    ability = Ability.new Factory :user
+    ability.should be_able_to(:create, Game)
+  end
+  
+  it "guests can't create games" do
+    ability = Ability.new User.new
+    ability.should_not be_able_to(:create, Game)
+  end
+  
+  it "anyone can read any game" do
+    ability = Ability.new Factory :user
+    ability.should be_able_to(:read, @game)
+    ability = Ability.new @game.user
+    ability.should be_able_to(:read, @game)
+    ability = Ability.new User.new
+    ability.should be_able_to(:read, @game)
+  end
+  
+  it "user can only update games which he owns" do
+    ability = Ability.new @game.user
+    ability.should be_able_to(:update, @game)
+    ability.should_not be_able_to(:update, Factory.build(:game))
+  end
+  
+  it "user can only destroy games which he owns and that has no rounds" do
+    ability = Ability.new @game.user
+    ability.should be_able_to(:destroy, @game)
+    ability.should_not be_able_to(:destroy, Factory.build(:game))
+    
+    @game.save!
+    Factory :round, :game => @game
+    
+    ability.should_not be_able_to(:destroy, @game)
   end
 end
