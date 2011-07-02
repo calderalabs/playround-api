@@ -1,6 +1,7 @@
 class RoundsController < ApplicationController
+  before_filter :parse_dates, :only => [:create, :update]
   load_and_authorize_resource
-  
+
   # GET /rounds
   # GET /rounds.xml
   def index
@@ -86,5 +87,12 @@ class RoundsController < ApplicationController
       format.html { redirect_to(rounds_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  
+  def parse_dates
+    params[:round][:date] = Time.zone.parse(params[:round][:date])
+    params[:round][:deadline] = Time.zone.parse(params[:round][:deadline])
   end
 end

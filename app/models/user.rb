@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
     self.display_name ||= self.email.split('@').first
   end
   
+  after_save :on => :create do
+    self.settings[:show_quicktour] = true
+    self.settings[:current_guider] = 'welcome'
+  end
+  
   has_many :subscriptions
   has_many :rounds
   has_many :arenas

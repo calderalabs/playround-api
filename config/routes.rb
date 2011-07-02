@@ -1,6 +1,6 @@
 Playround::Application.routes.draw do
   resources :comments
-
+  resource :settings, :only => :update
   resources :subscriptions
 
   resources :games do

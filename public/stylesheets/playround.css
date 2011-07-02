@@ -677,19 +677,15 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
-<<<<<<< HEAD
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999; }
-  #arenas li .arena-image, #arenas li .game-image, #arenas li .user-avatar {
-=======
+  box-shadow: 0 0 5px 0 #999999;
   width: 100px;
   height: auto; }
   #arenas li .image {
->>>>>>> Added guider and a short guided tour and refactored javascripts and stylesheets
     text-align: center; }
 
 #games li {
@@ -700,19 +696,15 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
-<<<<<<< HEAD
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999; }
-  #games li .arena-image, #games li .game-image, #games li .user-avatar {
-=======
+  box-shadow: 0 0 5px 0 #999999;
   width: 100px;
   height: auto; }
   #games li .image {
->>>>>>> Added guider and a short guided tour and refactored javascripts and stylesheets
     text-align: center; }
 
 #round-title h1 {
@@ -829,19 +821,15 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
-<<<<<<< HEAD
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999; }
-  #subscribers li .arena-image, #subscribers li .game-image, #subscribers li .user-avatar {
-=======
+  box-shadow: 0 0 5px 0 #999999;
   width: 100px;
   height: auto; }
   #subscribers li .image {
->>>>>>> Added guider and a short guided tour and refactored javascripts and stylesheets
     text-align: center; }
 
 #subscribers h2, #comments h2 {
@@ -866,19 +854,15 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
-<<<<<<< HEAD
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999; }
-  #users li .arena-image, #users li .game-image, #users li .user-avatar {
-=======
+  box-shadow: 0 0 5px 0 #999999;
   width: 100px;
   height: auto; }
   #users li .image {
->>>>>>> Added guider and a short guided tour and refactored javascripts and stylesheets
     text-align: center; }
 
 .spots {

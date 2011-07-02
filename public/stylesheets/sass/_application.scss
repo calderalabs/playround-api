@@ -35,16 +35,14 @@ $main-fucsia: #eb04a1;
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
-<<<<<<< HEAD
+
   @include rounded-corners(5px);
   @include box-shadow(0,0,5px,0, #999999);
-  .arena-image, .game-image, .user-avatar {
-=======
+
   width: 100px;
   height: auto;
   
   .image {
->>>>>>> Added guider and a short guided tour and refactored javascripts and stylesheets
     text-align: center;
   }
   

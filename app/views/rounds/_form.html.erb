@@ -1,3 +1,11 @@
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag 'jquery-ui-timepicker-addon' %>
+    
+  <script type="text/javascript" charset="utf-8">
+    $('input.ui-date-picker').datetimepicker({ timeFormat: 'hh:mm:ss', dateFormat: 'yy-mm-dd' });
+  </script>
+<% end %>
+
 <%= semantic_form_for(@round) do |f| %>
   <%= f.inputs do %>
       <%= f.hidden_field :game_id%>
@@ -9,8 +17,8 @@
       <%= f.label :arena_id %> <%= autocomplete_field_tag 'arena', '', autocomplete_arena_name_arenas_path, :value => @round.arena ? @round.arena.name : '', 
                                  :update_elements => { :id => '#round_arena_id' } %></li>
       <%= f.input :description, :required => false, :hint => 'This is an optional description for your round' %>
-      <%= f.input :deadline, :required => false, :start_year => Time.now.year %>
-      <%= f.input :date, :required => false, :start_year => Time.now.year %>
+      <%= f.input :deadline, :required => false, :input_html => { :class => 'ui-date-picker', :value => l(@round.deadline, :format => '%Y-%m-%d %H:%M:%S') }, :as => :string %>
+      <%= f.input :date, :required => false, :input_html => { :class => 'ui-date-picker', :value => l(@round.date, :format => '%Y-%m-%d %H:%M:%S') }, :as => :string %>
       <%= f.input :max_people, :required => false %>
       <%= f.input :min_people, :required => false%>
     <% end %>
