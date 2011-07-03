@@ -31,8 +31,14 @@ class Arena < ActiveRecord::Base
     errors.add(:address, "must be in a town or city") unless self.town_woeid
   end
   
+  scope :available_for, lambda { |user|
+      where("public = ? OR user_id = ?", true, user.id)
+  }
+  
+  scope :near, lambda { |location|
+      where(:town_woeid => location.woeid)
+  }
+  
   validates_url_format_of :website, :allow_blank => true
   adjusts_string :website, :prepend => 'http://', :if => Proc.new { |a| !(a.website =~ /^.*:.*$/) }
-  
-  reverse_geocoded_by :latitude, :longitude
 end

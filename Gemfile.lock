@@ -1,9 +1,3 @@
-GIT
-  remote: git://github.com/vpuzzella/geocoder.git
-  revision: 061ebd764980a93b16eb8e4fce63e286ee762344
-  specs:
-    geocoder (1.0.0)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -83,6 +77,7 @@ GEM
       activesupport (>= 2.3.7)
       formtastic
       i18n (>= 0.4.0)
+    geocoder (1.0.2)
     geoplanet (0.2.6)
       json (>= 1.1.3)
       rest-client (>= 0.9)
@@ -186,7 +181,7 @@ DEPENDENCIES
   factory_girl
   formtastic
   formtastic_datepicker_inputs
-  geocoder!
+  geocoder
   geoplanet
   jquery-rails
   launchy

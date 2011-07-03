@@ -51,15 +51,27 @@ $(document).ready(function(){
 
 	    $(e).autocomplete({
 				source: function( request, response ) {
-					$.getJSON( $(e).attr('data-autocomplete'), {
-					term: extractLast( request.term )
-					}, function() {
-                        $(arguments[0]).each(function(i, el) {
-                            var obj = {};
-                            obj[el.id] = el;
-                            $(e).data(obj);
-                        });
-                        response.apply(null, arguments);
+				  var queryParameter = $(e).attr('data-query-parameter') || 'term';
+				  var query = {}
+				  query[queryParameter] = extractLast( request.term )
+		
+				  
+					$.getJSON( $(e).attr('data-autocomplete'), query, function() {
+                        response($(arguments[0]).map(function(i, el) {
+                            var newEl = {};
+
+                            for(p in el)
+                              newEl[p] = el[p];
+
+                            newEl['label'] = el[$(e).attr('data-label') || 'label'];
+                            newEl['value'] = el[$(e).attr('data-value') || 'value'];
+
+                            return newEl;
+                          }).each(function(i, el) {
+                              var obj = {};
+                              obj[el.id] = el;
+                              $(e).data(obj);
+                          }));
                     });
 				},
 				search: function() {

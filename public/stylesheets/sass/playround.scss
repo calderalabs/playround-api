@@ -364,11 +364,7 @@ input.placeholder {
 
 #arena, #game, #user {
   .left-column {
-    width: 540px;
-  }
-
-  .right-column {
-    text-align: center;
+    margin-right: 20px;
   }
   
   p {
@@ -438,3 +434,10 @@ span.actions a {
 }
 
 form #location_map { margin-left: 25%; width:72%; margin-bottom: 20px; margin-top: -10px; height: 400px; }
+
+.empty-list-message {
+  color: #aaa;
+  text-align: center;
+  padding: 20px;
+  font-size: 16pt;
+}

@@ -6,10 +6,10 @@ class ConfirmationController < ApplicationController
     respond_to do |format|
       if @round.confirm!
         format.html { redirect_to(@round, :notice => 'Round was successfully confirmed.') }
-        format.xml { head :ok }
+        format.json { head :ok }
       else
         format.html { redirect_to @round }
-        format.xml { render :xml => @round.errors, :status => :unprocessable_entity }
+        format.json { render :json => @round.errors, :status => :unprocessable_entity }
       end
     end
   end

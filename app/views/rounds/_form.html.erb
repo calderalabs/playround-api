@@ -8,19 +8,22 @@
 
 <%= semantic_form_for(@round) do |f| %>
   <%= f.inputs do %>
-      <%= f.hidden_field :game_id%>
+      <%= f.hidden_field :game_id %>
       <li class="text">
-      <%= f.label :game_id %> <%= autocomplete_field_tag 'game', '', autocomplete_game_name_games_path, :value => @round.game ? @round.game.name : '', 
-                                 :update_elements => { :id => '#round_game_id' } %></li>
+      <%= f.label :game_id %> <%= autocomplete_field_tag 'game', '', games_path, :value => @round.game ? @round.game.name : '', 
+                                  'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
+                                  :update_elements => { :id => '#round_game_id' } %></li>
       <%= f.hidden_field :arena_id%>
       <li class="text">
-      <%= f.label :arena_id %> <%= autocomplete_field_tag 'arena', '', autocomplete_arena_name_arenas_path, :value => @round.arena ? @round.arena.name : '', 
-                                 :update_elements => { :id => '#round_arena_id' } %></li>
+      <%= f.label :arena_id %> <%= autocomplete_field_tag 'arena', '', arenas_path, :value => @round.arena ? @round.arena.name : '',
+                                  'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
+                                  :update_elements => { :id => '#round_arena_id' } %></li>
       <%= f.input :description, :required => false, :hint => 'This is an optional description for your round' %>
-      <%= f.input :deadline, :required => false, :input_html => { :class => 'ui-date-picker', :value => l(@round.deadline, :format => '%Y-%m-%d %H:%M:%S') }, :as => :string %>
+      <%= f.input :deadline, :required => false, :input_html => { :class => 'ui-date-picker', :value => l(@round.deadline, :format => '%Y-%m-%d %H:%M:%S') }, :as => :string, 
+                  :hint => "Other people will be able to subscribe to this round until this date"%>
       <%= f.input :date, :required => false, :input_html => { :class => 'ui-date-picker', :value => l(@round.date, :format => '%Y-%m-%d %H:%M:%S') }, :as => :string %>
-      <%= f.input :max_people, :required => false %>
-      <%= f.input :min_people, :required => false%>
+      <%= f.input :max_people, :required => false, :label => "Maximum people" %>
+      <%= f.input :min_people, :required => false, :label => "Minimum people", :hint => "This is the minimum number of people you would like to play with" %>
     <% end %>
   <%= f.buttons %>
 <% end %>

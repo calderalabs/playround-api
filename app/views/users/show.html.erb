@@ -6,24 +6,15 @@
   </h1>
 
   <div class="left-column">
-    <div class="boxed-item" style="min-height: 300px">
-      <% unless @user.real_name.blank? %>
-      <p>
-        <strong>Real name:</strong> <%= @user.real_name %>
-      </p>
-      <% end %>
-      <p>
-        <strong>Email:</strong> <%= @user.email %>
-      </p>
-    </div>
+    <%= image_tag @user.avatar.url(:medium) %>
   </div>
   
-  <div class="right-column">
-    <div class="boxed-item" style="min-width: 300px;">
-      <%= image_tag @user.avatar.url(:medium) %>
-    </div>
-  </div>
-  
-  <div class="clear"></div>
-  
+  <% unless @user.real_name.blank? %>
+  <p>
+    <strong>Real name:</strong> <%= @user.real_name %>
+  </p>
+  <% end %>
+  <p>
+    <strong>Email:</strong> <%= @user.email %>
+  </p>
 </div>

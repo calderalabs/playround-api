@@ -5,8 +5,8 @@ class UsersController < Clearance::UsersController
     @users = User.all
     
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
+      format.html
+      format.json  { render :json => @users }
     end
   end  
   
@@ -14,8 +14,8 @@ class UsersController < Clearance::UsersController
     @user = User.find(params[:id])
     
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @user }
+      format.html
+      format.json  { render :json => @user }
     end
   end
   
@@ -29,10 +29,10 @@ class UsersController < Clearance::UsersController
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to(@user, :notice => 'Your profile was successfully updated.') }
-        format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -40,7 +40,7 @@ class UsersController < Clearance::UsersController
   private
 
   def flash_notice_after_create
-    flash[:notice] = nil
+    
   end
   
   def url_after_create

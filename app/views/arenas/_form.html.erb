@@ -38,9 +38,9 @@
 
 <%= semantic_form_for @arena, :html => { :multipart => true } do |f| %>
   <%= f.inputs do %>
+  <%= f.input :public, :hint => "By checking this box you will allow other people to organize rounds in this arena" %>
   <%= f.input :name %>
   <%= f.input :description %>
-  <%= f.input :public %>
   <%= f.input :image %>
   <%= f.autocompleted_input :address, :size => nil, :url => autocomplete_address_arenas_path, :update_elements => 
     { :latitude => '#arena_latitude', :longitude => '#arena_longitude'} %>

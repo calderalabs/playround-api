@@ -3,15 +3,19 @@
   <%= link_to('Create a new arena!', new_arena_path) %>
 </div>
 
-<ul id="arenas">
-<% @arenas.each do |arena| %>
-<li>
-  <a href="<%= arena_path(arena) %>">
-    <div class="image"><%= image_tag arena.image.url(:thumb) %></div>
-    <div class="arena-details">
-      <%= arena.name %>
-    </div>
-  </a>
-</li>
-<% end%>
-</ul>
+<% if @arenas.empty? %>
+  <p class="empty-list-message">There are no arenas in your city.
+<% else %>
+  <ul id="arenas">
+    <% @arenas.each do |arena| %>
+    <li>
+      <a href="<%= arena_path(arena) %>">
+        <div class="image"><%= image_tag arena.image.url(:thumb) %></div>
+        <div class="arena-details">
+          <%= arena.name %>
+        </div>
+      </a>
+    </li>
+    <% end%>
+  </ul>
+<% end %>

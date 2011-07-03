@@ -8,10 +8,10 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html { redirect_to(@comment.round, :notice => 'Comment was successfully added.') }
-        format.xml  { render :xml => @comment, :status => :created, :location => @round }
+        format.json  { render :json => @comment, :status => :created }
       else
         format.html { render :template => 'rounds/show' }
-        format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @comment.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @comment.round }
-      format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
 end

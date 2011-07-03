@@ -17,12 +17,12 @@ eugenio.save!
 
 puts "Eugenio was created" if !!eugenio
 
-depalo_house = Arena.new({ :name => "Depalo's House", :latitude => 43.328092, :longitude => 11.3157779000001, :description => "The best house in the world", :address => "Via Mentana 45, Siena"})
+depalo_house = Arena.new({ :name => "Depalo's House", :latitude => 43.328092, :longitude => 11.3157779000001, :description => "The best house in the world", :address => "Via Mentana 45, Siena", :public => true})
 depalo_house.user_id = matteo.id
 depalo_house.save!
 puts "Depalo's House was created" if !!depalo_house
 
-giorni_house = Arena.new({ :name => "Giorni's House", :latitude => 43.3361655, :longitude => 11.3023851, :description => "The worst house in the world", :address => "Via Sansedoni 3, Siena"})
+giorni_house = Arena.new({ :name => "Giorni's House", :latitude => 43.3361655, :longitude => 11.3023851, :description => "The worst house in the world", :address => "Via Sansedoni 3, Siena", :public => true})
 giorni_house.user_id = eugenio.id
 giorni_house.save!
 puts "Giorni's House was created" if !!giorni_house

@@ -4,6 +4,7 @@ class Ability
   def initialize(user)
     user ||= User.new
     
+    can :create, User if user.guest?
     can :read, [Arena, Comment, Round, Game, User]
     
     can :create, [Round, Arena, Comment, Game] unless user.guest?

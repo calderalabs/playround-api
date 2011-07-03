@@ -4,7 +4,6 @@ class Round < ActiveRecord::Base
   after_initialize :initialize_default_values
 
   belongs_to :arena
-  geocoded_through :arena
   belongs_to :game
   belongs_to :user
   has_many :subscriptions
@@ -21,7 +20,7 @@ class Round < ActiveRecord::Base
   end
   
   before_validation do
-    errors.add(:arena_id, "must be a public arena or a private arena that you own") if !self.arena.public? && self.arena.user_id != self.user_id
+    errors.add(:arena_id, "must be a public arena or a private arena that you own") if self.arena && !self.arena.public? && self.arena.user_id != self.user_id
   end
   
   validates_presence_of :deadline

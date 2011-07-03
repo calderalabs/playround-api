@@ -27,6 +27,9 @@ ul {
 .container {
   margin: 0 auto; }
 
+textarea {
+  font-family: inherit; }
+
 #content {
   background-color: #ffffff; }
 
@@ -836,9 +839,7 @@ input.placeholder {
   padding-bottom: 20px; }
 
 #arena .left-column, #game .left-column, #user .left-column {
-  width: 540px; }
-#arena .right-column, #game .right-column, #user .right-column {
-  text-align: center; }
+  margin-right: 20px; }
 #arena p, #game p, #user p {
   text-align: left;
   font-size: large; }
@@ -908,3 +909,9 @@ form #location_map {
   margin-bottom: 20px;
   margin-top: -10px;
   height: 400px; }
+
+.empty-list-message {
+  color: #aaa;
+  text-align: center;
+  padding: 20px;
+  font-size: 16pt; }
