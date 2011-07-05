@@ -3,7 +3,7 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.where({})
-    @games = @games.where('name LIKE ?', "#{params[:q]}%") if params[:q]
+    @games = @games.where('LOWER(name) LIKE LOWER(?)', "#{params[:q]}%") if params[:q]
     
     respond_to do |format|
       format.html

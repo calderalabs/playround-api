@@ -6,7 +6,7 @@ class ArenasController < ApplicationController
     @arenas = Arena.where({})
     @arenas = @arenas.available_for(current_user) if signed_in?
     @arenas = @arenas.near(current_location) if located?
-    @arenas = @arenas.where('name LIKE ?', "#{params[:q]}%") if params[:q]
+    @arenas = @arenas.where('LOWER(name) LIKE LOWER(?)', "#{params[:q]}%") if params[:q]
     
     respond_to do |format|
       format.html
