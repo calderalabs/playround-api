@@ -51,4 +51,14 @@ Playround::Application.configure do
     :storage => :s3,
     :s3_credentials => "config/s3.yml",
   }
+  
+  ENV["REDISTOGO_URL"] = 'redis://playround:aae70b6a0b4afd6bd1c412ba7fcbce1b@filefish.redistogo.com:9721/' 
+  
+  uri = URI.parse(ENV["REDISTOGO_URL"])
+  
+  Redis::Settings.configure do |config|
+    config.connection = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+  end
+
+  Redis::Settings.root_namespace = "settings"
 end

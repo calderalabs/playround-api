@@ -30,5 +30,11 @@ Playround::Application.configure do
     :storage => :s3,
     :s3_credentials => "config/s3.yml",
   }
+  
+  Redis::Settings.configure do |config|
+    config.connection = Redis.new(:host => "localhost", :port => 6379)
+  end
+
+  Redis::Settings.root_namespace = "settings"
 end
 
