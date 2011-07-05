@@ -4,7 +4,7 @@ describe ConfirmationController do
   before(:each) do
     stub_geocoder
     
-    @round = Factory :round
+    @round = Factory :round, :deadline => Time.now
     @controller.sign_in @round.user
   end
   

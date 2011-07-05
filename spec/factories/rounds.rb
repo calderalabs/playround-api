@@ -5,4 +5,5 @@ Factory.define :round, :class => Round do |round|
   round.association :game
   round.association :user
   round.date Time.now + 2.months
+  round.deadline Time.now + 1.month
 end

@@ -14,7 +14,10 @@
     <strong>Real name:</strong> <%= @user.real_name %>
   </p>
   <% end %>
+  
+  <% if can? :read_email_of, @user %>
   <p>
     <strong>Email:</strong> <%= @user.email %>
   </p>
+  <% end %>
 </div>

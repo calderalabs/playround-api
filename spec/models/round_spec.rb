@@ -223,20 +223,23 @@ describe Round do
   end
   
   it "confirmable? should return the expected value" do
-    @round.confirmable?.should == true
-    
-    @round.deadline = Time.now + 1.month
-    
     @round.confirmable?.should == false
+    
+    @round.deadline = Time.now
+    
+    @round.confirmable?.should == true
   end
   
   it "should confirm if can confirm" do
+    @round.deadline = Time.now
+    
     @round.confirmed.should == false
     @round.confirm!.should == true
     @round.confirmed.should == true
   end
   
   it "should not confirm if the round is already confirmed" do
+    @round.deadline = Time.now
     @round.save!
     @round.confirm!
     

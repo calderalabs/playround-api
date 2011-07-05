@@ -65,6 +65,10 @@ describe User do
     @user.should allow_mass_assignment_of(:town_woeid)
   end
   
+  it "should mass-assign show_email" do
+    @user.should allow_mass_assignment_of(:show_email)
+  end
+  
   # methods tests
   
   it "should return the expected value on subscribed?" do

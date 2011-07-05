@@ -90,6 +90,14 @@ class Round < ActiveRecord::Base
       RoundMailer.round_confirmation_email(self, user).deliver
     end if @recently_confirmed
   end
+  
+  def past?
+    Time.now > self.date
+  end
+  
+  def subscribable?
+    Time.now < self.deadline && !self.full?
+  end
 
   private
   

@@ -79,7 +79,9 @@ class RoundsController < ApplicationController
   private
   
   def parse_dates
-    params[:round][:date] = Time.zone.parse(params[:round][:date])
-    params[:round][:deadline] = Time.zone.parse(params[:round][:deadline])
+    unless params[:round].nil?
+      params[:round][:date] = Time.zone.parse(params[:round][:date]) if params[:round][:date].is_a? String
+      params[:round][:deadline] = Time.zone.parse(params[:round][:deadline]) if params[:round][:deadline].is_a? String
+    end
   end
 end

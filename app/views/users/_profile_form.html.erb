@@ -2,9 +2,9 @@
   <%= f.inputs do %>
   <%= f.input :display_name %>
   <%= f.input :real_name %>
-  <%= f.input :email %>
+  <%= f.input :email %> <%= f.input :show_email, :as => :boolean %>
   <%= f.input :password, :input_html => { :autocomplete => 'off' } %>
   <%= f.input :avatar %>
   <% end %>
-  <%= f.buttons %>
+  <%= f.submit 'Update Profile' %>
 <% end %>

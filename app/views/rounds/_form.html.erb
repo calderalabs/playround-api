@@ -2,21 +2,51 @@
   <%= javascript_include_tag 'jquery-ui-timepicker-addon' %>
     
   <script type="text/javascript" charset="utf-8">
+  $(function() {
+    showClearButton = function(element) {
+      var input = $(element);
+      input.attr("disabled", true);
+      
+      $('<a class="clear-autocomplete" href="javascript:void(0)">clear</a>').click(function() {
+        var clear = $(this);
+        var label = clear.siblings("label");
+        var value = $("#" + label.attr("for"));
+        
+        clear.remove();
+        
+        input.val('');
+        input.attr("disabled", false);
+        
+        value.val('');
+      }).insertAfter(input);
+    }
+    
+    $("#round_game, #round_arena").bind("autocompleteselect", function(event, ui) {
+      if(ui.item)
+        showClearButton(this);
+    }).each(function(i, element) {
+      var el = $(element);
+      
+      if(el.val())
+        showClearButton(el);
+    });
+    
     $('input.ui-date-picker').datetimepicker({ timeFormat: 'hh:mm:ss', dateFormat: 'yy-mm-dd' });
+  });
   </script>
 <% end %>
 
 <%= semantic_form_for(@round) do |f| %>
   <%= f.inputs do %>
       <%= f.hidden_field :game_id %>
-      <li class="text">
-      <%= f.label :game_id %> <%= autocomplete_field_tag 'game', '', games_path, :value => @round.game ? @round.game.name : '', 
+      <%= f.autocompleted_input :game_id, :name => '', :url => games_path, :value => @round.game ? @round.game.name : '', 
                                   'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
+                                  :id => 'round_game',
                                   :update_elements => { :id => '#round_game_id' } %></li>
-      <%= f.hidden_field :arena_id%>
-      <li class="text">
-      <%= f.label :arena_id %> <%= autocomplete_field_tag 'arena', '', arenas_path, :value => @round.arena ? @round.arena.name : '',
+      <%= f.hidden_field :arena_id %>
+      <%= f.autocompleted_input :arena_id, :name => '', :url => arenas_path, :value => @round.arena ? @round.arena.name : '',
                                   'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
+                                  :id => 'round_arena',
                                   :update_elements => { :id => '#round_arena_id' } %></li>
       <%= f.input :description, :required => false, :hint => 'This is an optional description for your round' %>
       <%= f.input :deadline, :required => false, :input_html => { :class => 'ui-date-picker', :value => l(@round.deadline, :format => '%Y-%m-%d %H:%M:%S') }, :as => :string, 

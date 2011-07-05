@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include Clearance::User
   
-  attr_accessible :display_name, :real_name, :email, :password, :avatar, :town_woeid
+  attr_accessible :display_name, :real_name, :email, :password, :avatar, :town_woeid, :show_email
   
   has_attached_file :avatar, { :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
                                :default_url => '/images/missing_avatar.gif' }.merge(PAPERCLIP_CONFIG)
@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   after_create do
     self.settings[:show_quicktour] = true
     self.settings[:current_guider] = 'welcome'
+    self.settings[:show_email] = false
   end
   
   has_many :subscriptions
@@ -30,5 +31,17 @@ class User < ActiveRecord::Base
   
   def guest?
     new_record?
+  end
+  
+  def show_email
+    settings[:show_email]
+  end
+  
+  def show_email=(show)
+    settings[:show_email] = show
+  end
+  
+  def shows_email?
+    settings[:show_email] == true
   end
 end

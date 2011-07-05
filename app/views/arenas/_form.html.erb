@@ -38,7 +38,7 @@
 
 <%= semantic_form_for @arena, :html => { :multipart => true } do |f| %>
   <%= f.inputs do %>
-  <%= f.input :public, :hint => "By checking this box you will allow other people to organize rounds in this arena" %>
+  <%= f.input :public, :label => "Allow other people to organize rounds in this arena" %>
   <%= f.input :name %>
   <%= f.input :description %>
   <%= f.input :image %>

@@ -9,6 +9,6 @@ class Subscription < ActiveRecord::Base
   validates_uniqueness_of :round_id, :scope => :user_id, :message => "- this subscription has already been created"
   
   validate do
-    errors.add(:base, "This round is full") if self.round.full?
+    errors.add(:base, "You cannot subscribe to this round") if !self.round.subscribable?
   end
 end

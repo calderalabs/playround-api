@@ -39,7 +39,6 @@ $main-fucsia: #eb04a1;
   @include rounded-corners(5px);
   @include box-shadow(0,0,5px,0, #999999);
 
-  width: 100px;
   height: auto;
   
   .image {

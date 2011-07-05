@@ -1,7 +1,7 @@
 class SubscriptionsController < ApplicationController
   def create
     @round = Round.find(params[:id])
-    authorize! :manage_subscription_of, @round
+    authorize! :subscribe_to, @round
     @subscription = current_user.subscriptions.build(:round_id => params[:id])
     
     if @subscription.save
@@ -15,7 +15,7 @@ class SubscriptionsController < ApplicationController
   
   def destroy
     @round = Round.find(params[:id])
-    authorize! :manage_subscription_of, @round
+    authorize! :unsubscribe_to, @round
     @subscription = current_user.subscriptions.where(:round_id => @round.id).first
     
     @subscription.destroy

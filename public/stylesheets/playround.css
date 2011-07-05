@@ -306,6 +306,9 @@ form.formtastic fieldset > ol > li.datetime fieldset ol li label input {
   margin: 0;
   padding: 0; }
 
+.clear-autocomplete {
+  padding-left: 10px; }
+
 body {
   font-size: small; }
 
@@ -686,7 +689,6 @@ input.placeholder {
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
   box-shadow: 0 0 5px 0 #999999;
-  width: 100px;
   height: auto; }
   #arenas li .image {
     text-align: center; }
@@ -705,7 +707,6 @@ input.placeholder {
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
   box-shadow: 0 0 5px 0 #999999;
-  width: 100px;
   height: auto; }
   #games li .image {
     text-align: center; }
@@ -830,7 +831,6 @@ input.placeholder {
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
   box-shadow: 0 0 5px 0 #999999;
-  width: 100px;
   height: auto; }
   #subscribers li .image {
     text-align: center; }
@@ -861,7 +861,6 @@ input.placeholder {
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
   box-shadow: 0 0 5px 0 #999999;
-  width: 100px;
   height: auto; }
   #users li .image {
     text-align: center; }
