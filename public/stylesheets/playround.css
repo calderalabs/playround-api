@@ -683,13 +683,13 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
+  height: 120px;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999;
-  height: auto; }
+  box-shadow: 0 0 5px 0 #999999; }
   #arenas li .image {
     text-align: center; }
 
@@ -701,13 +701,13 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
+  height: 120px;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999;
-  height: auto; }
+  box-shadow: 0 0 5px 0 #999999; }
   #games li .image {
     text-align: center; }
 
@@ -825,13 +825,13 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
+  height: 120px;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999;
-  height: auto; }
+  box-shadow: 0 0 5px 0 #999999; }
   #subscribers li .image {
     text-align: center; }
 
@@ -855,13 +855,13 @@ input.placeholder {
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
+  height: 120px;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-box-shadow: 0 0 5px 0 #999999;
   -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999;
-  height: auto; }
+  box-shadow: 0 0 5px 0 #999999; }
   #users li .image {
     text-align: center; }
 

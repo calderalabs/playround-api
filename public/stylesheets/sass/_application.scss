@@ -35,11 +35,11 @@ $main-fucsia: #eb04a1;
   margin-top: 5px;
   margin-left: 0;
   border: 1px solid #ccc;
+  
+  height: 120px;
 
   @include rounded-corners(5px);
   @include box-shadow(0,0,5px,0, #999999);
-
-  height: auto;
   
   .image {
     text-align: center;
