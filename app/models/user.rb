@@ -42,6 +42,6 @@ class User < ActiveRecord::Base
   end
   
   def shows_email?
-    settings[:show_email] == true
+    !!settings[:show_email]
   end
 end

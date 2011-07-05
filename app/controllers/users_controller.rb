@@ -1,6 +1,7 @@
 class UsersController < Clearance::UsersController
   load_and_authorize_resource
-    
+  before_filter :parse_settings, :only => [:create, :update]
+  
   def index
     @users = User.all
     
@@ -38,6 +39,12 @@ class UsersController < Clearance::UsersController
   end
   
   private
+
+  def parse_settings
+    unless params[:user].nil?
+      params[:user][:show_email] = params[:user][:show_email].to_b
+    end
+  end
 
   def flash_notice_after_create
     
