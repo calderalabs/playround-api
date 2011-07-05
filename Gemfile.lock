@@ -97,7 +97,6 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    mocha (0.9.12)
     nokogiri (1.4.4)
     paperclip (2.3.11)
       activerecord (>= 2.3.0)
@@ -183,7 +182,6 @@ DEPENDENCIES
   geoplanet
   jquery-rails
   launchy
-  mocha
   paperclip
   pickle
   rails (= 3.0.7)

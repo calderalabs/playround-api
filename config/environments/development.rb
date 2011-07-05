@@ -37,4 +37,3 @@ Playround::Application.configure do
 
   Redis::Settings.root_namespace = "settings"
 end
-
