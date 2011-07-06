@@ -41,7 +41,7 @@ class UsersController < Clearance::UsersController
   private
 
   def parse_settings
-    unless params[:user].nil?
+    unless params[:user].nil? || params[:user][:show_email].nil?
       params[:user][:show_email] = params[:user][:show_email].to_b
     end
   end
