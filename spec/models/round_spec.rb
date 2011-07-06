@@ -264,7 +264,7 @@ describe Round do
     @subscription = Factory :subscription, :round => @round
     @round.reload
  
-    @round.subscribers.include?(@subscription.user).should == true
+    @round.all_subscribers.include?(@subscription.user).should == true
   end
   
   it "should decrease remaining spots when someone subscribes" do
@@ -293,5 +293,29 @@ describe Round do
     @round.authorized?(@round.user).should == true
     
     @round.authorized?(Factory :user).should == false
+  end
+  
+  it "past? should return the expected value" do
+    @round.past?.should == false
+    
+    Time.stub(:now).and_return(@round.date + 1.day)
+    
+    @round.past?.should == true
+  end
+  
+  it "subscribable? should return the expected value when the round is full" do
+    @round.subscribable?.should == true
+    
+    @round.stub(:remaining_spots).and_return(0)
+    
+    @round.subscribable?.should == false
+  end
+  
+  it "subscribable? should return the expected value when the current time is past the deadline" do
+    @round.subscribable?.should == true
+    
+    Time.stub(:now).and_return(@round.deadline + 1.day)
+    
+    @round.subscribable?.should == false
   end
 end

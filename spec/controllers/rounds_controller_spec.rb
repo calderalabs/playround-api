@@ -115,7 +115,6 @@ describe RoundsController do
     put :update, :id => @round.to_param, :round => @round.attributes
     
     should redirect_to(sign_in_url)
-    Time.unstub!(:now)
   end
 
   it "should destroy if you own the round" do
@@ -199,6 +198,5 @@ describe RoundsController do
 
     Time.stub(:now).and_return(@round.deadline + 10.seconds)
     ability.cannot?(:update, @round).should == true
-    Time.unstub!(:now)
   end
 end

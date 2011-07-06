@@ -38,7 +38,6 @@ describe ConfirmationController do
     post :create, :round_id => @round.to_param
 
     should redirect_to(sign_in_url)
-    Time.unstub!(:now)
   end
 
   it "should not confirm if you don't own the round" do
