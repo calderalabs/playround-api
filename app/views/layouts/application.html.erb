@@ -36,11 +36,11 @@
     <div id="session">
       <div class="container">
         <%= form_tag location_path, :method => :put, :id => 'location-form' do |f| %>
-          <%= hidden_field_tag 'redirect_to', request.request_uri %>
+          <%= hidden_field_tag 'redirect_to', request.fullpath %>
           <%= text_field_tag 'location', '' %>
         <% end %>
         
-        <%= link_to(located? ? [current_location.name, current_location.country].join(', ') : 'Unknown location', '/', :id => 'change-location') %> |
+        <%= link_to(located? ? [current_location.name, current_location.country].join(', ') : 'Unknown location', 'javascript:void(0)', :id => 'change-location') %> |
         
         <% if signed_in? -%>
           <%= link_to current_user.display_name, user_path(current_user), :id => 'change-profile' %> |
@@ -80,8 +80,6 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function() {
-    $('#location-form').css('display', 'none');
-    
     $('#location-form input').blur(function(event) {
       $('#location-form').css('display', 'none');
       $('#change-location').css('display', 'inline');

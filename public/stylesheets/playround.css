@@ -914,3 +914,6 @@ form #location_map {
   text-align: center;
   padding: 20px;
   font-size: 16pt; }
+
+#location-form {
+  display: none; }
