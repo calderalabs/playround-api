@@ -24,7 +24,6 @@ require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
 
-
 module WithinHelpers
   def with_scope(locator)
     locator ? within(*selector_for(locator)) { yield } : yield
@@ -61,6 +60,11 @@ end
 When /^(?:|I )click the confirmation button$/ do
   page.driver.browser.switch_to.alert.accept
 end
+
+When(/^I select "([^\"]*)" from the list$/) do |text|
+  find(:xpath, "//li/a[contains(text(),\"#{text}\")]").click
+end
+
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)

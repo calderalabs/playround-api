@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include Clearance::User
   
   attr_accessible :display_name, :real_name, :email, :password, :avatar, :town_woeid, :show_email
+  attr_accessor :show_email, :show_quicktour, :current_guider
   
   has_attached_file :avatar, { :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
                                :default_url => '/images/missing_avatar.gif' }.merge(PAPERCLIP_CONFIG)
@@ -10,10 +11,16 @@ class User < ActiveRecord::Base
     self.display_name ||= self.email.split('@').first
   end
   
-  after_create do
-    self.settings[:show_quicktour] = true
-    self.settings[:current_guider] = 'welcome'
-    self.settings[:show_email] = false
+  after_initialize :on => :create do
+    show_quicktour = true
+    current_guider = 'welcome'
+    show_email = false
+  end
+  
+  after_save do
+    settings[:show_quicktour] = show_quicktour
+    settings[:current_guider] = current_guider
+    settings[:show_email] = show_email
   end
   
   has_many :subscriptions
@@ -33,15 +40,7 @@ class User < ActiveRecord::Base
     new_record?
   end
   
-  def show_email
-    settings[:show_email]
-  end
-  
-  def show_email=(show)
-    settings[:show_email] = show
-  end
-  
   def shows_email?
-    !!settings[:show_email]
+    !!show_email
   end
 end

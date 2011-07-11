@@ -14,6 +14,5 @@ Then /^I should see the details of that user$/ do
   user = User.last
   
   Then "I should see \"#{user.display_name}\""
-  And "I should see \"#{user.email}\""
   And "I should see \"#{user.real_name}\""
 end

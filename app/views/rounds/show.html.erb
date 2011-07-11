@@ -33,11 +33,14 @@
 <div id="round-title">
   <h1>
     <%= link_to @round.game.name, game_path(@round.game)%> - <%= l @round.date, :format => :long %>
-    <% if can? :update, @round %>
       <span class="actions">
-      | <%= link_to 'Edit', edit_round_path(@round) %>
+      <% if can? :update, @round %>
+        | <%= link_to 'Edit', edit_round_path(@round) %>
+      <% end %>
+      <% if can? :destroy, @round %>
+        | <%= link_to 'Delete', round_path(@round), :method => 'delete', :confirm => 'Are you sure?' %>
+      <% end %>
       </span>
-    <% end %>
   </h1>
   <h2><%= link_to @round.arena.name, arena_path(@round.arena) %> - <%= @round.arena.address %></h2>
 </div>
@@ -124,7 +127,7 @@
         <span><%= time_ago_in_words comment.created_at %> ago</span>
         <span class="actions">
           <% if can? :destroy, comment %>
-            <%= link_to 'Remove', comment_path(comment), :method => :delete, :confirm => 'Are you sure?' %>
+            <%= link_to 'Delete', comment_path(comment), :method => :delete, :confirm => 'Are you sure?' %>
           <% end %>
         </span>
       </div>

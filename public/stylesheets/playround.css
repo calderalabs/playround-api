@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0; }
 
+img {
+  border: 0; }
+
 .boxed-item {
   padding: 20px;
   border: 1px solid #ccc;

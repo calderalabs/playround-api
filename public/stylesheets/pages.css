@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0; }
 
+img {
+  border: 0; }
+
 .boxed-item {
   padding: 20px;
   border: 1px solid #ccc;
@@ -177,9 +180,6 @@ textarea {
       -webkit-box-shadow: inset 0 0 0 0 0;
       box-shadow: inner 0 0 0 0 0; }
 
-#password-field {
-  display: none; }
-
 input[type=text], input[type=password] {
   font-size: 14pt;
   padding: 8px;
@@ -188,10 +188,7 @@ input[type=text], input[type=password] {
 
 label {
   font-size: 18pt;
-  margin: 20px;
-  display: block;
-  font-weight: bold;
-  box-shadow: none; }
+  font-weight: bold; }
 
 input.placeholder {
   color: #ccc; }

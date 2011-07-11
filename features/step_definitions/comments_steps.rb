@@ -14,3 +14,9 @@ Then /^I should see "([^"]*)"'s display name in the comments box$/ do |user|
     assert has_xpath?("//*[@id=\"comments\"]//*[text() = \"#{display_name}\"]")
   end
 end
+
+Given /^I fill in the text area in the comments box with "([^"]*)"$/ do |text|
+  within '#comments' do
+    find('textarea').set(text)
+  end
+end

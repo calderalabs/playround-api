@@ -12,7 +12,7 @@ Feature: Manage Comments
 
   Scenario: Create Comment
     Given I am on the page for that round
-    And I fill in "Text" with "This round is amazing"
+    And I fill in the text area in the comments box with "This round is amazing"
     And I press "Add Comment"
     Then I should see "Comment was successfully added"
     And I should be on the page for that round
@@ -27,6 +27,6 @@ Feature: Manage Comments
   Scenario: Destroy Comment
     Given a comment for that round exists with text: "This round is amazing" created by "Matteo"
     When I go to the page for that round
-    When I click the "Destroy" link in the comments box
+    When I click the "Delete" link in the comments box
     And I click the confirmation button
     And I should not see "This round is amazing"

@@ -3,6 +3,9 @@
     <%= @arena.name %> - <%= @arena.address %> <% if can? :update, @arena %>
       | <%= link_to 'Edit', edit_arena_path(@arena) %>
     <% end %>
+    <% if can? :destroy, @arena %>
+      | <%= link_to 'Delete', arena_path(@arena), :method => 'delete', :confirm => 'Are you sure?' %>
+    <% end %>
   </h1>
 
   <div class="left-column">

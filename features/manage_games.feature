@@ -11,7 +11,7 @@ Feature: Manage Games
 
   Scenario: Create Game
     When I click the "Games" link
-    And I click the "New Game" link
+    And I click the "Create a new game" link
     And I fill in "Name" with "DotA"
     And I fill in "Description" with "An awesome game."
     And I press "Create Game"
@@ -19,15 +19,15 @@ Feature: Manage Games
     And I should be on the page for that game
 
   Scenario: Read Game Details
-    Given a game exists
+    Given a game exists with name: "DotA"
     When I click the "Games" link
-    And I click the "Show" link
+    And I click the "DotA" link
     Then I should see the details of that game
 
   Scenario: Update Game
-    Given a game exists created by "Matteo"
+    Given a game exists with name: "DotA" created by "Matteo"
     When I click the "Games" link
-    And I click the "Show" link
+    And I click the "DotA" link
     And I click the "Edit" link
     And I fill in "Name" with "Risk!"
     And I press "Update Game"

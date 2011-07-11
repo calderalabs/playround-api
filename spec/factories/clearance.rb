@@ -5,6 +5,7 @@ end
 Factory.define :user, :class => User do |user|
   user.email    { Factory.next :email }
   user.password { "password" }
+  user.show_quicktour false
 end
 
 Factory.define :email_confirmed_user, :parent => :user do |user|

@@ -14,15 +14,10 @@
   <div class="container">
     <div class="left-column">
       <%= form_for @user, :html => { :id => 'signup-form' } do |form| %>
-        <div class="text_field">
-          <%= form.text_field :email, :id => 'email-field', :placeholder => 'Email address', :autocomplete => 'off' %>
-        </div>
-        <div class="password_field">
-          <%= form.password_field :password, :id => 'password-field', :autocomplete => 'off' %>
-        </div>
-        <div class="text_field">
-          <%= text_field_tag 'text-password', nil, :id => 'text-password-field', :placeholder => 'Password', :autocomplete => 'off', :size => 30 %>
-        </div>
+          <%= form.label :email %>
+          <%= form.text_field :email, :autocomplete => 'off' %>
+          <%= form.label :password %>
+          <%= form.password_field :password, :autocomplete => 'off' %>
 
         <p>Already a rounder? <%= link_to 'Sign in!', '/sign_in' %></p>
       
@@ -48,20 +43,14 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $("#email-field").placeholder();
-    $("#password-field").placeholder();
+    if(!'placeholder' in document.createElement('input')) {
+      $("#user_email, #user_password").each(function(i, f) {
+        var field = $(f);
+        var label = $("label[for=" + field.attr('id') + "]");
 
-    $('#text-password-field').focus(function() {
-      $('#text-password-field').hide();
-      $('#password-field').show();
-      $('#password-field').focus();
-    });
-      
-    $('#password-field').blur(function() {
-      if($('#password-field').val() == '') {
-        $('#text-password-field').show();
-        $('#password-field').hide();
-      }
-    });
+        label.hide();
+        field.attr('placeholder', label.text());
+      });
+    }
   });
 </script>

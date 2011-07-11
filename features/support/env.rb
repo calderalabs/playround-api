@@ -10,6 +10,10 @@ require 'database_cleaner'
 
 require 'database_cleaner/cucumber'
 
+require 'selenium/webdriver'
+
+Selenium::WebDriver::Firefox::Binary.path = "/opt/Firefox.app/Contents/MacOS/firefox-bin"
+
 Factory.find_definitions
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
