@@ -14,6 +14,7 @@ Feature: Manage Games
     And I click the "Create a new game" link
     And I fill in "Name" with "DotA"
     And I fill in "Description" with "An awesome game."
+    And I set a game's image
     And I press "Create Game"
     Then I should see "Game was successfully created"
     And I should be on the page for that game
@@ -30,7 +31,9 @@ Feature: Manage Games
     And I click the "DotA" link
     And I click the "Edit" link
     And I fill in "Name" with "Risk!"
+    And I set a game's image
     And I press "Update Game"
     Then I should be on the page for that game
     And I should see "Game was successfully updated."
     And I should see "Risk!"
+    And I should see the game's image

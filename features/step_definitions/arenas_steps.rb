@@ -16,3 +16,11 @@ end
 When /^I select that arena from "([^"]*)"$/ do |field|
   select Arena.last.name, :from => field
 end
+
+When /^I set an arena's image$/ do
+  attach_file('arena_image', File.join(File.expand_path(File.dirname(__FILE__)), "colosseum.jpg"))
+end
+
+Then /^I should see the arena's image$/ do
+  assert has_xpath?("//img[contains(@src, \"colosseum.jpg\")]")
+end

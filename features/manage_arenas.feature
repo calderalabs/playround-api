@@ -16,6 +16,7 @@ Feature: Manage Arenas
     And I fill in "Description" with "An awesome place to play."
     And I fill in "Address" with "Via Mentana, 45, Siena"
     And I select "Via Mentana" from the list
+    And I set an arena's image
     And I press "Create Arena"
     Then I should see "Arena was successfully created"
     And I should be on the page for that arena
@@ -34,10 +35,12 @@ Feature: Manage Arenas
     And I click the "Depalo's House" link
     And I click the "Edit" link
     And I fill in "Name" with "Tea Room"
+    And I set an arena's image
     And I press "Update Arena"
     Then I should be on the page for that arena
     And I should see "Arena was successfully updated."
     And I should see "Tea Room"
+    And I should see the arena's image
 
   Scenario: Destroy Arena
     Given an arena exists with name: "Depalo's House" created by "Matteo"
