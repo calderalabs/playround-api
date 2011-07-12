@@ -7,7 +7,7 @@ Then /^I should see my avatar$/ do
 end
 
 When /^I set my avatar$/ do
-  attach_file('user_avatar', File.join(File.expand_path(File.dirname(__FILE__)), "justin-bieber.jpg"))
+  attach_file('user_avatar', File.join(File.expand_path(File.dirname(__FILE__)), File.join("files", "justin-bieber.jpg")))
 end
 
 Then /^I should see the details of that user$/ do

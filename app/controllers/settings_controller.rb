@@ -3,7 +3,7 @@ class SettingsController < ApplicationController
     allowed_settings = [ :show_quicktour, :current_guider ]
     
     params[:settings].each do |k, v|
-      current_user.settings[k] = v if allowed_settings.include? k.to_sym
+      current_user.send("#{k}=", v) if allowed_settings.include? k.to_sym
     end
 
     respond_to do |format|

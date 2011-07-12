@@ -14,7 +14,7 @@ When /^I select that game from "([^"]*)"$/ do |field|
 end
 
 When /^I set a game's image$/ do
-  attach_file('game_image', File.join(File.expand_path(File.dirname(__FILE__)), "supermario.jpg"))
+  attach_file('game_image', File.join(File.expand_path(File.dirname(__FILE__)), File.join("files", "supermario.jpg")))
 end
 
 Then /^I should see the game's image$/ do

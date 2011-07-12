@@ -43,7 +43,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    if(!'placeholder' in document.createElement('input')) {
+    if('placeholder' in document.createElement('input')) {
       $("#user_email, #user_password").each(function(i, f) {
         var field = $(f);
         var label = $("label[for=" + field.attr('id') + "]");

@@ -55,23 +55,23 @@ class Round < ActiveRecord::Base
   end
   
   def all_subscribers
-    self.subscribers + [self.user]
+    subscribers + [user]
   end
   
   def remaining_spots
-    self.max_people - self.all_subscribers.count
+    max_people - all_subscribers.count
   end
   
   def full?
-    self.remaining_spots == 0
+    remaining_spots == 0
   end
   
-  def authorized?(user)
-    self.user == user
+  def authorized?(some_user)
+    user == some_user
   end
 
   def confirmable?
-    !self.confirmed_was && Time.now > self.deadline && Time.now < self.date
+    !confirmed_was && Time.now > deadline && Time.now < date
   end
   
   def confirmed=(confirmed)
@@ -82,21 +82,21 @@ class Round < ActiveRecord::Base
   
   def confirm!
     self.confirmed = true
-    self.save
+    save
   end
 
   after_save do
-    self.subscribers.each do |user|
+    subscribers.each do |user|
       RoundMailer.round_confirmation_email(self, user).deliver
     end if @recently_confirmed
   end
   
   def past?
-    Time.now > self.date
+    Time.now > date
   end
   
   def subscribable?
-    Time.now < self.deadline && !self.full?
+    Time.now < deadline && !full?
   end
 
   private

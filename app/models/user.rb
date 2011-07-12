@@ -11,10 +11,16 @@ class User < ActiveRecord::Base
     self.display_name ||= self.email.split('@').first
   end
   
-  after_initialize :on => :create do
-    show_quicktour = true
-    current_guider = 'welcome'
-    show_email = false
+  after_initialize do
+    self.show_quicktour = true
+    self.current_guider = 'welcome'
+    self.show_email = false
+  end
+  
+  after_find do
+    self.show_quicktour = settings[:show_quicktour]
+    self.current_guider = settings[:current_guider]
+    self.show_email = settings[:show_email]
   end
   
   after_save do
@@ -42,5 +48,9 @@ class User < ActiveRecord::Base
   
   def shows_email?
     !!show_email
+  end
+  
+  def shows_quicktour?
+    !!show_quicktour
   end
 end
