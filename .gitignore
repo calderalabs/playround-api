@@ -6,3 +6,4 @@ tmp/
 .DS_Store
 *.tmproj
 dump.rdb
+public/system
