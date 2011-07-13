@@ -33,7 +33,7 @@ class Ability
     end
     
     can :manage_confirmation_of, Round do |round|
-      round.user_id == user.id && round.confirmable?
+      round.user_id == user.id
     end
     
     can :subscribe_to, Round do |round|

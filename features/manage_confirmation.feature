@@ -6,16 +6,14 @@ Feature: Confirmation
   
   Background:
     Given a user "Matteo" exists with email: "matteodepalo@mac.com", password: "solidus"
-    And a round exists created by "Matteo"
     And I have logged in with email: "matteodepalo@mac.com", password: "solidus"
+    And I created a round in the past
     And I go to the home page
     
     Scenario: Confirm the round
-      Given the current time is between the deadline and the date
-      When I go to that round's page
+      When I go to the page for that round
+      And I press "Confirm"
       Then show me the page
-    
-    
     
     
   

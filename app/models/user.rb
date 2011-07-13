@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
   end
   
   after_initialize do
-    self.show_quicktour = true
-    self.current_guider = 'welcome'
-    self.show_email = false
+    self.show_quicktour ||= true
+    self.current_guider ||= 'welcome'
+    self.show_email ||= false
   end
   
   after_find do
@@ -24,9 +24,9 @@ class User < ActiveRecord::Base
   end
   
   after_save do
-    settings[:show_quicktour] = show_quicktour
-    settings[:current_guider] = current_guider
-    settings[:show_email] = show_email
+    self.settings[:show_quicktour] = show_quicktour
+    self.settings[:current_guider] = current_guider
+    self.settings[:show_email] = show_email
   end
   
   has_many :subscriptions
