@@ -5,12 +5,10 @@
 # files.
 
 require 'cucumber/rails'
-
 require 'database_cleaner'
-
 require 'database_cleaner/cucumber'
-
 require 'selenium/webdriver'
+require 'rspec/mocks/standalone'
 
 Selenium::WebDriver::Firefox::Binary.path = "/opt/Firefox.app/Contents/MacOS/firefox-bin"
 
