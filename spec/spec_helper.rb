@@ -3,7 +3,6 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'clearance'
-require 'clearance/shoulda_macros'
 require 'capybara/rails'
 
 Factory.find_definitions
@@ -37,7 +36,6 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   
   config.include CustomMatcher
-  config.include Clearance::Shoulda::Helpers
 end
 
 
