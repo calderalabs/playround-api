@@ -95,8 +95,16 @@ class Round < ActiveRecord::Base
     Time.now > date
   end
   
+  def past_deadline?
+    Time.now > deadline
+  end
+  
   def subscribable?
-    Time.now < deadline && !full?
+    Time.now < deadline && !full? && !self.confirmed
+  end
+  
+  def unsubscribable?
+    !past? && !self.confirmed
   end
 
   private

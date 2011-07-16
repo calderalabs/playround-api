@@ -26,11 +26,13 @@ Feature: Manage Rounds
     And I should see the details of that round
 
   Scenario: Read Round Details
-    Given a round exists
+    Given a round exists created by "Matteo"
     And I select "Siena, Italy" as my location
     When I click the "Rounds" link
     And I click the "Show" link
     Then I should see the details of that round
+    When I go to the rounds page
+    Then I should see "You can still subscribe to this round"
 
   Scenario: Update Round
     Given a round exists created by "Matteo"
@@ -44,7 +46,7 @@ Feature: Manage Rounds
 
   Scenario: Destroy Round
     Given a game: "DotA" exists with name: "DotA"
-    Given a round exists with game: game "DotA" created by "Matteo"
+    And a round exists with game: game "DotA" created by "Matteo"
     And I select "Siena, Italy" as my location
     When I click the "Rounds" link
     And I click the "Show" link
@@ -52,3 +54,36 @@ Feature: Manage Rounds
     And I click the confirmation button
     Then I should not see "DotA"
     And I should be on the rounds page
+    
+  Scenario: Read round after the deadline
+    Given a user "Eugenio" exists
+    And that user created a round with a past deadline
+    When I go to the page for that round
+    Then I should not see "left to subscribe"
+    And I should see "This round is not confirmed yet"
+    When I go to the rounds page
+    And I select "Siena, Italy" as my location
+    Then I should see "This round is not confirmed yet"
+  
+  Scenario: Read not confirmed round after the date
+    Given a user "Eugenio" exists
+    And that user created a round with a past date
+    When I go to the page for that round
+    Then I should see "This round never took place"
+    Then I should not see "left to subscribe"
+    When I go to the rounds page
+    And I select "Siena, Italy" as my location
+    Then I should see "This round never took place"
+  
+  Scenario: Read confirmed round after the date
+    Given a user "Eugenio" exists
+    And that user created a round with a past date and confirmed it
+    When I go to the page for that round
+    Then I should see "This round has already taken place"
+    And I should not see "left to subscribe"
+    When I go to the rounds page
+    And I select "Siena, Italy" as my location
+    Then I should see "This round has already taken place"
+  
+  
+  

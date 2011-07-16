@@ -10,7 +10,7 @@ class Ability
     
     can :create, [Round, Arena, Comment, Game] unless user.guest?
     
-    can :update, [Arena, Comment, Game], :user_id => user.id
+    can :update, [Arena, Comment, Game, Quicktour], :user_id => user.id
     
     can :update, Round do |round|
       round.user_id == user.id && Time.now < round.deadline
@@ -18,7 +18,7 @@ class Ability
     
     can :update, User, :id => user.id
     
-    can :destroy, Comment, :user_id => user.id
+    can :destroy, [Comment, Quicktour], :user_id => user.id
     
     can :destroy, Round do |round|
       round.subscribers.count == 0 && round.user_id == user.id
@@ -37,15 +37,15 @@ class Ability
     end
     
     can :subscribe_to, Round do |round|
-      !user.guest? && round.user_id != user.id && round.subscribable?
+      !user.guest? && round.user_id != user.id && !round.subscribers.include?(user) && round.subscribable?
     end
     
     can :unsubscribe_to, Round do |round|
-      !user.guest? && round.subscribers.include?(user) && !round.past?
+      !user.guest? && round.subscribers.include?(user) && round.unsubscribable?
     end
     
     can :read_email_of, User do |other_user|
-      user.id == other_user.id || other_user.shows_email?
+      user.id == other_user.id || other_user.show_email
     end
   end
 end

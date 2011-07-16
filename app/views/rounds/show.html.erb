@@ -49,43 +49,23 @@
   <div id="location_map" class="left-column" style="width: 650px; height: 200px;"></div>  
 
   <div class="right-column">
-    <% if @round.past? %>
-      <% if @round.confirmed %>
-        This round has already taken place
-      <% else %>
-        This round never took place
+    <% if can? :manage_confirmation_of, @round %>
+      <% if !@round.confirmed %>
+        <%= button_to 'Confirm', round_confirmation_path(@round), :id => 'confirm', :disabled => !@round.confirmable? %>
+        <%= round_confirmation_message(@round) %>
       <% end %>
     <% else %>
-      <% if can? :manage_confirmation_of, @round %>
-        <% if !@round.confirmed %>
-          <%= button_to 'Confirm', round_confirmation_path(@round), :id => 'confirm', :disabled => !@round.confirmable? %>
-          <%= !@round.confirmable? ? 'You can confirm in ' + time_ago_in_words(@round.deadline) : 'You can confirm now!' %>
-        <% else %>
-          You confirmed this round
-        <% end%>
-      <% else %>
-        <% unless signed_in? && current_user.subscribed?(@round) %>
-          <% if can? :subscribe_to, @round %>
-            <%= button_to "Subscribe", subscriptions_path(:id => @round.id), :id => 'subscribe', :confirm => 'Are you sure?', :method => :post %>
-            <%= time_ago_in_words(@round.deadline).capitalize + ' left to subscribe!' %>  
-          <% end %>
-        <% else %>
-          <% if can? :unsubscribe_to, @round %>
-            <%= button_to "Unsubscribe", subscription_path(:id => @round.id), :id => 'unsubscribe', :confirm => 'Are you sure?', :method => :delete %>
-          <% end %>
-        <% end %>
-      <% end %>
-
-      <% if !@round.confirmed %>
-        <p class="spots">
-          <% if @round.full? %>
-            This round is full!
-          <% else %>
-              <%= t :number_of_spots_left, :count => @round.remaining_spots %>
-          <% end %>
-        </p>
+      <% if can? :subscribe_to, @round %>
+        <%= button_to "Subscribe", subscriptions_path(:id => @round.id), :id => 'subscribe', :confirm => 'Are you sure?', :method => :post %>
+        <%= round_subscription_message(@round) %>  
+      <% elsif can? :unsubscribe_to, @round %>
+        <%= button_to "Unsubscribe", subscription_path(:id => @round.id), :id => 'unsubscribe', :confirm => 'Are you sure?', :method => :delete %>
       <% end %>
     <% end %>
+    
+    <p class="spots">
+      <%= round_status_message(@round) %>
+    </p>
   </div>  
   <div class="clear"></div>
 

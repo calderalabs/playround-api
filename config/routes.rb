@@ -16,7 +16,9 @@ Playround::Application.routes.draw do
     resource :confirmation, :only => :create, :controller => 'confirmation'
   end
   
-  resources :users
+  resources :users do
+    resource :quicktour, :controller => 'quicktour'
+  end
 
   resource :session, :controller => 'sessions'
   resource :location, :controller => 'location'

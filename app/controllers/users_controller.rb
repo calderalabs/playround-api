@@ -1,7 +1,6 @@
 class UsersController < Clearance::UsersController
   load_and_authorize_resource
-  before_filter :parse_settings, :only => [:create, :update]
-  
+
   def index
     @users = User.all
     
@@ -38,13 +37,21 @@ class UsersController < Clearance::UsersController
     end
   end
   
-  private
+  def create
+     @user = ::User.new(params[:user])
 
-  def parse_settings
-    unless params[:user].nil? || params[:user][:show_email].nil?
-      params[:user][:show_email] = params[:user][:show_email].to_b
-    end
-  end
+     if @user.save
+       @user.create_quicktour
+       
+       sign_in(@user)
+       redirect_back_or(url_after_create)
+     else
+       flash_failure_after_create
+       render :template => 'users/new'
+     end
+   end
+  
+  private
 
   def flash_notice_after_create
     

@@ -303,6 +303,14 @@ describe Round do
     @round.past?.should == true
   end
   
+  it "past_deadline? should return the expected value" do
+    @round.past_deadline?.should == false
+    
+    Time.stub(:now).and_return(@round.deadline + 1.day)
+    
+    @round.past_deadline?.should == true
+  end
+  
   it "subscribable? should return the expected value when the round is full" do
     @round.subscribable?.should == true
     

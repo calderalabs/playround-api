@@ -29,11 +29,7 @@
             <%= link_to round.arena.name, arena_path(round.arena) %> <%= " (at #{round.date.hour}:#{round.date.min})" %>
           </h2>
           <h3>
-            <% if round.deadline - Time.now > 0 %>
-              <%= time_ago_in_words(round.deadline).capitalize + ' left to subscribe!' %>
-            <% else %>
-              You can no longer subscribe to this round.
-            <% end %>
+            <%= round_status_message(round) %>
           </h3>
         <ul>
           <% round.max_people.times do |n| %>
@@ -57,7 +53,9 @@
         <% end %>
 
         <div class="spots">
-          <%= t :number_of_spots_left, :count => round.remaining_spots%>
+          <% unless round.past_deadline? %>
+            <%= t :number_of_spots_left, :count => round.remaining_spots %>
+          <% end %>
         </div>
       </div>
 

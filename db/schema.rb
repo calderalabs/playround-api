@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110614104445) do
+ActiveRecord::Schema.define(:version => 20110715134930) do
 
   create_table "arenas", :force => true do |t|
     t.integer  "user_id"
@@ -57,6 +57,13 @@ ActiveRecord::Schema.define(:version => 20110614104445) do
     t.datetime "updated_at"
   end
 
+  create_table "quicktours", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "current_guider", :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "rounds", :force => true do |t|
     t.integer  "user_id"
     t.integer  "arena_id"
@@ -93,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20110614104445) do
     t.string   "remember_token",      :limit => 128
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "show_email"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

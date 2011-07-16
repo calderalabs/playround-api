@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
         flash[:error] = 'Access denied'
         redirect_to sign_in_url 
         }
-      format.xml  { head :unauthorized }
+      format.json  { head :unauthorized }
     end
     
   end

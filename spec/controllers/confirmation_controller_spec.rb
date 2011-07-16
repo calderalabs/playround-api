@@ -13,10 +13,12 @@ describe ConfirmationController do
 
     post :create, :round_id => @round.to_param
 
-    should respond_with(:found)
-    should redirect_to(round_path(assigns(:round)))
+    round = assigns(:round)
+    
+    should redirect_to(round_path(round))
     flash[:notice].should == 'Round was successfully confirmed.'
-    assigns(:round).confirmed.should == true
+    round.reload
+    round.confirmed.should == true
   end
 
   it "should not confirm if the current time is before the deadline" do
@@ -25,8 +27,12 @@ describe ConfirmationController do
     @round.save!
 
     post :create, :round_id => @round.to_param
-
-    should redirect_to(sign_in_url)
+    
+    round = assigns(:round)
+    round.reload
+    flash[:notice].should_not == 'Round was successfully confirmed.'
+    should redirect_to(round)
+    round.confirmed.should_not == true
   end
 
   it "should not confirm if the current time is after the date" do
@@ -37,7 +43,11 @@ describe ConfirmationController do
     Time.stub(:now).and_return(@round.date + 10.seconds)
     post :create, :round_id => @round.to_param
 
-    should redirect_to(sign_in_url)
+    round = assigns(:round)
+    round.reload
+    flash[:notice].should_not == 'Round was successfully confirmed.'
+    should redirect_to(round)
+    round.confirmed.should_not == true
   end
 
   it "should not confirm if you don't own the round" do

@@ -1,14 +1,13 @@
-<% if signed_in? && current_user.settings[:show_quicktour] %>
+<% if signed_in? && current_user.shows_quicktour? %>
   <%= content_for :javascripts do %>
+    <script type="text/javascript" charset="utf-8">
+      var available_guiders = <%= raw Quicktour::GUIDERS.to_json %>;
+      var current_guider = <%= raw current_user.current_guider_name.to_json %>;
+      var quicktour_path = <%= raw user_quicktour_path(current_user).to_json %>;
+    </script>
+
     <%= javascript_include_tag 'guiders' %>
     <%= javascript_include_tag 'quicktour' %>
-    
-    <script type="text/javascript" charset="utf-8">
-      $(function() {
-          guiders.show('<%= current_user.settings[:current_guider] %>');
-        }
-      );
-    </script>
   <% end %>
 
   <%= content_for :stylesheets do %>

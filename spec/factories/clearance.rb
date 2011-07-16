@@ -5,7 +5,13 @@ end
 Factory.define :user, :class => User do |user|
   user.email    { Factory.next :email }
   user.password { "password" }
-  user.show_quicktour false
+  user.quicktour nil
+end
+
+Factory.define :user_with_quicktour, :class => User do |user|
+  user.email    { Factory.next :email }
+  user.password { "password" }
+  user.after_create { |u| Factory :quicktour, :user => u }
 end
 
 Factory.define :email_confirmed_user, :parent => :user do |user|

@@ -22,7 +22,6 @@ Feature: Manage settings
     And I press "Update Profile"
     And I click "Sign out"
     Given I have logged in with email: "matteodepalo@mac.com", password: "solidus"
-    When I press "No, thanks" inside the tour dialog
     And I go to user "Eugenio"'s page
     Then I should see "eugeniodepalo@gmail.com"
   
