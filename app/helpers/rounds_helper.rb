@@ -16,7 +16,7 @@ module RoundsHelper
       if round.full?
         "This round is full!"
       else
-        "You can still subscribe to this round"
+        "This round is not full yet"
       end
     end
   end
