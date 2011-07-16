@@ -32,7 +32,8 @@ Feature: Manage Rounds
     And I click the "Show" link
     Then I should see the details of that round
     When I go to the rounds page
-    Then I should see "You can still subscribe to this round"
+    Then I should see "This round is not full yet"
+    And I should see "spots left"
 
   Scenario: Update Round
     Given a round exists created by "Matteo"
@@ -64,7 +65,8 @@ Feature: Manage Rounds
     When I go to the rounds page
     And I select "Siena, Italy" as my location
     Then I should see "This round is not confirmed yet"
-  
+    And I should not see "spots left"
+    
   Scenario: Read not confirmed round after the date
     Given a user "Eugenio" exists
     And that user created a round with a past date
@@ -74,7 +76,7 @@ Feature: Manage Rounds
     When I go to the rounds page
     And I select "Siena, Italy" as my location
     Then I should see "This round never took place"
-  
+    And I should not see "spots left"
   Scenario: Read confirmed round after the date
     Given a user "Eugenio" exists
     And that user created a round with a past date and confirmed it
@@ -84,6 +86,6 @@ Feature: Manage Rounds
     When I go to the rounds page
     And I select "Siena, Italy" as my location
     Then I should see "This round has already taken place"
-  
+    And I should not see "spots left"
   
   

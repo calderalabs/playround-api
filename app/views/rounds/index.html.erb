@@ -52,11 +52,11 @@
           <%= link_to 'Show', round %>
         <% end %>
 
-        <div class="spots">
-          <% unless round.past_deadline? %>
+        <% if round.subscribable? %>
+          <div class="spots">
             <%= t :number_of_spots_left, :count => round.remaining_spots %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
 
       <div class="clear"></div>

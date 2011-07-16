@@ -14,10 +14,9 @@ describe ConfirmationController do
     post :create, :round_id => @round.to_param
 
     round = assigns(:round)
+    round.reload
     
     should redirect_to(round_path(round))
-    flash[:notice].should == 'Round was successfully confirmed.'
-    round.reload
     round.confirmed.should == true
   end
 
@@ -30,8 +29,8 @@ describe ConfirmationController do
     
     round = assigns(:round)
     round.reload
-    flash[:notice].should_not == 'Round was successfully confirmed.'
-    should redirect_to(round)
+    
+    should redirect_to(sign_in_url)
     round.confirmed.should_not == true
   end
 
@@ -45,8 +44,8 @@ describe ConfirmationController do
 
     round = assigns(:round)
     round.reload
-    flash[:notice].should_not == 'Round was successfully confirmed.'
-    should redirect_to(round)
+
+    should redirect_to(sign_in_url)
     round.confirmed.should_not == true
   end
 

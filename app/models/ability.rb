@@ -33,15 +33,11 @@ class Ability
     end
     
     can :manage_confirmation_of, Round do |round|
-      round.user_id == user.id && !round.past?
+      round.user_id == user.id && round.confirmable?
     end
     
-    can :subscribe_to, Round do |round|
-      !user.guest? && round.user_id != user.id && !round.subscribers.include?(user) && round.subscribable?
-    end
-    
-    can :unsubscribe_to, Round do |round|
-      !user.guest? && round.subscribers.include?(user) && round.unsubscribable?
+    can :manage_subscription_of, Round do |round|
+      !user.guest? && round.user_id != user.id && round.subscribable?
     end
     
     can :read_email_of, User do |other_user|

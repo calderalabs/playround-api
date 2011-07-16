@@ -38,6 +38,12 @@ class Round < ActiveRecord::Base
     self.errors.add(:base, "You cannot confirm this round") if @recently_confirmed && !self.confirmable?
   end
   
+  after_save do
+    subscribers.each do |user|
+      RoundMailer.round_confirmation_email(self, user).deliver
+    end if @recently_confirmed
+  end
+  
   def date=(date)
     if date
       super(date.change(:sec => 0))
@@ -71,7 +77,7 @@ class Round < ActiveRecord::Base
   end
 
   def confirmable?
-    !confirmed_was && Time.now > deadline && Time.now < date
+    !confirmed_was && past_deadline? && !past?
   end
   
   def confirmed=(confirmed)
@@ -84,12 +90,6 @@ class Round < ActiveRecord::Base
     self.confirmed = true
     save
   end
-
-  after_save do
-    subscribers.each do |user|
-      RoundMailer.round_confirmation_email(self, user).deliver
-    end if @recently_confirmed
-  end
   
   def past?
     Time.now > date
@@ -100,11 +100,7 @@ class Round < ActiveRecord::Base
   end
   
   def subscribable?
-    Time.now < deadline && !full? && !self.confirmed
-  end
-  
-  def unsubscribable?
-    !past? && !self.confirmed
+    !past_deadline? && !full?
   end
 
   private

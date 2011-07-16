@@ -56,22 +56,22 @@ describe SubscriptionsController do
   
   it "user can create subscriptions" do
     ability = Ability.new @user
-    ability.should be_able_to(:subscribe_to, @round)
+    ability.should be_able_to(:manage_subscription_of, @round)
   end
   
   it "guests can't create subscriptions" do
     ability = Ability.new User.new
-    ability.should_not be_able_to(:subscribe_to, @round)
+    ability.should_not be_able_to(:manage_subscription_of, @round)
   end
   
   it "user can destroy only subscriptions which he owns" do
     @subscription.round.reload
     ability = Ability.new @subscription.user
-    ability.should be_able_to(:unsubscribe_to, @subscription.round)
+    ability.should be_able_to(:manage_subscription_of, @subscription.round)
   end
   
   it "user can't subscribe to his own round" do
     ability = Ability.new @user
-    ability.should_not be_able_to(:subscribe_to, Factory(:round, :user => @user))
+    ability.should_not be_able_to(:manage_subscription_of, Factory(:round, :user => @user))
   end
 end
