@@ -23,6 +23,16 @@ class Round < ActiveRecord::Base
     errors.add(:arena_id, "must be a public arena or a private arena that you own") if self.arena && !self.arena.public? && self.arena.user_id != self.user_id
   end
   
+  validate do
+    self.errors.add(:base, "You cannot confirm this round") if @recently_confirmed && !self.confirmable?
+  end
+  
+  after_save do
+    subscribers.each do |user|
+      RoundMailer.round_confirmation_email(self, user).deliver
+    end if @recently_confirmed
+  end
+  
   validates_presence_of :deadline
   validates_presence_of :date
   validates_presence_of :max_people
@@ -34,30 +44,12 @@ class Round < ActiveRecord::Base
   validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 1, :only_integer => true, :unless => Proc.new { |round| round.min_people.nil? }
   validates_numericality_of :min_people, :greater_than => 1, :only_integer => true
   
-  validate do
-    self.errors.add(:base, "You cannot confirm this round") if @recently_confirmed && !self.confirmable?
-  end
-  
-  after_save do
-    subscribers.each do |user|
-      RoundMailer.round_confirmation_email(self, user).deliver
-    end if @recently_confirmed
-  end
-  
   def date=(date)
-    if date
-      super(date.change(:sec => 0))
-    else
-      super(nil)
-    end
+    super(date.try(:change, :sec => 0))
   end
   
   def deadline=(deadline)
-    if deadline
-      super(deadline.change(:sec => 0))
-    else
-      super(nil)
-    end
+    super(deadline.try(:change, :sec => 0))
   end
   
   def all_subscribers
