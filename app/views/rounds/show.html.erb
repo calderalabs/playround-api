@@ -50,7 +50,7 @@
 
   <div class="right-column">
     <% if can? :confirm, @round %>
-      <% if !@round.confirmed %>
+      <% if !@round.confirmed && !@round.past? %>
         <%= button_to 'Confirm', round_confirmation_path(@round), :id => 'confirm', :disabled => !@round.confirmable? %>
         <%= round_confirmation_message(@round) %>
       <% end %>
