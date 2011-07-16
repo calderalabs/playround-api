@@ -69,7 +69,7 @@
       <%= round_status_message(@round) %>
     </p>
     
-    <% unless @round.subscribable? %>
+    <% if @round.subscribable? %>
       <p class="status">
         <%= t :number_of_spots_left, :count => @round.remaining_spots %>
       </p>
