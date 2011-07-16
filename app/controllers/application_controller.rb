@@ -25,12 +25,12 @@ class ApplicationController < ActionController::Base
   end
   
   def current_timezone
-    set_location_from_session_or_user_or_ip unless @location
+    set_location_from_user_or_session_or_ip unless @location
     @timezone ||= session[:timezone] || Time.zone
   end
   
   def current_location
-    @location ||= set_location_from_session_or_user_or_ip
+    @location ||= set_location_from_user_or_session_or_ip
   end
   
   def set_location(location)
@@ -42,9 +42,9 @@ class ApplicationController < ActionController::Base
   
   private
   
-  def set_location_from_session_or_user_or_ip
-    location = session[:location]
-    location ||= GeoPlanet::Place.new(current_user.town_woeid) if signed_in? && current_user.town_woeid
+  def set_location_from_user_or_session_or_ip
+    location = GeoPlanet::Place.new(current_user.town_woeid) if signed_in? && current_user.town_woeid
+    location ||= session[:location]
     location ||= GeoPlanet::Place.search(request.location.try(:address).to_s).try(:first)
     
     set_location(location)
