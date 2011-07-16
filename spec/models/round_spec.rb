@@ -255,7 +255,7 @@ describe Round do
   end
   
   it "all subscribers should include the owner" do
-    @round.all_subscribers.include?(@round.user).should == true
+    @round.subscribers_and_owner.include?(@round.user).should == true
   end
   
   it "all subscribers should include a subscriber" do
@@ -264,7 +264,7 @@ describe Round do
     @subscription = Factory :subscription, :round => @round
     @round.reload
  
-    @round.all_subscribers.include?(@subscription.user).should == true
+    @round.subscribers_and_owner.include?(@subscription.user).should == true
   end
   
   it "should decrease remaining spots when someone subscribes" do

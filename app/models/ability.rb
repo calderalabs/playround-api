@@ -32,12 +32,16 @@ class Ability
       game.rounds.count == 0 && game.user_id == user.id
     end
     
-    can :manage_confirmation_of, Round do |round|
-      round.user_id == user.id && round.confirmable?
+    can :confirm, Round do |round|
+      round.user_id == user.id
     end
     
-    can :manage_subscription_of, Round do |round|
-      !user.guest? && round.user_id != user.id && round.subscribable?
+    can :unsubscribe_from, Round do |round|
+      !round.past_deadline? && round.subscribers.include?(user)
+    end
+    
+    can :subscribe_to, Round do |round|
+      !user.guest? && round.user_id != user.id
     end
     
     can :read_email_of, User do |other_user|

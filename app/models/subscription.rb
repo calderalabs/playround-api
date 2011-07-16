@@ -9,6 +9,6 @@ class Subscription < ActiveRecord::Base
   validates_uniqueness_of :round_id, :scope => :user_id
   
   validate do
-    errors.add(:base, "You cannot subscribe to this round") if !self.round.subscribable?
+    errors.add(:base, "You cannot subscribe to this round") if round && !round.subscribable?
   end
 end

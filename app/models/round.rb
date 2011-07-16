@@ -52,12 +52,12 @@ class Round < ActiveRecord::Base
     super(deadline.try(:change, :sec => 0))
   end
   
-  def all_subscribers
+  def subscribers_and_owner
     subscribers + [user]
   end
   
   def remaining_spots
-    max_people - all_subscribers.count
+    max_people - subscribers_and_owner.count
   end
   
   def full?
@@ -66,6 +66,14 @@ class Round < ActiveRecord::Base
   
   def authorized?(some_user)
     user == some_user
+  end
+
+  def past?
+    Time.now > date
+  end
+  
+  def past_deadline?
+    Time.now > deadline
   end
 
   def confirmable?
@@ -81,14 +89,6 @@ class Round < ActiveRecord::Base
   def confirm!
     self.confirmed = true
     save
-  end
-  
-  def past?
-    Time.now > date
-  end
-  
-  def past_deadline?
-    Time.now > deadline
   end
   
   def subscribable?

@@ -30,7 +30,7 @@ describe ConfirmationController do
     round = assigns(:round)
     round.reload
     
-    should redirect_to(sign_in_url)
+    should redirect_to(round)
     round.confirmed.should_not == true
   end
 
@@ -45,7 +45,7 @@ describe ConfirmationController do
     round = assigns(:round)
     round.reload
 
-    should redirect_to(sign_in_url)
+    should redirect_to(round)
     round.confirmed.should_not == true
   end
 

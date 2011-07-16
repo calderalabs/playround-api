@@ -1,7 +1,7 @@
 class ConfirmationController < ApplicationController
   def create
     @round = Round.find(params[:round_id])
-    authorize! :manage_confirmation_of, @round
+    authorize! :confirm, @round
     
     respond_to do |format|
       if @round.confirm!

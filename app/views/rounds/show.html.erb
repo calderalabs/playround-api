@@ -49,31 +49,23 @@
   <div id="location_map" class="left-column" style="width: 650px; height: 200px;"></div>  
 
   <div class="right-column">
-    <% if can? :update, @round %>
+    <% if can? :confirm, @round %>
       <% if !@round.confirmed %>
         <%= button_to 'Confirm', round_confirmation_path(@round), :id => 'confirm', :disabled => !@round.confirmable? %>
         <%= round_confirmation_message(@round) %>
       <% end %>
     <% else %>
-      <% if signed_in? && @round.subscribable? %>
-        <% if current_user.subscribed?(@round) %>
-          <%= button_to "Unsubscribe", subscription_path(:id => @round.id), :id => 'unsubscribe', :confirm => 'Are you sure?', :method => :delete %>
-        <% else %>
-          <%= button_to "Subscribe", subscriptions_path(:id => @round.id), :id => 'subscribe', :confirm => 'Are you sure?', :method => :post %>
-          <%= round_subscription_message(@round) %>  
-        <% end %>
+      <% if can? :unsubscribe_from, @round %>
+        <%= button_to "Unsubscribe", subscription_path(:id => @round.id), :id => 'unsubscribe', :confirm => 'Are you sure?', :method => :delete %>
+      <% elsif can?(:subscribe_to, @round) && @round.subscribable? %>
+        <%= button_to "Subscribe", subscriptions_path(:id => @round.id), :id => 'subscribe', :confirm => 'Are you sure?', :method => :post %>
+        <%= round_subscription_message(@round) %>
       <% end %>
     <% end %>
     
     <p class="status">
       <%= round_status_message(@round) %>
     </p>
-    
-    <% if @round.subscribable? %>
-      <p class="status">
-        <%= t :number_of_spots_left, :count => @round.remaining_spots %>
-      </p>
-    <% end %>
   </div>  
   <div class="clear"></div>
 
@@ -87,10 +79,16 @@
 <% if @round.past? %>
   <h2>People that subscribed to this round</h2>
 <% else %>
-  <h2>People you will meet at this round</h2>
+  <h2>
+    People you will meet at this round
+    
+    <% if @round.subscribable? %>
+      (<%= t :number_of_spots_left, :count => @round.remaining_spots %>)
+    <% end %>
+  </h2>
 <% end%>
 <ul>
-  <% @round.all_subscribers.each do |user| %>
+  <% @round.subscribers_and_owner.each do |user| %>
     <li>
       <a href="<%= user_path(user) %>">
       <div class="image"><%= image_tag user.avatar.url(:thumb) %></div>
