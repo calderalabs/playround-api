@@ -6,7 +6,7 @@ class Subscription < ActiveRecord::Base
   
   validates_presence_of :user_id
   validates_presence_of :round_id
-  validates_uniqueness_of :round_id, :scope => :user_id, :message => "- this subscription has already been created"
+  validates_uniqueness_of :round_id, :scope => :user_id
   
   validate do
     errors.add(:base, "You cannot subscribe to this round") if !self.round.subscribable?
