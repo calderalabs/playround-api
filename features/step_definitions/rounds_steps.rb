@@ -9,8 +9,18 @@ Then /^I should see the details of that round$/ do
 end
 
 Then /^I should not see that round listed$/ do
-  Then "I should not see \"#{Game.last.name}\""
-  And "I should not see \"#{Arena.last.name}\""
+  round = Round.last
+  
+  Then "I should not see \"#{round.game.name}\""
+  And "I should not see \"#{round.arena.name}\""
+end
+
+Then /^I should see that round listed$/ do
+  round = Round.last
+  
+  Then "I should see \"#{round.game.name}\""
+  And "I should see \"#{round.arena.name}\""
+  And "I should see \"#{round.user.display_name}\""
 end
 
 Given /^that user created a round with a past deadline$/ do
@@ -34,4 +44,8 @@ Given /^that user created a round with a past date and confirmed it$/ do
   Time.stub(:now).and_return(now - 3.weeks)
   round.confirm!
   Time.unstub(:now)
+end
+
+Given /^a user created a round in that arena$/ do
+  Factory :round, :arena => Arena.last
 end

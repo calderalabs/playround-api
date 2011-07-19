@@ -37,11 +37,11 @@ class Ability
     end
     
     can :unsubscribe_from, Round do |round|
-      !round.past_deadline? && round.subscribers.include?(user)
+      round.unsubscribable? && round.subscribers.include?(user)
     end
     
     can :subscribe_to, Round do |round|
-      !user.guest? && round.user_id != user.id
+      !user.guest? && round.user_id != user.id && round.subscribable? && !round.subscribers.include?(user)
     end
     
     can :read_email_of, User do |other_user|

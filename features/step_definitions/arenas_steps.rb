@@ -24,3 +24,7 @@ end
 Then /^I should see the arena's image$/ do
   assert has_xpath?("//img[contains(@src, \"colosseum.jpg\")]")
 end
+
+Given /^a public arena exists created by that user$/ do
+  Factory :arena, :user => User.last, :public => true
+end

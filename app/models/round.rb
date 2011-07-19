@@ -44,6 +44,10 @@ class Round < ActiveRecord::Base
   validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 1, :only_integer => true, :unless => Proc.new { |round| round.min_people.nil? }
   validates_numericality_of :min_people, :greater_than => 1, :only_integer => true
   
+  scope :pending_approval, lambda {
+      where("approved = ?", false)
+  }
+  
   def date=(date)
     super(date.try(:change, :sec => 0))
   end
@@ -93,6 +97,10 @@ class Round < ActiveRecord::Base
   
   def subscribable?
     !past_deadline? && !full?
+  end
+
+  def unsubscribable?
+    !past_deadline?
   end
 
   private

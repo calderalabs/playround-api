@@ -12,7 +12,7 @@ describe SubscriptionsController do
   
   it "should create subscription" do
     Proc.new do
-      post :create, :id => @round.to_param
+      post :create, :round_id => @round.to_param
     end.should change(Subscription, :count).by(1)
 
     should respond_with(:found)
@@ -20,7 +20,7 @@ describe SubscriptionsController do
   end
   
   it "should not subscribe if you own the round" do
-    post :create, :id => (Factory :round, :user => @user).to_param
+    post :create, :round_id => (Factory :round, :user => @user).to_param
     
     should redirect_to(sign_in_url)
   end
@@ -28,7 +28,7 @@ describe SubscriptionsController do
   it "should not create subscription if guest" do
     @controller.sign_out
     
-    post :create, :id => @round.to_param
+    post :create, :round_id => @round.to_param
 
     should redirect_to(sign_in_url)
   end
@@ -37,7 +37,7 @@ describe SubscriptionsController do
     Factory :subscription, :user => @user, :round => @round
     
     Proc.new do
-      delete :destroy, :id => @round.to_param
+      delete :destroy, :round_id => @round.to_param
     end.should change(Subscription, :count).by(-1)
 
     should respond_with(:found)
@@ -47,7 +47,7 @@ describe SubscriptionsController do
   it "should not destroy subscription if guest" do
     @controller.sign_out
     
-    delete :destroy, :id => @round.to_param
+    delete :destroy, :round_id => @round.to_param
 
     should redirect_to(sign_in_url)
   end

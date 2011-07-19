@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include Clearance::User
   
   attr_accessible :display_name, :real_name, :email, :password, :avatar, :town_woeid, :show_email
-  
+
   has_attached_file :avatar, { :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
                                :default_url => '/images/missing_avatar.gif' }.merge(PAPERCLIP_CONFIG)
   

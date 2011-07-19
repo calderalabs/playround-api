@@ -12,6 +12,7 @@ require 'geocoder/results/google'
 
 require 'custom_matchers'
 require 'cancan/matchers'
+require 'shoulda/matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

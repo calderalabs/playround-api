@@ -39,10 +39,9 @@ class UsersController < Clearance::UsersController
   
   def create
      @user = ::User.new(params[:user])
-
+     @user.build_quicktour
+     
      if @user.save
-       @user.create_quicktour
-       
        sign_in(@user)
        redirect_back_or(url_after_create)
      else

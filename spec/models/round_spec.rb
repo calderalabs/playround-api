@@ -77,6 +77,12 @@ describe Round do
     round.confirmed.should == false
   end
   
+  it "shouldn't be approved on creation" do
+    round = Round.new
+    
+    round.approved.should == false
+  end
+  
   it "minimum people should be less than maximum" do
     @round.min_people = 2
     @round.max_people = 1
@@ -182,6 +188,14 @@ describe Round do
     @round.should allow_mass_assignment_of(:description)
   end
   
+  it "should not be able to mass-assign approved" do
+    @round.should_not allow_mass_assignment_of(:approved)
+  end
+  
+  it "should not be able to mass-assign confirmed" do
+    @round.should_not allow_mass_assignment_of(:confirmed)
+  end
+  
   # associations tests
   
   it "should belong to an arena" do
@@ -277,16 +291,6 @@ describe Round do
     @round.remaining_spots.should be_one_less_than(previous_remaining_spots)
   end
   
-  it "should send emails to subscribers when the owner of the round confirms" do
-    @round.save!
-    
-    5.times { @subscription = Factory :subscription, :round => @round }
-    @round.confirm!
-    @round.subscribers.each do |subscriber|
-      @round.should have_sent_email.with_subject(/Round confirmation/).from('info@playround.com').with_body(/Hello/).to(subscriber.email)
-    end
-  end
-  
   it "only the user who created the round should be able to manage it" do
     @round.save!
     
@@ -325,5 +329,12 @@ describe Round do
     Time.stub(:now).and_return(@round.deadline + 1.day)
     
     @round.subscribable?.should == false
+  end
+  
+  it "should be listed in pending_approval when approved is false" do
+    @round.approved = false
+    @round.save!
+    
+    Round.pending_approval.should include(@round)
   end
 end

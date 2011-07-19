@@ -1,8 +1,10 @@
 class SubscriptionsController < ApplicationController
   def create
-    @round = Round.find(params[:id])
+    @round = Round.find(params[:round_id])
+
     authorize! :subscribe_to, @round
-    @subscription = current_user.subscriptions.build(:round_id => params[:id])
+    
+    @subscription = current_user.subscriptions.build(:round_id => @round.id)
     
     if @subscription.save
       flash[:notice] = "You successfully subscribed to this round."
@@ -14,10 +16,11 @@ class SubscriptionsController < ApplicationController
   end
   
   def destroy
-    @round = Round.find(params[:id])
+    @round = Round.find(params[:round_id])
+
     authorize! :unsubscribe_from, @round
-    @subscription = current_user.subscriptions.where(:round_id => @round.id).first
     
+    @subscription = current_user.subscriptions.where(:round_id => @round.id).first
     @subscription.destroy
     
     flash[:notice] = "You are no longer subscribed to this round."

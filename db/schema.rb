@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110715134930) do
+ActiveRecord::Schema.define(:version => 20110719164854) do
 
   create_table "arenas", :force => true do |t|
     t.integer  "user_id"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20110715134930) do
     t.integer  "min_people",  :default => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "approved",    :default => false
   end
 
   create_table "subscriptions", :force => true do |t|

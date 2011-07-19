@@ -55,10 +55,10 @@
         <%= round_confirmation_message(@round) %>
       <% end %>
     <% else %>
-      <% if can? :unsubscribe_from, @round %>
-        <%= button_to "Unsubscribe", subscription_path(:id => @round.id), :id => 'unsubscribe', :confirm => 'Are you sure?', :method => :delete %>
-      <% elsif can?(:subscribe_to, @round) && @round.subscribable? %>
-        <%= button_to "Subscribe", subscriptions_path(:id => @round.id), :id => 'subscribe', :confirm => 'Are you sure?', :method => :post %>
+      <% if can?(:unsubscribe_from, @round) %>
+        <%= button_to "Unsubscribe", round_subscription_path(@round), :id => 'unsubscribe', :confirm => 'Are you sure?', :method => :delete %>
+      <% elsif can?(:subscribe_to, @round) %>
+        <%= button_to "Subscribe", round_subscription_path(@round), :id => 'subscribe', :confirm => 'Are you sure?', :method => :post %>
         <%= round_subscription_message(@round) %>
       <% end %>
     <% end %>

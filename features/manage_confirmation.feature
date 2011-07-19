@@ -13,8 +13,7 @@ Feature: Confirmation
     Scenario: Confirm the round
       When I go to the page for that round
       And I press "Confirm"
-
-    
+      Then I should see "This round has been confirmed"
   
   
   

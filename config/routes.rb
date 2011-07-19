@@ -1,27 +1,25 @@
 Playround::Application.routes.draw do
-  resources :comments
-  resource :settings, :only => :update
-  resources :subscriptions
-
-  resources :games do
-    get :autocomplete_game_name, :on => :collection
-  end
-
-  resources :arenas do
-    get 'autocomplete_address', :on => :collection
-    get :autocomplete_arena_name, :on => :collection
-  end
-
   resources :rounds do
     resource :confirmation, :only => :create, :controller => 'confirmation'
+    resource :subscription, :only => [:create, :destroy], :controller => 'subscriptions'
   end
   
+  resources :arenas do
+    get 'autocomplete_address', :on => :collection
+  end
+
+  resources :games
+  
+  resources :comments, :only => [:create, :destroy]
+  
   resources :users do
-    resource :quicktour, :controller => 'quicktour'
+    resource :quicktour, :only => [:update, :destroy], :controller => 'quicktour'
   end
 
   resource :session, :controller => 'sessions'
-  resource :location, :controller => 'location'
+  resource :location, :only => :update, :controller => 'location'
+  
+  match 'dashboard/:id' => 'dashboard#index', :as => 'dashboard'
   
   match 'sign_in' => 'sessions#new', :as => 'sign_in'
   match 'sign_out' => 'sessions#destroy', :via => :delete, :as => 'sign_out'
