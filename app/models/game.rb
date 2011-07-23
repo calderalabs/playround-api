@@ -13,6 +13,10 @@ class Game < ActiveRecord::Base
   
   validates_length_of :name, :maximum => 30
   
+  before_destroy do
+    errors.add(:base, "You can't delete a game with rounds") and return false unless rounds.count == 0
+  end
+  
   validates_url_format_of :website, :allow_blank => true
   adjusts_string :website, :prepend => 'http://', :if => Proc.new { |a| !(a.website =~ /^.*:.*$/) }
 end

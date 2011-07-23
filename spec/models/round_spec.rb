@@ -2,201 +2,117 @@ require 'spec_helper'
 
 describe Round do
   before(:each) do
-    stub_geocoder
-    
-    @round = Factory.build :round
+    @user = Factory :user
+    @round = Factory.build :round, :user => @user
   end
   
-  # validity tests
+  # Validations
   
-  it "should be valid with valid attributes" do
+  it "should be valid with factory attributes" do
     assert @round.valid?
   end
-  
-   it "should not be valid without a deadline" do
-    @round.should validate_presence_of(:deadline)
-  end
-  
-  it "should not be valid without a date" do
+
+  it "should validate presence of date" do
     @round.should validate_presence_of(:date)
   end
   
-  it "should not be valid without maximum people" do
-    @round.should validate_presence_of(:max_people)
+  it "should validate presence of people" do
+    @round.should validate_presence_of(:people)
   end
   
-  it "should not be valid without minimum people" do
-    @round.should validate_presence_of(:min_people)
-  end
-  
-  it "should not be valid without an arena" do
+  it "should validate presence of arena" do
     @round.should validate_presence_of(:arena_id)
   end
   
-  it "should not be valid without a game" do
+  it "should validate presence of game" do
     @round.should validate_presence_of(:game_id)
   end
   
-  it "should be invalid without a user" do
+  it "should validate presence of user" do
     @round.should validate_presence_of(:user_id)
   end
   
-  it "minimum people should not be nil at creation" do
-    round = Round.new
-    
-    round.min_people.should_not be_nil
+  it "should have 2 people by default" do
+    Round.new.people.should == 2
   end
   
-  it "maximum people should not be nil at creation" do
-    round = Round.new
-    
-    round.max_people.should_not be_nil
+  it "should have the current time as the default date" do
+    now = Time.now.change(:sec => 0)
+    Time.stub(:now).and_return(now)
+    Round.new.date.should == now
   end
   
-  it "confirmed should not be nil at creation" do
-    round = Round.new
-    
-    round.confirmed.should_not be_nil
+  it "should not be approved by default" do
+    Round.new.approved.should == false
   end
   
-  it "date should not be nil at creation" do
-    round = Round.new
-    
-    round.date.should_not be_nil
+  it "should not be confirmed by default" do
+    Round.new.confirmed.should == false
   end
   
-  it "deadline should not be nil at creation" do
-    round = Round.new
-    
-    round.deadline.should_not be_nil
-  end
-  
-  it "confirmed should be false at creation" do
-    round = Round.new
-    
-    round.confirmed.should == false
-  end
-  
-  it "shouldn't be approved on creation" do
-    round = Round.new
-    
-    round.approved.should == false
-  end
-  
-  it "minimum people should be less than maximum" do
-    @round.min_people = 2
-    @round.max_people = 1
-    
+  it "should not have less than 2 people" do
+    @round.people = 1
     @round.should be_invalid
   end
   
-  it "people should not be less than 2" do
-    @round.min_people = 1
-    @round.max_people = 1
-    
+  it "should validate numericality of people" do
+    @round.should validate_numericality_of(:people)
+  end
+  
+  it "should not have a fractional number of people" do
+    @round.people = 0.5
     @round.should be_invalid
   end
   
-  it "minimum people should be numeric" do
-    @round.should validate_numericality_of(:min_people)
-  end
-  
-  it "maximum people should be numeric" do
-    @round.should validate_numericality_of(:max_people)
-  end
-  
-  it "minimum people should not be fractional" do
-    @round.min_people = 0.5
-    
-    @round.should be_invalid
-  end
-  
-  it "maximum people should not be fractional" do
-    @round.max_people = 0.5
-    
-    @round.should be_invalid
-  end
-  
-  it "deadline should be before or at the same time of date" do
-    @round.deadline = 1.hour.since(@round.date)
-    
-    @round.should be_invalid
-    @round.errors[:deadline].include?("must be earlier than date").should == true
-  end
-  
-  it "deadline should not be before now" do
-    @round.deadline = Time.now - 1.day
-    
-    @round.should be_invalid
-  end
-  
-  it "date should not be before now" do
+  it "should not have a past date as its date" do
     @round.date = Time.now - 1.day
-    
     @round.should be_invalid
   end
   
-  it "deadline and date should be equal on creation" do
-    round = Round.new
-    round.date.should == round.deadline
+  it "should be created on a public arena or on an arena created by the round owner" do
+    @round.arena = Factory :arena, :public => true
+    @round.should be_valid
+    @round.arena = Factory :arena, :public => false
+    @round.should_not be_valid
+    @round.arena = Factory :arena, :public => false, :user => @user
+    @round.should be_valid
   end
   
-  it "round arena should be either public or private and owned by the round creator" do
-    user = Factory :user
-    public_arena = Factory :arena, :public => true
-    private_arena = Factory :arena, :public => false, :user => user
-    
-    round = Factory.build :round, :arena => public_arena
-    round.should be_valid
-    round = Factory.build :round, :arena => private_arena
-    round.should be_invalid
-    round = Factory.build :round, :arena => private_arena, :user => user
-    round.should be_valid
-  end
+  # Mass assignment
   
-  # attributes accessibility tests
-  
-  it "should not be able to mass-assign user_id" do
+  it "should not allow mass assignment of user" do
     @round.should_not allow_mass_assignment_of(:user_id)
   end
   
-  it "should be able to mass-assign deadline" do
-    @round.should allow_mass_assignment_of(:deadline)
-  end
-  
-  it "should be able to mass-assign date" do
+  it "should allow mass assignment of date" do
     @round.should allow_mass_assignment_of(:date)
   end
   
-  it "should be able to mass-assign max_people" do
-    @round.should allow_mass_assignment_of(:max_people)
+  it "should allow mass assignment of people" do
+    @round.should allow_mass_assignment_of(:people)
   end
   
-  it "should be able to mass-assign min_people" do
-    @round.should allow_mass_assignment_of(:min_people)
-  end
-  
-  it "should be able to mass-assign arena_id" do
+  it "should allow mass assignment of arena" do
     @round.should allow_mass_assignment_of(:arena_id)
   end
   
-  it "should be able to mass-assign game_id" do
+  it "should allow mass assignment of game" do
     @round.should allow_mass_assignment_of(:game_id)
   end
   
-  it "should be able to mass-assign description" do
+  it "should allow mass assignment of description" do
     @round.should allow_mass_assignment_of(:description)
   end
   
-  it "should not be able to mass-assign approved" do
+  it "should allow mass assignment of approved" do
     @round.should_not allow_mass_assignment_of(:approved)
   end
   
-  it "should not be able to mass-assign confirmed" do
+  it "should allow mass assignment of confirmed" do
     @round.should_not allow_mass_assignment_of(:confirmed)
   end
   
-  # associations tests
+  # Associations
   
   it "should belong to an arena" do
     @round.should belong_to(:arena)
@@ -206,11 +122,11 @@ describe Round do
     @round.should belong_to(:game)
   end
  
-  it "rounds should have many subscriptions" do
+  it "should have many subscriptions" do
     @round.should have_many(:subscriptions)
   end
   
-  it "should belong to user" do
+  it "should belong to an user" do
     @round.should belong_to(:user)
   end
   
@@ -222,119 +138,68 @@ describe Round do
     @round.should have_many(:subscribers).through(:subscriptions)
   end
   
-  # methods tests
+  # Methods
   
-  it "should be full when subscribers are equal to max_people" do
-    @round.save!
-    
+  it "should be full when subscribers are equal to the number of people" do
     @round.full?.should == false
-    @round.remaining_spots.times do
-      Factory(:subscription, :round => @round)
-    end
-    @round.reload
-    
+    @round.people.times { @round.subscriptions << Factory.build(:subscription) }
     @round.full?.should == true
   end
   
-  it "confirmable? should return the expected value" do
-    @round.confirmable?.should == false
-    
-    @round.deadline = Time.now
-    
-    @round.confirmable?.should == true
-  end
-  
-  it "should confirm if can confirm" do
-    @round.deadline = Time.now
-    
-    @round.confirmed.should == false
-    @round.confirm!.should == true
-    @round.confirmed.should == true
-  end
-  
-  it "should not confirm if the round is already confirmed" do
-    @round.deadline = Time.now
-    @round.save!
-    @round.confirm!
-    
-    @round.confirmed.should == true
-    @round.confirm!.should == false 
-    @round.confirmed.should == true
-  end
-  
-  it "authorized? should return the expected value" do
-    @round.authorized?(@round.user).should == true
-    
-    @round.authorized?(mock_model('User')).should == false
-  end
-  
-  it "all subscribers should include the owner" do
-    @round.subscribers_and_owner.include?(@round.user).should == true
-  end
-  
-  it "all subscribers should include a subscriber" do
-    @round.save!
-
-    @subscription = Factory :subscription, :round => @round
-    @round.reload
- 
-    @round.subscribers_and_owner.include?(@subscription.user).should == true
-  end
-  
   it "should decrease remaining spots when someone subscribes" do
-    @round.save!
-    
-    previous_remaining_spots = @round.remaining_spots
-    @subscription = Factory :subscription, :round => @round
-    @round.reload
-    
-    @round.remaining_spots.should be_one_less_than(previous_remaining_spots)
+    Proc.new { @round.subscriptions << Factory.build(:subscription) }.should change(@round, :remaining_spots).by(-1)
   end
   
-  it "only the user who created the round should be able to manage it" do
-    @round.save!
-    
-    @round.authorized?(@round.user).should == true
-    
-    @round.authorized?(Factory :user).should == false
-  end
-  
-  it "past? should return the expected value" do
+  it "should be past after the date" do
     @round.past?.should == false
-    
     Time.stub(:now).and_return(@round.date + 1.day)
-    
     @round.past?.should == true
   end
   
-  it "past_deadline? should return the expected value" do
-    @round.past_deadline?.should == false
-    
-    Time.stub(:now).and_return(@round.deadline + 1.day)
-    
-    @round.past_deadline?.should == true
-  end
-  
-  it "subscribable? should return the expected value when the round is full" do
-    @round.subscribable?.should == true
-    
-    @round.stub(:remaining_spots).and_return(0)
-    
-    @round.subscribable?.should == false
-  end
-  
-  it "subscribable? should return the expected value when the current time is past the deadline" do
-    @round.subscribable?.should == true
-    
-    Time.stub(:now).and_return(@round.deadline + 1.day)
-    
-    @round.subscribable?.should == false
-  end
-  
-  it "should be listed in pending_approval when approved is false" do
-    @round.approved = false
+  it "shoud not be subscribable when the round is full" do
     @round.save!
-    
+    @round.subscribable_by?(@user).should == true
+    @round.people.times { Factory :subscription, :round => @round }
+    @round.subscribable_by?(@user).should == false
+  end
+  
+  it "should not be subscribable after the date" do
+    @round.save!
+    @round.subscribable_by?(@user).should == true
+    Time.stub(:now).and_return(@round.date + 1.day)
+    @round.subscribable_by?(@user).should == false
+  end
+  
+  it "should be listed in pending approval when it is not approved" do
+    @round.save!
     Round.pending_approval.should include(@round)
+  end
+  
+  it "should not be listed in pending approval when it is approved" do
+    @round.approved = true
+    @round.save!
+    Round.pending_approval.should_not include(@round)
+  end
+  
+  it "should be listed in approved when it is approved" do
+    @round.approved = true
+    @round.save!
+    Round.approved.should include(@round)
+  end
+  
+  it "should not be listed in approved when it is not approved" do
+    @round.save!
+    Round.approved.should_not include(@round)
+  end
+  
+  it "should be approved automatically when it's created by the owner of the arena" do
+    @round.user = @round.arena.user
+    @round.save!
+    @round.approved?.should == true
+  end
+  
+  it "should not be approved automatically when it's created by another user" do
+    @round.save!
+    @round.approved?.should == false
   end
 end

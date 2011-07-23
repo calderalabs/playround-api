@@ -1,6 +1,6 @@
-class DashboardController < ApplicationController
+class DashboardsController < ApplicationController
   def index
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     
     authorize! :update, @user
     
@@ -8,7 +8,7 @@ class DashboardController < ApplicationController
     @rounds = Round.where(:arena_id => @arenas.map { |a| a.id }).pending_approval
     
     respond_to do |format|
-      format.html { render 'dashboard' }
+      format.html
     end
   end
 end

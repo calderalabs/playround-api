@@ -37,7 +37,7 @@
       <% if can? :update, @round %>
         | <%= link_to 'Edit', edit_round_path(@round) %>
       <% end %>
-      <% if can? :destroy, @round %>
+      <% if can?(:destroy, @round) && @round.destroyable? %>
         | <%= link_to 'Delete', round_path(@round), :method => 'delete', :confirm => 'Are you sure?' %>
       <% end %>
       </span>
@@ -49,54 +49,61 @@
   <div id="location_map" class="left-column" style="width: 650px; height: 200px;"></div>  
 
   <div class="right-column">
-    <% if can? :confirm, @round %>
-      <% if !@round.confirmed && !@round.past? %>
-        <%= button_to 'Confirm', round_confirmation_path(@round), :id => 'confirm', :disabled => !@round.confirmable? %>
-        <%= round_confirmation_message(@round) %>
-      <% end %>
-    <% else %>
-      <% if can?(:unsubscribe_from, @round) %>
-        <%= button_to "Unsubscribe", round_subscription_path(@round), :id => 'unsubscribe', :confirm => 'Are you sure?', :method => :delete %>
-      <% elsif can?(:subscribe_to, @round) %>
+    <% if signed_in? %>
+      <% if can?(:create, Subscription) && @round.subscribable_by?(current_user) %>
         <%= button_to "Subscribe", round_subscription_path(@round), :id => 'subscribe', :confirm => 'Are you sure?', :method => :post %>
         <%= round_subscription_message(@round) %>
+      <% elsif can?(:destroy, @round.subscription_for(current_user)) && @round.unsubscribable_by?(current_user) %>
+        <%= button_to "Unsubscribe", round_subscription_path(@round), :id => 'unsubscribe', :confirm => 'Are you sure?', :method => :delete %>
       <% end %>
     <% end %>
-    
     <p class="status">
       <%= round_status_message(@round) %>
     </p>
   </div>  
   <div class="clear"></div>
-
+  
   <% unless @round.description.blank? %>
     <p class="additional-notes"><strong>Additional notes:</strong> <%= @round.description %></p>
   <% end %>
 </div>
 
-
 <div id="subscribers">
+  <h2>Who created this round</h2>
+  
+  <ul>
+    <li>
+          <a href="<%= user_path(@round.user) %>">
+          <div class="image"><%= image_tag @round.user.avatar.url(:thumb) %></div>
+          <div class="user-details"><%= @round.user.display_name %></div>
+          </a>
+    </li>
+  </ul>
+    <div class="clear"></div>
+      
 <% if @round.past? %>
   <h2>People that subscribed to this round</h2>
 <% else %>
   <h2>
     People you will meet at this round
     
-    <% if @round.subscribable? %>
-      (<%= t :number_of_spots_left, :count => @round.remaining_spots %>)
-    <% end %>
+    (<%= t :number_of_spots_left, :count => @round.remaining_spots %>)
   </h2>
 <% end%>
-<ul>
-  <% @round.subscribers_and_owner.each do |user| %>
-    <li>
-      <a href="<%= user_path(user) %>">
-      <div class="image"><%= image_tag user.avatar.url(:thumb) %></div>
-      <div class="user-details"><%= user.display_name %></div>
-      </a>
-    </li>
-  <% end%>
-</ul>
+<% if @round.subscribers.empty? %>
+  <p>None subscribed to this round yet.</p>
+<% else %>
+  <ul>
+    <% @round.subscribers.each do |user| %>
+      <li>
+        <a href="<%= user_path(user) %>">
+        <div class="image"><%= image_tag user.avatar.url(:thumb) %></div>
+        <div class="user-details"><%= user.display_name %></div>
+        </a>
+      </li>
+    <% end%>
+  </ul>
+<% end %>
 
 <div class="clear"></div>
 
@@ -105,7 +112,7 @@
 <div id="comments">
   <h2>Post your comments</h2>
   <ul>
-  <% @round.comments.each do |comment| %>
+  <% @round.comments(true).each do |comment| %>
     <li>
       <div class="header">
         <%= image_tag comment.user.avatar.url(:thumb), :width => '35', :height => '35' %>

@@ -1,10 +1,6 @@
 require 'spec_helper'
 
-describe LocationController do
-  before(:each) do
-    stub_geocoder
-  end
-  
+describe LocationsController do
   it "should update user location if signed in" do
     user = Factory :user
     @controller.sign_in user

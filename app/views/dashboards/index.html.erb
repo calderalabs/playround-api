@@ -1,0 +1,13 @@
+<%= content_for :dashboard_content do %>
+  <ul>
+    <% @rounds.each do |round| %>
+      <li>
+        <span><%= round.arena.name %></span>
+        <span><%= round.game.name %></span>
+        <span><%= round.user.display_name %></span>
+        <span><%= button_to 'Approve', '' %></span>
+        <span><%= button_to 'Reject', '' %></span>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

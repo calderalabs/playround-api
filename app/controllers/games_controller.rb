@@ -49,11 +49,15 @@ class GamesController < ApplicationController
   
   def destroy
     @game = Game.find(params[:id])
-    @game.destroy
-
+    
     respond_to do |format|
-      format.html { redirect_to(games_url) }
-      format.json  { head :ok }
+      if @game.destroy
+        format.html { redirect_to(games_url, :notice => 'Game was succesfully deleted.') }
+        format.json { head :ok }
+      else
+        format.html { redirect_to(@game, :error => 'Unable to delete game.') }
+        format.json { render :json => @game.errors, :status => :unprocessable_entity }
+      end
     end
   end
 

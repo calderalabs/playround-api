@@ -71,11 +71,15 @@ class ArenasController < ApplicationController
 
   def destroy
     @arena = Arena.find(params[:id])
-    @arena.destroy
 
     respond_to do |format|
-      format.html { redirect_to(arenas_url) }
-      format.json  { head :ok }
+      if @arena.destroy
+        format.html { redirect_to(arenas_url, :notice => 'Arena was succesfully deleted.') }
+        format.json { head :ok }
+      else
+        format.html { redirect_to(@arena, :error => 'Unable to delete arena.') }
+        format.json { render :json => @arena.errors, :status => :unprocessable_entity }
+      end
     end
   end
   

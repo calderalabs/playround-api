@@ -1,4 +1,4 @@
-class ConfirmationController < ApplicationController
+class ConfirmationsController < ApplicationController
   def create
     @round = Round.find(params[:round_id])
     authorize! :confirm, @round

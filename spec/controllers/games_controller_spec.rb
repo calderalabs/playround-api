@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe GamesController do
   before(:each) do
-    stub_geocoder
-    
     @game = Factory :game
     @controller.sign_in @game.user
   end
@@ -120,7 +118,7 @@ describe GamesController do
     
     delete :destroy, :id => @game.to_param
     
-    should redirect_to(sign_in_url)
+    should redirect_to(@game)
   end
   
   it "should not destroy if guest" do
@@ -158,14 +156,9 @@ describe GamesController do
     ability.should_not be_able_to(:update, Factory.build(:game))
   end
   
-  it "user can only destroy games which he owns and that has no rounds" do
+  it "user can only destroy games which he owns" do
     ability = Ability.new @game.user
     ability.should be_able_to(:destroy, @game)
     ability.should_not be_able_to(:destroy, Factory.build(:game))
-    
-    @game.save!
-    Factory :round, :game => @game
-    
-    ability.should_not be_able_to(:destroy, @game)
   end
 end

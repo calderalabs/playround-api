@@ -1,7 +1,9 @@
-class Round < ActiveRecord::Base
-  attr_accessible :deadline, :date, :max_people, :min_people, :arena_id, :game_id, :description
-  
-  after_initialize :initialize_default_values
+class Round < ActiveRecord::Base 
+  attr_accessible :date, :people, :arena_id, :game_id, :description
+
+  after_initialize do
+    self.date ||= Time.now
+  end
 
   belongs_to :arena
   belongs_to :game
@@ -10,42 +12,44 @@ class Round < ActiveRecord::Base
   has_many :comments
   has_many :subscribers, :through => :subscriptions, :source => :user
   
-  before_validation :validate_date_deadline, :if => Proc.new { !@recently_confirmed }
+  validate :on => :create do
+    errors.add(:date, "must be after the current time") if date && date < Time.now.change(:sec => 0)
+    errors.add(:arena_id, "must be a public arena or a private arena that you own") if arena && !arena.public? && arena.user != user
+  end
   
-  def validate_date_deadline
-    errors.add(:deadline, "must be earlier than date") if self.deadline && self.date && self.deadline > self.date
+  validate :on => :update do
+    editable_attributes = [:description, :approved, :confirmed]
+
+    errors.add(:base, "You cannot approve or reject this round") if approved_changed? && !approvable?
+    errors.add(:base, "You cannot confirm this round") if confirmed_changed? && !confirmable?
     
-    errors.add(:deadline, "must be after the current time") if self.deadline && self.deadline < Time.now.change(:sec => 0)
-    errors.add(:date, "must be after the current time") if self.date && self.date < Time.now.change(:sec => 0)
+    changed_attributes.each do |attribute, value|
+      errors.add(attribute.to_sym, "cannot be changed after creation") if !editable_attributes.include?(attribute.to_sym)
+    end
   end
   
-  before_validation do
-    errors.add(:arena_id, "must be a public arena or a private arena that you own") if self.arena && !self.arena.public? && self.arena.user_id != self.user_id
+  before_validation :on => :create do
+    self.approved = true if user == arena.user
   end
   
-  validate do
-    self.errors.add(:base, "You cannot confirm this round") if @recently_confirmed && !self.confirmable?
+  before_destroy do
+    errors.add(:base, "You can't delete a round with subscribers") and return false unless destroyable?
   end
   
-  after_save do
-    subscribers.each do |user|
-      RoundMailer.round_confirmation_email(self, user).deliver
-    end if @recently_confirmed
-  end
-  
-  validates_presence_of :deadline
   validates_presence_of :date
-  validates_presence_of :max_people
-  validates_presence_of :min_people
+  validates_presence_of :people
   validates_presence_of :arena_id
   validates_presence_of :game_id
   validates_presence_of :user_id
   
-  validates_numericality_of :max_people, :greater_than_or_equal_to => :min_people, :greater_than => 1, :only_integer => true, :unless => Proc.new { |round| round.min_people.nil? }
-  validates_numericality_of :min_people, :greater_than => 1, :only_integer => true
+  validates_numericality_of :people, :only_integer => true, :greater_than_or_equal_to => 2
   
   scope :pending_approval, lambda {
-      where("approved = ?", false)
+    where("approved = ?", false)
+  }
+  
+  scope :approved, lambda {
+    where("approved = ?", true)
   }
   
   def date=(date)
@@ -56,57 +60,56 @@ class Round < ActiveRecord::Base
     super(deadline.try(:change, :sec => 0))
   end
   
-  def subscribers_and_owner
-    subscribers + [user]
+  def remaining_spots
+    people - subscriptions.length
   end
   
-  def remaining_spots
-    max_people - subscribers_and_owner.count
+  def destroyable?
+    subscriptions.count == 0
   end
   
   def full?
     remaining_spots == 0
-  end
-  
-  def authorized?(some_user)
-    user == some_user
   end
 
   def past?
     Time.now > date
   end
   
-  def past_deadline?
-    Time.now > deadline
-  end
-
-  def confirmable?
-    !confirmed_was && past_deadline? && !past?
+  def subscription_for(user)
+    subscriptions.where(:user_id => user.id).first
   end
   
-  def confirmed=(confirmed)
-    @recently_confirmed = confirmed
-
-    super(confirmed)
+  def subscribable_by?(user)
+    subscription = Subscription.new(:round_id => id)
+    subscription.user = user
+    subscription.valid?
+  end
+  
+  def unsubscribable_by?(user)
+    !!subscription_for(user).try(:destroyable?)
+  end
+  
+  def approvable?
+    !approved_was && !past?
+  end
+  
+  def approve!
+    self.approved = true
+    save
+  end
+  
+  def reject!
+    self.approved = false
+    save
+  end
+  
+  def confirmable?
+    approved && !confirmed_was && !past? && full? 
   end
   
   def confirm!
     self.confirmed = true
     save
-  end
-  
-  def subscribable?
-    !past_deadline? && !full?
-  end
-
-  def unsubscribable?
-    !past_deadline?
-  end
-
-  private
-  
-  def initialize_default_values
-    self.date ||= Time.now
-    self.deadline ||= Time.now
   end
 end

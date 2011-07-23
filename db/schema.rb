@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110719164854) do
+ActiveRecord::Schema.define(:version => 20110720120345) do
 
   create_table "arenas", :force => true do |t|
     t.integer  "user_id"
@@ -69,11 +69,9 @@ ActiveRecord::Schema.define(:version => 20110719164854) do
     t.integer  "arena_id"
     t.integer  "game_id"
     t.text     "description"
-    t.datetime "deadline"
     t.datetime "date"
     t.boolean  "confirmed",   :default => false
-    t.integer  "max_people",  :default => 2
-    t.integer  "min_people",  :default => 2
+    t.integer  "people",      :default => 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "approved",    :default => false

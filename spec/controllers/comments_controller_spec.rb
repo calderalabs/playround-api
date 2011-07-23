@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe CommentsController do
   before(:each) do
-    stub_geocoder
-    
     @comment = Factory :comment
     @controller.sign_in @comment.user
   end

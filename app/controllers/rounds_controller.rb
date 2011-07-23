@@ -3,11 +3,7 @@ class RoundsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if located?
-      @rounds = Round.where(:arenas => { :town_woeid => current_location.woeid }).joins(:arena)
-    else
-      @rounds = []
-    end
+    @rounds = @rounds.where(:arenas => { :town_woeid => current_location.woeid }).joins(:arena) if located?
     
     respond_to do |format|
       format.html
@@ -16,8 +12,8 @@ class RoundsController < ApplicationController
   end
 
   def show
-    @round = Round.find(params[:id])
-    @comment = Comment.new(:round_id => @round.id)
+    @comment = @round.comments.build
+    @comment.user = current_user
     
     respond_to do |format|
       format.html
@@ -26,8 +22,6 @@ class RoundsController < ApplicationController
   end
 
   def new
-    @round = Round.new
-
     respond_to do |format|
       format.html
       format.json  { render :json => @round }
@@ -35,11 +29,11 @@ class RoundsController < ApplicationController
   end
 
   def edit
-    @round = Round.find(params[:id])
+
   end
 
   def create
-    @round = current_user.rounds.build(params[:round])
+    @round.user = current_user
     
     respond_to do |format|
       if @round.save
@@ -53,8 +47,6 @@ class RoundsController < ApplicationController
   end
 
   def update
-    @round = Round.find(params[:id])
-
     respond_to do |format|
       if @round.update_attributes(params[:round])
         format.html { redirect_to(@round, :notice => 'Round was successfully updated.') }
@@ -67,12 +59,14 @@ class RoundsController < ApplicationController
   end
 
   def destroy
-    @round = Round.find(params[:id])
-    @round.destroy
-
     respond_to do |format|
-      format.html { redirect_to(rounds_url) }
-      format.json  { head :ok }
+      if @round.destroy
+        format.html { redirect_to(rounds_url, :notice => 'Round was succesfully deleted.') }
+        format.json  { head :ok }
+      else
+        format.html { redirect_to(@round, :error => 'Unable to delete this round.') }
+        format.json  { render :json => @round.errors, :status => :unprocessable_entity }
+      end
     end
   end
   

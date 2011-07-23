@@ -2,28 +2,29 @@ class SubscriptionsController < ApplicationController
   def create
     @round = Round.find(params[:round_id])
 
-    authorize! :subscribe_to, @round
+    authorize! :create, Subscription
     
-    @subscription = current_user.subscriptions.build(:round_id => @round.id)
-    
-    if @subscription.save
-      flash[:notice] = "You successfully subscribed to this round."
-      redirect_to @round
-    else
-      flash[:failure] = "An error occurred while subscribing to this round."
-      redirect_to @round
+    respond_to do |format|
+      if current_user.subscriptions.create(:round_id => @round.id)
+        format.html { redirect_to @round, :notice => "You successfully subscribed to this round." }
+      else
+        format.html { redirect_to @round, :error => "Unable to subscribe to this round." }
+      end
     end
   end
   
   def destroy
     @round = Round.find(params[:round_id])
 
-    authorize! :unsubscribe_from, @round
+    authorize! :create, Subscription
+    authorize! :destroy, @round.subscription_for(current_user)
     
-    @subscription = current_user.subscriptions.where(:round_id => @round.id).first
-    @subscription.destroy
-    
-    flash[:notice] = "You are no longer subscribed to this round."
-    redirect_to @round
+    respond_to do |format|
+      if @round.subscription_for(current_user).try(:destroy)
+        format.html { redirect_to @round, :notice => "You are no longer subscribed to this round." }
+      else
+        format.html { redirect_to @round, :notice => "Unable to unsubscribe to this round." }
+      end
+    end
   end
 end

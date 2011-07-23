@@ -1,4 +1,4 @@
-class QuicktourController < ApplicationController
+class QuicktoursController < ApplicationController
   load_and_authorize_resource :user
   load_and_authorize_resource :quicktour, :through => :user, :singleton => true
   

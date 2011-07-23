@@ -14,8 +14,7 @@ Feature: Manage Rounds
     And a game exists with name: "DotA"
     When I click the "Rounds" link
     And I click the "Start a new round" link
-    And I fill in "Maximum people" with "20"
-    And I fill in "Minimum people" with "10"
+    And I fill in "Number of people" with "20"
     And I fill in "Game" with "DotA"
     And I select "DotA" from the list
     And I fill in "Arena" with "Depalo's House"
@@ -56,30 +55,20 @@ Feature: Manage Rounds
     Then I should not see "DotA"
     And I should be on the rounds page
     
-  Scenario: Read round after the deadline
+  Scenario: Read not full round after the date
     Given a user "Eugenio" exists
-    And that user created a round with a past deadline
+    And that user created a round that is past
     When I go to the page for that round
+    Then I should see "This round never took place"
     Then I should not see "left to subscribe"
-    And I should see "This round is not confirmed yet"
     When I go to the rounds page
     And I select "Siena, Italy" as my location
-    Then I should see "This round is not confirmed yet"
+    Then I should see "This round never took place"
     And I should not see "spots left"
     
-  Scenario: Read not confirmed round after the date
+  Scenario: Read full round after the date
     Given a user "Eugenio" exists
-    And that user created a round with a past date
-    When I go to the page for that round
-    Then I should see "This round never took place"
-    Then I should not see "left to subscribe"
-    When I go to the rounds page
-    And I select "Siena, Italy" as my location
-    Then I should see "This round never took place"
-    And I should not see "spots left"
-  Scenario: Read confirmed round after the date
-    Given a user "Eugenio" exists
-    And that user created a round with a past date and confirmed it
+    And that user created a round that is past and full
     When I go to the page for that round
     Then I should see "This round has already taken place"
     And I should not see "left to subscribe"

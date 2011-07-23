@@ -8,7 +8,15 @@ class Subscription < ActiveRecord::Base
   validates_presence_of :round_id
   validates_uniqueness_of :round_id, :scope => :user_id
   
+  before_destroy do
+    errors.add(:base, "Unable to unsubscribe from this round") and return false unless destroyable?
+  end
+  
   validate do
-    errors.add(:base, "You cannot subscribe to this round") if round && !round.subscribable?
+    errors.add(:base, "You cannot subscribe to this round") unless round && !round.past? && !round.full?
+  end
+  
+  def destroyable?
+    round && !round.past?
   end
 end

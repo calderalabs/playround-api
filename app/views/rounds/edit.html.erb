@@ -1,3 +1,9 @@
 <h1>Editing round</h1>
 
-<%= render 'form' %>
+<%= semantic_form_for(@round) do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :description, :required => false, :hint => 'This is an optional description for your round' %>
+  <% end %>
+  
+  <%= f.buttons %>
+<% end %>

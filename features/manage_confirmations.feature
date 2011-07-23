@@ -1,5 +1,5 @@
 @confirmation
-Feature: Confirmation
+Feature: Confirmations
   In order to notify subscribers that the round is actually taking place
   As a round organizer
   I want to be able to confirm the round

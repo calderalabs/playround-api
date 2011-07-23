@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe ArenasController do
   before(:each) do
-    stub_geocoder
-    
     @arena = Factory :arena
     @controller.sign_in @arena.user
   end
@@ -128,7 +126,7 @@ describe ArenasController do
     
     delete :destroy, :id => @arena.to_param
     
-    should redirect_to(sign_in_url)
+    should redirect_to(arena_path(@arena))
   end
   
   it "should not destroy if guest" do
@@ -166,14 +164,9 @@ describe ArenasController do
     ability.should_not be_able_to(:update, Factory.build(:arena))
   end
   
-  it "user can only destroy arenas which he owns and that has no rounds" do
+  it "user can only destroy arenas which he owns" do
     ability = Ability.new @arena.user
     ability.should be_able_to(:destroy, @arena)
     ability.should_not be_able_to(:destroy, Factory.build(:arena))
-    
-    @arena.save!
-    Factory :round, :arena => @arena
-    
-    ability.should_not be_able_to(:destroy, @arena)
   end
 end

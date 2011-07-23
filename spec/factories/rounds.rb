@@ -1,10 +1,17 @@
 Factory.define :round, :class => Round do |round|
-  round.max_people 10
-  round.min_people 2
+  round.people 10
   round.association :arena
   round.association :game
   round.association :user
   round.date Time.now + 2.months
-  round.deadline Time.now + 1.month
   round.approved false
+end
+
+Factory.define :approved_round, :class => Round do |round|
+  round.people 10
+  round.association :arena
+  round.association :game
+  round.association :user
+  round.date Time.now + 2.months
+  round.approved true
 end

@@ -1,4 +1,4 @@
-class LocationController < ApplicationController
+class LocationsController < ApplicationController
   def update
     places = GeoPlanet::Place.search(params[:location])
     location = places.first if places

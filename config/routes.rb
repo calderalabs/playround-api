@@ -1,7 +1,8 @@
 Playround::Application.routes.draw do
   resources :rounds do
-    resource :confirmation, :only => :create, :controller => 'confirmation'
-    resource :subscription, :only => [:create, :destroy], :controller => 'subscriptions'
+    resource :confirmations, :only => :create
+    resource :subscription, :only => [:create, :destroy]
+    resource :approvals, :only => :create
   end
   
   resources :arenas do
@@ -13,13 +14,13 @@ Playround::Application.routes.draw do
   resources :comments, :only => [:create, :destroy]
   
   resources :users do
-    resource :quicktour, :only => [:update, :destroy], :controller => 'quicktour'
+    resource :quicktours, :only => [:update, :destroy]
   end
 
   resource :session, :controller => 'sessions'
-  resource :location, :only => :update, :controller => 'location'
+  resource :locations, :only => :update
   
-  match 'dashboard/:id' => 'dashboard#index', :as => 'dashboard'
+  match 'dashboards/:user_id' => 'dashboards#index', :as => 'dashboards'
   
   match 'sign_in' => 'sessions#new', :as => 'sign_in'
   match 'sign_out' => 'sessions#destroy', :via => :delete, :as => 'sign_out'

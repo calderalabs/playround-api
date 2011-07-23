@@ -30,6 +30,10 @@ class Arena < ActiveRecord::Base
     
     errors.add(:address, "must be in a town or city") unless self.town_woeid
   end
+
+  before_destroy do
+    errors.add(:base, "You can't delete an arena with rounds") and return false unless rounds.count == 0
+  end
   
   scope :available_for, lambda { |user|
       where("public = ? OR user_id = ?", true, user.id)

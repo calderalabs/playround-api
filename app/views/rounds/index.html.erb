@@ -32,17 +32,13 @@
             <%= round_status_message(round) %>
           </h3>
         <ul>
-          <% round.max_people.times do |n| %>
-            <li>
-              <% if n < round.subscribers_and_owner.count %>
-                <%= image_tag round.subscribers_and_owner[n].avatar.url(:thumb), :width => '35', :height => '35' %>
-              <% elsif n < round.min_people %>
-                <div class="remaining-spot min"></div>
-              <% else %>
-                <div class="remaining-spot"></div>
-              <% end%>
-            </li>
-          <% end%>
+            <% round.subscribers.each do |subscriber| %>
+              <li><%= image_tag subscriber.avatar.url(:thumb), :width => '35', :height => '35' %></li>
+            <% end %>
+            <% round.remaining_spots.times do %>
+              <li><div class="remaining-spot"></div></li>
+            <% end %>
+          </li>
         </ul>
         </div>
       </div>
@@ -52,7 +48,7 @@
           <%= link_to 'Show', round %>
         <% end %>
 
-        <% if round.subscribable? %>
+        <% unless round.past? %>
           <div class="spots">
             <%= t :number_of_spots_left, :count => round.remaining_spots %>
           </div>

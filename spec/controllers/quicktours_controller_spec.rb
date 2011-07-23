@@ -1,9 +1,7 @@
 require 'spec_helper'
 
-describe QuicktourController do
+describe QuicktoursController do
   before(:each) do
-    stub_geocoder
-    
     @user = Factory :user_with_quicktour
     
     @controller.sign_in @user

@@ -2,76 +2,49 @@ require 'spec_helper'
 
 describe SubscriptionsController do
   before(:each) do
-    stub_geocoder
-    
     @user = Factory :user
-    @round = Factory :round
-    @subscription = Factory :subscription
+    @round = Factory :round, :user => @user
+  end
+  
+  it "should subscribe to the round when logged in" do
     @controller.sign_in @user
-  end
-  
-  it "should create subscription" do
-    Proc.new do
-      post :create, :round_id => @round.to_param
-    end.should change(Subscription, :count).by(1)
-
-    should respond_with(:found)
-    should redirect_to(@round)
-  end
-  
-  it "should not subscribe if you own the round" do
-    post :create, :round_id => (Factory :round, :user => @user).to_param
-    
-    should redirect_to(sign_in_url)
-  end
-  
-  it "should not create subscription if guest" do
-    @controller.sign_out
     
     post :create, :round_id => @round.to_param
-
-    should redirect_to(sign_in_url)
-  end
-  
-  it "should destroy subscription" do
-    Factory :subscription, :user => @user, :round => @round
-    
-    Proc.new do
-      delete :destroy, :round_id => @round.to_param
-    end.should change(Subscription, :count).by(-1)
-
-    should respond_with(:found)
+    @round.subscribers(true).should include(@user)
+    should set_the_flash.to(/subscribed/i)
     should redirect_to(@round)
   end
   
-  it "should not destroy subscription if guest" do
-    @controller.sign_out
-    
-    delete :destroy, :round_id => @round.to_param
-
+  it "should not subscribe to the round when not logged in" do
+    post :create, :round_id => @round.to_param
     should redirect_to(sign_in_url)
   end
   
-  # ability tests
-  
-  it "user can create subscriptions" do
-    ability = Ability.new @user
-    ability.should be_able_to(:subscribe_to, @round)
+  it "should unsubscribe to the round when logged in" do
+    @controller.sign_in @user
+    @round.subscriptions << Factory.build(:subscription, :user => @user, :round => nil)
+    @round.save!
+    
+    delete :destroy, :round_id => @round.to_param
+    @round.subscribers(true).should_not include(@user)
+    should set_the_flash.to(/no longer subscribed/i)
+    should redirect_to(@round)
   end
   
-  it "guests can't create subscriptions" do
+  it "should not unsubscribe when not logged in" do
+    delete :destroy, :round_id => @round.to_param
+    should redirect_to(sign_in_url)
+  end
+  
+  # Abilities
+  
+  it "registered users can subscribe to rounds" do
+    ability = Ability.new @user
+    ability.should be_able_to(:create, Subscription)
+  end
+  
+  it "guests can't subscribe to rounds" do
     ability = Ability.new User.new
-    ability.should_not be_able_to(:subscribe_to, @round)
-  end
-  
-  it "user can destroy only subscriptions which he owns" do
-    @subscription.round.reload
-    ability = Ability.new @subscription.user
-    ability.should be_able_to(:unsubscribe_from, @subscription.round)
-  end
-  
-  it "user can't subscribe to his own round" do
-    ability = Ability.new @user
-    ability.should_not be_able_to(:subscribe_to, Factory(:round, :user => @user))
+    ability.should_not be_able_to(:destroy, @user.subscriptions.build(:round_id => @round.id))
   end
 end

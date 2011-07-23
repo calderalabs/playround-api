@@ -1,16 +1,15 @@
 require 'spec_helper'
 
-describe DashboardController do
+describe DashboardsController do
   before(:each) do
-    stub_geocoder
-    
     @user = Factory :user
     @controller.sign_in @user
   end
   
   it "should get index" do
-    get :index, :id => @user.to_param
+    get :index, :user_id => @user.to_param
     
+    should render_template('index')
     should respond_with(:success)
   end
 end

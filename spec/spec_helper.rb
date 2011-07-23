@@ -5,7 +5,6 @@ require 'rspec/rails'
 require 'clearance'
 require 'capybara/rails'
 
-Factory.find_definitions
 require 'geoplanet'
 require 'geocoder'
 require 'geocoder/results/google'
@@ -14,9 +13,13 @@ require 'custom_matchers'
 require 'cancan/matchers'
 require 'shoulda/matchers'
 
+require 'object_with_constants'
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+Factory.find_definitions
 
 RSpec.configure do |config|
   # == Mock Framework
@@ -38,9 +41,6 @@ RSpec.configure do |config|
   
   config.include CustomMatcher
 end
-
-
-#Capybara.default_driver = :selenium
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
@@ -72,23 +72,13 @@ def assert_adjusts_url(record, key = :website)
   record.send(key).should == 'http://www.google.com'
 end
 
-class Object
-  def self.with_constants(constants, &block)
-    old_constants = Hash.new
-    constants.each do |constant, val|
-      old_constants[constant] = const_get(constant)
-      silence_stderr{ const_set(constant, val) }
-    end
-
-    block.call
-
-    old_constants.each do |constant, val|
-      silence_stderr{ const_set(constant, val) }
-    end
-  end
-end
-
 def stub_geocoder
   Geocoder.stub(:search).and_return([Geocoder::Result::Google.new({})])
   GeoPlanet::Place.stub(:search).and_return([GeoPlanet::Place.new({'woeid' => 724196, 'placeTypeName attrs' => {'code' => 7}})])
+end
+
+RSpec.configure do |config|
+  config.before(:each) do
+    stub_geocoder
+  end
 end
