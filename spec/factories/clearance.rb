@@ -10,7 +10,7 @@ end
 Factory.define :user_with_quicktour, :class => User do |user|
   user.email    { Factory.next :email }
   user.password { "password" }
-  user.quicktour { |u| u.association :quicktour, :user => u.result }
+  user.after_build { |u| u.quicktour = Factory.build(:quicktour, :user => u) }
 end
 
 Factory.define :email_confirmed_user, :parent => :user do |user|

@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Subscription do
   before(:each) do
     stub_geocoder
-    
-    @subscription = Factory.build :subscription
+
+    @subscription = Factory.build :subscription, :round => Factory(:round, :approved => true)
   end
   
   # validity tests

@@ -128,9 +128,9 @@ describe RoundsController do
   end
   
   it "should not destroy the round when there is at least one subscriber" do
-    @round.save!
-    @round.subscriptions << Factory.build(:subscription, :round => nil)
-    
+    @round.approve!
+    @round.subscriptions << Factory.build(:subscription)
+
     @controller.sign_in @user
     delete :destroy, :id => @round.to_param
     Round.all.should include(@round)

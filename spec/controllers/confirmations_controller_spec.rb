@@ -2,17 +2,16 @@ require 'spec_helper'
 
 describe ConfirmationsController do
   before(:each) do
-    @round = Factory :round
+    @round = Factory :round, :approved => true
   end
   
   it "should confirm if you own the round" do
-    round = Factory :approved_round
-    @controller.sign_in round.user
-    round.remaining_spots.times { Factory :subscription, :round => round }
-    round.reload
-    round.confirmable?.should == true
+    @controller.sign_in @round.user
+    @round.remaining_spots.times { Factory :subscription, :round => @round }
+    @round.reload
+    @round.confirmable?.should == true
 
-    post :create, :round_id => round.to_param
+    post :create, :round_id => @round.to_param
     round = assigns(:round)
     round.reload
     should redirect_to(round_path(round))
