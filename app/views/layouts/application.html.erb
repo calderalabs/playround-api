@@ -3,7 +3,7 @@
     <script type="text/javascript" charset="utf-8">
       var available_guiders = <%= raw Quicktour::GUIDERS.to_json %>;
       var current_guider = <%= raw current_user.current_guider_name.to_json %>;
-      var quicktour_path = <%= raw user_quicktour_path(current_user).to_json %>;
+      var quicktours_path = <%= raw user_quicktours_path(current_user).to_json %>;
     </script>
 
     <%= javascript_include_tag 'guiders' %>
@@ -34,7 +34,7 @@
   <% end %>
     <div id="session">
       <div class="container">
-        <%= form_tag location_path, :method => :put, :id => 'location-form' do %>
+        <%= form_tag locations_path, :method => :put, :id => 'location-form' do %>
           <%= hidden_field_tag 'redirect_to', request.fullpath %>
           <%= text_field_tag 'location', '' %>
         <% end %>
@@ -43,7 +43,7 @@
         
         <% if signed_in? -%>
           <%= link_to current_user.display_name, user_path(current_user), :id => 'change-profile' %> |
-          <%= link_to "Dashboard", dashboard_path(current_user) %> |
+          <%= link_to "Dashboard", dashboards_path(current_user) %> |
           <%= link_to "Sign out", sign_out_path, :method => :delete %>
         <% else -%>
           <%= link_to "Sign in", sign_in_path %>

@@ -13,10 +13,10 @@ class Subscription < ActiveRecord::Base
   end
   
   validate do
-    errors.add(:base, "You cannot subscribe to this round") unless round && !round.past? && !round.full?
+    errors.add(:base, "You cannot subscribe to this round") unless round && !round.past? && !round.full? && round.approved && !round.confirmed 
   end
   
   def destroyable?
-    round && !round.past?
+    round && !round.past? && round.approved && !round.confirmed
   end
 end

@@ -50,6 +50,11 @@
 
   <div class="right-column">
     <% if signed_in? %>
+      <% if can? :confirm, @round %>
+        <% if !@round.confirmed && !@round.past? %>
+          <%= button_to 'Confirm', round_confirmations_path(@round), :id => 'confirm', :disabled => !@round.confirmable?, :confirm => 'Are you sure?' %>
+        <% end %>
+      <% end %>
       <% if can?(:create, Subscription) && @round.subscribable_by?(current_user) %>
         <%= button_to "Subscribe", round_subscription_path(@round), :id => 'subscribe', :confirm => 'Are you sure?', :method => :post %>
         <%= round_subscription_message(@round) %>
@@ -59,6 +64,9 @@
     <% end %>
     <p class="status">
       <%= round_status_message(@round) %>
+    </p>
+    <p class="status">
+      <%= round_confirmation_message(@round) if @round.full? && !@round.past? %>
     </p>
   </div>  
   <div class="clear"></div>

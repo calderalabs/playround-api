@@ -37,6 +37,11 @@ Given /^that user created a round that is past and full$/ do
   Time.unstub(:now)
 end
 
+Given /^that user created a round that is full$/ do
+  round = Factory :approved_round, :user => User.last
+  round.remaining_spots.times { Factory :subscription, :round => round }
+end
+
 Given /^a user created a round in that arena$/ do
   Factory :round, :arena => Arena.last
 end

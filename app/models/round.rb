@@ -36,6 +36,12 @@ class Round < ActiveRecord::Base
     errors.add(:base, "You can't delete a round with subscribers") and return false unless destroyable?
   end
   
+  after_save do
+    subscribers.each do |user|
+      RoundMailer.confirmation_email(self, user).deliver
+    end if @recently_confirmed
+  end
+  
   validates_presence_of :date
   validates_presence_of :people
   validates_presence_of :arena_id
@@ -58,6 +64,12 @@ class Round < ActiveRecord::Base
   
   def deadline=(deadline)
     super(deadline.try(:change, :sec => 0))
+  end
+  
+  def confirmed=(confirmed)
+    @recently_confirmed = confirmed
+    
+    super(confirmed)
   end
   
   def remaining_spots

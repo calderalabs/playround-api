@@ -157,14 +157,14 @@ describe Round do
   end
   
   it "shoud not be subscribable when the round is full" do
-    @round.save!
+    @round.approve!
     @round.subscribable_by?(@user).should == true
     @round.people.times { Factory :subscription, :round => @round }
     @round.subscribable_by?(@user).should == false
   end
   
   it "should not be subscribable after the date" do
-    @round.save!
+    @round.approve!
     @round.subscribable_by?(@user).should == true
     Time.stub(:now).and_return(@round.date + 1.day)
     @round.subscribable_by?(@user).should == false

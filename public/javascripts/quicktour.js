@@ -3,7 +3,7 @@ function closeQuicktour() {
   
   $.ajax({
     type: "DELETE",
-    url: quicktour_path,
+    url: quicktours_path,
     contentType: 'application/json'
   });
 }
@@ -11,7 +11,7 @@ function closeQuicktour() {
 function nextGuider(guider) {
   $.ajax({
     type: "PUT",
-    url: quicktour_path,
+    url: quicktours_path,
     contentType: 'application/json'
   });
   

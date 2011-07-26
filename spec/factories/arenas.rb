@@ -1,10 +1,10 @@
-Factory.sequence :name do |n|
+Factory.sequence :arena_name do |n|
   "Tea Room#{n}"
 end
 
 Factory.define :arena, :class => Arena do |arena|
   arena.association :user
-  arena.name { Factory.next :name }
+  arena.name { Factory.next :arena_name }
   arena.latitude 43.31706
   arena.longitude 11.333599
   arena.description "Sala da thè più famosa"

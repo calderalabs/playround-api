@@ -18,4 +18,12 @@ module RoundsHelper
   def round_subscription_message(round)
     time_ago_in_words(round.date).capitalize + ' left to subscribe!'
   end
+  
+  def round_confirmation_message(round)
+    if round.confirmed
+      "This round has been confirmed"
+    else
+      "This round is not confirmed yet"
+    end
+  end
 end
