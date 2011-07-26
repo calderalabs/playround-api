@@ -12,7 +12,7 @@ require 'rspec/mocks/standalone'
 
 Selenium::WebDriver::Firefox::Binary.path = "/opt/Firefox.app/Contents/MacOS/firefox-bin"
 
-Factory.find_definitions
+FactoryGirl.find_definitions
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd

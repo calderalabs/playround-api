@@ -32,16 +32,20 @@ end
 Given /^that user created a round that is past and full$/ do
   now = Time.now
   Time.stub(:now).and_return(now - 1.month)
-  round = Factory :round, :date => Time.now + 1.week, :user => User.last
+  round = Factory :round, :date => Time.now + 1.week, :user => User.last, :approved => true
   round.remaining_spots.times { Factory :subscription, :round => round }
   Time.unstub(:now)
 end
 
 Given /^that user created a round that is full$/ do
-  round = Factory :approved_round, :user => User.last
+  round = Factory :round, :user => User.last, :approved => true
   round.remaining_spots.times { Factory :subscription, :round => round }
 end
 
 Given /^a user created a round in that arena$/ do
   Factory :round, :arena => Arena.last
+end
+
+Given /^an approved round exists created by another user$/ do
+  Factory :round, :approved => true
 end
