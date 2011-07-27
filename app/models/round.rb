@@ -18,9 +18,10 @@ class Round < ActiveRecord::Base
   end
   
   validate :on => :update do
-    editable_attributes = [:description, :approved, :confirmed]
+    editable_attributes = [:description, :approved, :confirmed, :rejected]
 
-    errors.add(:base, "You cannot approve or reject this round") if approved_changed? && !approvable?
+    errors.add(:base, "You cannot approve this round") if approved_changed? && !approvable?
+    errors.add(:base, "You cannot reject this round") if rejected_changed? && !rejectable?
     errors.add(:base, "You cannot confirm this round") if confirmed_changed? && !confirmable?
     
     changed_attributes.each do |attribute, value|
@@ -51,11 +52,15 @@ class Round < ActiveRecord::Base
   validates_numericality_of :people, :only_integer => true, :greater_than_or_equal_to => 2
   
   scope :pending_approval, lambda {
-    where("approved = ?", false)
+    where("approved = ? AND rejected = ?", false, false)
   }
   
   scope :approved, lambda {
     where("approved = ?", true)
+  }
+  
+  scope :rejected, lambda {
+    where("rejected = ?", true)
   }
   
   def date=(date)
@@ -103,7 +108,11 @@ class Round < ActiveRecord::Base
   end
   
   def approvable?
-    !approved_was && !past?
+    !approved_was && !past? && !rejected
+  end
+  
+  def rejectable?
+    !rejected_was && !past? && !approved
   end
   
   def approve!
@@ -112,7 +121,7 @@ class Round < ActiveRecord::Base
   end
   
   def reject!
-    self.approved = false
+    self.rejected = true
     save
   end
   

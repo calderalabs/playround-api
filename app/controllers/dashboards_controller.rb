@@ -5,7 +5,8 @@ class DashboardsController < ApplicationController
     authorize! :update, @user
     
     @arenas = @user.arenas
-    @rounds = Round.where(:arena_id => @arenas.map { |a| a.id }).pending_approval
+    @prending_rounds = Round.where(:arena_id => @arenas.map { |a| a.id }).pending_approval
+    @approved_rounds = Round.where(:arena_id => @arenas.map { |a| a.id }).approved
     
     respond_to do |format|
       format.html

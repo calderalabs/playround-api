@@ -46,6 +46,10 @@ describe Round do
     Round.new.approved.should == false
   end
   
+  it "should not be rejected by default" do
+    Round.new.rejected.should == false
+  end
+  
   it "should not be confirmed by default" do
     Round.new.confirmed.should == false
   end
@@ -104,12 +108,16 @@ describe Round do
     @round.should allow_mass_assignment_of(:description)
   end
   
-  it "should allow mass assignment of approved" do
+  it "should not allow mass assignment of approved" do
     @round.should_not allow_mass_assignment_of(:approved)
   end
   
-  it "should allow mass assignment of confirmed" do
+  it "should not allow mass assignment of confirmed" do
     @round.should_not allow_mass_assignment_of(:confirmed)
+  end
+  
+  it "should not allow mass assignment of rejected" do
+    @round.should_not allow_mass_assignment_of(:rejected)
   end
   
   # Associations
@@ -170,7 +178,7 @@ describe Round do
     @round.subscribable_by?(@user).should == false
   end
   
-  it "should be listed in pending approval when it is not approved" do
+  it "should be listed in pending approval when it is not approved and not rejected" do
     @round.save!
     Round.pending_approval.should include(@round)
   end
@@ -181,15 +189,32 @@ describe Round do
     Round.pending_approval.should_not include(@round)
   end
   
+  it "should not be listed in pending approval when it is rejected" do
+    @round.rejected = true
+    @round.save!
+    Round.pending_approval.should_not include(@round)
+  end
+  
   it "should be listed in approved when it is approved" do
     @round.approved = true
     @round.save!
     Round.approved.should include(@round)
   end
   
+  it "should be listed in rejected when it is rejected" do
+    @round.rejected = true
+    @round.save!
+    Round.rejected.should include(@round)
+  end
+  
   it "should not be listed in approved when it is not approved" do
     @round.save!
     Round.approved.should_not include(@round)
+  end
+  
+  it "should not be listed in rejected when it is not rejected" do
+    @round.save!
+    Round.rejected.should_not include(@round)
   end
   
   it "should be approved automatically when it's created by the owner of the arena" do

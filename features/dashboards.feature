@@ -16,7 +16,7 @@ Feature: Dashboard
     Then I should see that round listed
     When I press "Approve"
     Then I should see "Round was successfully approved"
-    And I should not see that round listed
+    And I should see that round listed
     
   Scenario: Reject a round
     Then I should see that round listed

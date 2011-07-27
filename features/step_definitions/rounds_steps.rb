@@ -8,10 +8,10 @@ Then /^I should see the details of that round$/ do
 end
 
 Then /^I should not see that round listed$/ do
-  round = Round.last
-  
-  Then "I should not see \"#{round.game.name}\""
-  And "I should not see \"#{round.arena.name}\""
+  if round = Round.last
+    Then "I should not see \"#{round.game.name}\""
+    And "I should not see \"#{round.arena.name}\""
+  end
 end
 
 Then /^I should see that round listed$/ do
