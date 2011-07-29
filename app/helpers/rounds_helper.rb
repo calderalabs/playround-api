@@ -23,11 +23,11 @@ module RoundsHelper
     if round.confirmed?
       t('views.rounds.helpers.confirmed')
     elsif round.pending?
-      "This round is pending for approval"
+      t('views.rounds.helpers.pending')
     elsif round.rejected?
-      "This round has been rejected"
+      t('views.rounds.helpers.rejected')
     elsif round.approved?
-      "This round has been approved"
+      t('views.rounds.helpers.approved')
     end
   end
 end
