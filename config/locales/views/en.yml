@@ -8,7 +8,7 @@ en:
     hints:
       round:
         description: "This is an optional description for your round"
-        
+    
   views:
     buttons:
       edit: "Edit"

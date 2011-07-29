@@ -8,7 +8,7 @@ it:
     hints:
       round:
         description: "Questa è una descrizione opzionale per il tuo round"
-        
+    
   views:
     buttons:
       edit: "Modifica"
@@ -31,12 +31,12 @@ it:
     dashboards:
       index:
         pending: "Rounds in attesa di approvazione"
-        approved: "Round approvati"
-        rejected: "Round rifiutati"
+        approved: "Rounds approvati"
+        rejected: "Rounds rifiutati"
         buttons:
           approve: "Approva"
           reject: "Rifiuta"
-        no_pending_rounds: "Non ci sono round in attesa di essere approvati."
+        no_pending_rounds: "Non ci sono rounds in attesa di essere approvati."
         no_approved_rounds: "Non hai approvato nessun round."
         no_rejected_rounds: "Non hai rifiutato nessun round."
     

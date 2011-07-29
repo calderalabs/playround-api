@@ -1,14 +1,5 @@
 en:
   activerecord:
-    attributes:
-      arena:
-        public:
-          label: "Allow other people to organize rounds in this arena"
-      round:
-        description:
-          hint: 'This is an optional description for your round'
-        people:
-          label: "Number of people"
     errors:
       arena:
         address:
