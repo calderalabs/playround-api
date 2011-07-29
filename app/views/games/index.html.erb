@@ -1,7 +1,6 @@
 <div id="title">
-    <h1>Games</h1>
-
-  <%= link_to('Create a new game!', new_game_path) %>
+  <h1><%= t('views.games.index.title')%></h1>
+  <%= link_to(t('views.games.index.create_new'), new_game_path) %>
 </div>
 
 <ul id="games">

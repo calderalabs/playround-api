@@ -1,0 +1,63 @@
+it:
+  controllers:
+    access_denied: "Accesso negato"
+    
+    clearance:
+      controllers:
+        passwords:
+          bad_email_or_password: "Impossibile creare l'account"
+  
+    approve:
+      success: 'Il round è stato approvato con successo.'
+      failure: 'Impossibile approvare il round.'
+    reject:
+      success: 'Il round è stato rifiutato con successo.'
+      failure: 'Impossibile rifiutare il round.'
+      
+    arenas:
+      create:
+        success: "L'arena è stata creata con successo."
+      update:
+        success: "L'arena è stata aggiornata con successo."
+      delete:
+        success: "L'arena è stata eliminata con successo."
+        failure: "Impossibile eliminare questa arena."
+
+    comments:
+      create:
+        success: "Il commento è stato aggiunto con successo."
+        
+    confirmations:
+      create:
+        success: "Il round è stato confermato con successo."
+        failure: "Impossibile confermare il round"
+
+    games:
+      create:
+        success: "Il gioco è stato creato con successo."
+      update:
+        success: "Il gioco è stato aggiornato con successo."
+      delete:
+        success: "Il gioco è stato eliminato con successo."
+        failure: "Impossibile eliminare questo gioco."
+        
+    rounds:
+      create:
+        success: "Il round è stato creato con successo."
+      update:
+        success: "Il round è stato aggiornato con successo."
+      delete:
+        success: "Il round è stato eliminato con successo."
+        failure: "Impossibile eliminare questo round."
+
+    subscriptions:
+      create:
+        success: "Ti sei iscritto con successo a questo round."
+        failure: "Impossibile iscriversi a questo round"
+      delete:
+        success: "Non sei più iscritto a questo round"
+        failure: "Impossibile disiscriversi da questo round"
+
+    users:
+      update:
+        success: "Il tuo profilo è stato aggiornato con successo"

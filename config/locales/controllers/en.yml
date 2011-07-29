@@ -1,0 +1,63 @@
+en:
+  controllers:
+    access_denied: "Access denied"
+    
+    clearance:
+      controllers:
+        passwords:
+          bad_email_or_password: 'Unable to create account.'
+  
+    approve:
+      success: 'Round was successfully approved.'
+      failure: 'Unable to approve round.'
+    reject:
+      success: 'Round was successfully rejected.'
+      failure: 'Unable to reject round.'
+    
+    arenas:
+      create:
+        success: 'Arena was successfully created.'
+      update:
+        success: 'Arena was successfully updated.'
+      delete:
+        success: 'Arena was succesfully deleted.'
+        failure: 'Unable to delete this arena.'
+        
+    comments:
+      create:
+        success: 'Comment was successfully added.'
+        
+    confirmations:
+      create:
+        success: 'Round was successfully confirmed.'
+        failure: 'Unable to confirm round.'
+      
+    games:
+      create:
+        success: 'Game was successfully created.'
+      update:
+        success: 'Game was successfully updated.'
+      delete:
+        success: 'Game was succesfully deleted.'
+        failure: 'Unable to delete this game.'
+
+    rounds:
+      create:
+        success: 'Round was successfully created.'
+      update:
+        success: 'Round was successfully updated.'
+      delete:
+        success: 'Round was succesfully deleted.'
+        failure: 'Unable to delete this round.'
+        
+    subscriptions:
+      create:
+        success: "You successfully subscribed to this round."
+        failure: "Unable to subscribe to this round."
+      delete:
+        success: "You are no longer subscribed to this round."
+        failure: "Unable to unsubscribe from this round."
+          
+    users:
+      update:
+        success: 'Your profile was successfully updated.'

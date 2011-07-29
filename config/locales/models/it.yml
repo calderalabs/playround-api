@@ -1,0 +1,51 @@
+it:
+  activerecord:
+    models:
+      arena:
+        one: Arena
+        other: Arene
+      game:
+        one: Gioco
+        other: Giochi
+      comment:
+        one: Commento
+        other: Commenti
+    attributes:
+      arena:
+        name: "Nome"
+        website: "Sito web"
+        description: "Descrizione"
+        image: "Immagine"
+        address: "Indirizzo"
+      game:
+        name: "Nome"
+        description: "Descrizione"
+        image: "Immagine"
+      user:
+        display_name: "Nickname"
+        real_name: "Nome reale"
+      round:
+        description: "Descrizione"
+        game: "Gioco"
+      comment:
+        text: "Testo"
+    errors:
+      arena:
+        address:
+          invalid: "deve essere in una città"
+        delete_with_rounds: "Non puoi eliminare un'arena con dei rounds"
+      game:
+        delete_with_rounds: "Non puoi eliminare un gioco con dei rounds"
+      subscription:
+        subscribe:
+          failure: "Non puoi iscriverti a questo round"
+        unsubscribe:
+          failure: "Impossibile disiscriversi da questo round"
+      round:
+        date:
+          invalid: "deve essere dopo la data attuale"
+        arena_id: 
+          invalid: "deve essere un'arena pubblica o un'arena privata che possiedi"
+        description:
+          cannot_change: "non può essere cambiata dopo la creazione del round"
+        delete_with_subscribers: "Non puoi eliminare un round con degli iscritti"

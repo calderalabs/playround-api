@@ -1,8 +1,8 @@
-<h1>Editing round</h1>
+<h1><%= t('views.rounds.edit.title') %></h1>
 
 <%= semantic_form_for(@round) do |f| %>
   <%= f.inputs do %>
-    <%= f.input :description, :required => false, :hint => 'This is an optional description for your round' %>
+    <%= f.input :description, :required => false, :hint => t('formtastic.hints.round.description') %>
   <% end %>
   
   <%= f.buttons %>

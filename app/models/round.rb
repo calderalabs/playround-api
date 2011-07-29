@@ -23,7 +23,7 @@ class Round < ActiveRecord::Base
   end
   
   before_destroy do
-    errors.add(:base, "You can't delete a round with subscribers") and return false unless destroyable?
+    errors.add(:base, t('activerecord.errors.round.delete_with_subscribers')) and return false unless destroyable?
   end
   
   validates_presence_of :date

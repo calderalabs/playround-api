@@ -2,26 +2,26 @@ module RoundsHelper
   def round_status_message(round)
     if round.past?
       if round.full?
-        "This round has already taken place"
+        t('views.rounds.helpers.past.full')
       else
-        "This round never took place"
+        t('views.rounds.helpers.past.not_full')
       end
     else
       if round.full?
-        "This round is full!"
+        t('views.rounds.helpers.not_past.full')
       else
-        "This round is not full yet"
+        t('views.rounds.helpers.not_past.not_full')
       end
     end
   end
   
   def round_subscription_message(round)
-    time_ago_in_words(round.date).capitalize + ' left to subscribe!'
+    time_ago_in_words(round.date).capitalize + t('views.rounds.helpers.left_to_subscribe')
   end
   
   def round_confirmation_message(round)
     if round.confirmed?
-      "This round has been confirmed"
+      t('views.rounds.helpers.confirmed')
     elsif round.pending?
       "This round is pending for approval"
     elsif round.rejected?

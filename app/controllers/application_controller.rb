@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.html {
-        flash[:error] = 'Access denied'
+        flash[:error] = t('controllers.access_denied')
         redirect_to sign_in_url 
         }
       format.json  { head :unauthorized }
@@ -15,6 +15,24 @@ class ApplicationController < ActionController::Base
   end
   
   before_filter :set_timezone
+  before_filter :set_locale
+  
+  def set_locale
+    locale = nil
+
+    # http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
+    if lang = env["HTTP_ACCEPT_LANGUAGE"]
+      lang = lang.split(",").map { |l|
+        l += ';q=1.0' unless l =~ /;q=\d+\.\d+$/
+        l.split(';q=')
+      }.first
+      locale = lang.first.split("-").first
+    else
+      locale = I18n.default_locale
+    end
+    
+    I18n.locale = params[:locale] || I18n.locale.to_s
+  end
 
   def set_timezone
     Time.zone = current_timezone

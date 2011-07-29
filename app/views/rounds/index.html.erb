@@ -1,10 +1,10 @@
 <div id="title">
   <h1>Rounds</h1>
-  <%= link_to('Start a new round!', new_round_path) %>
+  <%= link_to(t('views.rounds.index.start_new'), new_round_path) %>
 </div>
 
 <% if @rounds.empty? %>
-  <p class="empty-list-message">There are no rounds in your city.</p>
+  <p class="empty-list-message"><%= t('views.rounds.index.empty_list') %></p>
 <% else %>
   <ul id="rounds">
   <% @rounds.each do |round| %>
@@ -45,12 +45,12 @@
 
       <div class="actions right-column">
         <% if can? :read, round %>
-          <%= link_to 'Show', round %>
+          <%= link_to t('views.buttons.show'), round %>
         <% end %>
 
         <% unless round.past? %>
           <div class="spots">
-            <%= t :number_of_spots_left, :count => round.remaining_spots %>
+            <%= t('views.rounds.index.number_of_spots_left', :count => round.remaining_spots) %>
           </div>
         <% end %>
       </div>

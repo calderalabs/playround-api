@@ -6,9 +6,9 @@ class SubscriptionsController < ApplicationController
     
     respond_to do |format|
       if current_user.subscriptions.create(:round_id => @round.id)
-        format.html { redirect_to @round, :notice => "You successfully subscribed to this round." }
+        format.html { redirect_to @round, :notice => t('controllers.subscriptions.create.success') }
       else
-        format.html { redirect_to @round, :error => "Unable to subscribe to this round." }
+        format.html { redirect_to @round, :error => t('controllers.subscriptions.create.failure') }
       end
     end
   end
@@ -21,9 +21,9 @@ class SubscriptionsController < ApplicationController
     
     respond_to do |format|
       if @round.subscription_for(current_user).try(:destroy)
-        format.html { redirect_to @round, :notice => "You are no longer subscribed to this round." }
+        format.html { redirect_to @round, :notice => t('controllers.subscriptions.delete.success') }
       else
-        format.html { redirect_to @round, :notice => "Unable to unsubscribe to this round." }
+        format.html { redirect_to @round, :notice => t('controllers.subscriptions.delete.failure') }
       end
     end
   end

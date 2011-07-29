@@ -37,7 +37,7 @@ class RoundsController < ApplicationController
     
     respond_to do |format|
       if @round.save
-        format.html { redirect_to(@round, :notice => 'Round was successfully created.') }
+        format.html { redirect_to(@round, :notice => t('controllers.rounds.create.success')) }
         format.json  { render :json => @round, :status => :created }
       else
         format.html { render :action => "new" }
@@ -49,7 +49,7 @@ class RoundsController < ApplicationController
   def update
     respond_to do |format|
       if @round.update_attributes(params[:round])
-        format.html { redirect_to(@round, :notice => 'Round was successfully updated.') }
+        format.html { redirect_to(@round, :notice => t('controllers.rounds.update.success')) }
         format.json  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -61,10 +61,10 @@ class RoundsController < ApplicationController
   def destroy
     respond_to do |format|
       if @round.destroy
-        format.html { redirect_to(rounds_url, :notice => 'Round was succesfully deleted.') }
+        format.html { redirect_to(rounds_url, :notice => t('controllers.rounds.delete.success')) }
         format.json  { head :ok }
       else
-        format.html { redirect_to(@round, :error => 'Unable to delete this round.') }
+        format.html { redirect_to(@round, :error => t('controllers.rounds.delete.failure')) }
         format.json  { render :json => @round.errors, :status => :unprocessable_entity }
       end
     end

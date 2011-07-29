@@ -46,7 +46,7 @@ class ArenasController < ApplicationController
 
     respond_to do |format|
       if @arena.save
-        format.html { redirect_to(@arena, :notice => 'Arena was successfully created.') }
+        format.html { redirect_to(@arena, :notice => t('controllers.arenas.create.success')) }
         format.json  { render :json => @arena, :status => :created }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class ArenasController < ApplicationController
 
     respond_to do |format|
       if @arena.update_attributes(params[:arena])
-        format.html { redirect_to(@arena, :notice => 'Arena was successfully updated.') }
+        format.html { redirect_to(@arena, :notice => t('controllers.arenas.update.success')) }
         format.json  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -74,10 +74,10 @@ class ArenasController < ApplicationController
 
     respond_to do |format|
       if @arena.destroy
-        format.html { redirect_to(arenas_url, :notice => 'Arena was succesfully deleted.') }
+        format.html { redirect_to(arenas_url, :notice => t('controllers.arenas.delete.success')) }
         format.json { head :ok }
       else
-        format.html { redirect_to(@arena, :error => 'Unable to delete arena.') }
+        format.html { redirect_to(@arena, :error => t('controllers.arenas.delete.failure')) }
         format.json { render :json => @arena.errors, :status => :unprocessable_entity }
       end
     end

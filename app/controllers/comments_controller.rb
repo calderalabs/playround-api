@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to(@comment.round, :notice => 'Comment was successfully added.') }
+        format.html { redirect_to(@comment.round, :notice => t('controllers.comments.create.success')) }
         format.json  { render :json => @comment, :status => :created }
       else
         format.html { render :template => 'rounds/show' }

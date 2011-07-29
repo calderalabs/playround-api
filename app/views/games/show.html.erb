@@ -1,7 +1,7 @@
 <div id="game">
   <h1>
     <%= @game.name %> <% if can? :update, @game %>
-      | <%= link_to 'Edit', edit_game_path(@game) %>
+      | <%= link_to t('views.buttons.edit'), edit_game_path(@game) %>
     <% end %>
   </h1>
 

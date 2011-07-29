@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Playround | Stop sharing. Start being.</title>
+    <title><%= t('views.layouts.title')%></title>
     <%= stylesheet_link_tag 'playround', 'jquery-ui/jquery.ui.all' %>
     <%= yield :stylesheets %>
     
@@ -39,14 +39,14 @@
           <%= text_field_tag 'location', '' %>
         <% end %>
         
-        <%= link_to(located? ? [current_location.name, current_location.country].join(', ') : 'Unknown location', 'javascript:void(0)', :id => 'change-location') %> |
+        <%= link_to(located? ? [current_location.name, current_location.country].join(', ') : t('views.layouts.application.unknown_location'), 'javascript:void(0)', :id => 'change-location') %> |
         
         <% if signed_in? -%>
           <%= link_to current_user.display_name, user_path(current_user), :id => 'change-profile' %> |
-          <%= link_to "Dashboard", dashboards_path(current_user) %> |
-          <%= link_to "Sign out", sign_out_path, :method => :delete %>
+          <%= link_to t('views.layouts.application.dashboard'), dashboards_path(current_user) %> |
+          <%= link_to t('views.layouts.application.sign_out'), sign_out_path, :method => :delete %>
         <% else -%>
-          <%= link_to "Sign in", sign_in_path %>
+          <%= link_to t('views.layouts.application.sing_in'), sign_in_path %>
         <% end -%>
       </div>
     </div>
@@ -57,10 +57,10 @@
       </div>
       <div class="right-column">
         <ul>
-          <li><%= link_to "Rounds", rounds_path, :id => 'rounds-nav' %> </li>
-          <li><%= link_to "Arenas", arenas_path, :id => 'arenas-nav' %> </li>
-          <li><%= link_to "Games", games_path, :id => 'games-nav' %> </li>
-          <li><%= link_to "People", users_path, :id => 'people-nav' %> </li>
+          <li><%= link_to t('views.layouts.application.rounds'), rounds_path, :id => 'rounds-nav' %> </li>
+          <li><%= link_to t('views.layouts.application.arenas'), arenas_path, :id => 'arenas-nav' %> </li>
+          <li><%= link_to t('views.layouts.application.games'), games_path, :id => 'games-nav' %> </li>
+          <li><%= link_to t('views.layouts.application.people'), users_path, :id => 'people-nav' %> </li>
         </ul>
       </div>
     </div>
@@ -71,7 +71,7 @@
       </div>
     </div>
     <div id="footer">
-      <p>Copyright © Playround 2011. All rights reserved.</p>
+      <p><%= t('views.layouts.footer.title')%></p>
     </div>
 </body>
 

@@ -5,7 +5,7 @@
     </div>
 
     <div class="right-column">
-      <h2>Stop sharing. <em>Start being.</em></h2>
+      <h2><%= t('views.pages.title1') %> <em><%= t('views.pages.title2') %></em></h2>
     </div>
   </div>
 </div>
@@ -19,26 +19,26 @@
           <%= form.label :password %>
           <%= form.password_field :password, :autocomplete => 'off' %>
 
-        <p>Already a rounder? <%= link_to 'Sign in!', '/sign_in' %></p>
+        <p>Already a rounder? <%= link_to t('views.pages.sign_in'), '/sign_in' %></p>
       
-        <%= form.submit 'Sign up!', :id => 'signup-button' %>
+        <%= form.submit t('views.pages.sign_up'), :id => 'signup-button' %>
       <% end %>
     </div>
     
     <div class="right-column">
       <h1>
-        Choose a game.<br />
-        Pick a place.<br />
-        Meet new people.
+        <%= t('views.pages.slogan1') %><br />
+        <%= t('views.pages.slogan2') %><br />
+        <%= t('views.pages.slogan3') %>
       </h1>
     
-      <%= link_to 'View rounds around you!', rounds_path, :id => 'rounds-button' %>
+      <%= link_to t('views.pages.view_rounds_around_you'), rounds_path, :id => 'rounds-button' %>
     </div>
   </div>
 </div>
 
 <div id="footer">
-  <p>Copyright © Playround 2011. All rights reserved.</p>
+  <p><%= t('views.layouts.footer')%></p>
 </div>
 
 <script type="text/javascript">

@@ -1,0 +1,152 @@
+en:
+  formtastic:
+    labels:
+      arena:
+        public: "Allow other people to organize rounds in this arena"
+      round:
+        people: "Number of people"
+    hints:
+      round:
+        description: "This is an optional description for your round"
+        
+  views:
+    buttons:
+      edit: "Edit"
+      delete: "Delete"
+      show: "Show"
+      
+    arenas:
+      edit:
+        title: "Editing arena"
+      index:
+        title: "Arenas"
+        create_new: 'Create a new arena!'
+        empty_list: "There are no arenas in your city."
+      new:
+        title: "New arena"
+      show:
+        confirmations:
+          delete: "Are you sure to delete this arena?"
+        
+    dashboards:
+      index:
+        pending: "Pending rounds"
+        approved: "Approved rounds"
+        rejected: "Rejected rounds"
+        buttons:
+          approve: "Approve"
+          reject: "Reject"
+        no_pending_rounds: "There are no rounds pending for approval."
+        no_approved_rounds: "You did not approve any round."
+        no_rejected_rounds: "You did not reject any round."
+        
+    games:
+      edit:
+        title: "Editing game"
+      index:
+        title: "Games"
+        create_new: "Create a new game!"
+      new:
+        title: "New game"
+        
+    layouts:
+      title: "Playround | Stop sharing. Start being."
+      footer:
+        title: "Copyright © Playround 2011. All rights reserved."
+      application:
+        unknown_location: 'Unknown location'
+        dashboard: "Dashboard"
+        sign_in: "Sign in"
+        sign_out: "Sign out"
+        rounds: "Rounds"
+        arenas: "Arenas"
+        games: "Games"
+        people: "People"
+        
+    pages:
+      index:
+        title1: "Stop sharing."
+        title2: "Start being."
+        sign_in: "Sign in!"
+        sign_up: "Sign up!"
+        already_rounder: "Already a rounder?"
+        slogan1: "Choose a game"
+        slogan2: "Pick a place"
+        slogan3: "Meet new people"
+        view_rounds_around_you: "View rounds around you!"
+        
+    passwords:
+      edit:
+        title: "Change your password"
+        password_reset: "Your password has been reset. Choose a new password below."
+        choose_password: "Choose password"
+        save_this_password: "Save this password"
+
+    rounds:
+      helpers:
+        past:
+          full: "This round has already taken place"
+          not_full: "This round never took place"
+        not_past:
+          full: "This round is full!"
+          not_full: "This round is not full yet"
+        left_to_subscribe: ' left to subscribe!'
+        confirmed: "This round has been confirmed"
+        pending: "This round is pending for approval"
+        rejected: "This round has been rejected"
+        approved: "This round has been approved"
+      edit:
+        title: "Editing round"
+      index:
+        start_new: 'Start a new round!'
+        empty_list: "There are no rounds in your city."
+        number_of_spots_left:
+          one: "%{count} spot left"
+          other: "%{count} spots left"
+      new:
+        title: "New round"
+      show:
+        number_of_subscribed_people:
+          one: "%{count} person subscribed to this round"
+          other: "%{count} people subscribed to this round"
+        buttons:
+          confirm: "Confirm"
+          subscribe: "Subscribe"
+          unsubscribe: "Unsubscribe"
+        confirmations:
+          delete: "Are you sure to delete this round?"
+          confirm: "Are you sure to confirm this round?"
+          subscribe: "Are you sure to subscribe to this round?"
+          unsubscribe: "Are you sure to unsubscribe to this round?"
+          comments:
+            delete: "Are you sure to delete this comment?"
+        additional_notes: "Additional notes:"
+        who_created_this_round: "Who created this round"
+        people_subscribed_round: "People that subscribed to this round"
+        people_meet_round: "People you will meet at this round"
+        none_subscribed_round: "None subscribed to this round yet."
+        post_your_comments: "Post your comments"
+        
+    sessions:
+      new:
+        title: "Sign in"
+        sign_in: "Sign in"
+        sign_up: "Sign up"
+        forgot_password: "Forgot password?"
+    
+    users:
+      profile:
+        buttons:
+          update: "Update profile"
+      edit:
+        title: "Editing profile"
+      index:
+        title: "Users"
+      new:
+        title: "Sign up"
+        buttons:
+          sign_up: "Sign up"
+      show:
+        real_name: "Nome reale:"
+    
+  

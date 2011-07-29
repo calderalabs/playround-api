@@ -1,0 +1,31 @@
+en:
+  activerecord:
+    attributes:
+      arena:
+        public:
+          label: "Allow other people to organize rounds in this arena"
+      round:
+        description:
+          hint: 'This is an optional description for your round'
+        people:
+          label: "Number of people"
+    errors:
+      arena:
+        address:
+          invalid: "must be in a town or city"
+        delete_with_rounds: "You can't delete an arena with rounds"
+      game:
+        delete_with_rounds: "You can't delete a game with rounds"
+      subscription:
+        subscribe:
+          failure: "You cannot subscribe to this round"
+        unsubscribe:
+          failure: "Unable to unsubscribe from this round"
+      round:
+        date:
+          invalid: "must be after the current time"
+        arena_id: 
+          invalid: "must be a public arena or a private arena that you own"
+        description:
+          cannot_change: "cannot be changed after creation"
+        delete_with_subscribers: "You can't delete a round with subscribers"

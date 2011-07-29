@@ -6,10 +6,10 @@ class ConfirmationsController < ApplicationController
     respond_to do |format|
       begin
         @round.confirm!
-        format.html { redirect_to(@round, :notice => 'Round was successfully confirmed.') }
+        format.html { redirect_to(@round, :notice => t('controllers.confirmations.create.success')) }
         format.json { head :ok }
       rescue StateMachine::InvalidTransition
-        format.html { redirect_to(@round, :notice => 'Unable to confirm round.') }
+        format.html { redirect_to(@round, :notice => t('controllers.confirmations.create.failure')) }
         format.json { head :unprocessable_entity }
       end
     end

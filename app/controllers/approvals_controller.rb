@@ -6,10 +6,10 @@ class ApprovalsController < ApplicationController
     respond_to do |format|
       begin
         @round.approve!
-        format.html { redirect_to dashboards_path(current_user), :notice => 'Round was successfully approved.' }
+        format.html { redirect_to dashboards_path(current_user), :notice => t('controllers.approve.success') }
         format.json { head :ok }
       rescue StateMachine::InvalidTransition
-        format.html { redirect_to dashboards_path(current_user), :notice => 'Unable to approve round.' }
+        format.html { redirect_to dashboards_path(current_user), :notice => t('controllers.approve.failure') }
         format.json { head :unprocessable_entity }
       end
     end
@@ -21,9 +21,9 @@ class ApprovalsController < ApplicationController
     
     respond_to do |format|
       if @round.reject!
-        format.html { redirect_to dashboards_path(current_user), :notice => 'Round was successfully rejected.' }
+        format.html { redirect_to dashboards_path(current_user), :notice => t('controllers.reject.success') }
       else
-        format.html { redirect_to dashboards_path(current_user), :notice => 'Unable to reject round.' }
+        format.html { redirect_to dashboards_path(current_user), :notice => t('controllers.reject.failure') }
       end
     end
   end

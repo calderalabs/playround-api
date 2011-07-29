@@ -1,0 +1,150 @@
+it:
+  formtastic:
+    labels:
+      arena:
+        public: "Permetti ad altre persone di organizzare rounds in questa arena"
+      round:
+        people: "Numero di persone"
+    hints:
+      round:
+        description: "Questa è una descrizione opzionale per il tuo round"
+        
+  views:
+    buttons:
+      edit: "Modifica"
+      delete: "Elimina"
+      show: "Mostra"
+      
+    arenas:
+      edit: 
+        title: "Modifica l'arena"
+      index:
+        title: "Arene"
+        create_new: "Crea una nuova arena!"
+        empty_list: "Non ci sono arene nella tua città."
+      new:
+        title: "Nuova arena"
+      show:
+        confirmations:
+          delete: "Sei sicuro di voler eliminare questa arena?"
+    
+    dashboards:
+      index:
+        pending: "Rounds in attesa di approvazione"
+        approved: "Round approvati"
+        rejected: "Round rifiutati"
+        buttons:
+          approve: "Approva"
+          reject: "Rifiuta"
+        no_pending_rounds: "Non ci sono round in attesa di essere approvati."
+        no_approved_rounds: "Non hai approvato nessun round."
+        no_rejected_rounds: "Non hai rifiutato nessun round."
+    
+    games:
+      edit:
+        title: "Modifica il gioco"
+      index:
+        title: "Giochi"
+        create_new: "Crea un nuovo gioco!"
+      new:
+        title: "Nuovo gioco"
+    
+    layouts:
+      title: "Playround | Smetti di condividere. Comincia ad essere."
+      footer:
+        title: "Copyright © Playround 2011. Tutti i diritti riservati."
+      application:
+        unknown_location: 'Luogo sconosciuto'
+        dashboard: "Dashboard"
+        sign_in: "Accedi"
+        sign_out: "Esci"
+        rounds: "Rounds"
+        arenas: "Arene"
+        games: "Giochi"
+        people: "Persone"
+        
+    pages:
+      index:
+        title1: "Smetti di condividere."
+        title2: "Comincia ad essere."
+        sign_in: "Accedi!"
+        sign_up: "Registrati!"
+        already_rounder: "Sei già un rounder?"
+        slogan1: "Scegli un gioco"
+        slogan2: "Scegli un posto"
+        slogan3: "Incontra nuove persone"
+        view_rounds_around_you: "Vedi i rounds vicino a te!"
+        
+    passwords:
+      edit:
+        title: "Cambia la tua password"
+        password_reset: "La tua password è stata resettata. Scegli una nuova password qui in basso."
+        choose_password: "Scegli una password"
+        save_this_password: "Salva questa password"
+        
+    rounds:
+      helpers:
+        past:
+          full: "Questo round ha già avuto luogo"
+          not_full: "Questo round non ha mai avuto luogo"
+        not_past:
+          full: "Questo round è pieno!"
+          not_full: "Questo round non è ancora pieno"
+        left_to_subscribe: ' per iscriversi!'
+        confirmed: "Questo round è stato confermato"
+        pending: "Questo round è in attesa di essere approvato"
+        rejected: "Questo round è stato rifiutato"
+        approved: "Questo round è stato approvato"
+      edit:
+        title: "Modifica il round"
+      index:
+        start_new: "Fai partire un nuovo round!"
+        empty_list: "Non ci sono rounds nella tua città."
+        number_of_spots_left:
+          one: "%{count} posto rimasto"
+          other: "%{count} posti rimasti"
+      new:
+        title: "Nuovo round"
+      show:
+        number_of_subscribed_people:
+          one: "%{count} persona si è iscritta a questo round"
+          other: "%{count} persone si sono iscritte a questo round"
+        buttons:
+          confirm: "Conferma"
+          subscribe: "Iscritivi"
+          unsubscribe: "Disiscriviti"
+        confirmations:
+          delete: "Sei sicuro di voler eliminare questo round?"
+          confirm: "Sei sicuro di voler confermare questo round?"
+          subscribe: "Sei sicuro di volerti iscrivere a questo round?"
+          unsubscribe: "Sei sicuro di volerti disiscrivere da questo round?"
+          comments:
+            delete: "Sei sicuro di voler eliminare questo commento?"
+        additional_notes: "Note aggiuntive:"
+        who_created_this_round: "Chi ha creato questo round"
+        people_subscribed_round: "Persone che si sono iscritte a questo round"
+        people_meet_round: "Persone che incontrerai a questo round"
+        none_subscribed_round: "Nessuno si è ancora iscritto a questo round."
+        post_your_comments: "Lascia i tuoi commenti"
+        
+    sessions:
+      new:
+        title: "Accedi"
+        sign_in: "Accedi"
+        sign_up: "Registrati"
+        forgot_password: "Dimenticato la password?"
+        
+    users:
+      profile:
+        buttons:
+          update: "Aggiorna il profilo"
+      edit:
+        title: "Modifica il profilo"
+      index:
+        title: "Utenti"
+      new:
+        title: "Iscriviti"
+        buttons:
+          sign_up: "Iscriviti"
+      show:
+        real_name: "Nome reale:"

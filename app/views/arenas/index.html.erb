@@ -1,10 +1,10 @@
 <div id="title">
-  <h1>Arenas</h1>
-  <%= link_to('Create a new arena!', new_arena_path) %>
+  <h1><%= t('views.arenas.index.title')%></h1>
+  <%= link_to(t('views.arenas.index.create_new'), new_arena_path) %>
 </div>
 
 <% if @arenas.empty? %>
-  <p class="empty-list-message">There are no arenas in your city.</p>
+  <p class="empty-list-message"><%= t('views.arenas.index.empty_list')%></p>
 <% else %>
   <ul id="arenas">
     <% @arenas.each do |arena| %>

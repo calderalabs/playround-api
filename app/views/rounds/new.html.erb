@@ -1,4 +1,4 @@
-<h1>New round</h1>
+<h1><%= t('views.rounds.new.title')%></h1>
 
 <%= content_for :javascripts do %>
   <%= javascript_include_tag 'jquery-ui-timepicker-addon' %>
@@ -56,9 +56,9 @@
                                 'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
                                 :id => 'round_arena',
                                 :update_elements => { :id => '#round_arena_id' } %></li>
-    <%= f.input :description, :required => false, :hint => 'This is an optional description for your round' %>
+    <%= f.input :description, :required => false, :hint => t('formtastic.hints.round.description') %>
     <%= f.input :date, :required => false, :input_html => { :class => 'ui-date-picker', :value => l(@round.date, :format => '%Y-%m-%d %H:%M:%S') }, :as => :string %>
-    <%= f.input :people, :required => false, :label => "Number of people", :hint => "This is the minimum number of people you would like to play with" %>
+    <%= f.input :people, :required => false, :label => t('formtastic.labels.round.people') %>
   <% end %>
   
   <%= f.buttons %>

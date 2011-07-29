@@ -35,10 +35,10 @@
     <%= link_to @round.game.name, game_path(@round.game)%> - <%= l @round.date, :format => :long %>
       <span class="actions">
       <% if can? :update, @round %>
-        | <%= link_to 'Edit', edit_round_path(@round) %>
+        | <%= link_to t('views.buttons.edit'), edit_round_path(@round) %>
       <% end %>
       <% if can?(:destroy, @round) && @round.destroyable? %>
-        | <%= link_to 'Delete', round_path(@round), :method => 'delete', :confirm => 'Are you sure?' %>
+        | <%= link_to t('views.buttons.delete'), round_path(@round), :method => 'delete', :confirm => t('views.rounds.show.confirmations.delete') %>
       <% end %>
       </span>
   </h1>
@@ -52,14 +52,14 @@
     <% if signed_in? %>
       <% if can? :confirm, @round %>
         <% if @round.approved? && !@round.confirmed? && !@round.past? %>
-          <%= button_to 'Confirm', round_confirmations_path(@round), :id => 'confirm', :disabled => !@round.can_confirm?, :confirm => 'Are you sure?' %>
+          <%= button_to t('views.rounds.show.buttons.confirm'), round_confirmations_path(@round), :id => 'confirm', :disabled => !@round.can_confirm?, :confirm => t('views.rounds.show.confirmations.confirm') %>
         <% end %>
       <% end %>
       <% if can?(:create, Subscription) && @round.subscribable_by?(current_user) %>
-        <%= button_to "Subscribe", round_subscription_path(@round), :id => 'subscribe', :confirm => 'Are you sure?', :method => :post %>
+        <%= button_to t('views.rounds.show.buttons.subscribe'), round_subscription_path(@round), :id => 'subscribe', :confirm => t('views.rounds.show.confirmations.subscribe'), :method => :post %>
         <%= round_subscription_message(@round) %>
       <% elsif can?(:destroy, @round.subscription_for(current_user)) && @round.unsubscribable_by?(current_user) %>
-        <%= button_to "Unsubscribe", round_subscription_path(@round), :id => 'unsubscribe', :confirm => 'Are you sure?', :method => :delete %>
+        <%= button_to t('views.rounds.show.buttons.unsubscribe'), round_subscription_path(@round), :id => 'unsubscribe', :confirm => t('views.rounds.show.confirmations.unsubscribe'), :method => :delete %>
       <% end %>
     <% end %>
     <p class="status">
@@ -72,12 +72,12 @@
   <div class="clear"></div>
   
   <% unless @round.description.blank? %>
-    <p class="additional-notes"><strong>Additional notes:</strong> <%= @round.description %></p>
+    <p class="additional-notes"><strong><%= t('views.rounds.show.additional_notes')%></strong> <%= @round.description %></p>
   <% end %>
 </div>
 
 <div id="subscribers">
-  <h2>Who created this round</h2>
+  <h2><%= t('views.rounds.show.who_created_this_round')%></h2>
   
   <ul>
     <li>
@@ -90,16 +90,16 @@
     <div class="clear"></div>
       
 <% if @round.past? %>
-  <h2>People that subscribed to this round</h2>
+  <h2><%= t('views.rounds.show.people_subscribed_round')%></h2>
 <% else %>
   <h2>
-    People you will meet at this round
+    <%= t('views.rounds.show.people_meet_round')%>
     
-    (<%= t :number_of_spots_left, :count => @round.remaining_spots %>)
+    (<%= t('views.rounds.show.number_of_spots_left', :count => @round.remaining_spots) %>)
   </h2>
 <% end%>
 <% if @round.subscribers.empty? %>
-  <p>None subscribed to this round yet.</p>
+  <p><%= t('views.rounds.show.none_subscribed_round')%></p>
 <% else %>
   <ul>
     <% @round.subscribers.each do |user| %>
@@ -118,7 +118,7 @@
 </div>
 
 <div id="comments">
-  <h2>Post your comments</h2>
+  <h2><%= t('views.rounds.show.post_your_comments')%></h2>
   <ul>
   <% @round.comments(true).each do |comment| %>
     <li>
@@ -128,7 +128,7 @@
         <span><%= time_ago_in_words comment.created_at %> ago</span>
         <span class="actions">
           <% if can? :destroy, comment %>
-            <%= link_to 'Delete', comment_path(comment), :method => :delete, :confirm => 'Are you sure?' %>
+            <%= link_to t('views.buttons.delete'), comment_path(comment), :method => :delete, :confirm => t('views.rounds.show.confirmations.comments.delete') %>
           <% end %>
         </span>
       </div>
@@ -153,6 +153,6 @@
 
     <%= f.hidden_field :round_id %>
 
-    <%= f.submit 'Add Comment' %>
+    <%= f.submit t('helpers.submit.add', :model => Comment) %>
   <% end%>
 </div>

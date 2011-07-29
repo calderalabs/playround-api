@@ -1,9 +1,9 @@
 <%= content_for :dashboard_content do %>
   <div id="pending">
-    <h1>Pending approval</h1>
+    <h1><%= t('views.dashboards.index.pending')%></h1>
     
     <% if @rounds.pending.empty? %>
-      <p class="empty-list-message">There are no rounds pending for approval.</p>
+      <p class="empty-list-message"><%= t('views.dashboards.index.no_pending_rounds')%></p>
     <% else %>
       <ul>
         <% @rounds.pending.each do |round| %>
@@ -11,19 +11,19 @@
             <span><%= round.arena.name %></span>
             <span><%= round.game.name %></span>
             <span><%= round.user.display_name %></span>
-            <span><%= button_to 'Approve', round_approvals_path(round) %></span>
-            <span><%= button_to 'Reject', round_rejections_path(round) %></span>
+            <span><%= button_to t('views.dashboards.index.buttons.approve'), round_approvals_path(round) %></span>
+            <span><%= button_to t('views.dashboards.index.buttons.reject'), round_rejections_path(round) %></span>
           </li>
         <% end %>
       </ul>
     <% end %>
   </div>
-  
+
   <div id="approved">
-    <h1>Approved</h1>
+    <h1><%= t('views.dashboards.index.approved')%></h1>
     
     <% if @rounds.approved.empty? %>
-      <p class="empty-list-message">You did not approve any round.</p>
+      <p class="empty-list-message"><%= t('views.dashboards.index.no_approved_rounds')%></p>
     <% else %>
       <ul>
         <% @rounds.approved.each do |round| %>
@@ -31,7 +31,7 @@
             <span><%= round.arena.name %></span>
             <span><%= round.game.name %></span>
             <span><%= round.user.display_name %></span>
-            <span><%= button_to 'Reject', round_rejections_path(round) %></span>
+            <span><%= button_to t('views.dashboards.index.buttons.reject'), round_rejections_path(round) %></span>
           </li>
         <% end %>
       </ul>
@@ -42,7 +42,7 @@
     <h1>Rejected</h1>
     
     <% if @rounds.rejected.empty? %>
-      <p class="empty-list-message">You did not reject any round.</p>
+      <p class="empty-list-message"><%= t('views.dashboards.index.no_rejected_rounds')%>.</p>
     <% else %>
       <ul>
         <% @rounds.rejected.each do |round| %>
@@ -50,7 +50,7 @@
             <span><%= round.arena.name %></span>
             <span><%= round.game.name %></span>
             <span><%= round.user.display_name %></span>
-            <span><%= button_to 'Approve', round_approvals_path(round) %></span>
+            <span><%= button_to t('views.dashboards.index.buttons.approve'), round_approvals_path(round) %></span>
           </li>
         <% end %>
       </ul>

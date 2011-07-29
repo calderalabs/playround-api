@@ -38,7 +38,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to(@game, :notice => 'Game was successfully created.') }
+        format.html { redirect_to(@game, :notice => t('controllers.games.create.success')) }
         format.json  { render :json => @game, :status => :created }
       else
         format.html { render :action => "new" }
@@ -52,10 +52,10 @@ class GamesController < ApplicationController
     
     respond_to do |format|
       if @game.destroy
-        format.html { redirect_to(games_url, :notice => 'Game was succesfully deleted.') }
+        format.html { redirect_to(games_url, :notice => t('controllers.games.delete.success')) }
         format.json { head :ok }
       else
-        format.html { redirect_to(@game, :error => 'Unable to delete game.') }
+        format.html { redirect_to(@game, :error => t('controllers.games.delete.failure')) }
         format.json { render :json => @game.errors, :status => :unprocessable_entity }
       end
     end
@@ -66,7 +66,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.update_attributes(params[:game])
-        format.html { redirect_to(@game, :notice => 'Game was successfully updated.') }
+        format.html { redirect_to(@game, :notice => t('controllers.games.update.success')) }
         format.json  { head :ok }
       else
         format.html { render :action => "edit" }
