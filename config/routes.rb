@@ -2,7 +2,8 @@ Playround::Application.routes.draw do
   resources :rounds do
     resource :confirmations, :only => :create
     resource :subscription, :only => [:create, :destroy]
-    resource :approvals, :only => [:create, :destroy]
+    resource :approvals, :only => :create
+    resource :rejections, :only => :create
   end
   
   resources :arenas do

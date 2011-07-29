@@ -3,7 +3,7 @@ class RoundsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @rounds = @rounds.where(:arenas => { :town_woeid => current_location.woeid }).joins(:arena) if located?
+    @rounds = Round.approved.where(:arenas => { :town_woeid => current_location.woeid }).joins(:arena) if located?
     
     respond_to do |format|
       format.html

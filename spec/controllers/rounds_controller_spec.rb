@@ -3,7 +3,7 @@ require 'spec_helper'
 describe RoundsController do
   before(:each) do
     @user = Factory :user
-    @round = Factory.build :round, :user => @user
+    @round = Factory.build :approved_round, :user => @user
   end
 
   # Actions
@@ -128,7 +128,8 @@ describe RoundsController do
   end
   
   it "should not destroy the round when there is at least one subscriber" do
-    @round.approve!
+    @round.save!
+    
     @round.subscriptions << Factory.build(:subscription)
 
     @controller.sign_in @user
@@ -164,6 +165,7 @@ describe RoundsController do
     ability.can?(:read, @round).should == true
     ability = Ability.new User.new
     ability.can?(:read, @round).should == true
+    ability.can?(:read, Factory(:round)).should == false
   end
 
   it "registered users can only update rounds which they own" do

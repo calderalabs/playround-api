@@ -4,12 +4,13 @@ class ConfirmationsController < ApplicationController
     authorize! :confirm, @round
     
     respond_to do |format|
-      if @round.confirm!
+      begin
+        @round.confirm!
         format.html { redirect_to(@round, :notice => 'Round was successfully confirmed.') }
         format.json { head :ok }
-      else
-        format.html { redirect_to @round }
-        format.json { render :json => @round.errors, :status => :unprocessable_entity }
+      rescue StateMachine::InvalidTransition
+        format.html { redirect_to(@round, :notice => 'Unable to confirm round.') }
+        format.json { head :unprocessable_entity }
       end
     end
   end

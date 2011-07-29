@@ -43,7 +43,7 @@ describe Round do
   end
   
   it "should not be approved by default" do
-    Round.new.approved.should == false
+    Round.new.approved?.should == false
   end
   
   it "should not be rejected by default" do
@@ -51,7 +51,7 @@ describe Round do
   end
   
   it "should not be confirmed by default" do
-    Round.new.confirmed.should == false
+    Round.new.confirmed?.should == false
   end
   
   it "should not have less than 2 people" do
@@ -180,13 +180,12 @@ describe Round do
   
   it "should be listed in pending approval when it is not approved and not rejected" do
     @round.save!
-    Round.pending_approval.should include(@round)
+    Round.pending.should include(@round)
   end
   
   it "should not be listed in pending approval when it is approved" do
-    @round.approved = true
-    @round.save!
-    Round.pending_approval.should_not include(@round)
+    @round.approve!
+    Round.pending.should_not include(@round)
   end
   
   it "should not be listed in pending approval when it is rejected" do
@@ -196,8 +195,7 @@ describe Round do
   end
   
   it "should be listed in approved when it is approved" do
-    @round.approved = true
-    @round.save!
+    @round.approve!
     Round.approved.should include(@round)
   end
   

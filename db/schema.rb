@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110727110638) do
+ActiveRecord::Schema.define(:version => 20110728125650) do
 
   create_table "arenas", :force => true do |t|
     t.integer  "user_id"
@@ -70,12 +70,10 @@ ActiveRecord::Schema.define(:version => 20110727110638) do
     t.integer  "game_id"
     t.text     "description"
     t.datetime "date"
-    t.boolean  "confirmed",   :default => false
     t.integer  "people",      :default => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "approved",    :default => false
-    t.boolean  "rejected",    :default => false
+    t.string   "state"
   end
 
   create_table "subscriptions", :force => true do |t|

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SubscriptionsController do
   before(:each) do
     @user = Factory :user
-    @round = Factory :round, :user => @user, :approved => true
+    @round = Factory :approved_round, :user => @user
   end
   
   it "should subscribe to the round when logged in" do

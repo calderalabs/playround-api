@@ -4,7 +4,7 @@ describe Subscription do
   before(:each) do
     stub_geocoder
 
-    @subscription = Factory.build :subscription, :round => Factory(:round, :approved => true)
+    @subscription = Factory.build :subscription, :round => Factory(:approved_round)
   end
   
   # validity tests

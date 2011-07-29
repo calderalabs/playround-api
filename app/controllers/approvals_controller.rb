@@ -4,10 +4,13 @@ class ApprovalsController < ApplicationController
     authorize! :approve, @round
     
     respond_to do |format|
-      if @round.approve!
+      begin
+        @round.approve!
         format.html { redirect_to dashboards_path(current_user), :notice => 'Round was successfully approved.' }
-      else
+        format.json { head :ok }
+      rescue StateMachine::InvalidTransition
         format.html { redirect_to dashboards_path(current_user), :notice => 'Unable to approve round.' }
+        format.json { head :unprocessable_entity }
       end
     end
   end

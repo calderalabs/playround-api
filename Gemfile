@@ -53,3 +53,4 @@ gem 'shoulda-matchers', :git => 'git://github.com/thoughtbot/shoulda-matchers.gi
 gem 'formtastic_datepicker_inputs'
 gem 'thin'
 gem 'selenium-webdriver'
+gem 'state_machine'

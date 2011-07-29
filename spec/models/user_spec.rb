@@ -74,7 +74,7 @@ describe User do
   it "should return the expected value on subscribed?" do
     @user.save!
     
-    round = Factory :round, :approved => true
+    round = Factory :approved_round
     
     @user.subscribed?(round).should == false
     

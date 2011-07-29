@@ -1,26 +1,59 @@
 <%= content_for :dashboard_content do %>
-  <h2>Prending Rounds</h2>
-  <ul>
-    <% @prending_rounds.each do |round| %>
-      <li>
-        <span><%= round.arena.name %></span>
-        <span><%= round.game.name %></span>
-        <span><%= round.user.display_name %></span>
-        <span><%= button_to 'Approve', round_approvals_path(round), :method => :post %></span>
-        <span><%= button_to 'Reject', round_approvals_path(round), :method => :delete %></span>
-      </li>
+  <div id="pending">
+    <h1>Pending approval</h1>
+    
+    <% if @rounds.pending.empty? %>
+      <p class="empty-list-message">There are no rounds pending for approval.</p>
+    <% else %>
+      <ul>
+        <% @rounds.pending.each do |round| %>
+          <li>
+            <span><%= round.arena.name %></span>
+            <span><%= round.game.name %></span>
+            <span><%= round.user.display_name %></span>
+            <span><%= button_to 'Approve', round_approvals_path(round) %></span>
+            <span><%= button_to 'Reject', round_rejections_path(round) %></span>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
+  </div>
   
-  <h2>Approved Rounds</h2>
-  
-  <ul>
-    <% @approved_rounds.each do |round| %>
-      <li>
-        <span><%= round.arena.name %></span>
-        <span><%= round.game.name %></span>
-        <span><%= round.user.display_name %></span>
-      </li>
+  <div id="approved">
+    <h1>Approved</h1>
+    
+    <% if @rounds.approved.empty? %>
+      <p class="empty-list-message">You did not approve any round.</p>
+    <% else %>
+      <ul>
+        <% @rounds.approved.each do |round| %>
+          <li>
+            <span><%= round.arena.name %></span>
+            <span><%= round.game.name %></span>
+            <span><%= round.user.display_name %></span>
+            <span><%= button_to 'Reject', round_rejections_path(round) %></span>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
+  </div>
+  
+  <div id="rejected">
+    <h1>Rejected</h1>
+    
+    <% if @rounds.rejected.empty? %>
+      <p class="empty-list-message">You did not reject any round.</p>
+    <% else %>
+      <ul>
+        <% @rounds.rejected.each do |round| %>
+          <li>
+            <span><%= round.arena.name %></span>
+            <span><%= round.game.name %></span>
+            <span><%= round.user.display_name %></span>
+            <span><%= button_to 'Approve', round_approvals_path(round) %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 <% end %>

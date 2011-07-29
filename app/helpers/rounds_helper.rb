@@ -20,10 +20,14 @@ module RoundsHelper
   end
   
   def round_confirmation_message(round)
-    if round.confirmed
+    if round.confirmed?
       "This round has been confirmed"
-    else
-      "This round is not confirmed yet"
+    elsif round.pending?
+      "This round is pending for approval"
+    elsif round.rejected?
+      "This round has been rejected"
+    elsif round.approved?
+      "This round has been approved"
     end
   end
 end

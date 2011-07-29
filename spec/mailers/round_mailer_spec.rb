@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Round Mailer" do
   before(:each) do
-    @round = Factory :round, :approved => true
+    @round = Factory :approved_round
     @user = Factory :user
   end
   

@@ -51,8 +51,8 @@
   <div class="right-column">
     <% if signed_in? %>
       <% if can? :confirm, @round %>
-        <% if !@round.confirmed && !@round.past? %>
-          <%= button_to 'Confirm', round_confirmations_path(@round), :id => 'confirm', :disabled => !@round.confirmable?, :confirm => 'Are you sure?' %>
+        <% if @round.approved? && !@round.confirmed? && !@round.past? %>
+          <%= button_to 'Confirm', round_confirmations_path(@round), :id => 'confirm', :disabled => !@round.can_confirm?, :confirm => 'Are you sure?' %>
         <% end %>
       <% end %>
       <% if can?(:create, Subscription) && @round.subscribable_by?(current_user) %>
