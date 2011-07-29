@@ -2,14 +2,14 @@ it:
   activerecord:
     models:
       arena:
-        one: Arena
-        other: Arene
+        one: "Arena"
+        other: "Arene"
       game:
-        one: Gioco
-        other: Giochi
+        one: "Gioco"
+        other: "Giochi"
       comment:
-        one: Commento
-        other: Commenti
+        one: "Commento"
+        other: "Commenti"
     attributes:
       arena:
         name: "Nome"

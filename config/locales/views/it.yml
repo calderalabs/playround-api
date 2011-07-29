@@ -83,6 +83,12 @@ it:
         save_this_password: "Salva questa password"
         
     rounds:
+      number_of_spots_left:
+        one: "%{count} posto rimasto"
+        other: "%{count} posti rimasti"
+      number_of_subscribed_people:
+        one: "%{count} persona si è iscritta a questo round"
+        other: "%{count} persone si sono iscritte a questo round"
       helpers:
         past:
           full: "Questo round ha già avuto luogo"
@@ -100,15 +106,9 @@ it:
       index:
         start_new: "Fai partire un nuovo round!"
         empty_list: "Non ci sono rounds nella tua città."
-        number_of_spots_left:
-          one: "%{count} posto rimasto"
-          other: "%{count} posti rimasti"
       new:
         title: "Nuovo round"
       show:
-        number_of_subscribed_people:
-          one: "%{count} persona si è iscritta a questo round"
-          other: "%{count} persone si sono iscritte a questo round"
         buttons:
           confirm: "Conferma"
           subscribe: "Iscritivi"

@@ -83,6 +83,12 @@ en:
         save_this_password: "Save this password"
 
     rounds:
+      number_of_spots_left:
+        one: "%{count} spot left"
+        other: "%{count} spots left"
+      number_of_subscribed_people:
+        one: "%{count} person subscribed to this round"
+        other: "%{count} people subscribed to this round"
       helpers:
         past:
           full: "This round has already taken place"
@@ -100,15 +106,9 @@ en:
       index:
         start_new: 'Start a new round!'
         empty_list: "There are no rounds in your city."
-        number_of_spots_left:
-          one: "%{count} spot left"
-          other: "%{count} spots left"
       new:
         title: "New round"
       show:
-        number_of_subscribed_people:
-          one: "%{count} person subscribed to this round"
-          other: "%{count} people subscribed to this round"
         buttons:
           confirm: "Confirm"
           subscribe: "Subscribe"

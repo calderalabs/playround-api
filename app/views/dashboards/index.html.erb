@@ -39,10 +39,10 @@
   </div>
   
   <div id="rejected">
-    <h1>Rejected</h1>
+    <h1><%= t('views.dashboards.index.rejected')%></h1>
     
     <% if @rounds.rejected.empty? %>
-      <p class="empty-list-message"><%= t('views.dashboards.index.no_rejected_rounds')%>.</p>
+      <p class="empty-list-message"><%= t('views.dashboards.index.no_rejected_rounds')%></p>
     <% else %>
       <ul>
         <% @rounds.rejected.each do |round| %>

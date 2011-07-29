@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20110728125650) do
     t.integer  "people",      :default => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "rejected",    :default => false
     t.string   "state"
   end
 

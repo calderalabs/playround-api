@@ -95,7 +95,7 @@
   <h2>
     <%= t('views.rounds.show.people_meet_round')%>
     
-    (<%= t('views.rounds.show.number_of_spots_left', :count => @round.remaining_spots) %>)
+    (<%= t('views.rounds.number_of_spots_left', :count => @round.remaining_spots) %>)
   </h2>
 <% end%>
 <% if @round.subscribers.empty? %>
@@ -153,6 +153,6 @@
 
     <%= f.hidden_field :round_id %>
 
-    <%= f.submit t('helpers.submit.add', :model => Comment) %>
+    <%= f.submit t('helpers.submit.comment.add') %>
   <% end%>
 </div>

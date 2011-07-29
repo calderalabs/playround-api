@@ -50,7 +50,7 @@
 
         <% unless round.past? %>
           <div class="spots">
-            <%= t('views.rounds.index.number_of_spots_left', :count => round.remaining_spots) %>
+            <%= t('views.rounds.number_of_spots_left', :count => round.remaining_spots) %>
           </div>
         <% end %>
       </div>
