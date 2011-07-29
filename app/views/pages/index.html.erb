@@ -5,7 +5,7 @@
     </div>
 
     <div class="right-column">
-      <h2><%= t('views.pages.title1') %> <em><%= t('views.pages.title2') %></em></h2>
+      <h2><%= t('views.pages.index.title1') %> <em><%= t('views.pages.index.title2') %></em></h2>
     </div>
   </div>
 </div>
@@ -19,26 +19,26 @@
           <%= form.label :password %>
           <%= form.password_field :password, :autocomplete => 'off' %>
 
-        <p>Already a rounder? <%= link_to t('views.pages.sign_in'), '/sign_in' %></p>
+        <p><%= t('views.pages.index.already_rounder') %> <%= link_to t('views.pages.index.sign_in'), '/sign_in' %></p>
       
-        <%= form.submit t('views.pages.sign_up'), :id => 'signup-button' %>
+        <%= form.submit t('views.pages.index.sign_up'), :id => 'signup-button' %>
       <% end %>
     </div>
     
     <div class="right-column">
       <h1>
-        <%= t('views.pages.slogan1') %><br />
-        <%= t('views.pages.slogan2') %><br />
-        <%= t('views.pages.slogan3') %>
+        <%= t('views.pages.index.slogan1') %><br />
+        <%= t('views.pages.index.slogan2') %><br />
+        <%= t('views.pages.index.slogan3') %>
       </h1>
     
-      <%= link_to t('views.pages.view_rounds_around_you'), rounds_path, :id => 'rounds-button' %>
+      <%= link_to t('views.pages.index.view_rounds_around_you'), rounds_path, :id => 'rounds-button' %>
     </div>
   </div>
 </div>
 
 <div id="footer">
-  <p><%= t('views.layouts.footer')%></p>
+  <p><%= t('views.layouts.footer.title')%></p>
 </div>
 
 <script type="text/javascript">
