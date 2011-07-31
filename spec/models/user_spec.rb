@@ -39,6 +39,12 @@ describe User do
     @user.display_name.should ==  "matteodepalo"
   end
   
+  it "language should be some reasonable default at creation" do
+    @user.save!
+    
+    @user.language.should ==  "en"
+  end
+  
   # attributes accessiblity tests
   
   it "should mass-assign display_name" do
@@ -67,6 +73,10 @@ describe User do
   
   it "should mass-assign show_email" do
     @user.should allow_mass_assignment_of(:show_email)
+  end
+  
+  it "should mass-assign language" do
+    @user.should allow_mass_assignment_of(:language)
   end
   
   # methods tests

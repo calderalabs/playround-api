@@ -11,13 +11,17 @@ class ApplicationController < ActionController::Base
         }
       format.json  { head :unauthorized }
     end
-    
   end
   
   before_filter :set_timezone
   before_filter :set_locale
   
-  def set_locale
+  def set_locale(language = nil)
+    I18n.locale = language || params[:locale] || current_user.try(:language) || extract_locale_from_accept_language_header
+    current_user.language ||= I18n.locale if signed_in?
+  end
+  
+  def extract_locale_from_accept_language_header
     locale = nil
 
     # http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
@@ -31,7 +35,11 @@ class ApplicationController < ActionController::Base
       locale = I18n.default_locale
     end
     
-    I18n.locale = params[:locale] || I18n.locale.to_s
+    locale.to_s
+  end
+  
+  def default_url_options(options={})
+    { :locale => I18n.locale }
   end
 
   def set_timezone

@@ -19,7 +19,7 @@
           <%= form.label :password %>
           <%= form.password_field :password, :autocomplete => 'off' %>
 
-        <p><%= t('views.pages.index.already_rounder') %> <%= link_to t('views.pages.index.sign_in'), '/sign_in' %></p>
+        <p><%= t('views.pages.index.already_rounder') %> <%= link_to t('views.pages.index.sign_in'), sign_in_url %></p>
       
         <%= form.submit t('views.pages.index.sign_up'), :id => 'signup-button' %>
       <% end %>

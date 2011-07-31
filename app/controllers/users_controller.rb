@@ -1,6 +1,7 @@
 class UsersController < Clearance::UsersController
   load_and_authorize_resource
-
+  skip_before_filter :set_locale, :only => :update
+  
   def index
     @users = User.all
     
@@ -28,6 +29,7 @@ class UsersController < Clearance::UsersController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
+        set_locale(@user.language)
         format.html { redirect_to(@user, :notice => t('controllers.users.update.success')) }
         format.json  { head :ok }
       else
