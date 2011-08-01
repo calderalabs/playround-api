@@ -29,7 +29,6 @@ class UsersController < Clearance::UsersController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        set_locale(@user.language)
         format.html { redirect_to(@user, :notice => t('controllers.users.update.success')) }
         format.json  { head :ok }
       else

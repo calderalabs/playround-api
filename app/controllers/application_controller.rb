@@ -16,9 +16,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_timezone
   before_filter :set_locale
   
-  def set_locale(language = nil)
-    I18n.locale = language || params[:locale] || current_user.try(:language) || extract_locale_from_accept_language_header
-    current_user.language ||= I18n.locale if signed_in?
+  def set_locale
+    I18n.locale = params[:locale] || current_user.try(:language) || extract_locale_from_accept_language_header
   end
   
   def extract_locale_from_accept_language_header
