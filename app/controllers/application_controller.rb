@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     locale = nil
 
     # http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
-    if lang = env["HTTP_ACCEPT_LANGUAGE"]
+    if lang = request.env["HTTP_ACCEPT_LANGUAGE"]
       lang = lang.split(",").map { |l|
         l += ';q=1.0' unless l =~ /;q=\d+\.\d+$/
         l.split(';q=')
@@ -33,8 +33,6 @@ class ApplicationController < ActionController::Base
     else
       locale = I18n.default_locale
     end
-    
-    locale.to_s
   end
   
   def default_url_options(options={})

@@ -14,7 +14,7 @@ class Game < ActiveRecord::Base
   validates_length_of :name, :maximum => 30
   
   before_destroy do
-    errors.add(:base, t('activerecord.errors.game.delete_with_rounds')) and return false unless rounds.count == 0
+    errors.add(:base, I18n.t('activerecord.errors.game.delete_with_rounds')) and return false unless rounds.count == 0
   end
   
   validates_url_format_of :website, :allow_blank => true

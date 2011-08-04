@@ -14,8 +14,8 @@ class Round < ActiveRecord::Base
   has_many :subscribers, :through => :subscriptions, :source => :user
   
   validate :on => :create do
-    errors.add(:date, "must be after the current time") if date && date < Time.now.change(:sec => 0)
-    errors.add(:arena_id, "must be a public arena or a private arena that you own") unless arena && (arena.public? || owned_by_arena?)
+    errors.add(:date, I18n.t('activerecord.errors.round.date.invalid')) if date && date < Time.now.change(:sec => 0)
+    errors.add(:arena_id, I18n.t('activerecord.errors.round.arena_id.invalid')) unless arena && (arena.public? || owned_by_arena?)
   end
   
   before_validation :on => :create do
@@ -23,7 +23,7 @@ class Round < ActiveRecord::Base
   end
   
   before_destroy do
-    errors.add(:base, t('activerecord.errors.round.delete_with_subscribers')) and return false unless destroyable?
+    errors.add(:base, I18n.t('activerecord.errors.round.delete_with_subscribers')) and return false unless destroyable?
   end
   
   validates_presence_of :date

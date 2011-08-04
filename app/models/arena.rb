@@ -28,11 +28,11 @@ class Arena < ActiveRecord::Base
 
     self.town_woeid = town.try(:woeid)
     
-    errors.add(:address, t('activerecord.arenas.errors.address.invalid')) unless self.town_woeid
+    errors.add(:address, I18n.t('activerecord.arenas.errors.address.invalid')) unless self.town_woeid
   end
 
   before_destroy do
-    errors.add(:base, t('activerecord.arenas.errors.delete_with_rounds')) and return false unless rounds.count == 0
+    errors.add(:base, I18n.t('activerecord.arenas.errors.delete_with_rounds')) and return false unless rounds.count == 0
   end
   
   scope :available_for, lambda { |user|

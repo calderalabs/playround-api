@@ -9,11 +9,11 @@ class Subscription < ActiveRecord::Base
   validates_uniqueness_of :round_id, :scope => :user_id
   
   before_destroy do
-    errors.add(:base, t('activerecord.errors.subscription.unsubscribe.failure')) and return false unless destroyable?
+    errors.add(:base, I18n.t('activerecord.errors.subscription.unsubscribe.failure')) and return false unless destroyable?
   end
   
   validate do
-    errors.add(:base, t('activerecord.errors.subscription.subscribe.failure')) unless round && round.approved? && !round.past? && !round.full?
+    errors.add(:base, I18n.t('activerecord.errors.subscription.subscribe.failure')) unless round && round.approved? && !round.past? && !round.full?
   end
   
   def destroyable?

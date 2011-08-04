@@ -47,7 +47,7 @@ describe Round do
   end
   
   it "should not be rejected by default" do
-    Round.new.rejected.should == false
+    Round.new.rejected?.should == false
   end
   
   it "should not be confirmed by default" do
@@ -189,9 +189,8 @@ describe Round do
   end
   
   it "should not be listed in pending approval when it is rejected" do
-    @round.rejected = true
-    @round.save!
-    Round.pending_approval.should_not include(@round)
+    @round.reject!
+    Round.pending.should_not include(@round)
   end
   
   it "should be listed in approved when it is approved" do
@@ -200,8 +199,7 @@ describe Round do
   end
   
   it "should be listed in rejected when it is rejected" do
-    @round.rejected = true
-    @round.save!
+    @round.reject!
     Round.rejected.should include(@round)
   end
   
