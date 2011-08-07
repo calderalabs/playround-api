@@ -1,5 +1,28 @@
 en:
   activerecord:
+    models:
+      arena: "Arena"
+      game: "Game"
+      comment: "Comment"
+    attributes:
+      arena:
+        name: "Name"
+        website: "Website"
+        description: "Description"
+        image: "Image"
+        address: "Address"
+      game:
+        name: "Name"
+        description: "Description"
+        image: "Image"
+      user:
+        display_name: "Nickname"
+        real_name: "Real name"
+      round:
+        description: "Description"
+        game: "Game"
+      comment:
+        text: "Text"
     errors:
       arena:
         address:

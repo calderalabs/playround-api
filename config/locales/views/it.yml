@@ -8,6 +8,9 @@ it:
     hints:
       round:
         description: "Questa è una descrizione opzionale per il tuo round"
+    actions:
+      create: "Crea %{model}"
+      update: "Salva i cambiamenti"
     
   views:
     buttons:

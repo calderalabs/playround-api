@@ -8,6 +8,9 @@ en:
     hints:
       round:
         description: "This is an optional description for your round"
+    actions:
+      create: "Create %{model}"
+      update: "Save changes"
     
   views:
     buttons:
@@ -148,5 +151,3 @@ en:
           sign_up: "Sign up"
       show:
         real_name: "Nome reale:"
-    
-  
