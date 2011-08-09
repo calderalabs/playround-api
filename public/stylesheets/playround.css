@@ -1,922 +1,127 @@
-* {
-  margin: 0;
-  padding: 0; }
-
-img {
-  border: 0; }
-
-.boxed-item {
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-box-shadow: 0 0 5px 0 #999999;
-  -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999;
-  margin-bottom: 15px; }
-
-body {
-  background-color: #000;
-  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; }
-
-ul {
-  list-style: none; }
-
-#header {
-  background-color: #33005f;
-  color: #ffffff; }
-
-.container {
-  margin: 0 auto; }
-
-textarea {
-  font-family: inherit; }
-
-#content {
-  background-color: #ffffff; }
-
-#footer {
-  color: #666;
-  background-image: -moz-linear-gradient(top, #444444, black);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #444444), color-stop(1, black));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#444444', EndColorStr='black');
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#444444', EndColorStr='black')";
-  height: 300px;
-  text-align: center; }
-  #footer p {
-    line-height: 150px;
-    font-weight: bold; }
-
-.left-column {
-  float: left; }
-
-.right-column {
-  float: right; }
-
-.clear {
-  clear: both; }
-
-textarea {
-  resize: none; }
-
-/* -------------------------------------------------------------------------------------------------
-
-It's *strongly* suggested that you don't modify this file.  Instead, load a new stylesheet after
-this one in your layouts (eg formtastic_changes.css) and override the styles to suit your needs.
-This will allow you to update formtastic.css with new releases without clobbering your own changes.
-
-This stylesheet forms part of the Formtastic Rails Plugin
-(c) 2008 Justin French
-
---------------------------------------------------------------------------------------------------*/
-/* NORMALIZE AND RESET - obviously inspired by Yahoo's reset.css, but scoped to just form.formtastic
---------------------------------------------------------------------------------------------------*/
-form.formtastic, form.formtastic ul, form.formtastic ol, form.formtastic li, form.formtastic fieldset, form.formtastic legend, form.formtastic input, form.formtastic textarea, form.formtastic select, form.formtastic p {
-  margin: 0;
-  padding: 0; }
-
-form.formtastic fieldset {
-  border: 0; }
-
-form.formtastic em, form.formtastic strong {
-  font-style: normal;
-  font-weight: normal; }
-
-form.formtastic ol, form.formtastic ul {
-  list-style: none; }
-
-form.formtastic abbr, form.formtastic acronym {
-  border: 0;
-  font-variant: normal; }
-
-form.formtastic input, form.formtastic textarea, form.formtastic select {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit; }
-
-form.formtastic input, form.formtastic textarea, form.formtastic select {
-  font-size: 100%; }
-
-form.formtastic legend {
-  white-space: normal;
-  color: #000; }
-
-/* SEMANTIC ERRORS
---------------------------------------------------------------------------------------------------*/
-form.formtastic ul.errors {
-  color: #cc0000;
-  margin: 0.5em 0 1.5em 25%;
-  list-style: square; }
-
-form.formtastic ul.errors li {
-  padding: 0;
-  border: none;
-  display: list-item; }
-
-/* FIELDSETS & LISTS
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset {
-  overflow: hidden; }
-
-/* clearing contained floats */
-form.formtastic fieldset.buttons {
-  padding-left: 25%; }
-
-form.formtastic fieldset.buttons li {
-  float: left;
-  padding-right: 0.5em; }
-
-/* INPUT LIs
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li {
-  padding: 0.5em 0;
-  margin-top: -0.5em;
-  margin-bottom: 1em; }
-
-/* padding and negative margin juggling is for Firefox */
-form.formtastic fieldset > ol > li {
-  overflow: hidden; }
-
-/* clearing contained floats */
-/* LABELS
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li label {
-  display: block;
-  width: 25%;
-  float: left;
-  padding-top: .2em; }
-
-form.formtastic fieldset > ol > li > li label {
-  line-height: 100%;
-  padding-top: 0; }
-
-form.formtastic fieldset > ol > li > li label input {
-  line-height: 100%;
-  vertical-align: middle;
-  margin-top: -0.1em; }
-
-/* NESTED FIELDSETS AND LEGENDS (radio, check boxes and date/time inputs use nested fieldsets)
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li fieldset {
-  position: relative; }
-
-form.formtastic fieldset > ol > li fieldset legend {
-  position: absolute;
-  width: 95%;
-  left: 0px; }
-
-form.formtastic fieldset > ol > li fieldset legend span {
-  position: absolute; }
-
-form.formtastic fieldset > ol > li fieldset legend.label label {
-  position: absolute; }
-
-form.formtastic fieldset > ol > li fieldset ol {
-  float: left;
-  width: 74%;
-  margin: 0;
-  padding: 0 0 0 25%; }
-
-form.formtastic fieldset > ol > li fieldset ol li {
-  padding: 0;
-  border: 0; }
-
-/* INLINE HINTS
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li p.inline-hints {
-  color: #666;
-  margin: 0.5em 0 0 25%; }
-
-/* INLINE ERRORS
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li p.inline-errors {
-  color: #cc0000;
-  margin: 0.5em 0 0 25%; }
-
-form.formtastic fieldset > ol > li ul.errors {
-  color: #cc0000;
-  margin: 0.5em 0 0 25%;
-  list-style: square; }
-
-form.formtastic fieldset > ol > li ul.errors li {
-  padding: 0;
-  border: none;
-  display: list-item; }
-
-/* STRING, NUMERIC, PASSWORD, EMAIL, URL, PHONE & SEARCH OVERRIDES
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li.string input,
-form.formtastic fieldset > ol > li.password input,
-form.formtastic fieldset > ol > li.numeric input,
-form.formtastic fieldset > ol > li.email input,
-form.formtastic fieldset > ol > li.url input,
-form.formtastic fieldset > ol > li.phone input,
-form.formtastic fieldset > ol > li.autocompleted_string input,
-form.formtastic fieldset > ol > li.search input {
-  width: 72%; }
-
-form.formtastic fieldset > ol > li.string input[size],
-form.formtastic fieldset > ol > li.password input[size],
-form.formtastic fieldset > ol > li.numeric input[size],
-form.formtastic fieldset > ol > li.email input[size],
-form.formtastic fieldset > ol > li.url input[size],
-form.formtastic fieldset > ol > li.phone input[size],
-form.formtastic fieldset > ol > li.autocompleted_string input[size],
-form.formtastic fieldset > ol > li.search input[size] {
-  width: auto;
-  max-width: 72%; }
-
-/* TEXTAREA OVERRIDES
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li.text textarea {
-  width: 72%; }
-
-form.formtastic fieldset > ol > li.text textarea[cols] {
-  width: auto;
-  max-width: 72%; }
-
-/* HIDDEN OVERRIDES
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset ol li.hidden {
-  display: none; }
-
-/* BOOLEAN OVERRIDES
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li.boolean label {
-  padding-left: 25%;
-  width: auto; }
-
-form.formtastic fieldset > ol > li.boolean label input {
-  margin: 0 0.5em 0 0.2em; }
-
-/* RADIO OVERRIDES
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li.radio fieldset {
-  overflow: visible; }
-
-form.formtastic fieldset > ol > li.radio fieldset ol {
-  margin-bottom: -0.5em; }
-
-form.formtastic fieldset > ol > li.radio fieldset ol li {
-  margin: 0.1em 0 0.5em 0;
-  overflow: visible; }
-
-form.formtastic fieldset > ol > li.radio fieldset ol li label {
-  float: none;
-  width: 100%; }
-
-form.formtastic fieldset > ol > li.radio fieldset ol li label input {
-  margin-right: 0.2em; }
-
-/* CHECK BOXES (COLLECTION) OVERRIDES
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li.check_boxes fieldset {
-  overflow: visible; }
-
-form.formtastic fieldset > ol > li.check_boxes fieldset ol {
-  margin-bottom: -0.5em; }
-
-form.formtastic fieldset > ol > li.check_boxes fieldset ol li {
-  margin: 0.1em 0 0.5em 0;
-  overflow: visible; }
-
-form.formtastic fieldset > ol > li.check_boxes fieldset ol li label {
-  float: none;
-  width: 100%; }
-
-form.formtastic fieldset > ol > li.check_boxes fieldset ol li label input {
-  margin-right: 0.2em; }
-
-/* DATE & TIME OVERRIDES
---------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li.date fieldset ol li,
-form.formtastic fieldset > ol > li.time fieldset ol li,
-form.formtastic fieldset > ol > li.datetime fieldset ol li {
-  float: left;
-  width: auto;
-  margin: 0 .3em 0 0; }
-
-form.formtastic fieldset > ol > li.date fieldset ol li label,
-form.formtastic fieldset > ol > li.time fieldset ol li label,
-form.formtastic fieldset > ol > li.datetime fieldset ol li label {
-  display: none; }
-
-form.formtastic fieldset > ol > li.date fieldset ol li label input,
-form.formtastic fieldset > ol > li.time fieldset ol li label input,
-form.formtastic fieldset > ol > li.datetime fieldset ol li label input {
-  display: inline;
-  margin: 0;
-  padding: 0; }
-
-.clear-autocomplete {
-  padding-left: 10px; }
-
-body {
-  font-size: small; }
-
-#flash {
-  background-color: #b9037f;
-  color: #ffffff;
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 15pt; }
-
-a {
-  text-decoration: none;
-  font-weight: bold;
-  color: #6a00c5; }
-
-a:hover {
-  color: #eb04a1; }
-
-#title {
-  padding-bottom: 20px;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #ddd;
-  position: relative; }
-  #title a {
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    display: block;
-    height: 50px;
-    width: 190px;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    line-height: 50px;
-    color: black;
-    background-image: -moz-linear-gradient(top, #fff6cc, #ffd300);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff6cc), color-stop(1, #ffd300));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff6cc', EndColorStr='#ffd300');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff6cc', EndColorStr='#ffd300')";
-    -moz-box-shadow: 0 0 5px 0 #cca900;
-    -webkit-box-shadow: 0 0 5px 0 #cca900;
-    box-shadow: 0 0 5px 0 #cca900;
-    border: 1px solid #e6be00;
-    cursor: pointer;
-    position: absolute;
-    font-size: 14pt;
-    right: 0;
-    top: 0; }
-    #title a:hover {
-      -moz-box-shadow: inset 0 0 5px 0 #cca900;
-      -webkit-box-shadow: inset 0 0 5px 0 #cca900;
-      box-shadow: inner 0 0 5px 0 #cca900; }
-    #title a[disabled] {
-      border: 1px solid #bfbfbf;
-      cursor: default;
-      background-image: -moz-linear-gradient(top, white, #cccccc);
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
-      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
-      -moz-box-shadow: 0 0 5px 0 #b3b3b3;
-      -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
-      box-shadow: 0 0 5px 0 #b3b3b3;
-      color: black; }
-      #title a[disabled]:hover {
-        -moz-box-shadow: inset 0 0 0 0 0;
-        -webkit-box-shadow: inset 0 0 0 0 0;
-        box-shadow: inner 0 0 0 0 0; }
-  #title h1 {
-    border-bottom: 0;
-    margin: 0; }
-  #title input {
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    display: block;
-    height: auto;
-    width: auto;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    line-height: auto;
-    color: white;
-    background-image: -moz-linear-gradient(top, #9d2cff, #33005f);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #9d2cff), color-stop(1, #33005f));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#9d2cff', EndColorStr='#33005f');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#9d2cff', EndColorStr='#33005f')";
-    -moz-box-shadow: 0 0 5px 0 #18002c;
-    -webkit-box-shadow: 0 0 5px 0 #18002c;
-    box-shadow: 0 0 5px 0 #18002c;
-    border: 1px solid #250046;
-    cursor: pointer;
-    display: inline;
-    font-size: 16pt;
-    display: inline;
-    height: 30px;
-    margin-right: 10px;
-    width: 200px; }
-    #title input:hover {
-      -moz-box-shadow: inset 0 0 5px 0 #18002c;
-      -webkit-box-shadow: inset 0 0 5px 0 #18002c;
-      box-shadow: inner 0 0 5px 0 #18002c; }
-    #title input[disabled] {
-      border: 1px solid #bfbfbf;
-      cursor: default;
-      background-image: -moz-linear-gradient(top, white, #cccccc);
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
-      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
-      -moz-box-shadow: 0 0 5px 0 #b3b3b3;
-      -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
-      box-shadow: 0 0 5px 0 #b3b3b3;
-      color: black; }
-      #title input[disabled]:hover {
-        -moz-box-shadow: inset 0 0 0 0 0;
-        -webkit-box-shadow: inset 0 0 0 0 0;
-        box-shadow: inner 0 0 0 0 0; }
-  #title label {
-    display: inline;
-    font-size: 22pt;
-    line-height: 30px;
-    margin-right: 10px;
-    padding: 8px; }
-
-h1 {
-  padding-bottom: 25px;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #ddd;
-  font-size: 22pt; }
-
-#content {
-  min-height: 400px;
-  padding: 50px; }
-
-#session {
-  color: #ffffff;
-  padding: 10px;
-  background-color: #230040;
-  text-align: right; }
-  #session a {
-    color: #ffffff;
-    text-decoration: none;
-    padding: 10px; }
-  #session a:hover {
-    color: #ffd300; }
-
-#header a {
-  color: white;
-  font-weight: bold;
-  text-decoration: none; }
-
-#header a:hover {
-  color: #ffd300; }
-
-#header {
-  height: 50px;
-  padding: 10px;
-  line-height: 50px;
-  font-size: 13pt; }
-  #header li {
-    margin: 10px;
-    display: inline; }
-  #header .left-column {
-    padding-top: 5px; }
-  #header em {
-    font-style: normal;
-    color: #ffd300; }
-
-.container {
-  margin: 0 auto;
-  width: 900px; }
-
-#session-help li {
-  display: inline;
-  margin-right: 15px;
-  line-height: 30px; }
-#session-help ul {
-  margin-top: 20px;
-  font-size: 13pt; }
-
-.text_field input, .password_field input {
-  font-size: 12pt;
-  padding: 8px;
-  margin-bottom: 15px;
-  width: 300px; }
-
-.submit_field {
-  margin-top: 10px;
-  display: block; }
-  .submit_field input {
-    font-size: 15pt; }
-
-label {
-  font-size: 12pt;
-  margin-bottom: 15px;
-  display: block;
-  font-weight: bold;
-  box-shadow: none; }
-
-input.placeholder {
-  color: #cccccc; }
-
-.field_with_errors input {
-  border: 3px solid red; }
-
-.round {
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ccc; }
-  .round h3 {
-    margin: 5px 0;
-    font-weight: normal;
-    color: #555; }
-  .round .game a {
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    display: block;
-    height: auto;
-    width: 120px;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    line-height: auto;
-    color: black;
-    background-image: -moz-linear-gradient(top, white, white);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, white));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='white');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='white')";
-    -moz-box-shadow: 0 0 5px 0 #e6e6e6;
-    -webkit-box-shadow: 0 0 5px 0 #e6e6e6;
-    box-shadow: 0 0 5px 0 #e6e6e6;
-    border: 1px solid #f2f2f2;
-    cursor: pointer;
-    -moz-box-shadow: 0 0 5px 0 #999999;
-    -webkit-box-shadow: 0 0 5px 0 #999999;
-    box-shadow: 0 0 5px 0 #999999;
-    min-height: 60px;
-    margin-left: 10px;
-    font-size: 13pt;
-    padding: 10px; }
-    .round .game a:hover {
-      -moz-box-shadow: inset 0 0 5px 0 #e6e6e6;
-      -webkit-box-shadow: inset 0 0 5px 0 #e6e6e6;
-      box-shadow: inner 0 0 5px 0 #e6e6e6; }
-    .round .game a[disabled] {
-      border: 1px solid #bfbfbf;
-      cursor: default;
-      background-image: -moz-linear-gradient(top, white, #cccccc);
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
-      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
-      -moz-box-shadow: 0 0 5px 0 #b3b3b3;
-      -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
-      box-shadow: 0 0 5px 0 #b3b3b3;
-      color: black; }
-      .round .game a[disabled]:hover {
-        -moz-box-shadow: inset 0 0 0 0 0;
-        -webkit-box-shadow: inset 0 0 0 0 0;
-        box-shadow: inner 0 0 0 0 0; }
-    .round .game a:hover {
-      -moz-box-shadow: inset 0 0 5px 0 #999999;
-      -webkit-box-shadow: inset 0 0 5px 0 #999999;
-      box-shadow: inner 0 0 5px 0 #999999; }
-  .round .date {
-    text-align: center;
-    width: 70px;
-    height: 70px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    padding: 5px; }
-    .round .date .month {
-      padding: 2px;
-      font-weight: bold;
-      background-color: #eb04a1;
-      opacity: 0.7;
-      color: white;
-      border-radius: 5px;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px; }
-    .round .date .day {
-      font-size: 20pt; }
-  .round .deadline .month {
-    background-color: green; }
-  .round .subscribers {
-    margin-left: 20px;
-    margin-bottom: 10px;
-    width: 500px; }
-    .round .subscribers .details .arena {
-      font-weight: normal;
-      font-size: 14pt; }
-    .round .subscribers .details .game {
-      font-weight: normal;
-      font-size: 14pt; }
-      .round .subscribers .details .game a {
-        color: black; }
-    .round .subscribers ul {
-      margin-top: 10px; }
-    .round .subscribers li {
-      float: left;
-      margin: 1px;
-      width: 35px;
-      height: 35px;
-      border: 1px dotted #999; }
-      .round .subscribers li .remaining-spot {
-        width: 100%;
-        height: 100%;
-        background-color: #ffffff; }
-      .round .subscribers li .min {
-        background-color: #eee; }
-  .round .actions {
-    text-align: center;
-    width: 140px; }
-    .round .actions a {
-      margin: 0 auto;
-      text-decoration: none;
-      font-weight: bold;
-      text-align: center;
-      display: block;
-      height: 35px;
-      width: 120px;
-      border-radius: 10px;
-      -moz-border-radius: 10px;
-      -webkit-border-radius: 10px;
-      line-height: 35px;
-      color: white;
-      background-image: -moz-linear-gradient(top, #febde9, #eb04a1);
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #febde9), color-stop(1, #eb04a1));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#febde9', EndColorStr='#eb04a1');
-      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#febde9', EndColorStr='#eb04a1')";
-      -moz-box-shadow: 0 0 5px 0 #b9037f;
-      -webkit-box-shadow: 0 0 5px 0 #b9037f;
-      box-shadow: 0 0 5px 0 #b9037f;
-      border: 1px solid #d20490;
-      cursor: pointer;
-      font-size: 12pt;
-      margin-bottom: 8px; }
-      .round .actions a:hover {
-        -moz-box-shadow: inset 0 0 5px 0 #b9037f;
-        -webkit-box-shadow: inset 0 0 5px 0 #b9037f;
-        box-shadow: inner 0 0 5px 0 #b9037f; }
-      .round .actions a[disabled] {
-        border: 1px solid #bfbfbf;
-        cursor: default;
-        background-image: -moz-linear-gradient(top, white, #cccccc);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
-        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
-        -moz-box-shadow: 0 0 5px 0 #b3b3b3;
-        -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
-        box-shadow: 0 0 5px 0 #b3b3b3;
-        color: black; }
-        .round .actions a[disabled]:hover {
-          -moz-box-shadow: inset 0 0 0 0 0;
-          -webkit-box-shadow: inset 0 0 0 0 0;
-          box-shadow: inner 0 0 0 0 0; }
-    .round .actions .time {
-      margin-top: 10px;
-      color: #888; }
-    .round .actions .spots {
-      color: #000;
-      font-size: 14pt;
-      margin-top: 15px; }
-
-#arenas li {
-  float: left;
-  display: block;
-  padding: 10px;
-  margin: 20px;
-  margin-top: 5px;
-  margin-left: 0;
-  border: 1px solid #ccc;
-  height: 120px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-box-shadow: 0 0 5px 0 #999999;
-  -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999; }
-  #arenas li .image {
-    text-align: center; }
-
-#games li {
-  float: left;
-  display: block;
-  padding: 10px;
-  margin: 20px;
-  margin-top: 5px;
-  margin-left: 0;
-  border: 1px solid #ccc;
-  height: 120px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-box-shadow: 0 0 5px 0 #999999;
-  -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999; }
-  #games li .image {
-    text-align: center; }
-
-#round-title h1 {
-  padding-bottom: 10px; }
-
-#round-infos {
-  margin-top: 20px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 20px;
-  margin-bottom: 20px; }
-  #round-infos .left-column {
-    width: 650px; }
-  #round-infos .right-column {
-    width: 200px;
-    text-align: center;
-    color: #888;
-    font-size: 14pt;
-    font-weight: bold; }
-    #round-infos .right-column #subscribe, #round-infos .right-column #confirm {
-      text-decoration: none;
-      font-weight: bold;
-      text-align: center;
-      display: block;
-      height: 50px;
-      width: 120px;
-      border-radius: 10px;
-      -moz-border-radius: 10px;
-      -webkit-border-radius: 10px;
-      line-height: 50px;
-      color: white;
-      background-image: -moz-linear-gradient(top, #4dff4d, green);
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #4dff4d), color-stop(1, green));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#4dff4d', EndColorStr='green');
-      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#4dff4d', EndColorStr='green')";
-      -moz-box-shadow: 0 0 5px 0 #004d00;
-      -webkit-box-shadow: 0 0 5px 0 #004d00;
-      box-shadow: 0 0 5px 0 #004d00;
-      border: 1px solid #006700;
-      cursor: pointer;
-      font-size: 12pt;
-      margin: 0 auto;
-      margin-bottom: 20px; }
-      #round-infos .right-column #subscribe:hover, #round-infos .right-column #confirm:hover {
-        -moz-box-shadow: inset 0 0 5px 0 #004d00;
-        -webkit-box-shadow: inset 0 0 5px 0 #004d00;
-        box-shadow: inner 0 0 5px 0 #004d00; }
-      #round-infos .right-column #subscribe[disabled], #round-infos .right-column #confirm[disabled] {
-        border: 1px solid #bfbfbf;
-        cursor: default;
-        background-image: -moz-linear-gradient(top, white, #cccccc);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
-        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
-        -moz-box-shadow: 0 0 5px 0 #b3b3b3;
-        -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
-        box-shadow: 0 0 5px 0 #b3b3b3;
-        color: black; }
-        #round-infos .right-column #subscribe[disabled]:hover, #round-infos .right-column #confirm[disabled]:hover {
-          -moz-box-shadow: inset 0 0 0 0 0;
-          -webkit-box-shadow: inset 0 0 0 0 0;
-          box-shadow: inner 0 0 0 0 0; }
-    #round-infos .right-column #unsubscribe {
-      text-decoration: none;
-      font-weight: bold;
-      text-align: center;
-      display: block;
-      height: 50px;
-      width: 120px;
-      border-radius: 10px;
-      -moz-border-radius: 10px;
-      -webkit-border-radius: 10px;
-      line-height: 50px;
-      color: white;
-      background-image: -moz-linear-gradient(top, #ffcccc, red);
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffcccc), color-stop(1, red));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffcccc', EndColorStr='red');
-      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffcccc', EndColorStr='red')";
-      -moz-box-shadow: 0 0 5px 0 #cc0000;
-      -webkit-box-shadow: 0 0 5px 0 #cc0000;
-      box-shadow: 0 0 5px 0 #cc0000;
-      border: 1px solid #e60000;
-      cursor: pointer;
-      font-size: 12pt;
-      margin: 0 auto;
-      margin-bottom: 20px; }
-      #round-infos .right-column #unsubscribe:hover {
-        -moz-box-shadow: inset 0 0 5px 0 #cc0000;
-        -webkit-box-shadow: inset 0 0 5px 0 #cc0000;
-        box-shadow: inner 0 0 5px 0 #cc0000; }
-      #round-infos .right-column #unsubscribe[disabled] {
-        border: 1px solid #bfbfbf;
-        cursor: default;
-        background-image: -moz-linear-gradient(top, white, #cccccc);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #cccccc));
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc');
-        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='white', EndColorStr='#cccccc')";
-        -moz-box-shadow: 0 0 5px 0 #b3b3b3;
-        -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
-        box-shadow: 0 0 5px 0 #b3b3b3;
-        color: black; }
-        #round-infos .right-column #unsubscribe[disabled]:hover {
-          -moz-box-shadow: inset 0 0 0 0 0;
-          -webkit-box-shadow: inset 0 0 0 0 0;
-          box-shadow: inner 0 0 0 0 0; }
-
-#subscribers {
-  margin-bottom: 20px; }
-
-#subscribers li {
-  float: left;
-  display: block;
-  padding: 10px;
-  margin: 20px;
-  margin-top: 5px;
-  margin-left: 0;
-  border: 1px solid #ccc;
-  height: 120px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-box-shadow: 0 0 5px 0 #999999;
-  -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999; }
-  #subscribers li .image {
-    text-align: center; }
-
-#subscribers h2, #comments h2 {
-  padding-bottom: 20px; }
-
-#arena .left-column, #game .left-column, #user .left-column {
-  margin-right: 20px; }
-#arena p, #game p, #user p {
-  text-align: left;
-  font-size: large; }
-
-#user p {
-  line-height: 200%; }
-
-#users li {
-  float: left;
-  display: block;
-  padding: 10px;
-  margin: 20px;
-  margin-top: 5px;
-  margin-left: 0;
-  border: 1px solid #ccc;
-  height: 120px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-box-shadow: 0 0 5px 0 #999999;
-  -webkit-box-shadow: 0 0 5px 0 #999999;
-  box-shadow: 0 0 5px 0 #999999; }
-  #users li .image {
-    text-align: center; }
-
-.status {
-  color: #888;
-  font-size: 14pt;
-  margin-top: 15px; }
-
-.additional-notes {
-  margin-top: 20px;
-  font-style: italic; }
-
-#comments .header {
-  background-color: #f7eeff;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  padding: 10px;
-  font-style: italic; }
-  #comments .header img {
-    border: 1px solid #ccc; }
-  #comments .header a {
-    font-style: normal; }
-  #comments .header img, #comments .header a, #comments .header span {
-    margin-right: 5px; }
-
-#comments p {
-  padding: 15px;
-  padding-left: 10px; }
-
-#comments textarea {
-  width: 100%;
-  height: 100px;
-  margin-bottom: 10px; }
-
-span.actions a {
-  color: #eb04a1; }
-  span.actions a:hover {
-    color: #6a00c5; }
-
-form #location_map {
-  margin-left: 25%;
-  width: 72%;
-  margin-bottom: 20px;
-  margin-top: -10px;
-  height: 400px; }
-
-.empty-list-message {
-  color: #aaa;
-  text-align: center;
-  padding: 20px;
-  font-size: 16pt; }
-
-#location-form {
-  display: none; }
+/*
+Syntax error: Undefined mixin 'button'.
+        on line 39 of /Users/eugeniodepalo/Projects/playround/public/stylesheets/sass/playround.scss, in `button'
+        from line 39 of /Users/eugeniodepalo/Projects/playround/public/stylesheets/sass/playround.scss
+
+34:     border-bottom: 2px solid #ddd;
+35:     
+36:     position: relative;
+37: 
+38:     a {
+39:       @include button(190px, 50px, $main-orange, #000000);
+40:       position: absolute;
+41:       font-size: 14pt;
+42:       right: 0;
+43:       top: 0;
+44:     }
+
+Backtrace:
+/Users/eugeniodepalo/Projects/playround/public/stylesheets/sass/playround.scss:39:in `button'
+/Users/eugeniodepalo/Projects/playround/public/stylesheets/sass/playround.scss:39
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:169:in `visit_mixin'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:53:in `map'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:27:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:39:in `with_environment'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:26:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:230:in `visit_rule'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:53:in `map'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:27:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:39:in `with_environment'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:26:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:230:in `visit_rule'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:53:in `map'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:27:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:39:in `with_environment'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:26:in `visit_children'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:47:in `visit_root'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:7:in `send'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/visitors/perform.rb:7:in `visit'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/tree/root_node.rb:20:in `render'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/engine.rb:291:in `_render'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/engine.rb:239:in `render'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/util.rb:297:in `silence_sass_warnings'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/engine.rb:239:in `render'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/plugin/compiler.rb:319:in `update_stylesheet'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/plugin/compiler.rb:181:in `update_stylesheets'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/plugin/compiler.rb:175:in `each'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/plugin/compiler.rb:175:in `update_stylesheets'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/plugin/compiler.rb:173:in `each'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/plugin/compiler.rb:173:in `update_stylesheets'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/plugin.rb:81:in `update_stylesheets'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/plugin.rb:54:in `check_for_updates'
+/Library/Ruby/Gems/1.8/gems/sass-3.1.5/lib/sass/../sass/plugin/rack.rb:51:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/head.rb:14:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.3/lib/rack/methodoverride.rb:24:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/flash.rb:182:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/cookies.rb:302:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:32:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:12:in `cache'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:31:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:416:in `_run_call_callbacks'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.3/lib/rack/sendfile.rb:107:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.7/lib/rails/rack/logger.rb:13:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.3/lib/rack/runtime.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/activesupport-3.0.7/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `synchronize'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/static.rb:30:in `call'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:168:in `call'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `send'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `method_missing'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.7/lib/rails/rack/log_tailer.rb:14:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.3/lib/rack/content_length.rb:13:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:52:in `service'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:13:in `run'
+/Library/Ruby/Gems/1.8/gems/rack-1.2.3/lib/rack/server.rb:217:in `start'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.7/lib/rails/commands/server.rb:65:in `start'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:30
+/Library/Ruby/Gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27:in `tap'
+/Library/Ruby/Gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27
+script/rails:6:in `require'
+script/rails:6
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined mixin 'button'.\A         on line 39 of /Users/eugeniodepalo/Projects/playround/public/stylesheets/sass/playround.scss, in `button'\A         from line 39 of /Users/eugeniodepalo/Projects/playround/public/stylesheets/sass/playround.scss\A \A 34:     border-bottom: 2px solid #ddd;\A 35:     \A 36:     position: relative;\A 37: \A 38:     a {\A 39:       @include button(190px, 50px, $main-orange, #000000);\A 40:       position: absolute;\A 41:       font-size: 14pt;\A 42:       right: 0;\A 43:       top: 0;\A 44:     }"; }

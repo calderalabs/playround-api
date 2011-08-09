@@ -26,10 +26,6 @@ class User < ActiveRecord::Base
     !!self.quicktour
   end
   
-  def current_guider_name
-    Quicktour::GUIDERS[self.quicktour.current_guider]
-  end
-  
   def subscribed?(round)
     self.subscriptions.exists?(:round_id => round.id)
   end

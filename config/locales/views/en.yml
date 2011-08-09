@@ -1,23 +1,13 @@
 en:
-  formtastic:
-    labels:
-      arena:
-        public: "Allow other people to organize rounds in this arena"
-      round:
-        people: "Number of people"
-    hints:
-      round:
-        description: "This is an optional description for your round"
-    actions:
-      create: "Create %{model}"
-      update: "Save changes"
-    
   views:
-    buttons:
+    base:
       edit: "Edit"
       delete: "Delete"
       show: "Show"
-      
+      sign_in: "Sign in"
+      sign_up: "Sign up"
+      sign_out: "Sign out"
+
     arenas:
       edit:
         title: "Editing arena"
@@ -53,14 +43,13 @@ en:
         title: "New game"
         
     layouts:
-      title: "Playround | Stop sharing. Start being."
-      footer:
-        title: "Copyright © Playround 2011. All rights reserved."
+      base:
+        title: "Playround | Meet new people. Have fun."
+        copyright: "Copyright © Playround 2011. All rights reserved."
+        
       application:
         unknown_location: 'Unknown location'
         dashboard: "Dashboard"
-        sign_in: "Sign in"
-        sign_out: "Sign out"
         rounds: "Rounds"
         arenas: "Arenas"
         games: "Games"
@@ -68,15 +57,13 @@ en:
         
     pages:
       index:
-        title1: "Stop sharing."
-        title2: "Start being."
-        sign_in: "Sign in!"
-        sign_up: "Sign up!"
-        already_rounder: "Already a rounder?"
-        slogan1: "Choose a game"
-        slogan2: "Pick a place"
-        slogan3: "Meet new people"
-        view_rounds_around_you: "View rounds around you!"
+        slogan1: "Meet new people."
+        slogan2: "Have fun."
+        no_account: "Not a rounder yet?"
+        description1: "Choose an interest"
+        description2: "Choose a game"
+        description3: "Meet new people"
+        view_rounds: "View rounds around you!"
         
     passwords:
       edit:
@@ -86,7 +73,7 @@ en:
         save_this_password: "Save this password"
 
     rounds:
-      number_of_spots_left:
+      remaining_spots:
         one: "%{count} spot left"
         other: "%{count} spots left"
       number_of_subscribed_people:
@@ -107,8 +94,8 @@ en:
       edit:
         title: "Editing round"
       index:
-        start_new: 'Start a new round!'
-        empty_list: "There are no rounds in your city."
+        new: 'Start a new round!'
+        empty: "There are no rounds in your city."
       new:
         title: "New round"
       show:
@@ -132,9 +119,6 @@ en:
         
     sessions:
       new:
-        title: "Sign in"
-        sign_in: "Sign in"
-        sign_up: "Sign up"
         forgot_password: "Forgot password?"
     
     users:
@@ -145,9 +129,18 @@ en:
         title: "Editing profile"
       index:
         title: "Users"
-      new:
-        title: "Sign up"
-        buttons:
-          sign_up: "Sign up"
       show:
         real_name: "Nome reale:"
+    
+  formtastic:
+    labels:
+      arena:
+        public: "Allow other people to organize rounds in this arena"
+      round:
+        people: "Number of people"
+    hints:
+      round:
+        description: "This is an optional description for your round"
+    actions:
+      create: "Create %{model}"
+      update: "Save changes"

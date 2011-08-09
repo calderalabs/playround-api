@@ -1,0 +1,31 @@
+@import 'partials/base';
+@import 'blueprint/reset';
+
+a {
+  $normal-color: lighten($base-purple, 20%);
+  @include link-colors($normal-color, $base-fucsia, $normal-color, $normal-color, $normal-color);
+  text-decoration: none;
+  font-weight: bold !important;
+}
+
+body {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif !important;
+  background-color: black;
+}
+
+.container {
+  @include container;
+}
+
+body > footer {
+  @include background-image(linear-gradient(#333, black)); 
+  font-size: 15px;
+  color: #555;
+  text-align: center;
+  line-height: 100px;
+}
+
+.vertical {
+  display: table-cell;
+  vertical-align: middle;
+}

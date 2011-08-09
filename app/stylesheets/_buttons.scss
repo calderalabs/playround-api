@@ -1,0 +1,50 @@
+@import 'partials/base';
+
+$default-button-text-color: black;
+$default-button-color: $base-orange;
+$default-button-text-size: 18px;
+$default-button-padding: 15px;
+
+@mixin button($color: $default-button-color, $text-color: $default-button-text-color, $text-size: $default-button-text-size, $padding: $default-button-padding) {
+  @include inline-block;
+  @include border-radius(10px);
+  @include single-box-shadow(darken($color, 10%), 0, 0, 5px, 0);
+  @include background-image(linear-gradient(lighten($color, 40%), $color));
+  
+  $blur: 5px;
+  
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  padding: $padding;
+  margin: $blur;
+  font-size: $text-size;
+  color: $text-color;
+  border: 1px solid darken($color, 5%);
+  cursor: pointer;
+  
+  &:hover {
+    @include single-box-shadow(darken($color, 10%), 0, 0, $blur, 0, inset);
+  }
+
+  &[disabled] {
+    @include background-image(linear-gradient(lighten(#cccccc, 40%), #cccccc));
+    @include single-box-shadow(darken(#cccccc, 10%), 0, 0, $blur, 0);
+    
+    border: 1px solid darken(#cccccc, 5%);
+    cursor: default;
+    color: black;
+    
+    &:hover {
+      @include single-box-shadow(darken($color, 10%), 0, 0, 0);
+    }
+  }
+}
+
+@mixin fixed-button($width, $height, $color: $default-button-color, $text-color: $default-button-text-color, $text-size: $default-button-text-size) {
+  @include button($color, $text-color, $text-size, 0);
+  
+  width: $width;
+  height: $height;
+  line-height: $height;
+}

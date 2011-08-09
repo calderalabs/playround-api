@@ -1,0 +1,252 @@
+/* Color palette */
+/* Color palette */
+/* line 4, ../../../app/stylesheets/rounds/index.scss */
+section.results > ul > li {
+  margin: 20px 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+/* line 9, ../../../app/stylesheets/rounds/index.scss */
+section.results > ul > li:last-child {
+  border-bottom: 0;
+}
+
+/* line 14, ../../../app/stylesheets/rounds/index.scss */
+article.round {
+  overflow: hidden;
+  *zoom: 1;
+}
+/* line 17, ../../../app/stylesheets/rounds/index.scss */
+article.round .date {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 110px;
+  text-align: center;
+}
+/* line 147, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html article.round .date {
+  overflow-x: hidden;
+}
+/* line 22, ../../../app/stylesheets/rounds/index.scss */
+article.round .date > div {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+/* line 27, ../../../app/stylesheets/rounds/index.scss */
+article.round .date > div .month {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  background-color: #eb04a1;
+  color: white;
+  padding: 2px 5px;
+}
+/* line 36, ../../../app/stylesheets/rounds/index.scss */
+article.round .date > div .day {
+  font-size: 25px;
+}
+/* line 42, ../../../app/stylesheets/rounds/index.scss */
+article.round .game {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 170px;
+  text-align: center;
+}
+/* line 147, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html article.round .game {
+  overflow-x: hidden;
+}
+/* line 47, ../../../app/stylesheets/rounds/index.scss */
+article.round .game a {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 5px 0 #e6e6e6;
+  -webkit-box-shadow: 0 0 5px 0 #e6e6e6;
+  -o-box-shadow: 0 0 5px 0 #e6e6e6;
+  box-shadow: 0 0 5px 0 #e6e6e6;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #ffffff));
+  background-image: -webkit-linear-gradient(#ffffff, #ffffff);
+  background-image: -moz-linear-gradient(#ffffff, #ffffff);
+  background-image: -o-linear-gradient(#ffffff, #ffffff);
+  background-image: -ms-linear-gradient(#ffffff, #ffffff);
+  background-image: linear-gradient(#ffffff, #ffffff);
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  padding: 0;
+  margin: 5px;
+  font-size: 18px;
+  color: black;
+  border: 1px solid #f2f2f2;
+  cursor: pointer;
+  width: 90%;
+  height: 70px;
+  line-height: 70px;
+}
+/* line 7, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+article.round .game a {
+  *display: inline;
+}
+/* line 26, ../../../app/stylesheets/_buttons.scss */
+article.round .game a:hover {
+  -moz-box-shadow: inset 0 0 5px 0 #e6e6e6;
+  -webkit-box-shadow: inset 0 0 5px 0 #e6e6e6;
+  -o-box-shadow: inset 0 0 5px 0 #e6e6e6;
+  box-shadow: inset 0 0 5px 0 #e6e6e6;
+}
+/* line 30, ../../../app/stylesheets/_buttons.scss */
+article.round .game a[disabled] {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
+  background-image: -webkit-linear-gradient(#ffffff, #cccccc);
+  background-image: -moz-linear-gradient(#ffffff, #cccccc);
+  background-image: -o-linear-gradient(#ffffff, #cccccc);
+  background-image: -ms-linear-gradient(#ffffff, #cccccc);
+  background-image: linear-gradient(#ffffff, #cccccc);
+  -moz-box-shadow: 0 0 5px 0 #b3b3b3;
+  -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
+  -o-box-shadow: 0 0 5px 0 #b3b3b3;
+  box-shadow: 0 0 5px 0 #b3b3b3;
+  border: 1px solid #bfbfbf;
+  cursor: default;
+  color: black;
+}
+/* line 38, ../../../app/stylesheets/_buttons.scss */
+article.round .game a[disabled]:hover {
+  -moz-box-shadow: 0 0 0 #e6e6e6;
+  -webkit-box-shadow: 0 0 0 #e6e6e6;
+  -o-box-shadow: 0 0 0 #e6e6e6;
+  box-shadow: 0 0 0 #e6e6e6;
+}
+/* line 53, ../../../app/stylesheets/rounds/index.scss */
+article.round .subscribers {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 530px;
+}
+/* line 147, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html article.round .subscribers {
+  overflow-x: hidden;
+}
+/* line 56, ../../../app/stylesheets/rounds/index.scss */
+article.round .subscribers .remaining-spot {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  width: 35px;
+  height: 35px;
+  border: 1px dotted #ccc;
+}
+/* line 7, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+article.round .subscribers .remaining-spot {
+  *display: inline;
+}
+/* line 66, ../../../app/stylesheets/rounds/index.scss */
+article.round .actions {
+  text-align: right;
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 110px;
+}
+/* line 147, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html article.round .actions {
+  overflow-x: hidden;
+}
+/* line 70, ../../../app/stylesheets/rounds/index.scss */
+article.round .actions a {
+  margin: 5px;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 5px 0 #b9037f;
+  -webkit-box-shadow: 0 0 5px 0 #b9037f;
+  -o-box-shadow: 0 0 5px 0 #b9037f;
+  box-shadow: 0 0 5px 0 #b9037f;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #febde9), color-stop(100%, #eb04a1));
+  background-image: -webkit-linear-gradient(#febde9, #eb04a1);
+  background-image: -moz-linear-gradient(#febde9, #eb04a1);
+  background-image: -o-linear-gradient(#febde9, #eb04a1);
+  background-image: -ms-linear-gradient(#febde9, #eb04a1);
+  background-image: linear-gradient(#febde9, #eb04a1);
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px;
+  margin: 5px;
+  font-size: 18px;
+  color: white;
+  border: 1px solid #d20490;
+  cursor: pointer;
+}
+/* line 7, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+article.round .actions a {
+  *display: inline;
+}
+/* line 26, ../../../app/stylesheets/_buttons.scss */
+article.round .actions a:hover {
+  -moz-box-shadow: inset 0 0 5px 0 #b9037f;
+  -webkit-box-shadow: inset 0 0 5px 0 #b9037f;
+  -o-box-shadow: inset 0 0 5px 0 #b9037f;
+  box-shadow: inset 0 0 5px 0 #b9037f;
+}
+/* line 30, ../../../app/stylesheets/_buttons.scss */
+article.round .actions a[disabled] {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
+  background-image: -webkit-linear-gradient(#ffffff, #cccccc);
+  background-image: -moz-linear-gradient(#ffffff, #cccccc);
+  background-image: -o-linear-gradient(#ffffff, #cccccc);
+  background-image: -ms-linear-gradient(#ffffff, #cccccc);
+  background-image: linear-gradient(#ffffff, #cccccc);
+  -moz-box-shadow: 0 0 5px 0 #b3b3b3;
+  -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
+  -o-box-shadow: 0 0 5px 0 #b3b3b3;
+  box-shadow: 0 0 5px 0 #b3b3b3;
+  border: 1px solid #bfbfbf;
+  cursor: default;
+  color: black;
+}
+/* line 38, ../../../app/stylesheets/_buttons.scss */
+article.round .actions a[disabled]:hover {
+  -moz-box-shadow: 0 0 0 #b9037f;
+  -webkit-box-shadow: 0 0 0 #b9037f;
+  -o-box-shadow: 0 0 0 #b9037f;
+  box-shadow: 0 0 0 #b9037f;
+}

@@ -1,0 +1,83 @@
+@import 'partials/base';
+@import 'buttons';
+
+$header-height: 60px;
+
+#update-location-form {
+  display: none;
+}
+
+nav li {
+  display: inline;
+  padding: 10px;
+
+  a {
+    @include link-colors(white, $base-orange, white, white, white);
+  }
+}
+
+#session {
+  background-color: darken($base-purple, 5%);
+  text-align: right;
+  font-size: 14px;
+  padding: 10px;
+
+  li {
+    border-right: 1px dotted #cccccc;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+body > header {
+  background-color: $base-purple;
+  height: $header-height;
+  line-height: $header-height;
+  
+  nav {
+    @include column($blueprint-grid-columns / 2, true);
+    text-align: right;
+  }
+}
+
+#logo {
+  @include column($blueprint-grid-columns / 2);
+  
+  img {
+    vertical-align: middle;
+  }
+}
+
+#content {
+  background-color: white;
+}
+
+section.results > header {
+  $height: 50px;
+  
+  padding: 20px 0;
+  border-bottom: 1px dotted #cccccc;
+  height: $height;
+  
+  h1 {
+    @include column($blueprint-grid-columns / 2);
+    font-size: 30px;
+    line-height: $height;
+    vertical-align: middle;
+    font-weight: bold;
+  }
+  
+  div {
+    @include column($blueprint-grid-columns / 2, true);
+    text-align: right;
+  }
+  
+  a {
+    @include button;
+    padding: 0 $default-button-padding;
+    height: $height;
+    line-height: $height;
+  }
+}

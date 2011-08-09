@@ -3,11 +3,14 @@ class RoundsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @rounds = Round.approved.where(:arenas => { :town_woeid => current_location.woeid }).joins(:arena) if located?
-    @rounds = @rounds.find_by_sql("SELECT * FROM rounds INNER JOIN subscriptions ON rounds.id = subscriptions.round_id 
-                                                        INNER JOIN taggings ON taggings.taggable_id = subscriptions.user_id AND taggings.tag_id IN 
-                                                        (SELECT tag_id FROM taggings WHERE taggable_id = #{current_user.id})")
-    
+    @rounds = Round.approved
+    @rounds = @rounds.where(:arenas => { :town_woeid => current_location.woeid }).joins(:arena) if located?
+    @rounds = @rounds.joins(:subscriptions).
+              joins("INNER JOIN taggings ON subscriptions.user_id = taggings.taggable_id").
+              where("taggings.tag_id IN (SELECT tag_id FROM taggings WHERE taggings.taggable_id = #{current_user.id}) AND taggings.context = 'interests'").
+              group("rounds.id").
+              select("rounds.*, COUNT(*) AS interests_count").
+              order("interests_count") if signed_in?
     respond_to do |format|
       format.html
       format.json  { render :json => @rounds }

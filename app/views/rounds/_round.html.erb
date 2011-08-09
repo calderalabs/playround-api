@@ -1,0 +1,46 @@
+<article class="round">
+  <section class="date">
+    <div>
+      <div class="month"><%= t('date.abbr_month_names')[round.date.month] %></div>
+      <div class="day"><%= "%02d" % round.date.day %></div>
+      <div class="wday"><%= t('date.day_names')[round.date.wday] %></div>
+    </div>
+  </section>
+  
+  <section class="game">
+    <%= link_to round.game.name, game_path(round.game) %>
+  </section>
+  
+  <section class="subscribers">
+    <header>
+      <h1>
+        <%= link_to round.arena.name, arena_path(round.arena) %>
+        (at <%= "#{round.date.hour}:#{round.date.min}" %>)
+      </h1>
+      
+      <h2><%= round_status_message(round) %></h2>
+    </header>
+    
+    <ul>
+      <% round.subscribers.each do |subscriber| %>
+        <li><%= image_tag subscriber.avatar.url(:thumb) %></li>
+      <% end %>
+      
+      <% round.remaining_spots.times do %>
+        <li class="remaining-spot"></li>
+      <% end %>
+    </ul>
+  </section>
+
+  <section class="actions">
+    <% if can? :read, round %>
+      <%= link_to t('views.base.show'), round %>
+    <% end %>
+
+    <% unless round.past? %>
+      <section class="spots">
+        <%= t('views.rounds.round.remaining_spots', :count => round.remaining_spots) %>
+      </section>
+    <% end %>
+  </section>
+</article>

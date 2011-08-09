@@ -1,0 +1,79 @@
+@import 'partials/base';
+@import 'buttons';
+
+$header-height: 130px;
+
+#logo {
+  @include column($blueprint-grid-columns / 2);
+  line-height: $header-height;
+  
+  img {
+    vertical-align: middle;
+  }
+}
+
+body > header {
+  background-color: $base-purple;
+  height: $header-height;
+  text-align: center;
+  
+  h1 {
+    @include column($blueprint-grid-columns / 2, true);
+    font-weight: bold;
+    line-height: $header-height;
+    font-size: 30px;
+    color: white;
+    
+    em {
+      font-style: normal; 
+      color: $base-orange;
+    }
+  }
+}
+
+#content {
+  @include background-image(linear-gradient(#ffffff, lighten($base-purple, 65%)));
+}
+
+#signin {
+  @include column($blueprint-grid-columns / 2);
+  @include adjust-font-size-to(16px);
+
+  form {
+    label {
+      font-weight: bold;
+    }
+    
+    input {
+      font-size: 16px;
+      display: block;
+      padding: 10px;
+      margin: 20px auto;
+    
+      &[type=submit] {
+        @include fixed-button(190px, 60px);
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+#description {
+  @include column($blueprint-grid-columns / 2, true);
+  
+  h1 {
+    @include adjust-font-size-to(45px);
+    @include margin-trailer;
+    font-weight: bold;
+  }
+  
+  a {
+    @include button($base-fucsia, white, $default-button-text-size, 20px);
+  }
+}
+
+#signin, #description {
+  height: 500px;
+  display: table;
+  text-align: center;
+}

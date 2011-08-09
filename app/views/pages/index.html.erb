@@ -1,56 +1,48 @@
-<div id="header">
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'pages/index' %>
+<% end %>
+
+<header>
   <div class="container">
-    <div class="left-column">
+    <div id="logo">
       <%= image_tag 'logo.png' %>
     </div>
-
-    <div class="right-column">
-      <h2><%= t('views.pages.index.title1') %> <em><%= t('views.pages.index.title2') %></em></h2>
-    </div>
+    
+    <h1><%= t('views.pages.index.slogan1') %> <em><%= t('views.pages.index.slogan2') %></em></h1>
   </div>
-</div>
+</header>
 
 <div id="content">
   <div class="container">
-    <div class="left-column">
-      <%= form_for @user, :html => { :id => 'signup-form' } do |form| %>
+    <section id="signin">
+      <div class="vertical">
+        <%= form_for :session, :url => session_path do |form| %>
           <%= form.label :email %>
-          <%= form.text_field :email, :autocomplete => 'off' %>
+          <%= form.text_field :email %>
           <%= form.label :password %>
-          <%= form.password_field :password, :autocomplete => 'off' %>
+          <%= form.password_field :password %>
 
-        <p><%= t('views.pages.index.already_rounder') %> <%= link_to t('views.pages.index.sign_in'), sign_in_url %></p>
-      
-        <%= form.submit t('views.pages.index.sign_up'), :id => 'signup-button' %>
-      <% end %>
-    </div>
+          <p><%= t('views.pages.index.no_account') %> <%= link_to "#{t('views.base.sign_up')}!", sign_up_url %></p>
     
-    <div class="right-column">
-      <h1>
-        <%= t('views.pages.index.slogan1') %><br />
-        <%= t('views.pages.index.slogan2') %><br />
-        <%= t('views.pages.index.slogan3') %>
-      </h1>
-    
-      <%= link_to t('views.pages.index.view_rounds_around_you'), rounds_path, :id => 'rounds-button' %>
-    </div>
+          <%= form.submit "#{t('views.base.sign_in')}!" %>
+        <% end %>
+      </div>
+    </section>
+  
+    <section id="description">
+      <div class="vertical">
+        <h1>
+          <%= t('views.pages.index.description1') %><br />
+          <%= t('views.pages.index.description2') %><br />
+          <%= t('views.pages.index.description3') %>
+        </h1>
+  
+        <%= link_to t('views.pages.index.view_rounds'), rounds_path %>
+      </div>
+    </section>
   </div>
 </div>
 
-<div id="footer">
-  <p><%= t('views.layouts.footer.title')%></p>
-</div>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    if('placeholder' in document.createElement('input')) {
-      $("#user_email, #user_password").each(function(i, f) {
-        var field = $(f);
-        var label = $("label[for=" + field.attr('id') + "]");
-
-        label.hide();
-        field.attr('placeholder', label.text());
-      });
-    }
-  });
-</script>
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'home' %>
+<% end %>

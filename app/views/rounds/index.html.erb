@@ -1,62 +1,23 @@
-<div id="title">
-  <h1>Rounds</h1>
-  <%= link_to(t('views.rounds.index.start_new'), new_round_path) %>
-</div>
-
-<% if @rounds.empty? %>
-  <p class="empty-list-message"><%= t('views.rounds.index.empty_list') %></p>
-<% else %>
-  <ul id="rounds">
-  <% @rounds.each do |round| %>
-    <li class="round">
-      <div class="date left-column">
-        <div class="month">
-          <%= t('date.abbr_month_names')[round.date.month] %>
-        </div>
-        <div class="day">
-          <%= "%02d" % round.date.day %>
-        </div>
-        <div class="wday">
-          <%= t('date.day_names')[round.date.wday] %>
-        </div>
-      </div>
-      <div class="game left-column">
-        <%= link_to round.game.name, game_path(round.game) %>
-      </div>
-      <div class="subscribers left-column">
-        <div class="details">
-          <h2 class="arena">
-            <%= link_to round.arena.name, arena_path(round.arena) %> <%= " (at #{round.date.hour}:#{round.date.min})" %>
-          </h2>
-          <h3>
-            <%= round_status_message(round) %>
-          </h3>
-        <ul>
-            <% round.subscribers.each do |subscriber| %>
-              <li><%= image_tag subscriber.avatar.url(:thumb), :width => '35', :height => '35' %></li>
-            <% end %>
-            <% round.remaining_spots.times do %>
-              <li><div class="remaining-spot"></div></li>
-            <% end %>
-          </li>
-        </ul>
-        </div>
-      </div>
-
-      <div class="actions right-column">
-        <% if can? :read, round %>
-          <%= link_to t('views.buttons.show'), round %>
-        <% end %>
-
-        <% unless round.past? %>
-          <div class="spots">
-            <%= t('views.rounds.number_of_spots_left', :count => round.remaining_spots) %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="clear"></div>
-    </li>
-  <% end %>
-  </ul>
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'rounds/index' %>
 <% end %>
+
+<section class="results">
+  <header>
+    <h1>Rounds</h1>
+    
+    <div>
+      <%= link_to(t('views.rounds.index.new'), new_round_path) %>
+    </div>
+  </header>
+
+  <% if @rounds.empty? %>
+    <p class="empty-list-message"><%= t('views.rounds.index.empty') %></p>
+  <% else %>
+    <ul>
+      <% @rounds.each do |round| %>
+        <li><%= render round %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

@@ -47,38 +47,7 @@ $main-fucsia: #eb04a1;
   
 }
 
-@mixin button($width, $height, $color, $text-color) {
-  text-decoration: none;
-  font-weight: bold;
-  text-align: center;
-  display: block;
-  height: $height;
-  width: $width;
-  @include rounded-corners(10px);
-  line-height: $height;
-  color: $text-color;
-  
-  &:hover {
-    @include box-shadow-inset(0,0, 5px, 0, darken($color, 10%));
-  }
 
-  @include linear-gradient(lighten($color, 40%), $color);
-  @include box-shadow(0,0, 5px, 0, darken($color, 10%));
-  border: 1px solid darken($color, 5%);
-  cursor: pointer;
-  
-  &[disabled] {
-    border: 1px solid darken(#cccccc, 5%);
-    cursor: default;
-    @include linear-gradient(lighten(#cccccc, 40%), #cccccc);
-    @include box-shadow(0,0, 5px, 0, darken(#cccccc, 10%));
-    color: black;
-    
-    &:hover {
-      @include box-shadow-inset(0, 0, 0, 0, 0);
-    }
-  }
-}
 
 @mixin normal-box-shadow {
   border: 1px solid #ccc;

@@ -1,9 +1,7 @@
 <%= content_for :content do %>
-  <div id="title">
-    <h1>Dashboard</h1>
-  </div>
+  <h1>Dashboard</h1>
   
-  <%= yield :dashboard_content %>
+  <%= yield %>
 <% end %>
 
 <%= render :file => 'layouts/application' %>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>" xml:lang="<%= I18n.locale %>">
+  <head>
+    <meta content="width=1044" name="viewport" />
+    <meta charset="utf-8">
+    <%= csrf_meta_tag %>
+    
+    <title><%= content_for?(:title) ? yield(:title) : t('views.layouts.base.title') %></title>
+    
+    <%= stylesheet_link_tag 'base' %>
+    <!--[if lt IE 8]>
+      <%= stylesheet_link_tag 'ie' %>
+    <![endif]-->
+    <%= yield :stylesheets %>
+  </head>
+  
+  <body>
+    <% unless flash.empty? %>
+      <div id="flash">
+        <div class="container">
+          <% flash.each do |key, value| -%>
+            <div id="flash_<%= key %>"><%=h value %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  
+    <%= content_for?(:body) ? yield(:body) : yield %>
+
+    <footer>
+      <div class="container">
+        <p><%= t('views.layouts.base.copyright') %></p>
+      </div>
+    </footer>
+    
+    <%= javascript_include_tag 'jquery' %>
+    <%= javascript_include_tag 'jquery-ui' %>
+    <%= javascript_include_tag 'jquery_ujs' %>
+    <%= yield :javascripts %>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+/* Color palette */
+/* Color palette */
+/* line 6, ../../app/stylesheets/application.scss */
+#update-location-form {
+  display: none;
+}
+
+/* line 10, ../../app/stylesheets/application.scss */
+nav li {
+  display: inline;
+  padding: 10px;
+}
+/* line 14, ../../app/stylesheets/application.scss */
+nav li a {
+  color: white;
+}
+/* line 18, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+nav li a:visited {
+  color: white;
+}
+/* line 21, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+nav li a:focus {
+  color: white;
+}
+/* line 24, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+nav li a:hover {
+  color: #ffd300;
+}
+/* line 27, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+nav li a:active {
+  color: white;
+}
+
+/* line 19, ../../app/stylesheets/application.scss */
+#session {
+  background-color: #250046;
+  text-align: right;
+  font-size: 14px;
+  padding: 10px;
+}
+/* line 25, ../../app/stylesheets/application.scss */
+#session li {
+  border-right: 1px dotted #cccccc;
+}
+/* line 28, ../../app/stylesheets/application.scss */
+#session li:last-child {
+  border-right: 0;
+}
+
+/* line 34, ../../app/stylesheets/application.scss */
+body > header {
+  background-color: #33005f;
+  height: 60px;
+  line-height: 60px;
+}
+/* line 39, ../../app/stylesheets/application.scss */
+body > header nav {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 470px;
+  text-align: right;
+}
+/* line 147, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html body > header nav {
+  overflow-x: hidden;
+}
+
+/* line 45, ../../app/stylesheets/application.scss */
+#logo {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 470px;
+}
+/* line 147, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #logo {
+  overflow-x: hidden;
+}
+/* line 48, ../../app/stylesheets/application.scss */
+#logo img {
+  vertical-align: middle;
+}
+
+/* line 53, ../../app/stylesheets/application.scss */
+#content {
+  background-color: white;
+}
+
+/* line 57, ../../app/stylesheets/application.scss */
+section.results > header {
+  padding: 20px 0;
+  border-bottom: 1px dotted #cccccc;
+  height: 50px;
+}
+/* line 64, ../../app/stylesheets/application.scss */
+section.results > header h1 {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 470px;
+  font-size: 30px;
+  line-height: 50px;
+  vertical-align: middle;
+  font-weight: bold;
+}
+/* line 147, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html section.results > header h1 {
+  overflow-x: hidden;
+}
+/* line 72, ../../app/stylesheets/application.scss */
+section.results > header div {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 470px;
+  text-align: right;
+}
+/* line 147, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html section.results > header div {
+  overflow-x: hidden;
+}
+/* line 77, ../../app/stylesheets/application.scss */
+section.results > header a {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 5px 0 #cca900;
+  -webkit-box-shadow: 0 0 5px 0 #cca900;
+  -o-box-shadow: 0 0 5px 0 #cca900;
+  box-shadow: 0 0 5px 0 #cca900;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff6cc), color-stop(100%, #ffd300));
+  background-image: -webkit-linear-gradient(#fff6cc, #ffd300);
+  background-image: -moz-linear-gradient(#fff6cc, #ffd300);
+  background-image: -o-linear-gradient(#fff6cc, #ffd300);
+  background-image: -ms-linear-gradient(#fff6cc, #ffd300);
+  background-image: linear-gradient(#fff6cc, #ffd300);
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px;
+  margin: 5px;
+  font-size: 18px;
+  color: black;
+  border: 1px solid #e6be00;
+  cursor: pointer;
+  padding: 0 15px;
+  height: 50px;
+  line-height: 50px;
+}
+/* line 7, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+section.results > header a {
+  *display: inline;
+}
+/* line 26, ../../app/stylesheets/_buttons.scss */
+section.results > header a:hover {
+  -moz-box-shadow: inset 0 0 5px 0 #cca900;
+  -webkit-box-shadow: inset 0 0 5px 0 #cca900;
+  -o-box-shadow: inset 0 0 5px 0 #cca900;
+  box-shadow: inset 0 0 5px 0 #cca900;
+}
+/* line 30, ../../app/stylesheets/_buttons.scss */
+section.results > header a[disabled] {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
+  background-image: -webkit-linear-gradient(#ffffff, #cccccc);
+  background-image: -moz-linear-gradient(#ffffff, #cccccc);
+  background-image: -o-linear-gradient(#ffffff, #cccccc);
+  background-image: -ms-linear-gradient(#ffffff, #cccccc);
+  background-image: linear-gradient(#ffffff, #cccccc);
+  -moz-box-shadow: 0 0 5px 0 #b3b3b3;
+  -webkit-box-shadow: 0 0 5px 0 #b3b3b3;
+  -o-box-shadow: 0 0 5px 0 #b3b3b3;
+  box-shadow: 0 0 5px 0 #b3b3b3;
+  border: 1px solid #bfbfbf;
+  cursor: default;
+  color: black;
+}
+/* line 38, ../../app/stylesheets/_buttons.scss */
+section.results > header a[disabled]:hover {
+  -moz-box-shadow: 0 0 0 #cca900;
+  -webkit-box-shadow: 0 0 0 #cca900;
+  -o-box-shadow: 0 0 0 #cca900;
+  box-shadow: 0 0 0 #cca900;
+}

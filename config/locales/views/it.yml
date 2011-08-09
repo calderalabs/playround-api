@@ -54,8 +54,9 @@ it:
     
     layouts:
       title: "Playround | Smetti di condividere. Comincia ad essere."
-      footer:
-        title: "Copyright © Playround 2011. Tutti i diritti riservati."
+      base:
+        footer:
+          copyright: "Copyright © Playround 2011. Tutti i diritti riservati."
       application:
         unknown_location: 'Luogo sconosciuto'
         dashboard: "Dashboard"
@@ -73,8 +74,8 @@ it:
         sign_in: "Accedi!"
         sign_up: "Registrati!"
         already_rounder: "Sei già un rounder?"
-        slogan1: "Scegli un gioco"
-        slogan2: "Scegli un posto"
+        slogan1: "Scegli un interesse"
+        slogan2: "Scegli un gioco"
         slogan3: "Incontra nuove persone"
         view_rounds_around_you: "Vedi i rounds vicino a te!"
         
