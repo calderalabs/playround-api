@@ -4,6 +4,9 @@ class RoundsController < ApplicationController
 
   def index
     @rounds = Round.approved.where(:arenas => { :town_woeid => current_location.woeid }).joins(:arena) if located?
+    @rounds = @rounds.find_by_sql("SELECT * FROM rounds INNER JOIN subscriptions ON rounds.id = subscriptions.round_id 
+                                                        INNER JOIN taggings ON taggings.taggable_id = subscriptions.user_id AND taggings.tag_id IN 
+                                                        (SELECT tag_id FROM taggings WHERE taggable_id = #{current_user.id})")
     
     respond_to do |format|
       format.html

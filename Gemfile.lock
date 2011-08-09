@@ -1,4 +1,18 @@
 GIT
+  remote: git://github.com/eugeniodepalo/rails3-jquery-autocomplete.git
+  revision: 69a41b3c60c67c84386f1bcdc823fa40137040fe
+  specs:
+    rails3-jquery-autocomplete (0.9.0)
+      rails (~> 3.0)
+
+GIT
+  remote: git://github.com/justinfrench/formtastic.git
+  revision: 29c45b9906cd26fa8de741025bb13ec33c3185e9
+  specs:
+    formtastic (2.0.0.rc3)
+      rails (~> 3.0)
+
+GIT
   remote: git://github.com/thoughtbot/shoulda-matchers.git
   revision: f1baf025d64389d4d1e90262d415c9ad55c5ba1a
   specs:
@@ -34,6 +48,7 @@ GEM
       activemodel (= 3.0.7)
       activesupport (= 3.0.7)
     activesupport (3.0.7)
+    acts-as-taggable-on (2.0.6)
     addressable (2.2.6)
     arel (2.0.10)
     aws-s3 (0.6.2)
@@ -75,10 +90,6 @@ GEM
     eventmachine (0.12.10)
     factory_girl (2.0.1)
     ffi (1.0.9)
-    formtastic (1.2.4)
-      actionpack (>= 2.3.7)
-      activesupport (>= 2.3.7)
-      i18n (~> 0.4)
     formtastic_datepicker_inputs (1.0.0)
       actionpack (>= 2.3.7)
       activesupport (>= 2.3.7)
@@ -127,8 +138,6 @@ GEM
       activesupport (= 3.0.7)
       bundler (~> 1.0)
       railties (= 3.0.7)
-    rails3-jquery-autocomplete (0.9.0)
-      rails (~> 3.0)
     railties (3.0.7)
       actionpack (= 3.0.7)
       activesupport (= 3.0.7)
@@ -178,6 +187,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   aws-s3
   cancan
   capybara
@@ -185,7 +195,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   factory_girl
-  formtastic
+  formtastic!
   formtastic_datepicker_inputs
   geocoder
   geoplanet
@@ -194,7 +204,7 @@ DEPENDENCIES
   paperclip
   pickle
   rails (= 3.0.7)
-  rails3-jquery-autocomplete
+  rails3-jquery-autocomplete!
   rake (~> 0.8.7)
   rmagick
   rspec-rails
