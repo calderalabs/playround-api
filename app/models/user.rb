@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include Clearance::User
   
+  acts_as_voter
   acts_as_taggable_on :interests
   
   attr_accessible :display_name, :real_name, :email, :password, :avatar, :town_woeid, :show_email, :language

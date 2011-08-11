@@ -1,6 +1,6 @@
 class Round < ActiveRecord::Base 
   attr_accessible :date, :people, :arena_id, :game_id, :description
-  attr_editable :state, :description
+  attr_editable :state, :description, :winner_id
   
   after_initialize do
     self.date ||= Time.now
@@ -93,6 +93,10 @@ class Round < ActiveRecord::Base
 
   def past?
     Time.now > date
+  end
+  
+  def won?
+    !!self.winner_id
   end
   
   def subscription_for(user)
