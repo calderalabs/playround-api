@@ -5,12 +5,16 @@ class RoundsController < ApplicationController
   def index
     @rounds = Round.approved
     @rounds = @rounds.where(:arenas => { :town_woeid => current_location.woeid }).joins(:arena) if located?
-    @rounds = @rounds.joins(:subscriptions).
-              joins("INNER JOIN taggings ON subscriptions.user_id = taggings.taggable_id").
-              where("taggings.tag_id IN (SELECT tag_id FROM taggings WHERE taggings.taggable_id = #{current_user.id}) AND taggings.context = 'interests'").
-              group("rounds.id").
-              select("rounds.*, COUNT(*) AS interests_count").
-              order("interests_count") if signed_in?
+    @rounds = @rounds.select("rounds.*, interests_count").
+              joins("LEFT OUTER JOIN (" +
+                Round.joins(:subscriptions).
+                joins("INNER JOIN taggings ON subscriptions.user_id = taggings.taggable_id").
+                where("taggings.tag_id IN (SELECT tag_id FROM taggings WHERE taggings.taggable_id = #{current_user.id}) AND taggings.context = 'interests'").
+                select("rounds.id AS inner_round_id, COUNT(*) as interests_count").
+                group("rounds.id").to_sql +
+              ") ON rounds.id = inner_round_id").
+              order("interests_count DESC") if signed_in?
+              
     respond_to do |format|
       format.html
       format.json  { render :json => @rounds }
