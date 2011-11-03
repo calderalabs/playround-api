@@ -1,0 +1,9 @@
+development:
+  access_key_id: YOURAPIKEY
+  secret_access_key: YOURAPIKEY
+  bucket: 'playround-development'
+
+production:
+  access_key_id: YOURAPIKEY
+  secret_access_key: YOURAPIKEY
+  bucket: 'playround'

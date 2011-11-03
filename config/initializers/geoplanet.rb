@@ -1,0 +1,1 @@
+GeoPlanet.appid = "YOURGEOPLANETAPPID"
