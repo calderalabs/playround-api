@@ -7,3 +7,5 @@ tmp/
 *.tmproj
 dump.rdb
 public/system
+*.un~
+*.swp
