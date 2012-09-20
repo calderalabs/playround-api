@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   has_many :arenas
   has_many :comments
   has_many :games
-  has_many :votes
   has_one :quicktour
   
   validates_presence_of :display_name
