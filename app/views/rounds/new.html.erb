@@ -2,18 +2,20 @@
 
 <%= content_for :javascripts do %>
   <script type="text/javascript" charset="utf-8">
-    
+    $(document).ready(function() {
+      $('#round_date').datepicker();
+    })
   </script>
 <% end %>
 
 <%= simple_form_for(@round) do |f| %>
   <%= f.hidden_field :game_id %>
-  <%= f.input :game, :url => games_path, :value => @round.game ? @round.game.name : '', 
+  <%= f.input :game, :name => '', :url => games_path, :value => @round.game ? @round.game.name : '', 
                               'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
                               :id => 'round_game',
                               :update_elements => { :id => '#round_game_id' } %></li>
   <%= f.hidden_field :arena_id %>
-  <%= f.input :arena, :url => arenas_path, :value => @round.arena ? @round.arena.name : '',
+  <%= f.input :arena, :name => '', :url => arenas_path, :value => @round.arena ? @round.arena.name : '',
                               'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
                               :id => 'round_arena',
                               :update_elements => { :id => '#round_arena_id' } %></li>
