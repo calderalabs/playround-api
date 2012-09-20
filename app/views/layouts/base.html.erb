@@ -8,9 +8,6 @@
     <title><%= content_for?(:title) ? yield(:title) : t('views.layouts.base.title') %></title>
     
     <%= stylesheet_link_tag 'base' %>
-    <!--[if lt IE 8]>
-      <%= stylesheet_link_tag 'ie' %>
-    <![endif]-->
     <%= yield :stylesheets %>
   </head>
   
@@ -34,7 +31,6 @@
     </footer>
     
     <%= javascript_include_tag 'jquery' %>
-    <%= javascript_include_tag 'jquery-ui' %>
     <%= javascript_include_tag 'jquery_ujs' %>
     <%= yield :javascripts %>
   </body>

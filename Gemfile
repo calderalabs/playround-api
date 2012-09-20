@@ -7,6 +7,7 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'bootstrap-sass'
+  gem 'compass-rails'
 end
 
 gem 'sqlite3'
@@ -23,7 +24,6 @@ gem 'aws-s3'
 gem 'thin'
 gem 'state_machine'
 gem 'acts-as-taggable-on'
-gem 'compass'
 gem 'adjust_string', :path => './lib/adjust_string'
 gem 'attr_editable', :path => './lib/attr_editable'
 gem 'validates_url_format_of', :path => './lib/validates_url_format_of'
