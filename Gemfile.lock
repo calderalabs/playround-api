@@ -1,3 +1,18 @@
+PATH
+  remote: ./lib/adjust_string
+  specs:
+    adjust_string (0.0.1)
+
+PATH
+  remote: ./lib/attr_editable
+  specs:
+    attr_editable (0.0.1)
+
+PATH
+  remote: ./lib/validates_url_format_of
+  specs:
+    validates_url_format_of (0.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -205,6 +220,8 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
+  adjust_string!
+  attr_editable!
   aws-s3
   bootstrap-sass
   cancan
@@ -232,3 +249,4 @@ DEPENDENCIES
   state_machine
   thin
   uglifier
+  validates_url_format_of!

@@ -1,7 +1,8 @@
 class Subscription < ActiveRecord::Base
+  include Voteable
+  
   attr_accessible :round_id
   
-  acts_as_voteable
   belongs_to :user
   belongs_to :round
   
