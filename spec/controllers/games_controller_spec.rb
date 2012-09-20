@@ -3,7 +3,7 @@ require 'spec_helper'
 describe GamesController do
   before(:each) do
     @game = FactoryGirl.create :game
-    @controller.sign_in @game.user
+    sign_in_as @game.user
   end
 
   it "should get index" do

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe CommentsController do
   before(:each) do
     @comment = FactoryGirl.create :comment
-    @controller.sign_in @comment.user
+    sign_in_as @comment.user
   end
 
   it "should create comment" do

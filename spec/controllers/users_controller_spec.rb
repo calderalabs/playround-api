@@ -3,7 +3,7 @@ require 'spec_helper'
 describe UsersController do
   before(:each) do
     @user = FactoryGirl.create :user
-    @controller.sign_in @user
+    sign_in_as @user
   end
   
   it "should always get show user" do

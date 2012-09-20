@@ -16,7 +16,7 @@ describe RoundsController do
   end
 
   it "should display round creation page when logged in" do
-    @controller.sign_in @user
+    sign_in_as @user
     
     get :new
     assigns(:round).should_not be_nil
@@ -30,7 +30,7 @@ describe RoundsController do
   end
 
   it "should create round when logged in" do
-    @controller.sign_in @user
+    sign_in_as @user
     
     post :create, :round => @round.attributes
     round = assigns(:round)
@@ -45,11 +45,11 @@ describe RoundsController do
     get :show, :id => @round.to_param
     should respond_with(:success)
     
-    @controller.sign_in @user
+    sign_in_as @user
     get :show, :id => @round.to_param
     should respond_with(:success)
     
-    @controller.sign_in FactoryGirl.create :user
+    sign_in_as FactoryGirl.create :user
     get :show, :id => @round.to_param
     should respond_with(:success)
   end
@@ -57,7 +57,7 @@ describe RoundsController do
   it "should display round editing page when you own it" do
     @round.save!
     
-    @controller.sign_in @user
+    sign_in_as @user
     get :edit, :id => @round.to_param
     should respond_with(:success)
   end
@@ -65,7 +65,7 @@ describe RoundsController do
   it "should not display round editing page when you don't own it" do
     @round.save!
     
-    @controller.sign_in FactoryGirl.create :user
+    sign_in_as FactoryGirl.create :user
     get :edit, :id => @round.to_param
     should redirect_to(sign_in_url)
   end
@@ -80,7 +80,7 @@ describe RoundsController do
   it "should update the round when you own it" do
     @round.save!
     
-    @controller.sign_in @user
+    sign_in_as @user
     put :update, :id => @round.to_param, :round => { :description => 'Amazing description' }
     @round.reload
     @round.description.should == 'Amazing description'
@@ -91,7 +91,7 @@ describe RoundsController do
   it "should not update the round when you don't own it" do
     @round.save!
     
-    @controller.sign_in FactoryGirl.create :user
+    sign_in_as FactoryGirl.create :user
     put :update, :id => @round.to_param, :round => { :description => 'Amazing description' }
     @round.reload
     @round.description.should_not == 'Amazing description'
@@ -112,7 +112,7 @@ describe RoundsController do
   it "should destroy the round when you own it" do
     @round.save!
     
-    @controller.sign_in @user
+    sign_in_as @user
     delete :destroy, :id => @round.to_param
     Round.all.should_not include(@round)
     should redirect_to(rounds_path)
@@ -121,7 +121,7 @@ describe RoundsController do
   it "should not destroy the round when you don't own it" do
     @round.save!
     
-    @controller.sign_in FactoryGirl.create :user
+    sign_in_as FactoryGirl.create :user
     delete :destroy, :id => @round.to_param
     Round.all.should include(@round)
     should redirect_to(sign_in_url)
@@ -132,7 +132,7 @@ describe RoundsController do
     
     @round.subscriptions << FactoryGirl.build(:subscription)
 
-    @controller.sign_in @user
+    sign_in_as @user
     delete :destroy, :id => @round.to_param
     Round.all.should include(@round)
     should redirect_to(@round)

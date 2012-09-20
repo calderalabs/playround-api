@@ -4,7 +4,7 @@ describe QuicktoursController do
   before(:each) do
     @user = FactoryGirl.create :user_with_quicktour
     
-    @controller.sign_in @user
+    sign_in_as @user
   end
   
   it "should update if you own the user" do

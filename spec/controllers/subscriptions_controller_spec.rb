@@ -7,7 +7,7 @@ describe SubscriptionsController do
   end
   
   it "should subscribe to the round when logged in" do
-    @controller.sign_in @user
+    sign_in_as @user
     
     post :create, :round_id => @round.to_param
     @round.subscribers(true).should include(@user)
@@ -21,7 +21,7 @@ describe SubscriptionsController do
   end
   
   it "should unsubscribe to the round when logged in" do
-    @controller.sign_in @user
+    sign_in_as @user
     @round.subscriptions << FactoryGirl.build(:subscription, :user => @user, :round => nil)
     @round.save!
     

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe LocationsController do
   it "should update user location if signed in" do
     user = FactoryGirl.create :user
-    @controller.sign_in user
+    sign_in_as user
     
     Proc.new do
       put :update, :location => "Siena, Italy", :redirect_to => rounds_path

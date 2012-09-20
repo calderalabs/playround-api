@@ -8,7 +8,7 @@ describe ApprovalsController do
   end
   
   it "should approve the round if you're the owner of the arena" do
-    @controller.sign_in @user
+    sign_in_as @user
     post :create, :round_id => @round.to_param
     
     @round.reload
@@ -18,7 +18,7 @@ describe ApprovalsController do
   end
   
   it "should not approve the round if you're not the owner of the arena" do
-    @controller.sign_in FactoryGirl.create :user
+    sign_in_as FactoryGirl.create :user
     post :create, :round_id => @round.to_param
     
     @round.reload

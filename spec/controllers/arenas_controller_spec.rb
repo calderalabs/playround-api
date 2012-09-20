@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ArenasController do
   before(:each) do
     @arena = FactoryGirl.create :arena
-    @controller.sign_in @arena.user
+    sign_in_as @arena.user
   end
   
   # RESTful methods tests
