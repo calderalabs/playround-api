@@ -131,6 +131,10 @@ en:
         title: "Users"
       show:
         real_name: "Nome reale:"
+      buttons:
+        sign_up: "Sign up"
+      new:
+        title: "Sign up"
     
   formtastic:
     labels:

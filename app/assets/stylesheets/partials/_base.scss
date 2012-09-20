@@ -4,8 +4,8 @@ $blueprint-grid-margin: 10px;
 
 $blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin;
 
-@import 'blueprint';
-@import 'compass';
+@import "blueprint";
+@import "compass";
 
 /* Color palette */
 

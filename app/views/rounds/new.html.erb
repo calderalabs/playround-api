@@ -2,62 +2,24 @@
 
 <%= content_for :javascripts do %>
   <script type="text/javascript" charset="utf-8">
-  $(function() {
-    showClearButton = function(element) {
-      var input = $(element);
-      
-      if(!input.attr("disabled")) {
-        input.attr("disabled", true);
-      
-        $('<a class="clear-autocomplete" href="javascript:void(0)">clear</a>').click(function() {
-          var clear = $(this);
-          var input = clear.siblings("input");
-
-          clear.remove();
-        
-          input.val('');
-          input.attr("disabled", false);
-        
-          var updateElements = $.parseJSON(input.attr("data-update-elements"));
-        
-          for (var key in updateElements) {
-              $(updateElements[key]).val('');
-          }
-        }).insertAfter(input);
-      }
-    }
     
-    $("#round_game, #round_arena").bind("autocompleteselect", function(event, ui) {
-      if(ui.item)
-        showClearButton(this);
-    }).each(function(i, element) {
-      var el = $(element);
-      
-      if(el.val())
-        showClearButton(el);
-    });
-    
-    $('input.ui-date-picker').datetimepicker({ timeFormat: 'hh:mm:ss', dateFormat: 'yy-mm-dd' });
-  });
   </script>
 <% end %>
 
-<%= semantic_form_for(@round) do |f| %>
-  <%= f.inputs do %>
-    <%= f.hidden_field :game_id %>
-    <%= f.autocompleted_input :game, :name => '', :url => games_path, :value => @round.game ? @round.game.name : '', 
-                                'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
-                                :id => 'round_game',
-                                :update_elements => { :id => '#round_game_id' } %></li>
-    <%= f.hidden_field :arena_id %>
-    <%= f.autocompleted_input :arena, :name => '', :url => arenas_path, :value => @round.arena ? @round.arena.name : '',
-                                'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
-                                :id => 'round_arena',
-                                :update_elements => { :id => '#round_arena_id' } %></li>
-    <%= f.input :description, :required => false, :hint => t('formtastic.hints.round.description') %>
-    <%= f.input :date, :required => false, :input_html => { :class => 'ui-date-picker', :value => l(@round.date, :format => '%Y-%m-%d %H:%M:%S') }, :as => :string %>
-    <%= f.input :people, :required => false, :label => t('formtastic.labels.round.people') %>
-  <% end %>
+<%= simple_form_for(@round) do |f| %>
+  <%= f.hidden_field :game_id %>
+  <%= f.input :game, :url => games_path, :value => @round.game ? @round.game.name : '', 
+                              'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
+                              :id => 'round_game',
+                              :update_elements => { :id => '#round_game_id' } %></li>
+  <%= f.hidden_field :arena_id %>
+  <%= f.input :arena, :url => arenas_path, :value => @round.arena ? @round.arena.name : '',
+                              'data-label' => 'name', 'data-value' => 'name', 'data-query-parameter' => 'q',
+                              :id => 'round_arena',
+                              :update_elements => { :id => '#round_arena_id' } %></li>
+  <%= f.input :description, :required => false, :hint => t('formtastic.hints.round.description') %>
+  <%= f.input :date, :required => false, :input_html => { :class => 'ui-date-picker', :value => l(@round.date, :format => '%Y-%m-%d %H:%M:%S') }, :as => :string %>
+  <%= f.input :people, :required => false, :label => t('formtastic.labels.round.people') %>
   
-  <%= f.buttons %>
+  <%= f.button :submit %>
 <% end %>

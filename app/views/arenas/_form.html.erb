@@ -26,31 +26,23 @@
       $("#arena_latitude").attr('value', latLng.lat().toString(10));
       $("#arena_longitude").attr('value', latLng.lng().toString(10));
     });
-
-    $("#arena_address").bind('railsAutocomplete.select', function() {
-      var position = new google.maps.LatLng(parseFloat($("#arena_latitude").attr("value")), parseFloat($("#arena_longitude").attr("value")));
-      marker.setPosition(position);
-      map.setCenter(position);
-    });
   });
 </script>
 <% end %>
 
-<%= semantic_form_for @arena, :html => { :multipart => true } do |f| %>
-  <%= f.inputs do %>
+<%= simple_form_for @arena, :html => { :multipart => true } do |f| %>
   <%= f.input :public %>
   <%= f.input :name %>
   <%= f.input :description %>
   <%= f.input :image %>
   <%= f.input :website %>
-  <%= f.autocompleted_input :address, :size => nil, :url => autocomplete_address_arenas_path, :update_elements => 
+  <%= f.input :address, :size => nil, :url => autocomplete_address_arenas_path, :update_elements => 
     { :latitude => '#arena_latitude', :longitude => '#arena_longitude'} %>
     
   <div id="location_map" class="map"></div>
   
   <%= f.hidden_field :latitude %>
   <%= f.hidden_field :longitude %>
-  <% end %>
-  <%= f.buttons %>
+  <%= f.button :submit %>
 <% end %>
 
