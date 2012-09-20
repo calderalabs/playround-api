@@ -9,3 +9,4 @@ dump.rdb
 public/system
 *.un~
 *.swp
+.sass-cache/
