@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe ApprovalsController do
   before(:each) do
-    @user = Factory :user
-    @arena = Factory :arena, :user => @user
-    @round = Factory :round, :arena => @arena
+    @user = FactoryGirl.create :user
+    @arena = FactoryGirl.create :arena, :user => @user
+    @round = FactoryGirl.create :round, :arena => @arena
   end
   
   it "should approve the round if you're the owner of the arena" do
@@ -18,7 +18,7 @@ describe ApprovalsController do
   end
   
   it "should not approve the round if you're not the owner of the arena" do
-    @controller.sign_in Factory :user
+    @controller.sign_in FactoryGirl.create :user
     post :create, :round_id => @round.to_param
     
     @round.reload

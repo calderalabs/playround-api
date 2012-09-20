@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe QuicktoursController do
   before(:each) do
-    @user = Factory :user_with_quicktour
+    @user = FactoryGirl.create :user_with_quicktour
     
     @controller.sign_in @user
   end
@@ -14,7 +14,7 @@ describe QuicktoursController do
   end
 
   it "should not update if you don't own the user" do
-    user = Factory :user_with_quicktour
+    user = FactoryGirl.create :user_with_quicktour
     put :update, :user_id => user.to_param, :format => 'json'
 
     should respond_with(:unauthorized)
@@ -23,7 +23,7 @@ describe QuicktoursController do
   it "should not update if guest" do
     @controller.sign_out
     
-    put :update, :user_id => Factory(:user_with_quicktour).to_param, :format => 'json'
+    put :update, :user_id => FactoryGirl.create(:user_with_quicktour).to_param, :format => 'json'
     
     should respond_with(:unauthorized)
   end
@@ -37,7 +37,7 @@ describe QuicktoursController do
   end
 
   it "should not destroy if you don't own the user" do
-    delete :destroy, :user_id => Factory(:user_with_quicktour).to_param, :format => 'json'
+    delete :destroy, :user_id => FactoryGirl.create(:user_with_quicktour).to_param, :format => 'json'
 
     should respond_with(:unauthorized)
   end
@@ -45,7 +45,7 @@ describe QuicktoursController do
   it "should not destroy if guest" do
     @controller.sign_out
     
-    delete :destroy, :user_id => Factory(:user_with_quicktour).to_param, :format => 'json'
+    delete :destroy, :user_id => FactoryGirl.create(:user_with_quicktour).to_param, :format => 'json'
     
     should respond_with(:unauthorized)
   end

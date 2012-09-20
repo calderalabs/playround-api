@@ -1,3 +1,5 @@
-Factory.define :subscription, :class => Subscription do |subscription|
-  subscription.association :user
+FactoryGirl.define do
+  factory :subscription do |subscription|
+    subscription.association :user
+  end
 end

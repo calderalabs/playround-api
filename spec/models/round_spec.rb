@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Round do
   before(:each) do
-    @user = Factory :user
-    @round = Factory.build :round, :user => @user
+    @user = FactoryGirl.create :user
+    @round = FactoryGirl.build :round, :user => @user
   end
   
   # Validations
@@ -74,11 +74,11 @@ describe Round do
   end
   
   it "should be created on a public arena or on an arena created by the round owner" do
-    @round.arena = Factory :arena, :public => true
+    @round.arena = FactoryGirl.create :arena, :public => true
     @round.should be_valid
-    @round.arena = Factory :arena, :public => false
+    @round.arena = FactoryGirl.create :arena, :public => false
     @round.should_not be_valid
-    @round.arena = Factory :arena, :public => false, :user => @user
+    @round.arena = FactoryGirl.create :arena, :public => false, :user => @user
     @round.should be_valid
   end
   
@@ -150,12 +150,12 @@ describe Round do
   
   it "should be full when subscribers are equal to the number of people" do
     @round.full?.should == false
-    @round.people.times { @round.subscriptions << Factory.build(:subscription) }
+    @round.people.times { @round.subscriptions << FactoryGirl.build(:subscription) }
     @round.full?.should == true
   end
   
   it "should decrease remaining spots when someone subscribes" do
-    Proc.new { @round.subscriptions << Factory.build(:subscription) }.should change(@round, :remaining_spots).by(-1)
+    Proc.new { @round.subscriptions << FactoryGirl.build(:subscription) }.should change(@round, :remaining_spots).by(-1)
   end
   
   it "should be past after the date" do
@@ -167,7 +167,7 @@ describe Round do
   it "shoud not be subscribable when the round is full" do
     @round.approve!
     @round.subscribable_by?(@user).should == true
-    @round.people.times { Factory :subscription, :round => @round }
+    @round.people.times { FactoryGirl.create :subscription, :round => @round }
     @round.subscribable_by?(@user).should == false
   end
   

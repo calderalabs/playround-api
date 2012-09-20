@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe SubscriptionsController do
   before(:each) do
-    @user = Factory :user
-    @round = Factory :approved_round, :user => @user
+    @user = FactoryGirl.create :user
+    @round = FactoryGirl.create :approved_round, :user => @user
   end
   
   it "should subscribe to the round when logged in" do
@@ -22,7 +22,7 @@ describe SubscriptionsController do
   
   it "should unsubscribe to the round when logged in" do
     @controller.sign_in @user
-    @round.subscriptions << Factory.build(:subscription, :user => @user, :round => nil)
+    @round.subscriptions << FactoryGirl.build(:subscription, :user => @user, :round => nil)
     @round.save!
     
     delete :destroy, :round_id => @round.to_param

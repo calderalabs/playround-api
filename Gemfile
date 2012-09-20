@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -30,16 +30,10 @@ gem 'sqlite3'
 #   gem 'webrat'
 # end
 
-gem 'rake', '~> 0.8.7'
+gem 'rake'
 gem 'clearance'
-gem 'factory_girl'
 gem 'cancan'
-gem 'capybara'
-gem 'launchy'
-gem 'cucumber-rails'
-gem 'pickle'
-gem 'database_cleaner'
-gem 'paperclip', '2.3.15'
+gem 'paperclip'
 gem 'rmagick'
 gem 'sass'
 gem 'geocoder'
@@ -50,10 +44,21 @@ gem 'geoplanet'
 gem 'aws-s3'
 gem 'rspec-rails'
 gem 'shoulda-matchers', :git => 'git://github.com/thoughtbot/shoulda-matchers.git'
-gem 'formtastic_datepicker_inputs'
 gem 'thin'
-gem 'selenium-webdriver'
 gem 'state_machine'
 gem 'acts-as-taggable-on'
-gem "compass", ">= 0.11.5"
+gem 'compass', '>= 0.11.5'
+
+gem 'factory_girl', :group => [:development, :test]
+
+group :test do
+  gem 'selenium-webdriver'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'cucumber-rails'
+  gem 'pickle'
+  gem 'database_cleaner'
+end
+
+
 

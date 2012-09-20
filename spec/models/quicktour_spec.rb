@@ -4,7 +4,7 @@ describe Quicktour do
   before(:each) do
     stub_geocoder
     
-    @quicktour = Factory.build :quicktour
+    @quicktour = FactoryGirl.build :quicktour
   end
   
   # validity tests

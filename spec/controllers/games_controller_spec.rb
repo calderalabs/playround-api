@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe GamesController do
   before(:each) do
-    @game = Factory :game
+    @game = FactoryGirl.create :game
     @controller.sign_in @game.user
   end
 
@@ -43,7 +43,7 @@ describe GamesController do
     
     should respond_with(:success)
     
-    game = Factory :game
+    game = FactoryGirl.create :game
     
     get :show, :id => game.to_param
     
@@ -63,7 +63,7 @@ describe GamesController do
   end
 
   it "should not get edit if you don't own the game" do
-    get :edit, :id => Factory(:game).to_param
+    get :edit, :id => FactoryGirl.create(:game).to_param
 
     should redirect_to(sign_in_url)
   end
@@ -84,7 +84,7 @@ describe GamesController do
   end
 
   it "should not update if you don't own the game" do
-    game = Factory :game
+    game = FactoryGirl.create :game
     put :update, :id => game.to_param, :game => game.attributes
 
     should redirect_to(sign_in_url)
@@ -108,13 +108,13 @@ describe GamesController do
   end
 
   it "should not destroy if you don't own the game" do
-    delete :destroy, :id => Factory(:game).to_param
+    delete :destroy, :id => FactoryGirl.create(:game).to_param
 
     should redirect_to(sign_in_url)
   end
   
   it "should not destroy if there is at least one round with that game" do
-    Factory :round, :game => @game
+    FactoryGirl.create :round, :game => @game
     
     delete :destroy, :id => @game.to_param
     
@@ -132,7 +132,7 @@ describe GamesController do
   # ability tests
   
   it "user can create games" do
-    ability = Ability.new Factory :user
+    ability = Ability.new FactoryGirl.create :user
     ability.should be_able_to(:create, Game)
   end
   
@@ -142,7 +142,7 @@ describe GamesController do
   end
   
   it "anyone can read any game" do
-    ability = Ability.new Factory :user
+    ability = Ability.new FactoryGirl.create :user
     ability.should be_able_to(:read, @game)
     ability = Ability.new @game.user
     ability.should be_able_to(:read, @game)
@@ -153,12 +153,12 @@ describe GamesController do
   it "user can only update games which he owns" do
     ability = Ability.new @game.user
     ability.should be_able_to(:update, @game)
-    ability.should_not be_able_to(:update, Factory.build(:game))
+    ability.should_not be_able_to(:update, FactoryGirl.build(:game))
   end
   
   it "user can only destroy games which he owns" do
     ability = Ability.new @game.user
     ability.should be_able_to(:destroy, @game)
-    ability.should_not be_able_to(:destroy, Factory.build(:game))
+    ability.should_not be_able_to(:destroy, FactoryGirl.build(:game))
   end
 end

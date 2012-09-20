@@ -4,7 +4,7 @@ describe Arena do
   before(:each) do
     stub_geocoder
     
-    @arena = Factory.build :arena
+    @arena = FactoryGirl.build :arena
   end
   
   # validity tests

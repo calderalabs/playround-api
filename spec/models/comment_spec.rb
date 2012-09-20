@@ -4,7 +4,7 @@ describe Comment do
   before(:each) do
     stub_geocoder
     
-    @comment = Factory.build :comment
+    @comment = FactoryGirl.build :comment
   end
   
   # validity tests

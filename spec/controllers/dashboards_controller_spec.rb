@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe DashboardsController do
   before(:each) do
-    @user = Factory :user
+    @user = FactoryGirl.create :user
     @controller.sign_in @user
   end
   

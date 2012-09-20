@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ArenasController do
   before(:each) do
-    @arena = Factory :arena
+    @arena = FactoryGirl.create :arena
     @controller.sign_in @arena.user
   end
   
@@ -51,7 +51,7 @@ describe ArenasController do
     
     should respond_with(:success)
     
-    arena = Factory :arena, :public => true
+    arena = FactoryGirl.create :arena, :public => true
     
     get :show, :id => arena.to_param
     
@@ -71,7 +71,7 @@ describe ArenasController do
   end
 
   it "should not get edit if you don't own the arena" do
-    get :edit, :id => Factory(:arena).to_param
+    get :edit, :id => FactoryGirl.create(:arena).to_param
     
     should redirect_to(sign_in_url)
   end
@@ -92,7 +92,7 @@ describe ArenasController do
   end
   
   it "should not update if you don't own the arena" do
-    arena = Factory :arena
+    arena = FactoryGirl.create :arena
     put :update, :id => arena.to_param, :arena => arena.attributes
     
     should redirect_to(sign_in_url)
@@ -116,13 +116,13 @@ describe ArenasController do
   end
   
   it "should not destroy if you don't own the arena" do
-    delete :destroy, :id => Factory(:arena).to_param
+    delete :destroy, :id => FactoryGirl.create(:arena).to_param
     
     should redirect_to(sign_in_url)
   end
   
   it "should not destroy if there is at least one round with that arena" do
-    Factory :round, :arena => @arena
+    FactoryGirl.create :round, :arena => @arena
     
     delete :destroy, :id => @arena.to_param
     
@@ -140,7 +140,7 @@ describe ArenasController do
   # ability tests
   
   it "user can create arenas" do
-    ability = Ability.new Factory :user
+    ability = Ability.new FactoryGirl.create :user
     ability.should be_able_to(:create, Arena)
   end
   
@@ -150,7 +150,7 @@ describe ArenasController do
   end
   
   it "anyone can read any arena" do
-    ability = Ability.new Factory :user
+    ability = Ability.new FactoryGirl.create :user
     ability.should be_able_to(:read, @arena)
     ability = Ability.new @arena.user
     ability.should be_able_to(:read, @arena)
@@ -161,12 +161,12 @@ describe ArenasController do
   it "user can only update arenas which he owns" do
     ability = Ability.new @arena.user
     ability.should be_able_to(:update, @arena)
-    ability.should_not be_able_to(:update, Factory.build(:arena))
+    ability.should_not be_able_to(:update, FactoryGirl.build(:arena))
   end
   
   it "user can only destroy arenas which he owns" do
     ability = Ability.new @arena.user
     ability.should be_able_to(:destroy, @arena)
-    ability.should_not be_able_to(:destroy, Factory.build(:arena))
+    ability.should_not be_able_to(:destroy, FactoryGirl.build(:arena))
   end
 end

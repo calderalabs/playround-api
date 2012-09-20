@@ -4,7 +4,7 @@ describe Subscription do
   before(:each) do
     stub_geocoder
 
-    @subscription = Factory.build :subscription, :round => Factory(:approved_round)
+    @subscription = FactoryGirl.build :subscription, :round => FactoryGirl.create(:approved_round)
   end
   
   # validity tests
@@ -24,7 +24,7 @@ describe Subscription do
   it "combination of user and round should be unique" do
     @subscription.save!
     
-    @another_subscription = Factory.build :subscription, :round => @subscription.round, :user => @subscription.user
+    @another_subscription = FactoryGirl.build :subscription, :round => @subscription.round, :user => @subscription.user
     
     @another_subscription.should be_invalid
   end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController do
   before(:each) do
-    @user = Factory :user
+    @user = FactoryGirl.create :user
     @controller.sign_in @user
   end
   
@@ -11,7 +11,7 @@ describe UsersController do
     
     should respond_with(:success)
     
-    user = Factory :user
+    user = FactoryGirl.create :user
     
     get :show, :id => user.to_param
     
@@ -31,7 +31,7 @@ describe UsersController do
   end
   
   it "should not get edit if you don't own the user" do
-    get :edit, :id => Factory(:user).to_param
+    get :edit, :id => FactoryGirl.create(:user).to_param
     
     should redirect_to(sign_in_url)
   end
@@ -52,7 +52,7 @@ describe UsersController do
   end
   
   it "should not update if you don't own the user" do
-    user = Factory :user
+    user = FactoryGirl.create :user
     put :update, :id => user.to_param, :user => user.attributes
     
     should redirect_to(sign_in_path)

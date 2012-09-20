@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe ConfirmationsController do
   before(:each) do
-    @round = Factory :approved_round
+    @round = FactoryGirl.create :approved_round
   end
   
   it "should confirm if you own the round" do
     @controller.sign_in @round.user
-    @round.remaining_spots.times { Factory :subscription, :round => @round }
+    @round.remaining_spots.times { FactoryGirl.create :subscription, :round => @round }
 
     post :create, :round_id => @round.to_param
     round = assigns(:round)
@@ -27,7 +27,7 @@ describe ConfirmationsController do
   end
 
   it "should not confirm if you don't own the round" do
-    @controller.sign_in Factory :user
+    @controller.sign_in FactoryGirl.create :user
     post :create, :round_id => @round.to_param
 
     should redirect_to(sign_in_url)

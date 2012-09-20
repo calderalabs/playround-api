@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe RoundsController do
   before(:each) do
-    @user = Factory :user
-    @round = Factory.build :approved_round, :user => @user
+    @user = FactoryGirl.create :user
+    @round = FactoryGirl.build :approved_round, :user => @user
   end
 
   # Actions
@@ -49,7 +49,7 @@ describe RoundsController do
     get :show, :id => @round.to_param
     should respond_with(:success)
     
-    @controller.sign_in Factory :user
+    @controller.sign_in FactoryGirl.create :user
     get :show, :id => @round.to_param
     should respond_with(:success)
   end
@@ -65,7 +65,7 @@ describe RoundsController do
   it "should not display round editing page when you don't own it" do
     @round.save!
     
-    @controller.sign_in Factory :user
+    @controller.sign_in FactoryGirl.create :user
     get :edit, :id => @round.to_param
     should redirect_to(sign_in_url)
   end
@@ -91,7 +91,7 @@ describe RoundsController do
   it "should not update the round when you don't own it" do
     @round.save!
     
-    @controller.sign_in Factory :user
+    @controller.sign_in FactoryGirl.create :user
     put :update, :id => @round.to_param, :round => { :description => 'Amazing description' }
     @round.reload
     @round.description.should_not == 'Amazing description'
@@ -121,7 +121,7 @@ describe RoundsController do
   it "should not destroy the round when you don't own it" do
     @round.save!
     
-    @controller.sign_in Factory :user
+    @controller.sign_in FactoryGirl.create :user
     delete :destroy, :id => @round.to_param
     Round.all.should include(@round)
     should redirect_to(sign_in_url)
@@ -130,7 +130,7 @@ describe RoundsController do
   it "should not destroy the round when there is at least one subscriber" do
     @round.save!
     
-    @round.subscriptions << Factory.build(:subscription)
+    @round.subscriptions << FactoryGirl.build(:subscription)
 
     @controller.sign_in @user
     delete :destroy, :id => @round.to_param
@@ -165,7 +165,7 @@ describe RoundsController do
     ability.can?(:read, @round).should == true
     ability = Ability.new User.new
     ability.can?(:read, @round).should == true
-    ability.can?(:read, Factory(:round)).should == false
+    ability.can?(:read, FactoryGirl.create(:round)).should == false
   end
 
   it "registered users can only update rounds which they own" do
@@ -173,7 +173,7 @@ describe RoundsController do
 
     ability = Ability.new @user
     ability.can?(:update, @round).should == true
-    ability = Ability.new Factory :user
+    ability = Ability.new FactoryGirl.create :user
     ability.cannot?(:update, @round).should == true
   end
 end

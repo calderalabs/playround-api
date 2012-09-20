@@ -26,5 +26,5 @@ Then /^I should see the arena's image$/ do
 end
 
 Given /^a public arena exists created by that user$/ do
-  Factory :arena, :user => User.last, :public => true
+  FactoryGirl.create :arena, :user => User.last, :public => true
 end

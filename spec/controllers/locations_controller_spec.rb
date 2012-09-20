@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe LocationsController do
   it "should update user location if signed in" do
-    user = Factory :user
+    user = FactoryGirl.create :user
     @controller.sign_in user
     
     Proc.new do

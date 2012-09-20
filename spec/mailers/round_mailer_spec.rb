@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "Round Mailer" do
   before(:each) do
-    @round = Factory :approved_round
-    @user = Factory :user
+    @round = FactoryGirl.create :approved_round
+    @user = FactoryGirl.create :user
   end
   
   after(:each) do
@@ -16,7 +16,7 @@ describe "Round Mailer" do
   end
   
   it "should send emails to subscribers after confirmation" do
-    @round.remaining_spots.times { @round.subscriptions << Factory.build(:subscription) }
+    @round.remaining_spots.times { @round.subscriptions << FactoryGirl.build(:subscription) }
     @round.confirm!
     @round.subscribers.each do |s|
       should have_sent_email.with_subject(/confirmation/).from('info@playround.com').with_body(/take place in #{@round.arena.name}/).to("#{s.email}")

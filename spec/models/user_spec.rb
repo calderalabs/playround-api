@@ -4,7 +4,7 @@ describe User do
   before(:each) do
     stub_geocoder
     
-    @user = Factory.build :user, :email => "matteodepalo@mac.com"
+    @user = FactoryGirl.build :user, :email => "matteodepalo@mac.com"
   end
   
   # validity tests
@@ -85,11 +85,11 @@ describe User do
   it "should return the expected value on subscribed?" do
     @user.save!
     
-    round = Factory :approved_round
+    round = FactoryGirl.create :approved_round
     
     @user.subscribed?(round).should == false
     
-    Factory :subscription, :user => @user, :round => round
+    FactoryGirl.create :subscription, :user => @user, :round => round
     
     @user.subscribed?(round).should == true
   end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CommentsController do
   before(:each) do
-    @comment = Factory :comment
+    @comment = FactoryGirl.create :comment
     @controller.sign_in @comment.user
   end
 
@@ -33,7 +33,7 @@ describe CommentsController do
   end
   
   it "should not destroy if you don't own the comment" do
-    delete :destroy, :id => Factory(:comment).to_param
+    delete :destroy, :id => FactoryGirl.create(:comment).to_param
     
     should redirect_to(sign_in_url)
   end
@@ -49,7 +49,7 @@ describe CommentsController do
   # ability tests
   
   it "user can create comments" do
-    ability = Ability.new Factory :user
+    ability = Ability.new FactoryGirl.create :user
     ability.should be_able_to(:create, Comment)
   end
   
@@ -59,7 +59,7 @@ describe CommentsController do
   end
   
   it "anyone can read any comment" do
-    ability = Ability.new Factory :user
+    ability = Ability.new FactoryGirl.create :user
     ability.should be_able_to(:read, @comment)
     ability = Ability.new @comment.user
     ability.should be_able_to(:read, @comment)
@@ -70,12 +70,12 @@ describe CommentsController do
   it "user can only update comments which he owns" do
     ability = Ability.new @comment.user
     ability.should be_able_to(:update, @comment)
-    ability.should_not be_able_to(:update, Factory.build(:comment))
+    ability.should_not be_able_to(:update, FactoryGirl.build(:comment))
   end
   
   it "user can only destroy comments which he owns" do
     ability = Ability.new @comment.user
     ability.should be_able_to(:destroy, @comment)
-    ability.should_not be_able_to(:destroy, Factory.build(:comment))
+    ability.should_not be_able_to(:destroy, FactoryGirl.build(:comment))
   end
 end

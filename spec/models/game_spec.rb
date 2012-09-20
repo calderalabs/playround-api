@@ -4,7 +4,7 @@ describe Game do
   before(:each) do
     stub_geocoder
     
-    @game = Factory.build :game
+    @game = FactoryGirl.build :game
   end
 
   # validity tests
