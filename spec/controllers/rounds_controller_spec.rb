@@ -32,7 +32,7 @@ describe RoundsController do
   it "should create round when logged in" do
     sign_in_as @user
     
-    post :create, :round => @round.attributes
+    post :create, :round => @round.accessible_attributes
     round = assigns(:round)
     Round.all.should include(round)
     should set_the_flash.to(/created/i)

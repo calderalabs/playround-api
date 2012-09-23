@@ -45,7 +45,7 @@ describe UsersController do
   end
   
   it "should update if you own the user" do
-    put :update, :id => @user.to_param, :user => @user.attributes
+    put :update, :id => @user.to_param, :user => @user.accessible_attributes
     
     should respond_with(:found)
     should redirect_to(user_path(@user))
@@ -53,7 +53,7 @@ describe UsersController do
   
   it "should not update if you don't own the user" do
     user = FactoryGirl.create :user
-    put :update, :id => user.to_param, :user => user.attributes
+    put :update, :id => user.to_param, :user => user.accessible_attributes
     
     should redirect_to(sign_in_path)
   end

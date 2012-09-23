@@ -3,7 +3,6 @@ require 'spec_helper'
 describe ArenasController do
   before(:each) do
     @arena = FactoryGirl.build :arena
-    @valid_attributes = @arena.attributes.select{ |k,v| Arena.accessible_attributes.include?(k.to_sym) }
     sign_in_as @arena.user
   end
   
@@ -33,7 +32,7 @@ describe ArenasController do
 
   it "should create arena" do
     Proc.new do
-      post :create, :arena => @valid_attributes
+      post :create, :arena => @arena.accessible_attributes
     end.should change(Arena, :count).by(1)
 
     should respond_with(:found)
@@ -43,7 +42,7 @@ describe ArenasController do
   it "should not create arena if guest" do
     sign_out
     
-    post :create, :arena => @valid_attributes
+    post :create, :arena => @arena.accessible_attributes
     
     should redirect_to(sign_in_url)
   end
@@ -91,7 +90,7 @@ describe ArenasController do
 
   it "should update if you own the arena" do
     @arena.save!
-    put :update, :id => @arena.to_param, :arena => @valid_attributes
+    put :update, :id => @arena.to_param, :arena => @arena.accessible_attributes
     
     should respond_with(:found)
     should redirect_to(arena_path(assigns(:arena)))
@@ -99,7 +98,7 @@ describe ArenasController do
   
   it "should not update if you don't own the arena" do
     arena = FactoryGirl.create :arena
-    put :update, :id => arena.to_param, :arena => arena.attributes
+    put :update, :id => arena.to_param, :arena => arena.accessible_attributes
     
     should redirect_to(sign_in_url)
   end
@@ -108,7 +107,7 @@ describe ArenasController do
     @arena.save!
     sign_out
     
-    put :update, :id => @arena.to_param, :arena => @arena.attributes
+    put :update, :id => @arena.to_param, :arena => @arena.accessible_attributes
     
     should redirect_to(sign_in_url)
   end
