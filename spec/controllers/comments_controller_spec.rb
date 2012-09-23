@@ -16,7 +16,7 @@ describe CommentsController do
   end
   
   it "should not create comment if guest" do
-    @controller.sign_out
+    sign_out
     
     post :create, :comment => @comment.attributes
     
@@ -39,7 +39,7 @@ describe CommentsController do
   end
   
   it "should not destroy if guest" do
-    @controller.sign_out
+    sign_out
     
     delete :destroy, :id => @comment.to_param
     

@@ -31,7 +31,7 @@ describe GamesController do
   end
   
   it "should not create if guest" do
-    @controller.sign_out
+    sign_out
     
     post :create, :game => @game.attributes
     
@@ -49,7 +49,7 @@ describe GamesController do
     
     should respond_with(:success)
     
-    @controller.sign_out
+    sign_out
     
     get :show, :id => @game.to_param
     
@@ -69,7 +69,7 @@ describe GamesController do
   end
   
   it "should not get edit if guest" do
-    @controller.sign_out
+    sign_out
     
     get :edit, :id => @game.to_param
     
@@ -91,7 +91,7 @@ describe GamesController do
   end
   
   it "should not update if guest" do
-    @controller.sign_out
+    sign_out
     
     put :update, :id => @game.to_param, :game => @game.attributes
     
@@ -122,7 +122,7 @@ describe GamesController do
   end
   
   it "should not destroy if guest" do
-    @controller.sign_out
+    sign_out
     
     delete :destroy, :id => @game.to_param
     

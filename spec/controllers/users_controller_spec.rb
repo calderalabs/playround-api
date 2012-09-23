@@ -17,7 +17,7 @@ describe UsersController do
     
     should respond_with(:success)
     
-    @controller.sign_out
+    sign_out
     
     get :show, :id => @user.to_param
     
@@ -37,7 +37,7 @@ describe UsersController do
   end
   
   it "should not get edit if guest" do
-    @controller.sign_out
+    sign_out
     
     get :edit, :id => @user.to_param
     
@@ -59,7 +59,7 @@ describe UsersController do
   end
   
   it "should not update if guest" do
-    @controller.sign_out
+    sign_out
     
     put :update, :id => @user.to_param, :user => @user.attributes
     

@@ -2,13 +2,15 @@ require 'spec_helper'
 
 describe ArenasController do
   before(:each) do
-    @arena = FactoryGirl.create :arena
+    @arena = FactoryGirl.build :arena
+    @valid_attributes = @arena.attributes.select{ |k,v| Arena.accessible_attributes.include?(k.to_sym) }
     sign_in_as @arena.user
   end
   
   # RESTful methods tests
   
   it "should get index" do
+    @arena.save!
     get :index
     
     should respond_with(:success)
@@ -22,7 +24,7 @@ describe ArenasController do
   end
   
   it "should not get new if guest" do
-    @controller.sign_out
+    sign_out
     
     get :new
     
@@ -31,7 +33,7 @@ describe ArenasController do
 
   it "should create arena" do
     Proc.new do
-      post :create, :arena => @arena.attributes
+      post :create, :arena => @valid_attributes
     end.should change(Arena, :count).by(1)
 
     should respond_with(:found)
@@ -39,14 +41,15 @@ describe ArenasController do
   end
   
   it "should not create arena if guest" do
-    @controller.sign_out
+    sign_out
     
-    post :create, :arena => @arena.attributes
+    post :create, :arena => @valid_attributes
     
     should redirect_to(sign_in_url)
   end
 
   it "should always show arenas" do
+    @arena.save!
     get :show, :id => @arena.to_param
     
     should respond_with(:success)
@@ -57,7 +60,7 @@ describe ArenasController do
     
     should respond_with(:success)
     
-    @controller.sign_out
+    sign_out
     
     get :show, :id => @arena.to_param
     
@@ -65,6 +68,7 @@ describe ArenasController do
   end
 
   it "should get edit if you own the arena" do
+    @arena.save!
     get :edit, :id => @arena.to_param
     
     should respond_with(:success)
@@ -77,7 +81,8 @@ describe ArenasController do
   end
   
   it "should not get edit if guest" do
-    @controller.sign_out
+    @arena.save!
+    sign_out
     
     get :edit, :id => @arena.to_param
     
@@ -85,7 +90,8 @@ describe ArenasController do
   end
 
   it "should update if you own the arena" do
-    put :update, :id => @arena.to_param, :arena => @arena.attributes
+    @arena.save!
+    put :update, :id => @arena.to_param, :arena => @valid_attributes
     
     should respond_with(:found)
     should redirect_to(arena_path(assigns(:arena)))
@@ -99,7 +105,8 @@ describe ArenasController do
   end
   
   it "should not update if guest" do
-    @controller.sign_out
+    @arena.save!
+    sign_out
     
     put :update, :id => @arena.to_param, :arena => @arena.attributes
     
@@ -107,6 +114,8 @@ describe ArenasController do
   end
 
   it "should destroy if you own the arena" do
+    @arena.save!
+
     Proc.new do
       delete :destroy, :id => @arena.to_param
     end.should change(Arena, :count).by(-1)
@@ -122,6 +131,7 @@ describe ArenasController do
   end
   
   it "should not destroy if there is at least one round with that arena" do
+    @arena.save!
     FactoryGirl.create :round, :arena => @arena
     
     delete :destroy, :id => @arena.to_param
@@ -130,7 +140,8 @@ describe ArenasController do
   end
   
   it "should not destroy if guest" do
-    @controller.sign_out
+    @arena.save!
+    sign_out
     
     delete :destroy, :id => @arena.to_param
     
@@ -150,6 +161,7 @@ describe ArenasController do
   end
   
   it "anyone can read any arena" do
+    @arena.save!
     ability = Ability.new FactoryGirl.create :user
     ability.should be_able_to(:read, @arena)
     ability = Ability.new @arena.user
@@ -159,12 +171,14 @@ describe ArenasController do
   end
   
   it "user can only update arenas which he owns" do
+    @arena.save!
     ability = Ability.new @arena.user
     ability.should be_able_to(:update, @arena)
     ability.should_not be_able_to(:update, FactoryGirl.build(:arena))
   end
   
   it "user can only destroy arenas which he owns" do
+    @arena.save!
     ability = Ability.new @arena.user
     ability.should be_able_to(:destroy, @arena)
     ability.should_not be_able_to(:destroy, FactoryGirl.build(:arena))

@@ -21,7 +21,7 @@ describe QuicktoursController do
   end
   
   it "should not update if guest" do
-    @controller.sign_out
+    sign_out
     
     put :update, :user_id => FactoryGirl.create(:user_with_quicktour).to_param, :format => 'json'
     
@@ -43,7 +43,7 @@ describe QuicktoursController do
   end
   
   it "should not destroy if guest" do
-    @controller.sign_out
+    sign_out
     
     delete :destroy, :user_id => FactoryGirl.create(:user_with_quicktour).to_param, :format => 'json'
     
