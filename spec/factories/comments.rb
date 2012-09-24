@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :comment do |comment|
-    comment.association :user
-    comment.association :round
-    comment.text 'Amazing comment'
+  factory :comment do
+    user
+    round
+    text 'Amazing comment'
   end
 end

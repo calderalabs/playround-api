@@ -15,7 +15,7 @@ class Round < ActiveRecord::Base
   
   validate :on => :create do
     errors.add(:date, I18n.t('activerecord.errors.round.date.invalid')) if date && date < Time.now.change(:sec => 0)
-    errors.add(:arena_id, I18n.t('activerecord.errors.round.arena_id.invalid')) unless arena && (arena.public? || owned_by_arena?)
+    errors.add(:arena_id, I18n.t('activerecord.errors.round.arena_id.invalid')) if !arena || (!arena.public? && !owned_by_arena?)
   end
   
   before_validation :on => :create do
