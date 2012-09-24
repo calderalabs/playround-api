@@ -32,9 +32,10 @@ gem 'factory_girl', :group => [:development, :test]
 gem 'rspec-rails', :group => [:development, :test]
 
 group :test do
+  gem 'webmock'
   gem 'capybara'
   gem 'launchy'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'pickle'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
