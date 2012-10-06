@@ -27,6 +27,7 @@ gem 'acts-as-taggable-on'
 gem 'adjust_string', :path => './lib/adjust_string'
 gem 'attr_editable', :path => './lib/attr_editable'
 gem 'validates_url_format_of', :path => './lib/validates_url_format_of'
+gem 'dotenv'
 
 gem 'factory_girl', :group => [:development, :test]
 gem 'rspec-rails', :group => [:development, :test]

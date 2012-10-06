@@ -10,3 +10,4 @@ public/system
 *.un~
 *.swp
 .sass-cache/
+.env

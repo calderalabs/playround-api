@@ -9,6 +9,10 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+if Rails.env.development? || Rails.env.test?
+  Dotenv.load
+end
+
 module Playround
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
